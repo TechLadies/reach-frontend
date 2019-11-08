@@ -3,6 +3,16 @@ import Loginimage from "C:/Users/Lu Theng/Desktop/Techladies bootcamp/Reach proj
 import Logo from "C:/Users/Lu Theng/Desktop/Techladies bootcamp/Reach project/reach-frontend/src/images/Logo.svg";
 import { Link } from 'react-router-dom';
 
+const formValid =  formErrors => {
+  let valid = true;
+
+  // validate form errors being empty
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  return valid;
+}
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,19 +28,29 @@ class Login extends React.Component {
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    console.log("Submitting");
-    console.log(this.state);
-  };
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
+  handleSubmit = e => {
+    e.preventDefault();
+
+    if (formValid(this.state)) {
+      console.log(`
+        --SUBMITTING--
+        Email: ${this.state.email}
+        Password: ${this.state.password}
+      `);
+    } else {this.setState({
+      error: "Your email and password do not match. Please try again"
+  });
+    }
+  }
+
   render() {
+    console.log(this.state);
     const { email, password } = this.state;
     return (
       <div>
@@ -69,10 +89,12 @@ class Login extends React.Component {
             <li className=  "login-form-list">
               <Link to="#">Forget password?</Link>
             </li>
+            {this.state.error && <p className= "error-msg">{this.state.error}</p>}
             <button className="login-button">
               <span className="login-button-text">Login</span>
             </button>
           </form>
+         
 
         </ul>
       </div>
