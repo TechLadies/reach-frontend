@@ -27,9 +27,11 @@ body {
   bottom: 10.4%;
   
 }
-
+.logo {
+  margin-bottom: 2em;
+}
 .login-form-list{
-  padding-bottom: 1em;
+  padding-bottom: 0.6em;
   line-height: 34px;
 }
 
@@ -54,6 +56,4 @@ body {
   color: white; 
 }
 
-.login-br{
-  
-}
+
