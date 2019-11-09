@@ -45,17 +45,15 @@ function Login() {
     }
   }
   return (
-    <div>
+    <div className = "login-container">
       <img src={Loginimage} className="login-img" alt="Login" />
-      <ul className="login-form">
-        <li className="login-form-list">
-          <img src={Logo} className="logo" alt="Logo" />
-        </li>
+      <div className="login-form">
+        <img src={Logo} className="logo" alt="Logo" />
         <form onSubmit={handleSubmit} >
-          <li>
+          <div className="login-form-list">
             <label htmlFor="email">Email Address</label>
-          </li>
-          <li className="login-form-list">
+
+
             <input
               type="text"
               name="email"
@@ -64,11 +62,11 @@ function Login() {
               onChange={handleChange}
               className="textbox"
             />
-          </li>
-          <li>
+          </div>
+          <div className="login-form-list">
             <label htmlFor="password">Password</label>
-          </li>
-          <li className="login-form-list">
+
+
             <input
               type="text"
               name="password"
@@ -77,10 +75,10 @@ function Login() {
               onChange={handleChange}
               className="textbox"
             />
-          </li>
-          <li className="login-form-list">
-            <Link to="#">Forget password?</Link>
-          </li>
+
+
+            <div className= "login-form-list"><Link to="#">Forget password?</Link> </div>
+          </div>
           {state.error && <p className="error-msg">{state.error}</p>}
           <button className="login-button">
             <span className="login-button-text">Login</span>
@@ -88,7 +86,8 @@ function Login() {
         </form>
 
 
-      </ul>
+
+      </div>
     </div>
   );
 }
