@@ -1,6 +1,6 @@
 import React from "react";
-import Loginimage from "C:/Users/Lu Theng/Desktop/Techladies bootcamp/Reach project/reach-frontend/src/images/Group 5.svg";
-import Logo from "C:/Users/Lu Theng/Desktop/Techladies bootcamp/Reach project/reach-frontend/src/images/Logo.svg";
+import Loginimage from "../images/Group 5.svg";
+import Logo from "../images/Logo.svg";
 import { Link } from 'react-router-dom';
 
 const formValid =  formErrors => {
