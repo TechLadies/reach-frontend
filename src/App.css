@@ -1,0 +1,31 @@
+.icon-orange-button{
+    background: #FFC881;
+    border-radius: 4px;
+    width: 203px;
+    height: 44px;
+    
+}
+
+.orange-button{
+    background: #FFC881;
+    border-radius: 4px;
+    width: 199px;
+    height: 44px;
+    
+}
+
+
+.white-button{
+    background: #FFFDFA;
+    box-shadow: 0px 1px 0px #ECDFDC;
+    width: 123px;
+    height: 44px; 
+    border: 1px solid #80485B;
+}
+
+.purple-button{
+    background:#4B1E2D;
+    width: 120px;
+    height: 44px; 
+    border-radius: 4px
+}
