@@ -77,7 +77,7 @@ function Login() {
             />
 
 
-            <div className= "login-form-list"><Link to="#">Forget password?</Link> </div>
+            <div className= "login-form-list"><Link to="#">Forgot password?</Link> </div>
           </div>
           {state.error && <p className="error-msg">{state.error}</p>}
           <button className="login-button">
