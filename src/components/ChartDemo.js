@@ -1,6 +1,12 @@
 import React from "react";
 
 import { VictoryPie } from "victory";
+/*
+ *
+ * Read more about this chart libray here:
+ * https://formidable.com/open-source/victory/docs/
+ *
+ */
 
 const fakeData = [
   { x: "cats", y: 55, fill: "#0a2" },
