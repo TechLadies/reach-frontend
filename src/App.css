@@ -29,3 +29,9 @@
     height: 44px; 
     border-radius: 4px
 }
+
+.chart-holder {
+    outline: 1px solid red;
+    width: 400px;
+    height: 400px;
+}
