@@ -14,7 +14,7 @@ const fakeData = [
   { x: "rabbits", y: 20, fill: "orange" }
 ];
 
-const ChartDemo = () => (
+const ChartDemo  = () => (
   <div className="chart-holder">
     <VictoryPie
       innerRadius={100}
