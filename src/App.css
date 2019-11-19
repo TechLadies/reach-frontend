@@ -1,3 +1,5 @@
+/* Login Page*/
+
 .icon-orange-button{
     background: #FFC881;
     border-radius: 4px;
@@ -29,3 +31,46 @@
     height: 44px; 
     border-radius: 4px
 }
+
+/* Nav Bar */
+.navbar {
+    height: 66px;
+}
+
+.logo_navbar{
+    position: relative;
+    left: 15px;
+}
+
+.search_icon {
+    position: relative;
+    left: 50px;
+}
+
+.form-inline{
+    position: relative;
+    left: 60px;
+    background-color: transparent !important;
+    border:none !important;
+    font-size: 15px;
+    width:500px !important;
+}
+
+.navBarSearchForm-input{
+    width:600px !important;
+}
+
+input.transparent-input { 
+    border:none !important
+}
+
+.transparent-input {
+   background-color: rgba(0, 0, 0, 0);
+   border:none;
+}
+ input.transparent-input{
+       background-color:rgba(0,0,0,0) !important;
+       border:none !important;
+    }
+
+
