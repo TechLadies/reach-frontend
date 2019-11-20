@@ -1,4 +1,6 @@
 import React from 'react';
+import $ from 'jquery';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 class Navbar extends React.Component {
   render() {
@@ -17,14 +19,14 @@ class Navbar extends React.Component {
         <img src="/search.svg" /> 
         </span>
 
-        <form className="form-inline mx-2 my-auto d-inline w-100" id="navBarSearchForm">
+        <form className="form mx-2 d-inline w-100" id="navBarSearchForm">
             <input className="form-control transparent-input" type="search" placeholder="Search Donor ID Number" aria-label="Search" />
           </form>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/">Dashboards<span className="sr-only">(current)</span></a>
+              <a className="nav-link" href="/">Dashboard<span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/">Donors</a>
@@ -32,15 +34,16 @@ class Navbar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="/">Update Donor Database</a>
             </li>
+
+  
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a className="nav-link dropdown-toggle " href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Alvin Teo
               </a>
-              <div className="dropdown-menu show" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/">Action</a>
-                <a className="dropdown-item" href="/">Another action</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="/">Something else here</a>
+              <div className="dropdown-menu toggle dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a className="dropdown-item" href="/">Log Out</a>
+                {/* <div className="dropdown-divider"></div>
+                <a className="dropdown-item" href="/">Something else here</a> */}
               </div>
             </li>
           </ul>
