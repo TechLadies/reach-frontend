@@ -1,6 +1,6 @@
 import React from "react";
 
-import { VictoryPie } from "victory";
+import { VictoryPie, VictoryTooltip, VictoryAxis, VictoryLegend } from "victory";
 /*
  *
  * Read more about this chart libray here:
@@ -18,20 +18,36 @@ const fakeData = [
 
 const ByIntent = () => (
   <div className="chart-holder">
-    <VictoryPie
-      innerRadius={120}
-      padAngle={10}
-      data={fakeData}
-      style={{
-        data: {
-          fill: ({ datum }) => datum.fill
+    <div className= "chart">
+      <VictoryPie
+        innerRadius={120}
+        /* labelComponent={<VictoryTooltip activateData={true} flyoutStyle= {{display: "none"}} />} */
+        labelComponent={<VictoryAxis tickFormat={() => ''} />}
+        padAngle={8}
+        data={fakeData}
+        style={{
+          data: {
+            fill: ({ datum }) => datum.fill
+          }
         }
-      },
-      { labels: { display: "none" } }
-    }
-      
-    />
+
+        }
+      />
+    </div>
+    <div className= "chart">
+      <VictoryLegend
+        data={fakeData}
+        style={{
+          data:{
+            fill: ({datum}) => datum.fill
+          }
+        }}
+      />
+    </div>
   </div>
+
+   
+  
 );
 
 export default ByIntent;

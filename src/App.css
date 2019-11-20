@@ -35,3 +35,7 @@
     width: 400px;
     height: 400px;
 }
+
+.chart{
+    outline: 1px solid red;
+}
