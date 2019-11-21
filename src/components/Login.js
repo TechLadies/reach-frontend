@@ -4,6 +4,7 @@ import Logo from "../images/Logo.svg";
 import { Link } from 'react-router-dom';
 
 
+
 const initialState = {
   name: "",
   email: ""
