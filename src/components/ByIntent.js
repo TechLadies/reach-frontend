@@ -18,7 +18,6 @@ const fakeData = [
 
 const ByIntent = () => (
   <div className="chart-holder">
-    <div className= "chart">
       <VictoryPie
         innerRadius={120}
         /* labelComponent={<VictoryTooltip activateData={true} flyoutStyle= {{display: "none"}} />} */
@@ -33,17 +32,6 @@ const ByIntent = () => (
 
         }
       />
-    </div>
-    <div className= "chart">
-      <VictoryLegend
-        data={fakeData}
-        style={{
-          data:{
-            fill: ({datum}) => datum.fill
-          }
-        }}
-      />
-    </div>
   </div>
 
    
