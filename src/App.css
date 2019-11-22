@@ -37,6 +37,7 @@
     height: 266px;
 }
 
+/* ByIntent Component */
 .chart{
     outline: 1px solid blue;
     width: 778px;
@@ -73,3 +74,24 @@
     background: #CB87B0;
 }
 
+.flex{
+    display: flex;
+    align-items: baseline;
+}
+
+.byintent-crownvalue{
+    font-size: 24px;
+    margin-left: 12.96px;
+}
+
+.byintent-value{
+    font-size: 24px; 
+    margin-left: 29.99px
+}
+.byintent-name{
+    margin-left: 16px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #9FA2B4;
+    letter-spacing: 0.3px;
+}

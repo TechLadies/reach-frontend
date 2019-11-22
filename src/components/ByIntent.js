@@ -1,14 +1,9 @@
 import React from "react";
 import TwoHands from "../images/twohandsdonation.svg";
+import Crown from "../images/crown.svg";
 
 
 import { VictoryPie, VictoryTooltip, VictoryAxis, VictoryLegend } from "victory";
-/*
- *
- * Read more about this chart libray here:
- * https://formidable.com/open-source/victory/docs/
- *
- */
 
 const fakeData = [
   { x: "Bi-monthly Charity Dinner", y: 130, fill: "#FFA001" },
@@ -18,6 +13,8 @@ const fakeData = [
   { x: "Others", y: 20, fill: "#CB87B0" }
 ];
 
+/* highest value of y in fakeDATA */
+/* const highestDonorIntent = Math.max.apply(Math, fakeData.map(function(o){return o.y;})) */
 
 
 const ByIntent = () => (
@@ -42,21 +39,44 @@ const ByIntent = () => (
 
     </div>
     <div>
-      <div className="legend brightorange"></div> {fakeData[0].x}
-    </div>
-    <div>
-      <div className="legend pink"></div> {fakeData[1].x}
-    </div>
-    <div>
-      <div className="legend lightpink"></div> {fakeData[2].x}
-    </div>
-    <div>
-      <div className="legend darkpurple"></div> {fakeData[3].x}
-    </div>
-    <div>
-      <div className="legend darkpurple"></div> {fakeData[4].x}
+      <div className= "flex"><img src = {Crown}/><h1 className= "byintent-crownvalue">{fakeData[0].y}</h1></div>
+      <div className = "flex">
+        <div className="legend brightorange"></div>
+        <div className = "byintent-name"> {fakeData[0].x}</div>
+      </div>    
     </div>
 
+    <div>
+        <h1 className= "byintent-value">{fakeData[1].y}</h1>
+        <div className = "flex">
+          <div className="legend pink"></div> 
+          <div className = "byintent-name">{fakeData[1].x}</div>
+        </div>
+    </div>
+
+    <div>
+        <h1 className= "byintent-value">{fakeData[2].y}</h1>
+        <div className = "flex">
+          <div className="legend lightpink"></div> 
+          <div className ="byintent-name">{fakeData[2].x}</div>
+        </div>
+    </div>
+
+    <div>
+        <h1 className= "byintent-value">{fakeData[3].y}</h1>
+        <div className = "flex">
+          <div className="legend darkpurple"></div> 
+          <div className= "byintent-name">{fakeData[3].x}</div>
+        </div>  
+    </div>
+
+    <div>
+        <h1 className= "byintent-value">{fakeData[4].y}</h1>
+        <div className = "flex">
+          <div className="legend lilac"></div> 
+          <div className = "byintent-name">{fakeData[4].x}</div>
+        </div>
+    </div>
         
     <img src={TwoHands} className="twohands" />
   </div>
