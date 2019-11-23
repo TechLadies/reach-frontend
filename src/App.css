@@ -86,3 +86,16 @@ input.transparent-input {
   right: 0;
   left: auto;
 }
+
+
+/* Dashboard Box */
+
+.box {
+    background: #FFFFFF;
+    box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05), 0px 2px 4px rgba(128, 72, 91, 0.1);
+    border-radius: 8px;
+}
+
+.wrap {
+    padding: 40px 80px;
+}
