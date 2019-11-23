@@ -1,13 +1,39 @@
-import React from 'react';
-import $ from 'jquery';
-import 'bootstrap/dist/js/bootstrap.min.js';
+import React, { useState } from 'react';
+// import $ from 'jquery';
+// import 'bootstrap/dist/js/bootstrap.min.js';
 
-class Navbar extends React.Component {
-  render() {
+const Dropdown = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const toggleOpen = (e) => { 
+    setIsVisible( !isVisible );
+    e.preventDefault()
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+    }
+  document.addEventListener('click', () => {
+    console.log('click')
+    setIsVisible(false)
+  })
+
+  return (
+    <>
+    <a className="nav-link dropdown-toggle " onClick={toggleOpen} href="/" id="navbarDropdown" role="button" aria-haspopup="true" aria-expanded="false">
+    Alvin Teo
+  </a>
+  <div className= {"dropdown-menu toggle dropdown-menu-right " + (isVisible ? 'show' : '') } aria-labelledby="navbarDropdown">
+    <i className="fas fa-chevron-down"></i>
+    <a className="dropdown-item" href="/">Log Out</a>
+  </div>
+  </>
+  )
+}
+
+
+function Navbar(props) {
     return (
       <nav className="navbar navbar-expand-lg navbar-light" style={{backgroundColor: "#FFF3E2"}}>
 
-     <span class="logo_navbar">
+     <span className="logo_navbar">
      <img src="/reach_logo.png" height="33" width="120" alt="text here" />
      </span>
 
@@ -15,7 +41,7 @@ class Navbar extends React.Component {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <span class="search_icon">
+        <span className="search_icon">
         <img src="/search.svg" /> 
         </span>
 
@@ -34,17 +60,10 @@ class Navbar extends React.Component {
             <li className="nav-item">
               <a className="nav-link" href="/">Update Donor Database</a>
             </li>
-
+    
   
             <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle " href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Alvin Teo
-              </a>
-              <div className="dropdown-menu toggle dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="/">Log Out</a>
-                {/* <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="/">Something else here</a> */}
-              </div>
+            <Dropdown />
             </li>
           </ul>
          
@@ -52,6 +71,4 @@ class Navbar extends React.Component {
       </nav>
     )
   }
-}
-
 export default Navbar;

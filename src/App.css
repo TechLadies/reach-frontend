@@ -2,7 +2,7 @@
 .navbar {
     height: 66px;
     border-top: 1px solid #ECDFDC;
-    border-bottom: 1px solid ##ECDFDC;
+    border-bottom: 1px solid #ECDFDC;
 }
 
 .logo_navbar{
@@ -50,3 +50,7 @@ input.transparent-input {
     right: 0; 
     left: auto; 
 }
+
+/* .dropdown-toggle::after {
+    display: none;
+} */
