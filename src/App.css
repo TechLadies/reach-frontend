@@ -1,56 +1,88 @@
-/* Nav Bar */
-.navbar {
-    height: 66px;
-    border-top: 1px solid #ECDFDC;
-    border-bottom: 1px solid #ECDFDC;
+.button {
+  line-height: 19px;
+  padding: 13px 24px 12px 11px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid transparent;
 }
 
-.logo_navbar{
-    position: relative;
-    left: 15px;
+.button-icon {
+  margin-right: 12px;
+}
+
+.orangebutton {
+  background: #ffc881;
+  border-radius: 4px;
+  width: 203px;
+  color: #80485b;
+}
+
+.whitebutton {
+  background: #fffdfa;
+  border: 1px solid #80485b;
+  padding-left: 27px;
+}
+
+.purplebutton {
+  background: #4b1e2d;
+  color: #ffffff;
+  padding-left: 27px;
+}
+
+.transparentbutton {
+  background: none;
+  color: #80485b;
+  font-size: 16px;
+}
+
+.logo_navbar {
+  position: relative;
+  left: 15px;
 }
 
 .search_icon {
-    position: relative;
-    left: 50px;
+  position: relative;
+  left: 50px;
 }
 
-.form{
-    position: relative;
-    left: 60px!important;
-    background-color: transparent !important;
-    border:none !important;
-    font-size: 15px;
-    width:250px !important;
+.form {
+  position: relative;
+  left: 60px !important;
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 15px;
+  width: 250px !important;
 }
 
-.navBarSearchForm{
-    width:50px !important;
+.navBarSearchForm {
+  width: 50px !important;
 }
 
-input.transparent-input { 
-    border:none !important
+input.transparent-input {
+  border: none !important;
 }
 
 .transparent-input {
-   background-color: rgba(0, 0, 0, 0);
-   border:none;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }
- input.transparent-input{
-       background-color:rgba(0,0,0,0) !important;
-       border:none !important;
-    }
-
-.navbar-nav > li{
-    padding-left:20px;
-    padding-right:20px;
-    }
+input.transparent-input {
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+}
+/* Nav Bar */
+.navbar {
+  height: 66px;
+  border-top: 1px solid #ecdfdc;
+  border-bottom: 1px solid #ecdfdc;
+}
+.navbar-nav > li {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 .navbarDropdown {
-    right: 0; 
-    left: auto; 
+  right: 0;
+  left: auto;
 }
-
-/* .dropdown-toggle::after {
-    display: none;
-} */
