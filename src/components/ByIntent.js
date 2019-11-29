@@ -13,9 +13,6 @@ const fakeData = [
   { x: "Others", y: 288, fill: "#CB87B0" }
 ];
 
-/* highest value of y in fakeDATA */
-/* const highestDonorIntent = Math.max.apply(Math, fakeData.map(function(o){return o.y;})) */
-
 
 const ByIntent = () => (
   <div className="chart">

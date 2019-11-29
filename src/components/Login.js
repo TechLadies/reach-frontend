@@ -4,49 +4,54 @@ import Logo from "../images/Logo.svg";
 import { Link } from 'react-router-dom';
 
 
-
 const initialState = {
-  name: "",
-  email: ""
-};
-
-
-const formValid = formErrors => {
-  let valid = true;
-
-  // validate form errors being empty
-  Object.values(formErrors).forEach(val => {
-    val.length > 0 && (valid = false);
-  });
-
-  return valid;
+  email: "",
+  password: ""
 };
 
 function Login() {
   const [state, setState] = useState(initialState)
   const handleChange = e => {
     setState({
+      ...state,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = e => {
-    e.preventDefault();
-
-    if (formValid(state)) {
-      console.log(`
-        --SUBMITTING--
-        Email: ${state.email}
-        Password: ${state.password}
-      `);
+  const validateLogin = response => {
+    if (response.ok) {
+      response.json()
+        .then(data => console.log(data.token));
     } else {
+      response.json()
+        .then(data => console.log(data));
       setState({
+        ...state,
+        password: "",
         error: "Your email and password do not match. Please try again"
       });
     }
   }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    fetch(
+      "https://united-women-backend.herokuapp.com/login",
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "username": state.email,
+          "password": state.password
+        })
+      })
+      .then(validateLogin)
+      .catch(err=> {setState({...state, error: "Connection error, unable to login."})});
+        
+  }
+
   return (
-    <div className = "login-container">
+    <div className="login-container">
       <img src={Loginimage} className="login-img" alt="Login" />
       <div className="login-form">
         <img src={Logo} className="logo" alt="Logo" />
@@ -69,7 +74,7 @@ function Login() {
 
 
             <input
-              type="text"
+              type="password"
               name="password"
               placeholder=" Enter your password"
               value={state.password}
@@ -78,10 +83,12 @@ function Login() {
             />
 
 
-            <div className= "login-form-list"><Link to="#">Forgot password?</Link> </div>
+            <div className="login-form-list"><Link to="#">Forgot password?</Link> </div>
           </div>
           {state.error && <p className="error-msg">{state.error}</p>}
-          <button className="login-button">
+          <button
+            onClick={handleSubmit}
+            className="login-button">
             <span className="login-button-text">Login</span>
           </button>
         </form>
