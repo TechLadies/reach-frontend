@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Loginimage from "../images/Group 5.svg";
 import Logo from "../images/Logo.svg";
-import { Link } from 'react-router-dom';
+import { Link, Redirect, Route } from 'react-router-dom';
+
 
 
 const initialState = {
   email: "",
-  password: ""
+  password: "",
+  toDashboard: false
 };
 
 function Login() {
@@ -23,6 +25,12 @@ function Login() {
     if (response.ok) {
       response.json()
         .then(data => console.log(data.token));
+      setState({
+        ...state,
+        toDashboard: true
+      });
+
+
     } else {
       response.json()
         .then(data => console.log(data));
@@ -34,6 +42,9 @@ function Login() {
     }
   }
 
+  if (state.toDashboard === true) {
+    return <Redirect to='/' />
+  }
   const handleSubmit = e => {
     e.preventDefault();
     fetch(
@@ -47,9 +58,11 @@ function Login() {
         })
       })
       .then(validateLogin)
-      .catch(err=> {setState({...state, error: "Connection error, unable to login."})});
-        
+      .catch(err => { setState({ ...state, error: "Connection error, unable to login." }) });
+
   }
+
+
 
   return (
     <div className="login-container">
