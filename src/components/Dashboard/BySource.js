@@ -1,6 +1,6 @@
 import React from "react";
-import TwoHands from "../images/twohandsdonation.svg";
-import Crown from "../images/crown.svg";
+import TwoHands from "../../images/twohandsdonation.svg";
+import Crown from "../../images/crown.svg";
 import {
   VictoryPie,
   VictoryAxis,
@@ -39,7 +39,7 @@ const BySource = () => (
     </div>
 
     <div className="legend-container">
-      <div className="bysource-row1 byintentborder">
+      <div className="bysource-row1 bysourceborder">
         <div className="flex">
           <img src={Crown} />
           <h1 className="bysource-crownvalue">{fakeData[0].y}</h1>
