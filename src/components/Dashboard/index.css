@@ -14,7 +14,7 @@
 
 .line-chart{
     position: absolute;
-    width: 778px;
+    width: 778px; 
     height: 441px;
     left: 80px;
     top: 362px;
@@ -159,9 +159,16 @@
 .chart{
     width: 778px;
     height: 398px;
-    border-radius: 8px;
     display: flex;
     margin: 2rem 2rem;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05), 0px 2px 4px rgba(128, 72, 91, 0.1);
+}
+
+/* gridding the dashboard */
+.wrap{
+    display: grid;
+    outline: 1px solid red; 
+    grid-template-columns: 50% 200px;
+    grid-template-rows: 200px 200px;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
