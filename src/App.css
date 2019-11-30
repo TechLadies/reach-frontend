@@ -32,11 +32,30 @@
 }
 /* ByIntent Component */
 
+.piechart-holder{
+     position: relative; 
+     display: flex;
+     justify-content: center;
+     align-items: center;
+    
+}
 
+.piechart-img{
+    position: absolute; 
+    top: 50% ;
+    left: 50%;
+    border-radius: 100%;
+    width : 128px;
+    height: 128px; 
+    box-shadow: 0px 0px 24px rgba(128, 72, 91, 0.08);
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    
+}
 .VictoryContainer{
      /* outline: 1px solid black;  */
-     margin-top: 2rem;
-    
+     
 }
 
 .chart{

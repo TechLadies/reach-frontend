@@ -16,7 +16,11 @@ const fakeData = [
 
 const ByIntent = () => (
   <div className="chart">
-
+    <div className= "piechart-holder">
+      <div className= "piechart-img">
+         <img src={TwoHands} className="twohands" /> 
+         </div> 
+      
 
     <VictoryPie
       innerRadius={103}
@@ -36,6 +40,8 @@ const ByIntent = () => (
     >
 
     </VictoryPie>
+    
+      </div>
 
 
     <div className="legend-container">
@@ -83,7 +89,7 @@ const ByIntent = () => (
       </div>
 
     </div>
-    {/* <img src={TwoHands} className="twohands" /> */}
+    
   </div>
 
 
