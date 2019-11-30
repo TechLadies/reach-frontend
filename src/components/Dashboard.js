@@ -3,10 +3,9 @@ import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
 import Box from './Box'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import BySource from './BySource'
 import DonationAmount from "./DonationAmount"
 import KeyStatistics from "./KeyStatistics" 
-import ByIntent from "./ByIntent"
+import BySource from "./BySource"
 
 const fakeData = [
     { x: "cats", y: 55, fill: "#0a2" },
@@ -44,7 +43,7 @@ const fakeData = [
           
           <BySource />    
 
-          <ByIntent />    
+          <BySource />    
           
         </div>
       </>

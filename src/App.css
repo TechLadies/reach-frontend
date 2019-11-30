@@ -174,8 +174,6 @@ input.transparent-input {
    
 }
 
-
-
 .twohands{
     position: relative;
     margin: left;
@@ -219,16 +217,16 @@ input.transparent-input {
    align-items: baseline;
 }
 
-.byintent-crownvalue{
+.bysource-crownvalue{
    font-size: 24px;
    margin-left: 12.96px;
 }
 
-.byintent-value{
+.bysource-value{
    font-size: 24px; 
    margin-left: 29.99px
 }
-.byintent-name{
+.bysource-name{
    margin-left: 16px;
    line-height: 18px;
    font-size: 14px;
@@ -236,14 +234,14 @@ input.transparent-input {
    letter-spacing: 0.3px;
 }
 
-.byintent-row1{
+.bysource-row1{
    width: 382px;
    height: 110px;
    padding-top: 30px;   
    
 }
 
-.byintent-row{
+.bysource-row{
    width: 191px;
    height: 110px;
    padding-top: 25px;   
