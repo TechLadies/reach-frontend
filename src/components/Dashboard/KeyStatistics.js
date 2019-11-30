@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
 import Box from './Box'
-import donationsCircle from "../images/donations-circle.svg";
-import twoHandsDonation from "../images/two-hands-donation.svg";
-import Steps from "../images/steps.png";
+import donationsCircle from "../../images/donations-circle.svg";
+import twoHandsDonation from "../../images/two-hands-donation.svg";
+import Steps from "../../images/steps.png";
 
 const KeyStatistics  = () => {
     return (
