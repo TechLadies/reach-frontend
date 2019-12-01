@@ -1,18 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
-import Box from './Box'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
 import KeyStatistics from "./KeyStatistics" ;
 import BySource from "./BySource";
+import ByIntent from "./ByIntent"
 import "./index.css";
-
-// const fakeData = [
-//     { x: "cats", y: 55, fill: "#0a2" },
-//     { x: "dogs", y: 124, fill: "blue" },
-//     { x: "rabbits", y: 20, fill: "orange" }
-//   ];
 
 const fetchData = async (start, end) => {
 
@@ -118,9 +111,9 @@ const fetchData = async (start, end) => {
 
           <KeyStatistics />
           
-          <BySource />    
+          <BySource />
 
-          <BySource />    
+          <ByIntent />
           
         </div>
       </>

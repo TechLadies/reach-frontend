@@ -4,10 +4,12 @@ import Box from './Box'
 
 const ByIntent  = () => {
     return (
-    <>
-    <h1>By Intent</h1>
-
-        </>
+        <div className="byintent">
+            <h1>By Intent</h1>
+            <Box>
+                bar chart goes here
+            </Box>
+        </div>
     )
 }
 

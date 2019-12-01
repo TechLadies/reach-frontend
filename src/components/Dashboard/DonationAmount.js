@@ -4,8 +4,8 @@ import Box from './Box'
 
 const DonationAmount  = () => {
     return (
-    <>
-    <h1>Donation Amount</h1>
+    <div>
+        <h1>Donation Amount</h1>
           <Box>
           <div className="line-chart">
               <VictoryChart
@@ -29,7 +29,7 @@ const DonationAmount  = () => {
               </VictoryChart>
           </div>
           </Box>
-        </>
+        </div>
     )
 }
 
