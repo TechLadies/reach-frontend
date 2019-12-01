@@ -67,22 +67,31 @@ const fetchData = async (start, end) => {
     // use state start and end
     const [startDate, setStartDate] = useState(today.setMonth(today.getMonth()-3))
     const [endDate, setEndDate] = useState(new Date())
-    const [donationAmt, setDonationAmt] = useState([]);
-    const [totalDonationAmt, setTotalDonationAmt] = useState(0);
-    const [totalNoOfDonations, setTotalNoOfDonations] = useState(0); 
-    const [noOfDonationBySource, setNoOfDonationBySource] = useState([]);  
-    const [donationAmtByIntent, setDonationAmtByIntent] = useState([]);
+
+    const [dashboardData, setDashboardData] = useState({
+      "startDate": "2019-09-23",
+      "endDate": "2019-11-23",
+      "donationAmt": [],
+      "totalDonationAmt": null,
+      "totalNoOfDonations": null,
+      "noOfDonationBySource": [],
+      "donationAmtByIntent": []
+    })
 
     useEffect( () => {
       fetchData(startDate, endDate)
         .then(data => {
-          setDonationAmt(data.donationAmt)
-          setTotalDonationAmt(data.totalDonationAmt)
-          setTotalNoOfDonations(data.totalNoOfDonations)
-          setNoOfDonationBySource(data.noOfDonationBySource)
-          setDonationAmtByIntent(data.donationAmtByIntent)
+          setDashboardData(data)
         });
     }, [startDate, endDate]);
+
+    const {
+      donationAmt,
+      totalDonationAmt,
+      totalNoOfDonations,
+      noOfDonationBySource,
+      donationAmtByIntent
+    } = dashboardData
 
     return (
       <>
