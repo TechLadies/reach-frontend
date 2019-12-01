@@ -20,7 +20,7 @@ import "./index.css";
     const today = new Date()
     // use state start and end
     const [startDate, setStartDate] = useState(today.setMonth(today.getMonth()-3))
-    const [endDate, setEndDate] = useState(today)
+    const [endDate, setEndDate] = useState(new Date())
     const [donationAmt, setDonationAmt] = useState([]);
     const [totalDonationAmt, setTotalDonationAmt] = useState(0);
     const [totalNoOfDonations, setTotalNoOfDonations] = useState(0); 
