@@ -13,7 +13,7 @@ const fakeData = [
 ];
 
 const BySource = () => (
-  <>
+  <div className="dashboard-gridcontent">
     <div>
       <header>Total Number of Donations</header>
       <h1>By Source</h1>
@@ -90,7 +90,7 @@ const BySource = () => (
         </div>
       </div>
     </Box>
-  </>
+  </div>
 );
 
 export default BySource;

@@ -4,7 +4,8 @@ import Box from './Box'
 
 const DonationAmount  = () => {
     return (
-    <>
+  <div className="dashboard-gridcontent"> 
+  <>
     <h1>Donation Amount</h1>
           <Box>
           <div className="line-chart">
@@ -29,7 +30,9 @@ const DonationAmount  = () => {
               </VictoryChart>
           </div>
           </Box>
+          
         </>
+        </div>
     )
 }
 
