@@ -91,9 +91,8 @@ const Dashboard = () => {
         <div className="dashboard">
           <h1 className="dashboard-title">Dashboard</h1>
           <div className="d-flex">
-            <div>
-              <label htmlFor="startDate"> From &nbsp; {"      "}</label>
-
+            <div className="from-rectangle">
+              <div className="from-label"></div><label htmlFor="startDate"> From &nbsp; {"      "}</label>
               <DatePicker
                 id="startDate"
                 selected={startDate}
@@ -103,7 +102,7 @@ const Dashboard = () => {
                 endDate={endDate}
               />
             </div>
-            <div>
+            <div className="to-rectangle">
               <label htmlFor="endDate"> To &nbsp; {"      "}</label>
               <DatePicker
                 id="endDate"
