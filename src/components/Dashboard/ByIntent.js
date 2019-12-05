@@ -11,7 +11,7 @@ const sampleData = [
 
 const ByIntent  = () => {
     return (
-        <div className="">
+        <div className="dashboard-header">
             <h1 className="dashboard-headertxt">By Intent</h1>
             
              <div className = "byintent-bar">

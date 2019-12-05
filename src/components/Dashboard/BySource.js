@@ -14,7 +14,7 @@ const fakeData = [
 
 const BySource = () => (
   <div className="dashboard-gridcontent">
-    <div>
+    <div className="dashboard-header">
       <header>Total Number of Donations</header>
       <h1 className= "dashboard-headertxt">By Source</h1>
     </div>
@@ -54,11 +54,11 @@ const BySource = () => (
           </div>
 
           <div className="flex">
-            <div className="bysource-row byintentborder">
+            <div className="bysource-row bysourceborder">
               <h1 className="bysource-value">{fakeData[1].y}</h1>
               <div className="flex">
                 <div className="legend pink"></div>
-                <div className="byintent-name">{fakeData[1].x}</div>
+                <div className="bysource-name">{fakeData[1].x}</div>
               </div>
             </div>
 
@@ -71,7 +71,7 @@ const BySource = () => (
             </div>
           </div>
           <div className="flex">
-            <div className="bysource-row">
+            <div className="bysource-row bs-bottom">
               <h1 className="bysource-value">{fakeData[3].y}</h1>
               <div className="flex">
                 <div className="legend darkpurple"></div>

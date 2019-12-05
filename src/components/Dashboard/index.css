@@ -54,11 +54,6 @@
 .orangebutton{
    width: 192px;
    height: 44px;
-   position: absolute;
-   left: 78.75%;
-   right: 6.25%;
-   top: 22.09%;
-   bottom: 85.79%;
    border-radius: 4px;
 }
 
@@ -110,6 +105,11 @@
 }
 .dashboard-headertxt{
    font-size: 26px;
+   margin-top: 3px;
+}
+
+.dashboard-header{
+   margin-bottom: 24px;
 }
 
 /* BySource Component */
@@ -120,7 +120,7 @@
 }
 
 .legend-container{
-   margin: 30px 48px auto 0;
+
 }
 
 .brightorange{
@@ -167,8 +167,8 @@
 
 .bysource-row1{
    width: 382px;
-   height: 110px;
-   padding-top: 30px;   
+   height: 81px;
+   margin-top: 64px;   
 }
 
 .bysource-row{
@@ -177,12 +177,20 @@
    padding-top: 25px;   
 }
 
+.bs-bottom{
+   margin-bottom: 33px;
+}
+
+.bysourceborder{
+   border-bottom: 1px solid #EBEDF0;
+}
+
 .piechart-holder{
      position: relative; 
      display: flex;
      justify-content: center;
      align-items: center;
-    
+      
 }
 
 .piechart-img{
@@ -202,14 +210,12 @@
 
 .chart{
     display: flex;
-    
-  
+    margin-bottom: 3rem;
 }
 
 .byintent-bar{
    width: 294px;
    height: 398px;
-   margin: 2rem 2rem;
    align-items: right;
 }
 
@@ -217,8 +223,8 @@
 .wrap{
     display: grid;
     grid-template-columns: 778px 294px;
-    grid-template-rows: 12.4% 498px 458px;
-    grid-column-gap: 48px;
+    grid-template-rows: 12.4% auto auto;
+    grid-column-gap: 98px;
     grid-row-gap: 64px;
     margin-left: 80px;
  
@@ -230,4 +236,5 @@
 
 .dashboard-button{
    margin-top: 90px;
+   margin-left: 100px;
 }
