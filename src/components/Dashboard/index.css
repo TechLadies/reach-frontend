@@ -8,6 +8,7 @@
 
 
 
+
 /* Dashboard */
 
 .line-chart{
@@ -21,7 +22,7 @@
     line-height: 33px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+
 }
 .keystats-smallbox{
    display: flex;
@@ -51,6 +52,13 @@
     height: 225px;
     width: 278px;
     }
+
+.dashboard-title{
+       font-size: 32px;
+}
+.dashboard-headertxt{
+   font-size: 26px;
+}
 
 /* BySource Component */
 .legend {
@@ -141,27 +149,26 @@
 
 
 .chart{
-    width: 778px;
-    height: 398px;
     display: flex;
-    margin: 2rem 2rem;
+    
+  
 }
 
 /* gridding the dashboard */
 .wrap{
     display: grid;
-    outline: 1px solid red; 
-    grid-template-columns: 72% auto;
-    grid-template-rows: 174px 500px 500px;
-    grid-template-areas:
-    "header header"
-    "main1 sidebar"
-    "main2 sidebar" ;
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    
+    grid-template-columns: 778px 294px;
+    grid-template-rows: 12.4% 498px 458px;
+    grid-column-gap: 48px;
+    grid-row-gap: 64px;
+    margin-left: 80px;
+ 
 }
 
-.dashboard-gridcontent{
-   padding: 40px 80px;
+.dashboard{
+   margin-top: 40px;
+}
+
+.dashboard-button{
+   margin-top: 90px;
 }

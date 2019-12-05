@@ -16,13 +16,13 @@ const BySource = () => (
   <div className="dashboard-gridcontent">
     <div>
       <header>Total Number of Donations</header>
-      <h1>By Source</h1>
+      <h1 className= "dashboard-headertxt">By Source</h1>
     </div>
     <Box>
       <div className="chart">
         <div className="piechart-holder">
           <div className="piechart-img">
-            <img src={TwoHands} className="twohands" />
+            <img src={TwoHands} className="twohands" alt="twohands"/>
           </div>
 
           <VictoryPie

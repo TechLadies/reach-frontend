@@ -9,7 +9,7 @@ const KeyStatistics = () => {
   return (
     <>
       <div className="keystats">
-        <h1>Key Statistics</h1>
+        <h1 className= "dashboard-headertxt">Key Statistics</h1>
         <Box>
           <div className="keystats-smallbox">
             <img src={donationsCircle} alt="donationscircle" />

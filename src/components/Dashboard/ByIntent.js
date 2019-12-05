@@ -4,8 +4,8 @@ import Box from './Box'
 
 const ByIntent  = () => {
     return (
-        <div className="dashboard-gridcontent">
-            <h1>By Intent</h1>
+        <div className="">
+            <h1 className= "dashboard-headertxt">By Intent</h1>
             <Box>
                 bar chart goes here
             </Box>
