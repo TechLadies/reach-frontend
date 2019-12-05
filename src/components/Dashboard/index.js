@@ -90,12 +90,11 @@ const fetchData = async (start, end) => {
     return (
       <>
       <div className="wrap">
-        <div className="dashboard-gridcontent">
-          <h1>Dashboard</h1>
+      <div className="dashboard-gridcontent">
+        <h1>Dashboard</h1>
           <div className="d-flex">
-            <div>
-              <label htmlFor="startDate"> From &nbsp; {"      "}</label>
-
+            <div className="from-rectangle">
+              <div className="from-label"></div><label htmlFor="startDate"> From &nbsp; {"      "}</label>
               <DatePicker
                 id="startDate"
                 selected={startDate}
@@ -105,7 +104,7 @@ const fetchData = async (start, end) => {
                 endDate={endDate}
               />
             </div>
-            <div>
+            <div className="to-rectangle">
               <label htmlFor="endDate"> To &nbsp; {"      "}</label>
               <DatePicker
                 id="endDate"
