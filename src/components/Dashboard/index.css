@@ -35,6 +35,10 @@
    height: 44px
 }
 
+.startdate{
+   height: 44px;
+}
+
 /* .startdate{
    position: absolute;
    left: 6.25%;
@@ -97,17 +101,7 @@
     transform: matrix(1, 0, 0, 1, 0, 0);
     }
 
-.dashboard-title{
-       font-size: 32px;
-}
-.dashboard-headertxt{
-   font-size: 26px;
-   margin-top: 3px;
-}
 
-.dashboard-header{
-   margin-bottom: 24px;
-}
 
 /* BySource Component */
 .legend {
@@ -116,10 +110,7 @@
    border-radius: 50%; 
 }
 
-.legend-container{
-
-}
-
+/* coloured bullet points for piechart legend */
 .brightorange{
    background: #FFA001;
 }
@@ -220,18 +211,30 @@
 .wrap{
     display: grid;
     grid-template-columns: 778px 294px;
-    grid-template-rows: 12.4% auto auto;
+    grid-template-rows: 134px auto auto;
     grid-column-gap: 98px;
     grid-row-gap: 64px;
     margin-left: 80px;
+    margin-top: 40px;
  
 }
 
-.dashboard{
-   margin-top: 40px;
+.dashboard-button{
+   margin-top: 50px;
+   margin-left: 100px;
 }
 
-.dashboard-button{
-   margin-top: 90px;
-   margin-left: 100px;
+.dashboard-title{
+       font-size: 32px;
+       margin-bottom: 12px;
+}
+.dashboard-headertxt{
+   font-size: 26px;
+   margin-bottom: 24px;
+}
+
+.dashboard-header{
+   color: #9FA2B4;
+   font-weight: 600;
+   line-height: 18px;
 }

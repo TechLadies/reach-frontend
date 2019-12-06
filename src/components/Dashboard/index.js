@@ -94,7 +94,7 @@ const Dashboard = () => {
             <div className="from-rectangle">
               <div className="from-label"></div><label htmlFor="startDate"> From &nbsp; {"      "}</label>
               <DatePicker
-                id="startDate"
+                className="startDate"
                 selected={startDate}
                 onChange={date => setStartDate(date)}
                 selectsStart
@@ -105,7 +105,7 @@ const Dashboard = () => {
             <div className="to-rectangle">
               <label htmlFor="endDate"> To &nbsp; {"      "}</label>
               <DatePicker
-                id="endDate"
+                className="endDate"
                 selected={endDate}
                 onChange={date => setEndDate(date)}
                 selectsEnd
