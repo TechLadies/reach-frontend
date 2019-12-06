@@ -202,10 +202,15 @@
     margin-bottom: 3rem;
 }
 
+/* ByIntent Component */
+
 .byintent-bar{
    width: 294px;
    height: 398px;
    align-items: right;
+   font-style: normal;
+   font-weight: normal;
+   color: #9FA2B4;
 }
 
 /* gridding the dashboard */

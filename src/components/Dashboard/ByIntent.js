@@ -22,13 +22,21 @@ const ByIntent  = () => {
                     domainPadding={{ x: 10 }}
                     height={265}
                     width={220}
-                    labelComponent={<VictoryAxis tickFormat={() => ""} />}
                     >
-                         
+
+                <VictoryAxis
+                    tickValues={({ datum }) => ` ${datum.x}`}
+                 />
+                 <VictoryAxis
+                    dependentAxis
+                    tickFormat={(x) => (`${x / 100}k`)}
+                />
+
                     <VictoryBar horizontal
                         data={sampleData}
                         labels={({ datum }) => ` ${datum.x}`}
                         style={{
+                            labels: { fill: "#9FA2B4" },
                             data: {
                               fill: ({ datum }) => datum.fill,
                             }
