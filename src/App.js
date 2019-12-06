@@ -9,7 +9,6 @@ import Dashboard from "./components/Dashboard";
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
         <Switch>
           <Route path="/login">
@@ -19,6 +18,7 @@ function App() {
             <Dummy />
           </Route>
           <Route path="/">
+            <Navbar />
             <Dashboard />
           </Route>
         </Switch>
