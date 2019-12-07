@@ -6,6 +6,7 @@ import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
 import BySource from "./BySource";
 import ByIntent from "./ByIntent";
+import Header from "../Header";
 import "./index.css";
 
 const fetchData = async (start, end) => {
@@ -87,42 +88,42 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="dashboard">
+      <Header>
         <div>
-        <h1 className="dashboard-title">Dashboard</h1>
-        <div className="d-flex">
-          <div className="from-rectangle">
-            <div className="from-label"></div>
-            <label htmlFor="startDate"> From &nbsp; {"      "}</label>
-            <DatePicker
-              className="startDate"
-              selected={startDate}
-              onChange={date => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-            />
-          </div>
-          <div className="to-rectangle">
-            <label htmlFor="endDate"> To &nbsp; {"      "}</label>
-            <DatePicker
-              className="endDate"
-              selected={endDate}
-              onChange={date => setEndDate(date)}
-              selectsEnd
-              endDate={endDate}
-              minDate={startDate}
-            />
+          <Header.Content>Dashboard</Header.Content>
+          <div className="d-flex">
+            <div className="from-rectangle">
+              <div className="from-label"></div>
+              <label htmlFor="startDate"> From &nbsp; {"      "}</label>
+              <DatePicker
+                className="dateform"
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+              />
+            </div>
+            <div className="to-rectangle">
+              <label htmlFor="endDate"> To &nbsp; {"      "}</label>
+              <DatePicker
+                className="dateform"
+                selected={endDate}
+                onChange={date => setEndDate(date)}
+                selectsEnd
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
           </div>
         </div>
-        </div>
-        <div className="dashboard-button">
+        <Header.Buttons>
           <button className="button orangebutton">
             <img src={Person} className="button-icon" alt="person" />
             View Donor List
           </button>
-        </div>
-      </div>
+        </Header.Buttons>
+      </Header>
 
       <div className="wrap">
         <DonationAmount />
