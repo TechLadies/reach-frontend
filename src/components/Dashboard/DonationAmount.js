@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { VictoryLine, VictoryChart, VictoryTheme } from 'victory';
+import { VictoryLine, VictoryChart, VictoryAxis } from 'victory';
 import Box from './Box'
+import theme from './VictoryTheme'
 
 const DonationAmount  = () => {
     return (
@@ -9,7 +10,7 @@ const DonationAmount  = () => {
           <Box>
           <div className="line-chart">
               <VictoryChart
-              theme={VictoryTheme.material}
+              theme={theme}
               height={200}
               width={300}
               >
@@ -26,6 +27,7 @@ const DonationAmount  = () => {
                   { x: 5, y: 7 }
                   ]}
               />
+              
               </VictoryChart>
           </div>
           </Box>

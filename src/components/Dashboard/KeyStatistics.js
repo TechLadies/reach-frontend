@@ -10,11 +10,12 @@ const KeyStatistics = () => {
     <>
       <div className="keystats">
         <h1 className= "dashboard-headertxt">Key Statistics</h1>
+        <div className="keystats-wrap">
         <Box>
           <div className="keystats-smallbox">
             <img src={donationsCircle} alt="donationscircle" />
             <div>
-              <div className="totaldonationamt">$12,154</div>
+              <div className="totaldonationamt">$12,154.00</div>
               <div className="keystatslabel">Total Donation Amount</div>
             </div>
           </div>
@@ -33,8 +34,10 @@ const KeyStatistics = () => {
             </div>
           </div>
         </Box>
-
         <img src={Steps} className="steps" alt="steps" />
+        </div>
+
+
       </div>
     </>
   );

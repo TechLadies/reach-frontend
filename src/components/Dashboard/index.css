@@ -72,21 +72,30 @@
     align-items: left;
 }
 
+.keystats-wrap{
+   margin: -10px;
+}
+
 .keystats-smallbox{
    display: flex;
    align-items: center;
+   width: 294px;
+   height: 112px;
+   margin: 15px;
 }
 
 .totalnumberdonors{
     font-size: 26px;
     line-height: 17px;
-    color: #252631
+    color: #252631;
+    line-height: 1.6;
 }
 
 .totaldonationamt{
     font-size: 26px;
     line-height: 17px;
-    color: #252631
+    color: #252631;
+    line-height: 1.6
 }
 
 .keystatslabel{
@@ -100,8 +109,6 @@
     height: 255px;
     transform: matrix(1, 0, 0, 1, 0, 0);
     }
-
-
 
 /* BySource Component */
 .legend {
