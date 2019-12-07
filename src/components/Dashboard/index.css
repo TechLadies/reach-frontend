@@ -217,7 +217,7 @@
 .wrap{
     display: grid;
     grid-template-columns: 778px 294px;
-    grid-template-rows: 134px auto auto;
+    grid-template-rows: auto auto;
     grid-column-gap: 98px;
     grid-row-gap: 64px;
     margin-left: 80px;
@@ -226,8 +226,9 @@
 }
 
 .dashboard-button{
-   margin-top: 50px;
-   margin-left: 100px;
+position: relative;
+margin-left: 45%;
+margin-top: 3%;
 }
 
 .dashboard-title{
@@ -244,4 +245,12 @@
    color: #9FA2B4;
    font-weight: 600;
    line-height: 18px;
+}
+.dashboard{
+   border-bottom: solid 1px #ECDFDC;
+   padding-left: 80px;
+   padding-top: 40px;
+   display: flex;
+   height: 174px;
+   
 }
