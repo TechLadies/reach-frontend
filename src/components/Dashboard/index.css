@@ -15,7 +15,6 @@
    height: 38px;
    left: 80px;
    top: calc(50% - 38px/2 - 578.5px);
-
    font-style: normal;
    font-weight: normal;
    font-size: 32px;
@@ -205,13 +204,13 @@
 /* ByIntent Component */
 
 .byintent-bar{
-   width: 294px;
-   height: 398px;
    align-items: right;
-   font-style: normal;
-   font-weight: normal;
+   font-family: Muli !important;
+   font-style: normal !important;
+   font-weight: normal !important;;
    color: #9FA2B4;
 }
+
 
 /* gridding the dashboard */
 .wrap{

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis } from 'victory';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryLabel, VictoryTheme } from 'victory';
 import Box from './Box'
 
 const sampleData = [
@@ -25,7 +25,7 @@ const ByIntent  = () => {
                     >
 
                 <VictoryAxis
-                    tickValues={({ datum }) => ` ${datum.x}`}
+                    tickFormat={() => ""}
                  />
                  <VictoryAxis
                     dependentAxis
@@ -35,6 +35,7 @@ const ByIntent  = () => {
                     <VictoryBar horizontal
                         data={sampleData}
                         labels={({ datum }) => ` ${datum.x}`}
+                        labelComponent={<VictoryLabel dy={-20} x={50} />}
                         style={{
                             labels: { fill: "#9FA2B4" },
                             data: {
