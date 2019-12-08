@@ -89,40 +89,41 @@ const Dashboard = () => {
   return (
     <>
       <Header>
-        <div>
+        <Header.Top>
           <Header.Content>Dashboard</Header.Content>
-          <div className="d-flex">
-            <div className="from-rectangle">
-              <div className="from-label"></div>
-              <label htmlFor="startDate"> From &nbsp; {"      "}</label>
-              <DatePicker
-                className="dateform"
-                selected={startDate}
-                onChange={date => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-              />
-            </div>
-            <div className="to-rectangle">
-              <label htmlFor="endDate"> To &nbsp; {"      "}</label>
-              <DatePicker
-                className="dateform"
-                selected={endDate}
-                onChange={date => setEndDate(date)}
-                selectsEnd
-                endDate={endDate}
-                minDate={startDate}
-              />
-            </div>
+          <Header.Buttons>
+            <button className="button orangebutton">
+              <img src={Person} className="button-icon" alt="person" />
+              View Donor List
+            </button>
+          </Header.Buttons>
+        </Header.Top>
+
+        <div className="d-flex">
+          <div className="from-rectangle">
+            <div className="from-label"></div>
+            <label htmlFor="startDate"> From &nbsp; {"      "}</label>
+            <DatePicker
+              className="dateform"
+              selected={startDate}
+              onChange={date => setStartDate(date)}
+              selectsStart
+              startDate={startDate}
+              endDate={endDate}
+            />
+          </div>
+          <div className="to-rectangle">
+            <label htmlFor="endDate"> To &nbsp; {"      "}</label>
+            <DatePicker
+              className="dateform"
+              selected={endDate}
+              onChange={date => setEndDate(date)}
+              selectsEnd
+              endDate={endDate}
+              minDate={startDate}
+            />
           </div>
         </div>
-        <Header.Buttons>
-          <button className="button orangebutton">
-            <img src={Person} className="button-icon" alt="person" />
-            View Donor List
-          </button>
-        </Header.Buttons>
       </Header>
 
       <div className="wrap">
