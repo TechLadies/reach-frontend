@@ -6,7 +6,7 @@ import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
 import BySource from "./BySource";
 import ByIntent from "./ByIntent";
-import Header from "../Header";
+import Header from "../Header/index.js";
 import "./index.css";
 
 const fetchData = async (start, end) => {

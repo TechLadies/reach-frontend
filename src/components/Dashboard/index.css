@@ -206,36 +206,5 @@
   line-height: 18px;
  
 }
-.header {
-/*   border-bottom: solid 1px #ecdfdc; */
-  padding: 40px 6.25% 0px 6.25%;
-  height: 12.3%;
-  width: 100%;
-  border: solid 1px red;
-  
-}
-.header-top{
-   border: solid 1px blue;
-   display: flex;
-}
-.header-button {
-   position: relative;
 
-   
-   border: solid 1px green; 
- }
- 
- .header-content {
-   font-size: 32px;
-   margin-bottom: 12px;
-   border: solid 1px red;
-   width: 100%;
- 
- }
-
-.dateform{
-   border-radius: 4px;
-   width: 169px;
-   height: 44px; 
-}
 

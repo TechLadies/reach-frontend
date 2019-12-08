@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.css";
 
 const Header = ({children}) => <div className= "header">{children}</div>;
 const Top = ({children}) => <div className= "header-top">{children}</div>;
