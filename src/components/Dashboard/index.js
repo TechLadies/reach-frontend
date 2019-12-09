@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
 import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
+import Calendar from "../../images/calendar.svg";
 import BySource from "./BySource";
 import ByIntent from "./ByIntent";
 import Header from "../Header/index.js";
