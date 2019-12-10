@@ -9,24 +9,6 @@
 
 /* Dashboard */
 
-.react-datepicker__input-container {
-  width: 169px;
-  height: 44px;
-}
-
-.dateform{
-  background: url("../../images/calendar.svg") no-repeat;
-  background-position-x: 80%;
-  background-position-y: 50%;
-  padding-left: 15%;
-  border-radius: 4px;
-}
-
-.startdate {
-  height: 44px;
-}
-
-
 .orangebutton {
   width: 192px;
   height: 44px;

@@ -7,7 +7,7 @@ const Bottom = ({children}) => <div className= "header-bottom">{children}</div>;
 
 const Content = ({children}) => <div className= "header-content">{children}</div>;
 const Buttons = ({children}) => <div className="header-button">{children}</div>;
-const Filters = ({children}) => <div>{children}</div>;
+const Filters = ({children}) => <div className= "header-filters">{children}</div>;
 
 Header.Top = Top;
 Header.Bottom = Bottom;

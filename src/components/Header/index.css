@@ -1,9 +1,9 @@
 .header {
     /*   border-bottom: solid 1px #ecdfdc; */
-      padding: 40px 6.25% 0px 6.25%;
+      padding: 2.8% 6.25% 2.8% 6.25%;
       height: 12.3%;
       width: 100%;
-      border: solid 1px red;
+      border-bottom: solid 1px #ECDFDC;
       
     }
     .header-top{
@@ -12,8 +12,6 @@
     }
     .header-button {
        position: relative;
-    
-       
        border: solid 1px green; 
      }
      
@@ -22,11 +20,23 @@
        margin-bottom: 12px;
        border: solid 1px red;
        width: 100%;
-     
      }
-    
+
+     .header-bottom{
+       border: solid 1px green;
+       margin-top: 12px;
+       
+     }
+
+     .header-filters{
+       border: solid 1px purple;
+     }
     .dateform{
-       border-radius: 4px;
+      background: url("../../images/calendar.svg") no-repeat;
+      background-position-x: 80%;
+      background-position-y: 50%;
+      padding-left: 15%;
+      border-radius: 4px;
        width: 169px;
        height: 44px; 
     }

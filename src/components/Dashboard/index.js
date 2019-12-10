@@ -124,7 +124,10 @@ const Dashboard = () => {
               minDate={startDate}
             />
           </div>
-        </div>
+        </div> 
+        <Header.Bottom> Active Filters
+        <Header.Filters>Hi</Header.Filters>
+        </Header.Bottom>
       </Header>
 
       <div className="wrap">
