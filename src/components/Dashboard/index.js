@@ -101,9 +101,8 @@ const Dashboard = () => {
         </Header.Top>
 
         <div className="d-flex">
-          <div className="from-rectangle">
-            <div className="from-label"></div>
-            <label htmlFor="startDate"> From &nbsp; {"      "}</label>
+          <div>
+            <label className ="datelabel-from" htmlFor="startDate"> From &nbsp; {"      "}</label>
             <DatePicker
               className="dateform"
               selected={startDate}
@@ -113,8 +112,8 @@ const Dashboard = () => {
               endDate={endDate}
             />
           </div>
-          <div className="to-rectangle">
-            <label htmlFor="endDate"> To &nbsp; {"      "}</label>
+          <div>
+            <label className= "datelabel-to" htmlFor="endDate"> To &nbsp; {"      "}</label>
             <DatePicker
               className="dateform"
               selected={endDate}
@@ -125,9 +124,9 @@ const Dashboard = () => {
             />
           </div>
         </div> 
-        <Header.Bottom> Active Filters
-        <Header.Filters>Hi</Header.Filters>
-        </Header.Bottom>
+       {/*  <Header.Bottom> Active Filters
+        <Header.Filters>Filter tabs</Header.Filters>
+        </Header.Bottom> */}
       </Header>
 
       <div className="wrap">

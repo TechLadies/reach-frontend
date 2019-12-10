@@ -7,29 +7,29 @@
       
     }
     .header-top{
-       border: solid 1px blue;
+      /*  border: solid 1px blue; */
        display: flex;
     }
     .header-button {
        position: relative;
-       border: solid 1px green; 
+       /* border: solid 1px green;  */
      }
      
      .header-content {
        font-size: 32px;
        margin-bottom: 12px;
-       border: solid 1px red;
+       /* border: solid 1px red; */
        width: 100%;
      }
 
      .header-bottom{
-       border: solid 1px green;
+       /* border: solid 1px green; */
        margin-top: 12px;
        
      }
 
      .header-filters{
-       border: solid 1px purple;
+      /*  border: solid 1px purple; */
      }
     .dateform{
       background: url("../../images/calendar.svg") no-repeat;
@@ -39,4 +39,11 @@
       border-radius: 4px;
        width: 169px;
        height: 44px; 
+    }
+    
+    .datelabel-to{
+     padding: 0px 24px; 
+    }
+    .datelabel-from{
+      padding-right: 24px;
     }
