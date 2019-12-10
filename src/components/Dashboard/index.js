@@ -92,39 +92,44 @@ const Dashboard = () => {
       <Header>
         <Header.Top>
           <Header.Content>Dashboard</Header.Content>
-          <Header.Buttons>
+        </Header.Top>
+        <Header.Bottom>
+          <div className="d-flex">
+            <div>
+              <label className="datelabel-from" htmlFor="startDate">
+                {" "}
+                From &nbsp; {"      "}
+              </label>
+              <DatePicker
+                className="dateform"
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+              />
+            </div>
+            <div>
+              <label className="datelabel-to" htmlFor="endDate">
+                {" "}
+                To &nbsp; {"      "}
+              </label>
+              <DatePicker
+                className="dateform"
+                selected={endDate}
+                onChange={date => setEndDate(date)}
+                selectsEnd
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
             <button className="button orangebutton">
               <img src={Person} className="button-icon" alt="person" />
               View Donor List
             </button>
-          </Header.Buttons>
-        </Header.Top>
-
-        <div className="d-flex">
-          <div>
-            <label className ="datelabel-from" htmlFor="startDate"> From &nbsp; {"      "}</label>
-            <DatePicker
-              className="dateform"
-              selected={startDate}
-              onChange={date => setStartDate(date)}
-              selectsStart
-              startDate={startDate}
-              endDate={endDate}
-            />
           </div>
-          <div>
-            <label className= "datelabel-to" htmlFor="endDate"> To &nbsp; {"      "}</label>
-            <DatePicker
-              className="dateform"
-              selected={endDate}
-              onChange={date => setEndDate(date)}
-              selectsEnd
-              endDate={endDate}
-              minDate={startDate}
-            />
-          </div>
-        </div> 
-       {/*  <Header.Bottom> Active Filters
+        </Header.Bottom>
+        {/*  <Header.Bottom> Active Filters
         <Header.Filters>Filter tabs</Header.Filters>
         </Header.Bottom> */}
       </Header>
