@@ -74,6 +74,7 @@
    width: 294px;
    height: 112px;
    margin: 15px;
+  
 }
 
 .totalnumberdonors{
@@ -218,10 +219,10 @@
   display: grid;
   grid-template-columns: 778px 294px;
   grid-template-rows: auto auto;
-  grid-column-gap: 98px;
+  grid-column-gap: 7.65%;
   grid-row-gap: 64px;
-  margin-left: 80px;
-  margin-top: 40px;
+  margin: 40px 6.25%;
+
 }
 
 .header-button {
