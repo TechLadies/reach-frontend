@@ -20,7 +20,7 @@
 }
 
 .header-bottom {
-  border: solid 1px green;
+ /*  border: solid 1px green; */
   margin-top: 12px;
 }
 
@@ -47,3 +47,4 @@
 button.button.orangebutton {
  margin-left: 43.2%;
 }
+
