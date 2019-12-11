@@ -1,7 +1,5 @@
 .header {
-  /*   border-bottom: solid 1px #ecdfdc; */
   padding: 2.8% 6.25% 2.8% 6.25%;
-  height: 12.3%;
   width: 100%;
   border-bottom: solid 1px #ecdfdc;
 }
@@ -22,7 +20,7 @@
 }
 
 .header-bottom {
-/*   border: solid 1px green; */
+  border: solid 1px green;
   margin-top: 12px;
 }
 
@@ -47,5 +45,5 @@
 }
 
 button.button.orangebutton {
-  margin-left: 37.2%;
+ margin-left: 43.2%;
 }
