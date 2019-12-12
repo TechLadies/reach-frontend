@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import DonorList from "./components/DonorList/DonorList";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
           <Route path="/">
             <Navbar />
             <Dashboard />
+          </Route>
+          <Route path="/donorlist">
+            <Navbar />
+            <DonorList />
           </Route>
         </Switch>
       </BrowserRouter>

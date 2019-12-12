@@ -120,7 +120,8 @@ const Dashboard = () => {
         <Header.Buttons>
           <button className="button orangebutton">
             <img src={Person} className="button-icon" alt="person" />
-            View Donor List
+            <a className="donor-list-link" href="../DonorList/index">View Donor List</a>
+            
           </button>
         </Header.Buttons>
       </Header>
