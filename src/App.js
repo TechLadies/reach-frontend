@@ -1,25 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Login from './components/Login';
-import ByIntent from './components/ByIntent';
-import { BrowserRouter, Route, Link , Switch} from 'react-router-dom';
+import "./App.css";
+import Navbar from "./components/navbar";
+import Login from "./components/Login";
+import Dummy from "./components/Dummy";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route path="/" exact>
-            <ByIntent className ="byintentchart"/>
-          </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/dummy">
+            <Dummy />
+          </Route>
+          <Route path="/">
+            <Navbar />
+            <Dashboard />
           </Route>
         </Switch>
       </BrowserRouter>
     </div>
-
   );
 }
 
