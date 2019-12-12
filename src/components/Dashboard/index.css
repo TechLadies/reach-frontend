@@ -9,48 +9,6 @@
 
 /* Dashboard */
 
-/* .h1{
-   position: absolute;
-   width: 199px;
-   height: 38px;
-   left: 80px;
-   top: calc(50% - 38px/2 - 578.5px);
-   font-style: normal;
-   font-weight: normal;
-   font-size: 32px;
-   line-height: 50px;
-   display: flex;
-   align-items: center;
-   letter-spacing: -1.4px;
-   } */
-
-/* .d-flex{
-   width: 219px;
-   height: 44px;
-} */
-
-.react-datepicker__input-container {
-  width: 169px;
-  height: 44px;
-}
-
-.startdate {
-  height: 44px;
-}
-
-/* .startdate{
-   position: absolute;
-   left: 6.25%;
-   right: 91.02%;
-   top: 12.08%;
-   bottom: 86.71%;
-   font-family: Muli;
-   font-style: normal;
-   font-weight: normal;
-   font-size: 14px;
-   line-height: 17px;
-} */
-
 .orangebutton {
   width: 192px;
   height: 44px;
@@ -225,18 +183,7 @@
 
 }
 
-.header-button {
-  position: relative;
-  margin-left: 45%;
-  
-  border: solid 1px red; 
-}
 
-.header-content {
-  font-size: 32px;
-  margin-bottom: 12px;
-  border: solid 1px red;
-}
 
 .dashboard-headertxt {
   font-size: 26px;
@@ -248,17 +195,7 @@
   color: #9fa2b4;
   font-weight: 600;
   line-height: 18px;
-}
-.header {
-  border-bottom: solid 1px #ecdfdc;
-  padding-left: 80px;
-  padding-top: 40px;
-  display: flex;
-  height: 174px;
+ 
 }
 
-.dateform{
-   border-radius: 4px;
-   width: 169px;
-   height: 44px; 
-}
+
