@@ -9,7 +9,7 @@ const fakeUpdates = [
 ]
 const UpdateDb = () => {
   return (
-    <Box>
+      <div className= "updatedb-box">
       <img src={UpdateDbImg} alt="Update donor database" />
       <div>
       <div>
@@ -26,7 +26,7 @@ const UpdateDb = () => {
         </div>
       </div>
       </div>
-    </Box>
+      </div>
   );
 };
 
