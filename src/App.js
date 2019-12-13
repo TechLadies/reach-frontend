@@ -18,7 +18,7 @@ function App() {
           <Route path="/dummy">
             <Dummy />
           </Route>
-          <Route path="/">
+          <Route path="/" exact>
             <Navbar />
             <Dashboard />
           </Route>
