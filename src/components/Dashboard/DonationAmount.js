@@ -30,8 +30,8 @@ const DonationAmount  = () => {
               
               </VictoryChart>
           </div>
-          </Box>
-        </div>
+        </Box>
+    </div>
     )
 }
 

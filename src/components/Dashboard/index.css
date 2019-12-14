@@ -64,31 +64,30 @@
   border-radius: 8px;
 }
 
-.keystats-wrap{
-   margin: -10px;
+.keystats-wrap {
+  margin: -10px;
 }
 
-.keystats-smallbox{
-   display: flex;
-   align-items: center;
-   width: 294px;
-   height: 112px;
-   margin: 15px;
-  
+.keystats-smallbox {
+  display: flex;
+  align-items: center;
+  width: 294px;
+  height: 112px;
+  margin: 15px;
 }
 
-.totalnumberdonors{
-    font-size: 26px;
-    line-height: 17px;
-    color: #252631;
-    line-height: 1.6;
+.totalnumberdonors {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+  line-height: 1.6;
 }
 
-.totaldonationamt{
-    font-size: 26px;
-    line-height: 17px;
-    color: #252631;
-    line-height: 1.6
+.totaldonationamt {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+  line-height: 1.6;
 }
 
 .totaldonationamt {
@@ -222,14 +221,13 @@
   grid-column-gap: 7.65%;
   grid-row-gap: 64px;
   margin: 40px 6.25%;
-
 }
 
 .header-button {
   position: relative;
   margin-left: 45%;
-  
-  border: solid 1px red; 
+
+  border: solid 1px red;
 }
 
 .header-content {
@@ -257,8 +255,9 @@
   height: 174px;
 }
 
-.dateform{
-   border-radius: 4px;
-   width: 169px;
-   height: 44px; 
+.dateform {
+  border-radius: 4px;
+  width: 169px;
+  height: 44px;
 }
+

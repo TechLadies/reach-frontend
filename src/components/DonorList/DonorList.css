@@ -1,0 +1,15 @@
+th, td {
+    padding: 10px;
+    position: relative;
+    left: 80px;
+}
+
+th {
+    color: #A78F6C;
+    border: 1px; 
+}
+
+tr:hover {
+    background-color: #FFF3E2;
+    border-radius: 10px;
+  }
