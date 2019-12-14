@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Header from "../Header";
 
 const donorData = async (start, end) => {
     return new Promise((resolve, reject) => {
@@ -30,36 +31,40 @@ const donorData = async (start, end) => {
 
 function DonorList(props) {
     return (
-        <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+      <div class = "Donor Table">
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID Number</th>
+          <th scope="col">Name</th>
+          <th scope="col">Total Amt Donated</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Email Address</th>
+          <th scope="col">DNC Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
       )
     }
 
