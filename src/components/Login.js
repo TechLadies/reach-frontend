@@ -26,8 +26,8 @@ function Login() {
       response.json().then(data => {
         console.log(data.token);
         localStorage.setItem('token', data.token)
+        history.push("/");
       });
-      history.push("/");
     } else {
       response.json().then(data => console.log(data));
       setState({
