@@ -1,32 +1,40 @@
 import React from "react";
 import Box from "../../components/Dashboard/Box";
 import UpdateDbImg from "../../images/updatedonordb.svg";
-import Reportplus from '../../images/reportplus.svg';
+import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
 
-const fakeUpdates = [
+const fakeUpdates = {
+  lastUpdate: "16 Sep 2019, 13:94",
+  period: "1 Sep 2019 - 31 Oct 2019"
+};
 
-]
 const UpdateDb = () => {
   return (
-      <Box className= "updatedb-box">
+    <Box className="updatedb-box">
       <img src={UpdateDbImg} alt="Update donor database" />
-      <div>
-      <div>
-        <div>Last database update</div>
-        <div>For donations in the period of </div>
-      </div>
-      <div>
-        <h1>To update the database upload the IPC file here</h1>
-        <div>
-          <button className="button orangebutton">
-            <img src={Reportplus} className="button-icon" alt ="Upload IPC file"/>
-            Upload IPC File
-          </button>
+      <div className = "updatedetails-container">
+        <div className =" update-top">
+          <div className= "update-title">Last database update
+          <p className = " update-data">{fakeUpdates.lastUpdate}</p></div>
+          <div className="update-title">For donations in the period of 
+          <p className= "update-data"> {fakeUpdates.period} </p></div>
+        </div>
+        <div className= "update-bottom">
+          <p className= "upload">To update the database, upload the IPC file here</p>
+          <div className= "upload-button">
+            <button className="button orangebutton">
+              <img
+                src={Reportplus}
+                className="button-icon"
+                alt="Upload IPC file"
+              />
+              Upload IPC File
+            </button>
+          </div>
         </div>
       </div>
-      </div>
-      </Box>
+    </Box>
   );
 };
 
