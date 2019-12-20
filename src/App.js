@@ -19,11 +19,11 @@ function App() {
             <Dummy />
           </Route>
           <Route path="/update_donor_database">
-          <ProtectedRoute path="/">
             <Navbar />
             <UpdateDb />
           </Route>
-          <Route path="/">
+          <ProtectedRoute path="/">
+            <Navbar />
             <Dashboard />
           </ProtectedRoute>
         </Switch>
