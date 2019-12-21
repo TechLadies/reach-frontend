@@ -21,7 +21,7 @@ const UpdateDb = () => {
           <p className= "update-data"> {fakeUpdates.period} </p></div>
         </div>
         <div className= "update-bottom">
-          <p className= "upload">To update the database, upload the IPC file here</p>
+          <div className= "upload">To update the database, upload the IPC file here</div>
           <div className= "upload-button">
             <button className="button orangebutton">
               <img
