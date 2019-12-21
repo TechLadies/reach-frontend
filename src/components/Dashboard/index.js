@@ -123,7 +123,7 @@ const Dashboard = () => {
                 minDate={startDate}
               />
             </div>
-            <button className="button orangebutton">
+            <button className="button orangebutton vdl">
               <img src={Person} className="button-icon" alt="person" />
               View Donor List
             </button>
