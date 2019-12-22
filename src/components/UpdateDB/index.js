@@ -3,6 +3,7 @@ import Box from "../../components/Dashboard/Box";
 import UpdateDbImg from "../../images/updatedonordb.svg";
 import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
+import FileHandlers from "./FileHandlers"
 
 const fakeUpdates = {
   lastUpdate: "16 Sep 2019, 13:94",
@@ -23,14 +24,7 @@ const UpdateDb = () => {
         <div className= "update-bottom">
           <div className= "upload">To update the database, upload the IPC file here</div>
           <div className= "upload-button">
-            <button className="button orangebutton">
-              <img
-                src={Reportplus}
-                className="button-icon"
-                alt="Upload IPC file"
-              />
-              Upload IPC File
-            </button>
+           <FileHandlers/> 
           </div>
         </div>
       </div>

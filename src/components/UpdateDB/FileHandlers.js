@@ -1,6 +1,42 @@
-import React, { useReducer, useCallback, useEffect } from "react";
-
+import React, { useReducer, useCallback, useEffect, useState } from "react";
+import Reportplus from "../../images/reportplus.svg";
+import "./index.css";
 const initialState = {
+  selectedFile: null,
+  loaded: 0
+};
+
+function FileHandlers() {
+  const [state, setState] = useState(initialState);
+  const handleSelectedFile = e => {
+    setState({
+      ...state,
+      selectedFile: e.target.file[0],
+      loaded: 0
+    });
+  };
+  return (
+    <div>
+      <input
+        type="file"
+        value={state.selectedFile}
+        name=""
+        onChange={handleSelectedFile}
+        
+      />
+       <button className="button orangebutton" onClick= {FileHandlers}>
+              <img
+                src={Reportplus}
+                className="button-icon"
+                alt="Upload IPC file"
+              />
+              Upload IPC File
+            </button>
+    </div>
+  );
+}
+
+/* const initialState = {
   files: [],
   pending: [],
   next: null,
@@ -77,5 +113,5 @@ useEffect(() =>{
       onSubmit,
       onChange,
   };
-};
-export default useFileHandlers;
+}; */
+export default FileHandlers;
