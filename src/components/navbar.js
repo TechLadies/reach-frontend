@@ -46,7 +46,7 @@ function Navbar(props) {
         </span>
 
         <form className="form mx-2 d-inline w-100" id="navBarSearchForm">
-            <input className="form-control transparent-input" type="search" placeholder="Search Donor ID Number" aria-label="Search" />
+            <input className="form-control transparent-input" type="search" placeholder="Search Donor ID" aria-label="Search" />
           </form>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">

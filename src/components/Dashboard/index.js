@@ -128,10 +128,21 @@ const Dashboard = () => {
               View Donor List
             </button>
           </div>
+<<<<<<< HEAD
         </Header.Bottom>
         {/*  <Header.Bottom> Active Filters
         <Header.Filters>Filter tabs</Header.Filters>
         </Header.Bottom> */}
+=======
+        </div>
+        <Header.Buttons>
+          <button className="button orangebutton">
+            <img src={Person} className="button-icon" alt="person" />
+            <a className="donor-list-link" href="../DonorList/index">View Donor List</a>
+            
+          </button>
+        </Header.Buttons>
+>>>>>>> edd875b2ec98987262a33ffe0c9967a00aa74622
       </Header>
 
       <div className="wrap">

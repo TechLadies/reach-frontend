@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import DonorList from "./components/DonorList/DonorList";
 
 function App() {
   return (
@@ -17,10 +18,21 @@ function App() {
           <Route path="/dummy">
             <Dummy />
           </Route>
+<<<<<<< HEAD
           <ProtectedRoute path="/">
             <Navbar />
             <Dashboard />
           </ProtectedRoute>
+=======
+          <Route path="/" exact>
+            <Navbar />
+            <Dashboard />
+          </Route>
+          <Route path="/donorlist">
+            <Navbar />
+            <DonorList />
+          </Route>
+>>>>>>> edd875b2ec98987262a33ffe0c9967a00aa74622
         </Switch>
       </BrowserRouter>
     </div>
