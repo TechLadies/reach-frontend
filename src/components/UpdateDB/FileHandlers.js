@@ -1,17 +1,29 @@
 import React, { useReducer, useCallback, useEffect, useState } from "react";
 import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
+import * as Papa from "papaparse";
+
 const initialState = {
-  selectedFile: null,
+  selectedFile: "",
   loaded: 0
 };
 
 function FileHandlers() {
   const [state, setState] = useState(initialState);
   const handleSelectedFile = e => {
+    console.log(e.target.files[0]);
+
+    Papa.parse(e.target.files[0], {
+      header: true,
+      download: false,
+      delimiter: ",",
+      complete: function(results) {
+        console.log(results.data);
+      }
+    });
     setState({
       ...state,
-      selectedFile: e.target.file[0],
+      selectedFile: e.target.files[0],
       loaded: 0
     });
   };
@@ -19,19 +31,15 @@ function FileHandlers() {
     <div>
       <input
         type="file"
-        value={state.selectedFile}
         name=""
+        id="uploads"
         onChange={handleSelectedFile}
-        
+        accept=".csv"
       />
-       <button className="button orangebutton" onClick= {FileHandlers}>
-              <img
-                src={Reportplus}
-                className="button-icon"
-                alt="Upload IPC file"
-              />
-              Upload IPC File
-            </button>
+      <button className="button orangebutton" onClick={FileHandlers}>
+        <img src={Reportplus} className="button-icon" alt="Upload IPC file" />
+        Upload IPC File
+      </button>
     </div>
   );
 }
