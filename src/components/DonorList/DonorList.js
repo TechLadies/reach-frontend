@@ -4,7 +4,9 @@ import "./DonorList.css";
 import Dummy from "../Dummy";
 import Person from "../../images/person.svg";
 import Filterw from "../../images/filter_whitebtn.svg";
+import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
+
 
 const donorData = async (start, end) => {
   return new Promise((resolve, reject) => {
@@ -255,6 +257,10 @@ function DonorList(props) {
             <img src={Filterw} className="button-icon" alt="person" />
             <a className="donor-list-link" href="../DonorList/index">Filters</a>
           </button>
+            <button className="button purplebutton">
+            <img src={Filterp} className="button-icon" alt="person" />
+              <a className="donor-list-link" href="../DonorList/index">Filters</a>
+            </button>
           <button className="button orangebutton">
             <img src={Reportplus} className="button-icon" alt="person" />
             <a className="donor-list-link" href="../DonorList/index">Export Donor List</a>
