@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import "./DonorList.css";
+import Dummy from "../Dummy";
+import Person from "../../images/person.svg";
+import Filterw from "../../images/filter_whitebtn.svg";
+import Reportplus from "../../images/reportplus.svg";
 
 const donorData = async (start, end) => {
   return new Promise((resolve, reject) => {
@@ -242,9 +246,22 @@ function DonorList(props) {
   return (
     <div class="Donor Table">
       <Header>
-      <Header.Content>Donors</Header.Content>
-      <Header.Buttons></Header.Buttons>
+        <div>
+            <div className="totaldonationamt">Donors</div>
+            <div className="keystatslabel">15 of 233 donors listed</div>
+        </div>
+        <Header.Buttons>
+          <button className="button whitebutton">
+            <img src={Filterw} className="button-icon" alt="person" />
+            <a className="donor-list-link" href="../DonorList/index">Filters</a>
+          </button>
+          <button className="button orangebutton">
+            <img src={Reportplus} className="button-icon" alt="person" />
+            <a className="donor-list-link" href="../DonorList/index">Export Donor List</a>
+          </button>
+        </Header.Buttons>
       </Header> 
+        
       <table class="table">
         <thead>
           <tr>
