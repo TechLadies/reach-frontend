@@ -43,34 +43,57 @@
   margin-top: 32px;
 }
 
-.popup-box{
-  border: 1px solid #CC7503;
+.popup-box {
+  border: 1px solid #cc7503;
   border-radius: 4px;
   width: 430px;
   height: 253px;
-  
+  z-index: 1;
+  position:absolute; 
+  top: 0%;
+  transform: translate(108%, 90%); 
+  display:none;
 }
 
-.popup-msg1{
+.popup-msg1 {
   font-size: 16px;
   line-height: 24px;
 }
-.popup-msg2{
+.popup-msg2 {
   font-size: 20px;
   font-weight: bold;
   color: #252631;
   line-height: 24px;
 }
 
-.message-container{
+.message-container {
   background: white;
   height: 160px;
   padding: 32px 40px;
 }
 
-.popup-btn{
+.popup-btn {
   display: flex;
-  background: #FDF0DF;
+  background: #fdf0df;
   height: 90px;
+  padding: 24px 55px;
 }
 
+.continue-btn {
+  background: #ffc881;
+  width: 147px;
+
+  
+}
+
+.cancel-btn{
+  background: none;
+  width: 147px;
+  border: 1px solid #F32931;
+  margin-left: 24px;
+
+}
+
+button>span {
+  color: #F32931;
+}

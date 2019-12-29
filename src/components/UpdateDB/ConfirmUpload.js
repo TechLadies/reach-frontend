@@ -10,8 +10,8 @@ function ConfirmUpload() {
             <p className= "popup-msg2"> Would you like to proceed?</p>
             </div>
             <div className= "popup-btn">
-            <div><button className= "button orangebutton">Yes, continue</button></div>
-            <div><button className= "button transparentbutton">Cancel</button></div>
+            <div><button className= "button continue-btn">Yes, continue</button></div>
+            <div><button className= "button cancel-btn"><span>Cancel</span></button></div>
             </div>
 
         </Box>
