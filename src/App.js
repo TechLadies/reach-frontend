@@ -6,6 +6,7 @@ import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import UpdateDb from "./components/UpdateDB";
+import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/update_donor_database">
             <Navbar />
             <UpdateDb />
+            <ConfirmUpload/>
           </Route>
           <ProtectedRoute path="/">
             <Navbar />

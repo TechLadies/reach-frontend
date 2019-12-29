@@ -4,6 +4,7 @@ import UpdateDbImg from "../../images/updatedonordb.svg";
 import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
 import FileHandlers from "./FileHandlers"
+import ConfirmUpload from "./FileHandlers"
 
 const fakeUpdates = {
   lastUpdate: "16 Sep 2019, 13:94",
@@ -25,6 +26,7 @@ const UpdateDb = () => {
           <div className= "upload">To update the database, upload the IPC file here</div>
           <div className= "upload-button">
            <FileHandlers/> 
+          
           </div>
         </div>
       </div>
