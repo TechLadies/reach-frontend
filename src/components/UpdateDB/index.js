@@ -20,8 +20,6 @@ const UpdateDb = () => {
     setShowPopUp(true);
   }
   
-  
-
   return (
     <Box className="updatedb-box">
       {showPopUp && <ConfirmUpload/>}

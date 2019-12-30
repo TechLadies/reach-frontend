@@ -5,6 +5,7 @@ import Box from "../../components/Dashboard/Box";
 
 function ConfirmUpload() {
     return(
+      
         <Box className= "popup-box">
            <div className= "message-container">
             <p className= "popup-msg1">You are uploading 101 donations from the period of 1 Nov 2019 to 31 Dec 2019 </p>
@@ -16,6 +17,7 @@ function ConfirmUpload() {
             </div>
 
         </Box>
+        
     )
 }
 
