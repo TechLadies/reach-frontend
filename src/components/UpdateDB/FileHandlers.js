@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
 import * as Papa from "papaparse";
+import ConfirmUpload from "./FileHandlers"
+import { render } from "react-dom";
 
 const initialState = {
   selectedFile: "",
-  loaded: 0
+  loaded: 0,
+  
 };
 
-function FileHandlers() {
+function FileHandlers(props) {
   const [state, setState] = useState(initialState);
+
   const handleSelectedFile = e => {
     console.log(e.target.files[0]);
+   
 
     Papa.parse(e.target.files[0], {
       header: true,
@@ -24,9 +29,13 @@ function FileHandlers() {
     setState({
       ...state,
       selectedFile: e.target.files[0],
-      loaded: 0
-    });
+      loaded: 0,
+    
+    }/* , ()=> state.ConfirmUpload */);
+
+    props.aSPU();
   };
+    
   return (
     <div>
       <input
@@ -40,9 +49,12 @@ function FileHandlers() {
         <img src={Reportplus} className="button-icon" alt="Upload IPC file" />
         Upload IPC File
       </button>
+     
     </div>
   );
-}
+ }
+
+
 
 /* const initialState = {
   files: [],

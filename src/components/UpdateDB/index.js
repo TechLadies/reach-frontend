@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "../../components/Dashboard/Box";
 import UpdateDbImg from "../../images/updatedonordb.svg";
 import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
 import FileHandlers from "./FileHandlers"
-import ConfirmUpload from "./FileHandlers"
+import ConfirmUpload from "./ConfirmUpload"
+
 
 const fakeUpdates = {
   lastUpdate: "16 Sep 2019, 13:94",
@@ -12,8 +13,18 @@ const fakeUpdates = {
 };
 
 const UpdateDb = () => {
+
+  const [showPopUp, setShowPopUp] = useState(false);
+  const activateShowPopUp = () =>{
+    console.log("hi");
+    setShowPopUp(true);
+  }
+  
+  
+
   return (
     <Box className="updatedb-box">
+      {showPopUp && <ConfirmUpload/>}
       <img src={UpdateDbImg} alt="Update donor database" />
       <div className = "updatedetails-container">
         <div className =" update-top">
@@ -24,12 +35,12 @@ const UpdateDb = () => {
         </div>
         <div className= "update-bottom">
           <div className= "upload">To update the database, upload the IPC file here</div>
-          <div className= "upload-button">
-           <FileHandlers/> 
+    
+           <FileHandlers aSPU={activateShowPopUp}/> 
           
           </div>
         </div>
-      </div>
+      
     </Box>
   );
 };

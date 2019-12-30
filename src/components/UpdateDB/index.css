@@ -52,7 +52,8 @@
   position:absolute; 
   top: 0%;
   transform: translate(108%, 90%); 
-  display:none;
+  
+  
 }
 
 .popup-msg1 {
@@ -96,4 +97,8 @@
 
 button>span {
   color: #F32931;
+}
+
+body{  
+
 }
