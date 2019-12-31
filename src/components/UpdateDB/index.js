@@ -20,9 +20,13 @@ const UpdateDb = () => {
     setShowPopUp(true);
   }
   
+  const deactivateShowPopUp = () => {
+    console.log("hi");
+    setShowPopUp(false);
+  }
   return (
     <Box className="updatedb-box">
-      {showPopUp && <ConfirmUpload/>}
+      {showPopUp && <ConfirmUpload dSPU={deactivateShowPopUp}/>}
       <img src={UpdateDbImg} alt="Update donor database" />
       <div className = "updatedetails-container">
         <div className =" update-top">
@@ -34,7 +38,7 @@ const UpdateDb = () => {
         <div className= "update-bottom">
           <div className= "upload">To update the database, upload the IPC file here</div>
     
-           <FileHandlers aSPU={activateShowPopUp}/> 
+           <FileHandlers aSPU={activateShowPopUp} /> 
           
           </div>
         </div>

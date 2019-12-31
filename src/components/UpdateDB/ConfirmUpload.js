@@ -3,7 +3,10 @@ import "./index.css";
 import Box from "../../components/Dashboard/Box";
 
 
-function ConfirmUpload() {
+function ConfirmUpload(props) {
+  const onCancel = () => {
+      props.dSPU()
+  }
     return(
       
         <Box className= "popup-box">
@@ -13,7 +16,7 @@ function ConfirmUpload() {
             </div>
             <div className= "popup-btn">
             <div><button className= "button continue-btn">Yes, continue</button></div>
-            <div><button className= "button cancel-btn"><span>Cancel</span></button></div>
+            <div><button className= "button cancel-btn" onClick= {onCancel}><span>Cancel</span></button></div>
             </div>
 
         </Box>

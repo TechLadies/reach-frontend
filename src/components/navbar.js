@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// import $ from 'jquery';
-// import 'bootstrap/dist/js/bootstrap.min.js';
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false);
