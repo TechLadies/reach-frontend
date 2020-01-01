@@ -23,7 +23,6 @@ function App() {
           <Route path="/update_donor_database">
             <Navbar />
             <UpdateDb />
-            
           </Route>
           <ProtectedRoute path="/">
             <Navbar />
