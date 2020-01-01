@@ -2,34 +2,55 @@ import React from "react";
 import "./index.css";
 import Box from "../../components/Dashboard/Box";
 
-
 function ConfirmUpload(props) {
   const onCancel = () => {
-      props.CPU()
-  }
+    props.CPU();
+  };
 
-  const quantity = props.ipcEntries.length
-  console.log(findDonationDateRange(props.ipcEntries))
+  const quantity = props.ipcEntries.length;
+  const array = props.ipcEntries;
+  const getDateArray = array.map(value => {
+    return Date.parse(value["Date of Donation"]);
+  }).sort();
 
-    return(
-      
-        <Box className= "popup-box">
-           <div className= "message-container">
-            <p className= "popup-msg1">You are uploading {quantity} donations from the period of 1 Nov 2019 to 31 Dec 2019 </p>
-            <p className= "popup-msg2"> Would you like to proceed?</p>
-            </div>
-            <div className= "popup-btn">
-            <div><button className= "button continue-btn">Yes, continue</button></div>
-            <div><button className= "button cancel-btn" onClick= {onCancel}><span>Cancel</span></button></div>
-            </div>
 
-        </Box>
-        
-    )
+  const maxDate = new Date(Math.max.apply(null, getDateArray))
+  const minDate = new Date(Math.min.apply(null, getDateArray))
+
+  return (
+    <Box className="popup-box">
+      <div className="message-container">
+        <p className="popup-msg1">
+          You are uploading {quantity} donations from the period of {dateStringOf(minDate)} to {dateStringOf(maxDate)}
+        </p>
+        <p className="popup-msg2"> Would you like to proceed?</p>
+      </div>
+      <div className="popup-btn">
+        <div>
+          <button className="button continue-btn">Yes, continue</button>
+        </div>
+        <div>
+          <button className="button cancel-btn" onClick={onCancel}>
+            <span>Cancel</span>
+          </button>
+        </div>
+      </div>
+    </Box>
+  );
 }
 
-function findDonationDateRange(donations) {
-    return donations;
+
+function dateStringOf(date) {
+
+  const day = date.getDate()
+  const year = date.getFullYear()
+  const months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+  const month = months[date.getMonth()]
+  const printDate = day + " " + month + " " + year
+  
+  console.log(printDate)
+  return printDate;
 }
 
-export default ConfirmUpload; 
+export default ConfirmUpload;
