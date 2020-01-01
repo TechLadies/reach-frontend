@@ -9,19 +9,25 @@ function ConfirmUpload(props) {
 
   const quantity = props.ipcEntries.length;
   const array = props.ipcEntries;
-  const getDateArray = array.map(value => {
-    return Date.parse(value["Date of Donation"]);
-  }).sort();
+  const getDateArray = array
+    .map(value => {
+      return Date.parse(value["Date of Donation"]);
+    })
+    .sort();
 
-
-  const maxDate = new Date(Math.max.apply(null, getDateArray))
-  const minDate = new Date(Math.min.apply(null, getDateArray))
+  const maxDate = new Date(Math.max.apply(null, getDateArray));
+  const minDate = new Date(Math.min.apply(null, getDateArray));
 
   return (
     <Box className="popup-box">
       <div className="message-container">
         <p className="popup-msg1">
-          You are uploading {quantity} donations from the period of {dateStringOf(minDate)} to {dateStringOf(maxDate)}
+          You are uploading{" "}
+          <span className="popup-purpletxt">{quantity} donations</span> from the
+          period of{" "}
+          <span className="popup-purpletxt">
+            {dateStringOf(minDate)} to {dateStringOf(maxDate)}
+          </span>
         </p>
         <p className="popup-msg2"> Would you like to proceed?</p>
       </div>
@@ -39,17 +45,27 @@ function ConfirmUpload(props) {
   );
 }
 
-
 function dateStringOf(date) {
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+  const month = months[date.getMonth()];
+  const printDate = day + " " + month + " " + year;
 
-  const day = date.getDate()
-  const year = date.getFullYear()
-  const months = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
-  const month = months[date.getMonth()]
-  const printDate = day + " " + month + " " + year
-  
-  console.log(printDate)
+  console.log(printDate);
   return printDate;
 }
 
