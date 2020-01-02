@@ -104,3 +104,7 @@ button>span {
   color: #80485b;
   font-weight: bold;
 }
+
+.defaultinputfile{
+  display:none;
+}

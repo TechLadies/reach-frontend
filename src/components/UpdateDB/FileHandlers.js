@@ -25,16 +25,17 @@ function FileHandlers(props) {
     <div>
       <input
         type="file"
-        name=""
-        id="uploads"
+        name="file"
+        id="file"
         onChange={handleSelectedFile}
         accept=".csv"
         value= {onCancel}
+        className= "defaultinputfile"
       />
-      <button className="button orangebutton" onClick={FileHandlers}>
-        <img src={Reportplus} className="button-icon" alt="Upload IPC file" />
+      <label for= "file" className= "button orangebutton">
+      <img src={Reportplus} className="button-icon" alt="Upload IPC file" />
         Upload IPC File
-      </button>
+      </label>
     </div>
   );
 }
