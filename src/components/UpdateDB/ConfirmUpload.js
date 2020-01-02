@@ -5,6 +5,7 @@ import Box from "../../components/Dashboard/Box";
 function ConfirmUpload(props) {
   const onCancel = () => {
     props.CPU();
+    
   };
 
   const quantity = props.ipcEntries.length;

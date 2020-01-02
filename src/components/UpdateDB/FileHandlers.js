@@ -4,6 +4,9 @@ import "./index.css";
 import * as Papa from "papaparse";
 
 function FileHandlers(props) {
+  const onCancel= () =>{
+    props.CPU()
+  }
   const handleSelectedFile = e => {
     console.log(e.target.files[0]);
 
@@ -26,6 +29,7 @@ function FileHandlers(props) {
         id="uploads"
         onChange={handleSelectedFile}
         accept=".csv"
+        value= {onCancel}
       />
       <button className="button orangebutton" onClick={FileHandlers}>
         <img src={Reportplus} className="button-icon" alt="Upload IPC file" />

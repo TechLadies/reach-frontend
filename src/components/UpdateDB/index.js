@@ -21,7 +21,8 @@ const UpdateDb = () => {
   const loadIpcEntries = entries => {
     setUpload({
       showPopUp: true,
-      ipcData: entries
+      ipcData: entries,
+      
     });
   };
 
@@ -29,13 +30,14 @@ const UpdateDb = () => {
     setUpload({
       showPopUp: false,
       ipcData: []
+    
     });
   };
 
 
   return (
     <Box className="updatedb-box">
-      {upload.showPopUp && <ConfirmUpload CPU={CancelPopUp} ipcEntries={upload.ipcData} />}
+      {upload.showPopUp && <ConfirmUpload CPU={CancelPopUp} ipcEntries={upload.ipcData} resetState= {priorUploadState}/>}
       <img src={UpdateDbImg} alt="Update donor database" />
       <div className="updatedetails-container">
         <div className=" update-top">
@@ -53,7 +55,7 @@ const UpdateDb = () => {
             To update the database, upload the IPC file here
           </div>
 
-          <FileHandlers loadIpcEntries={loadIpcEntries} />
+          <FileHandlers loadIpcEntries={loadIpcEntries} CPU={CancelPopUp} />
         </div>
       </div>
     </Box>
