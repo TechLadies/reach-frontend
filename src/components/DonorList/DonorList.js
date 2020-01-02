@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import "./DonorList.css";
-import Dummy from "../Dummy";
-import Person from "../../images/person.svg";
+import Styles from "./DonorList.css";
 import Filterw from "../../images/filter_whitebtn.svg";
 import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
@@ -144,6 +142,7 @@ function ListItem(props) {
 }
 
 function DonorList(props) {
+
   const data = {
     donationList: [
       {
@@ -245,6 +244,10 @@ function DonorList(props) {
     ]
   };
 
+  function changeButton() {
+    document.getElementById("filterbutton").classList.toggle('purplebutton')
+  }
+  
   return (
     <div class="Donor Table">
       <Header>
@@ -253,20 +256,17 @@ function DonorList(props) {
             <div className="keystatslabel">15 of 233 donors listed</div>
         </div>
         <Header.Buttons>
-          <button className="button whitebutton">
+          <button id = 'filterbutton' onClick={changeButton} className="button whitebutton">
             <img src={Filterw} className="button-icon" alt="person" />
             <a className="donor-list-link" href="../DonorList/index">Filters</a>
           </button>
-            <button className="button purplebutton">
-            <img src={Filterp} className="button-icon" alt="person" />
-              <a className="donor-list-link" href="../DonorList/index">Filters</a>
-            </button>
           <button className="button orangebutton">
             <img src={Reportplus} className="button-icon" alt="person" />
             <a className="donor-list-link" href="../DonorList/index">Export Donor List</a>
           </button>
         </Header.Buttons>
       </Header> 
+
         
       <table class="table">
         <thead>
@@ -283,8 +283,41 @@ function DonorList(props) {
           <ListItem data={data.donationList} />
         </tbody>
       </table>
+      
+      <div className={Styles.pagination}>
+          <span>&laquo;</span>
+          <span className={Styles.active}>1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+        </div>
+
+        <nav aria-label="...">
+  <ul class="pagination">
+    <li class="page-item disabled">
+      <span class="page-link">Previous</span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item active">
+      <span class="page-link">
+        2
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+
+
     </div>
+
+
+
   );
 }
+
 
 export default DonorList;
