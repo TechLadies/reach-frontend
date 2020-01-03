@@ -4,13 +4,41 @@ import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
 import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
-import Calendar from "../../images/calendar.svg";
 import BySource from "./BySource";
 import ByIntent from "./ByIntent";
 import Header from "../Header/index.js";
 import "./index.css";
 
-const fetchData = async (start, end) => {
+
+
+ const fetchData = (start, end) => {
+  return (
+     fetch("http://reach-backend.herokuapp.com/api/dashboard", {
+      method: "POST",
+      /* credentials: 'include', */
+     
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    }).then(function(response) {
+    console.log(response)
+    return response.json()
+    }).then(function(data){
+      const dashboard_data = data
+      console.log(dashboard_data)
+  
+    }).catch(err => {console.log(err)})
+ 
+  )}; 
+
+  
+
+  
+
+
+
+/* const fetchData = async (start, end) => {
   // RETURN A FAKE PROMISE IN LIEU OF FETCH
   return new Promise((resolve, reject) => {
     const data = {
@@ -53,7 +81,7 @@ const fetchData = async (start, end) => {
   // return fetch ('/dashboard?startDate='+start+'&endDate='+end)
   //   .then(resp => resp.json())
   //   .catch(err => {console.log("err: ", JSON.stringify(err))});
-};
+}; */
 
 const Dashboard = () => {
   const today = new Date();
@@ -62,7 +90,7 @@ const Dashboard = () => {
     today.setMonth(today.getMonth() - 3)
   );
   const [endDate, setEndDate] = useState(new Date());
-
+/* 
   const [dashboardData, setDashboardData] = useState({
     startDate: "2019-09-23",
     endDate: "2019-11-23",
@@ -86,9 +114,11 @@ const Dashboard = () => {
     noOfDonationBySource,
     donationAmtByIntent
   } = dashboardData;
-
+ */
   return (
     <>
+    {console.log(fetchData())}
+    {console.log(localStorage.getItem("token"))}
       <Header>
         <Header.Top>
           <Header.Content>Dashboard</Header.Content>
