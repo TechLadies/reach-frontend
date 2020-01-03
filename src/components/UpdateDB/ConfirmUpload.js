@@ -28,6 +28,7 @@ function ConfirmUpload(props) {
 
   return (
     <Box className="popup-box">
+      <div className="popup-foruploadcontainer">
       <div className="message-container">
         <p className="popup-msg1">
           You are uploading{" "}
@@ -48,6 +49,7 @@ function ConfirmUpload(props) {
             <span>Cancel</span>
           </button>
         </div>
+      </div>
       </div>
     </Box>
   );
