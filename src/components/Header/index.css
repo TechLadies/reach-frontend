@@ -21,6 +21,7 @@
 
 .header-bottom {
  /*  border: solid 1px green; */
+  display: flex;
   margin-top: 12px;
 }
 
