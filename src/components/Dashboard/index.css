@@ -181,16 +181,12 @@
   margin: 40px 6.25%;
 }
 
-<<<<<<< HEAD
-=======
 .header-button {
   position: relative;
   margin-left: 45%;
 
   border: solid 1px red;
 }
->>>>>>> edd875b2ec98987262a33ffe0c9967a00aa74622
-
 
 .dashboard-headertxt {
   font-size: 26px;
@@ -202,15 +198,10 @@
   color: #9fa2b4;
   font-weight: 600;
   line-height: 18px;
- 
 }
 
-<<<<<<< HEAD
-=======
 .dateform {
   border-radius: 4px;
   width: 169px;
   height: 44px;
 }
->>>>>>> edd875b2ec98987262a33ffe0c9967a00aa74622
-

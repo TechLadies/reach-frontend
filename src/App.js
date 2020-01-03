@@ -18,21 +18,14 @@ function App() {
           <Route path="/dummy">
             <Dummy />
           </Route>
-<<<<<<< HEAD
-          <ProtectedRoute path="/">
+          <ProtectedRoute path="/" exact>
             <Navbar />
             <Dashboard />
           </ProtectedRoute>
-=======
-          <Route path="/" exact>
-            <Navbar />
-            <Dashboard />
-          </Route>
           <Route path="/donorlist">
             <Navbar />
             <DonorList />
           </Route>
->>>>>>> edd875b2ec98987262a33ffe0c9967a00aa74622
         </Switch>
       </BrowserRouter>
     </div>
