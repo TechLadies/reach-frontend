@@ -8,7 +8,7 @@ const ProgressBar = () =>{
       <Box className= "popup-box">
         <h1>Uploading in progress</h1>
         <p> Please do not close this tab</p>
-        <Line percent="10" strokeWidth="4" strokeColor="#D3D3D3" />
+        <Line percent="50" strokeWidth="2" strokeColor="#FFA001" trailColor="#F8E7CF" trailWidth="2"/>
         <p>percentagehere </p>
       </Box>
     )
