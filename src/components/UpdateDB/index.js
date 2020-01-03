@@ -4,7 +4,7 @@ import UpdateDbImg from "../../images/updatedonordb.svg";
 import "./index.css";
 import FileHandlers from "./FileHandlers";
 import ConfirmUpload from "./ConfirmUpload";
-
+import ProgressBar from "./ProgressBar";
 const fakeUpdates = {
   lastUpdate: "16 Sep 2019, 13:94",
   period: "1 Sep 2019 - 31 Oct 2019"
@@ -12,7 +12,8 @@ const fakeUpdates = {
 
 const priorUploadState = {
   showPopUp: false,
-  ipcData: []
+  ipcData: [],
+  uploading: false
 };
 
 const UpdateDb = () => {
@@ -22,22 +23,37 @@ const UpdateDb = () => {
     setUpload({
       showPopUp: true,
       ipcData: entries,
-      
+      uploading: false
     });
   };
 
-  const CancelPopUp = () => {
+  const cancelPopUp = () => {
     setUpload({
       showPopUp: false,
-      ipcData: []
-    
+      ipcData: [],
+      uploading: false
     });
   };
 
+  const onYesContinue = () => {
+    setUpload({
+      showPopUp: false,
+      ipcData: upload.ipcData,
+      uploading: true
+    });
+  };
 
   return (
     <Box className="updatedb-box">
-      {upload.showPopUp && <ConfirmUpload CPU={CancelPopUp} ipcEntries={upload.ipcData} resetState= {priorUploadState}/>}
+      {upload.showPopUp && (
+        <ConfirmUpload
+          CPU={cancelPopUp}
+          ipcEntries={upload.ipcData}
+          resetState={priorUploadState}
+          clickYes={onYesContinue}
+        />
+      )}
+      {upload.uploading && (<ProgressBar/>)}
       <img src={UpdateDbImg} alt="Update donor database" />
       <div className="updatedetails-container">
         <div className=" update-top">
@@ -55,7 +71,7 @@ const UpdateDb = () => {
             To update the database, upload the IPC file here
           </div>
 
-          <FileHandlers loadIpcEntries={loadIpcEntries} CPU={CancelPopUp} />
+          <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
         </div>
       </div>
     </Box>

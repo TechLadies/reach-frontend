@@ -17,6 +17,7 @@ function FileHandlers(props) {
       skipEmptyLines: true,
       complete: function(results) {  
         props.loadIpcEntries(results.data);
+        console.log(results.data);
       }
     });
   };

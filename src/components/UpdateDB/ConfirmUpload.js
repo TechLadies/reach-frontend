@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.css";
 import Box from "../../components/Dashboard/Box";
+import { Line } from 'rc-progress';
+import ProgressBar from "./ProgressBar";
 
 function ConfirmUpload(props) {
   const onCancel = () => {
@@ -8,6 +10,11 @@ function ConfirmUpload(props) {
     
   };
 
+  const onYes = () =>{
+    props.clickYes()
+    
+  }
+  
   const quantity = props.ipcEntries.length;
   const array = props.ipcEntries;
   const getDateArray = array
@@ -34,7 +41,7 @@ function ConfirmUpload(props) {
       </div>
       <div className="popup-btn">
         <div>
-          <button className="button continue-btn">Yes, continue</button>
+          <button className="button continue-btn"onClick={onYes}>Yes, continue</button>
         </div>
         <div>
           <button className="button cancel-btn" onClick={onCancel}>
@@ -69,5 +76,6 @@ function dateStringOf(date) {
   console.log(printDate);
   return printDate;
 }
+
 
 export default ConfirmUpload;
