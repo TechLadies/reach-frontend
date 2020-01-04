@@ -4,6 +4,7 @@ body {
   padding: 0;
   background: #FFFDFA;
   font-size: 14px;
+  
 }
 
 .login-container{
@@ -25,7 +26,6 @@ input:focus{
   outline:none; 
   border-color:  #FFA001;
 }
-
 
 
 .login-form {

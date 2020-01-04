@@ -1,0 +1,207 @@
+/* Dashboard Box */
+
+.box {
+  background: #ffffff;
+  box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
+    0px 2px 4px rgba(128, 72, 91, 0.1);
+  border-radius: 8px;
+}
+
+/* Dashboard */
+
+.orangebutton {
+  width: 192px;
+  height: 44px;
+  border-radius: 4px;
+}
+
+.line-chart {
+  background: #ffffff;
+  box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
+    0px 2px 4px rgba(128, 72, 91, 0.1);
+  border-radius: 8px;
+}
+
+.keystats-wrap {
+  margin: -10px;
+}
+
+.keystats-smallbox {
+  display: flex;
+  align-items: center;
+  width: 294px;
+  height: 112px;
+  margin: 15px;
+}
+
+.totalnumberdonors {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+  line-height: 1.6;
+}
+
+.totaldonationamt {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+  line-height: 1.6;
+}
+
+.totaldonationamt {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+}
+
+.keystatslabel {
+  font-size: 14px;
+  line-height: 22px;
+  color: #9fa2b4;
+}
+
+.steps {
+  width: 278px;
+  height: 255px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+/* BySource Component */
+.legend {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* coloured bullet points for piechart legend */
+.brightorange {
+  background: #ffa001;
+}
+
+.pink {
+  background: #fe5366;
+}
+
+.lightpink {
+  background: #ff9a85;
+}
+
+.darkpurple {
+  background: #80485b;
+}
+
+.lilac {
+  background: #cb87b0;
+}
+
+.flex {
+  display: flex;
+  align-items: baseline;
+}
+
+.bysource-crownvalue {
+  font-size: 24px;
+  margin-left: 12.96px;
+}
+
+.bysource-value {
+  font-size: 24px;
+  margin-left: 29.99px;
+}
+.bysource-name {
+  margin-left: 16px;
+  line-height: 18px;
+  font-size: 14px;
+  color: #9fa2b4;
+  letter-spacing: 0.3px;
+}
+
+.bysource-row1 {
+  width: 382px;
+  height: 81px;
+  margin-top: 64px;
+}
+
+.bysource-row {
+  width: 191px;
+  height: 110px;
+  padding-top: 25px;
+}
+
+.bs-bottom {
+  margin-bottom: 33px;
+}
+
+.bysourceborder {
+  border-bottom: 1px solid #ebedf0;
+}
+
+.piechart-holder {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.piechart-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 100%;
+  width: 128px;
+  height: 128px;
+  box-shadow: 0px 0px 24px rgba(128, 72, 91, 0.08);
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+}
+
+.chart {
+  display: flex;
+  margin-bottom: 3rem;
+}
+
+/* ByIntent Component */
+
+.byintent-bar {
+  align-items: right;
+  font-family: Muli !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  color: #9fa2b4;
+}
+
+/* gridding the dashboard */
+.wrap {
+  display: grid;
+  grid-template-columns: 778px 294px;
+  grid-template-rows: auto auto;
+  grid-column-gap: 7.65%;
+  grid-row-gap: 64px;
+  margin: 40px 6.25%;
+}
+
+.header-button {
+  position: relative;
+  margin-left: auto;
+
+  border: solid 1px red;
+}
+
+.dashboard-headertxt {
+  font-size: 26px;
+  margin-bottom: 24px;
+  color: #252631;
+}
+
+.dashboard-header {
+  color: #9fa2b4;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.dateform {
+  border-radius: 4px;
+  width: 169px;
+  height: 44px;
+}

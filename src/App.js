@@ -1,19 +1,15 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import Report from "./images/report.svg";
-import Filterp from "./images/filter_purplebtn.svg";
-import Filterw from "./images/filter_whitebtn.svg";
+import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
 import Dummy from "./components/Dummy";
-import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import DonorList from "./components/DonorList/DonorList";
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
         <Switch>
           <Route path="/login">
@@ -22,12 +18,29 @@ function App() {
           <Route path="/dummy">
             <Dummy />
           </Route>
-          <Route path="/">
+          <ProtectedRoute path="/" exact>
+            <Navbar />
             <Dashboard />
+          </ProtectedRoute>
+          <Route path="/donorlist">
+            <Navbar />
+            <DonorList />
           </Route>
         </Switch>
       </BrowserRouter>
     </div>
+  );
+}
+
+function ProtectedRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={() => {
+        if (!localStorage.getItem("token")) return <Redirect to="/login" />;
+        return children;
+      }}
+    />
   );
 }
 
