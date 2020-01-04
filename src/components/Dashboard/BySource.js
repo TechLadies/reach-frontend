@@ -4,11 +4,19 @@ import Crown from "../../images/crown.svg";
 import Box from "./Box";
 import { VictoryPie, VictoryAxis, VictoryContainer } from "victory";
 
-/* const fakeData = (props) => props.data.NoOfDonationBySource[0]
-console.log(fakeData) */
+
 const BySource = (props) =>{
   const donationSourceData = props.data.NoOfDonationBySource
+  if (!donationSourceData) return null
   console.log(donationSourceData);
+
+  const bySourceData = [
+    { x: donationSourceData[0].sourceName, y: donationSourceData[0].noOfDonations, fill: "#FFA001" },
+    { x: donationSourceData[1].sourceName, y: donationSourceData[1].noOfDonations, fill: "#FE5366" },
+    { x: donationSourceData[2].sourceName, y: donationSourceData[2].noOfDonations, fill: "#FF9A85" },
+    { x: donationSourceData[3].sourceName, y: donationSourceData[3].noOfDonations, fill: "#80485B" },
+    { x: donationSourceData[4].sourceName, y: donationSourceData[4].noOfDonations, fill: "#CB87B0" }
+  ];
 
   return(
   
@@ -31,7 +39,7 @@ const BySource = (props) =>{
             width={350}
             labelComponent={<VictoryAxis tickFormat={() => ""} />}
             padAngle={8}
-            data={donationSourceData} 
+            data={bySourceData} 
             style={{
               data: {
                 fill: ({ datum }) => datum.fill
@@ -44,45 +52,45 @@ const BySource = (props) =>{
           <div className="bysource-row1 bysourceborder">
             <div className="flex">
               <img src={Crown} />
-              <h1 className="bysource-crownvalue">{/* {fakeData[0].y} */}</h1>
+              <h1 className="bysource-crownvalue">{ bySourceData[0].y}</h1>
             </div>
             <div className="flex">
               <div className="legend brightorange"></div>
-              <div className="bysource-name"> {/* {fakeData[0].x} */}</div>
+              <div className="bysource-name"> { bySourceData[0].x} </div>
             </div>
           </div>
 
           <div className="flex">
             <div className="bysource-row bysourceborder">
-              <h1 className="bysource-value">{/* {fakeData[1].y} */}</h1>
+              <h1 className="bysource-value">{bySourceData[1].y}</h1>
               <div className="flex">
                 <div className="legend pink"></div>
-                <div className="bysource-name">{/* {fakeData[1].x} */}</div>
+                <div className="bysource-name">{bySourceData[1].x}</div>
               </div>
             </div>
 
             <div className="bysource-row bysourceborder">
-              <h1 className="bysource-value">{/* {fakeData[2].y} */}</h1>
+              <h1 className="bysource-value">{bySourceData[2].y}</h1>
               <div className="flex">
                 <div className="legend lightpink"></div>
-                <div className="bysource-name">{/* {fakeData[2].x} */}</div>
+                <div className="bysource-name">{bySourceData[2].x}</div>
               </div>
             </div>
           </div>
           <div className="flex">
             <div className="bysource-row bs-bottom">
-              <h1 className="bysource-value">{/* {fakeData[3].y} */}</h1>
+              <h1 className="bysource-value">{bySourceData[3].y}</h1>
               <div className="flex">
                 <div className="legend darkpurple"></div>
-                <div className="bysource-name">{/* {fakeData[3].x} */}</div>
+                <div className="bysource-name">{bySourceData[3].x}</div>
               </div>
             </div>
 
             <div className="bysource-row">
-              <h1 className="bysource-value">{/* {fakeData[4].y} */}</h1>
+              <h1 className="bysource-value">{bySourceData[4].y}</h1>
               <div className="flex">
                 <div className="legend lilac"></div>
-                <div className="bysource-name">{/* {fakeData[4].x} */}</div>
+                <div className="bysource-name">{bySourceData[4].x}</div>
               </div>
             </div>
           </div>

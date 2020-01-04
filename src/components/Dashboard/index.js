@@ -29,10 +29,6 @@ import "./index.css";
  
   )}; 
 
-  // THE REAL FETCH
-  // return fetch ('/dashboard?startDate='+start+'&endDate='+end)
-  //   .then(resp => resp.json())
-  //   .catch(err => {console.log("err: ", JSON.stringify(err))});
 
 const Dashboard = () => {
   const today = new Date();
