@@ -9,6 +9,7 @@
 }
 .header-button {
   position: relative;
+  margin-left: auto;
   /* border: solid 1px green;  */
 }
 
@@ -20,7 +21,7 @@
 }
 
 .header-bottom {
- /*  border: solid 1px green; */
+  /*  border: solid 1px green; */
   display: flex;
   margin-top: 12px;
 }
@@ -46,6 +47,5 @@
 }
 
 .vdl {
- margin-left: 43.2%;
+  margin-left: 43.2%;
 }
-

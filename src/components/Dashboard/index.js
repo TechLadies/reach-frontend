@@ -125,12 +125,13 @@ const Dashboard = () => {
             </div>
           </div>
           <Header.Buttons>
-            <button className="button orangebutton">
+            <a
+              className="button orangebutton donor-list-link"
+              href="../DonorList/index"
+            >
               <img src={Person} className="button-icon" alt="person" />
-              <a className="donor-list-link" href="../DonorList/index">
-                View Donor List
-              </a>
-            </button>
+              View Donor List
+            </a>
           </Header.Buttons>
         </Header.Bottom>
       </Header>
