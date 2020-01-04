@@ -76,15 +76,21 @@ input.transparent-input {
   height: 66px;
   border-top: 1px solid #ecdfdc;
   border-bottom: 1px solid #ecdfdc;
-  
 }
 .navbar-nav > li {
   padding-left: 20px;
   padding-right: 20px;
 }
 
+.navbar-nav .nav-link {
+  color: #252631;
+}
+.navbar-nav .nav-link.active {
+  color: #80485b;
+  font-weight: 600;
+}
+
 .navbarDropdown {
   right: 0;
   left: auto;
 }
-
