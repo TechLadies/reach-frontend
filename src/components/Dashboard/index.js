@@ -4,9 +4,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
 import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
+import Calendar from "../../images/calendar.svg";
 import BySource from "./BySource";
 import ByIntent from "./ByIntent";
-import Header from "../Header";
+import Header from "../Header/index.js";
 import "./index.css";
 
 const fetchData = async (start, end) => {
@@ -89,12 +90,16 @@ const Dashboard = () => {
   return (
     <>
       <Header>
-        <div>
+        <Header.Top>
           <Header.Content>Dashboard</Header.Content>
+        </Header.Top>
+        <Header.Bottom>
           <div className="d-flex">
-            <div className="from-rectangle">
-              <div className="from-label"></div>
-              <label htmlFor="startDate"> From &nbsp; {"      "}</label>
+            <div>
+              <label className="datelabel-from" htmlFor="startDate">
+                {" "}
+                From &nbsp; {"      "}
+              </label>
               <DatePicker
                 className="dateform"
                 selected={startDate}
@@ -104,8 +109,11 @@ const Dashboard = () => {
                 endDate={endDate}
               />
             </div>
-            <div className="to-rectangle">
-              <label htmlFor="endDate"> To &nbsp; {"      "}</label>
+            <div>
+              <label className="datelabel-to" htmlFor="endDate">
+                {" "}
+                To &nbsp; {"      "}
+              </label>
               <DatePicker
                 className="dateform"
                 selected={endDate}
@@ -116,14 +124,16 @@ const Dashboard = () => {
               />
             </div>
           </div>
-        </div>
-        <Header.Buttons>
-          <button className="button orangebutton">
-            <img src={Person} className="button-icon" alt="person" />
-            <a className="donor-list-link" href="../DonorList/index">View Donor List</a>
-            
-          </button>
-        </Header.Buttons>
+          <Header.Buttons>
+            <a
+              className="button orangebutton donor-list-link"
+              href="../DonorList/index"
+            >
+              <img src={Person} className="button-icon" alt="person" />
+              View Donor List
+            </a>
+          </Header.Buttons>
+        </Header.Bottom>
       </Header>
 
       <div className="wrap">

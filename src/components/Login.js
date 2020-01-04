@@ -26,8 +26,8 @@ function Login() {
       response.json().then(data => {
         console.log(data.token);
         localStorage.setItem('token', data.token)
+        history.push("/");
       });
-      history.push("/");
     } else {
       response.json().then(data => console.log(data));
       setState({
@@ -40,11 +40,11 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch("https://united-women-backend.herokuapp.com/login", {
+    fetch("https://reach-backend.herokuapp.com/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: state.email,
+        email: state.email,
         password: state.password
       })
     })

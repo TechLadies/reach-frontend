@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-function Box ({children}) {
+function Box ({children, className}) {
     return(
-        <div className = 'box'>
+        <div className={`box ${className}`}>
             {children}
         </div>
     )
