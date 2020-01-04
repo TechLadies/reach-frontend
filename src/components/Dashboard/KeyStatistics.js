@@ -5,7 +5,8 @@ import donationsCircle from "../../images/donations-circle.svg";
 import twoHandsDonation from "../../images/two-hands-donation.svg";
 import Steps from "../../images/steps.png";
 
-const KeyStatistics = () => {
+const KeyStatistics = (props) => {
+  
   return (
     <>
       <div className="keystats">
@@ -15,7 +16,7 @@ const KeyStatistics = () => {
           <div className="keystats-smallbox">
             <img src={donationsCircle} alt="donationscircle" />
             <div>
-              <div className="totaldonationamt">$12,154.00</div>
+              <div className="totaldonationamt">${props.data.totalDonationAmt}</div>
               <div className="keystatslabel">Total Donation Amount</div>
             </div>
           </div>
@@ -29,8 +30,8 @@ const KeyStatistics = () => {
               alt="twohandsdonation"
             />
             <div>
-              <div className="totalnumberdonors">6329</div>
-              <div className="keystatslabel">Total Number of Donors</div>
+              <div className="totalnumberdonors">{props.data.totalNoOfDonations}</div>
+              <div className="keystatslabel">Total Number of Donations</div>
             </div>
           </div>
         </Box>

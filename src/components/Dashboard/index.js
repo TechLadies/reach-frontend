@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
 import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
-import BySource from "./BySource";
+import ByProject from "./ByProject";
 import ByIntent from "./ByIntent";
 import Header from "../Header/index.js";
 import "./index.css";
@@ -46,6 +46,7 @@ const Dashboard = () => {
     });
   }, [startDate, endDate]);
   
+  if(!dashboardData) return null
   console.log(dashboardData);
 
   return (
@@ -99,7 +100,7 @@ const Dashboard = () => {
       <div className="wrap">
         <DonationAmount data= {dashboardData}/>
         <KeyStatistics data= {dashboardData}/>
-        <BySource data= {dashboardData}/>
+        <ByProject data= {dashboardData}/>
         <ByIntent data= {dashboardData}/>
       </div>
     </>

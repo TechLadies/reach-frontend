@@ -5,10 +5,8 @@ import Box from "./Box";
 import { VictoryPie, VictoryAxis, VictoryContainer } from "victory";
 
 
-const BySource = (props) =>{
+const ByProject = (props) =>{
   const donationSourceData = props.data.NoOfDonationBySource
-  if (!donationSourceData) return null
-  console.log(donationSourceData);
 
   const bySourceData = [
     { x: donationSourceData[0].sourceName, y: donationSourceData[0].noOfDonations, fill: "#FFA001" },
@@ -100,4 +98,4 @@ const BySource = (props) =>{
   </div>
 );
           }
-export default BySource;
+export default ByProject;
