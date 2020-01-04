@@ -59,22 +59,14 @@
   width: 50px !important;
 }
 
-input.transparent-input {
-  border: none !important;
-}
-
-.transparent-input {
-  background-color: rgba(0, 0, 0, 0);
+.transparent-input,
+.transparent-input:focus {
+  background-color: transparent;
   border: none;
-}
-input.transparent-input {
-  background-color: rgba(0, 0, 0, 0) !important;
-  border: none !important;
 }
 /* Nav Bar */
 .navbar {
   height: 66px;
-  border-top: 1px solid #ecdfdc;
   border-bottom: 1px solid #ecdfdc;
 }
 .navbar-nav > li {
