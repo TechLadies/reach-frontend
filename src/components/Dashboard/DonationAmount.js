@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { VictoryLine, VictoryChart, VictoryAxis } from 'victory';
 import Box from './Box'
 import theme from './VictoryTheme'
 
-const DonationAmount  = () => {
+const DonationAmount  = (props) => {
     return (
   <div className="dashboard-gridcontent"> 
     <h1 className= "dashboard-headertxt">Donation Amount</h1>
@@ -19,15 +19,12 @@ const DonationAmount  = () => {
                   data: { stroke: "#FE5366" },
                   parent: { border: "1px solid #CC7503"},
                   }}
-                  data={[
-                  { x: 1, y: 2 },
-                  { x: 2, y: 3 },
-                  { x: 3, y: 5 },
-                  { x: 4, y: 4 },
-                  { x: 5, y: 7 }
-                  ]}
+                  data={props.data.donationAmt}
+                  y= "amount"
+                  x= "date"
+                  scale={{ x: "time" }}
               />
-              
+    
               </VictoryChart>
           </div>
           </Box>
