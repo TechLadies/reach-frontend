@@ -17,6 +17,15 @@ const DonationAmount = props => {
   }
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
 
+  const yValues= newDonationsArr.map(e=> e.y).sort(function(a,b){return a-b})
+  const maxY= Math.ceil((Math.max(...yValues))/1000)*1000
+  const minY= Math.floor((Math.min(...yValues))/1000)*1000
+  const middleY = Math.ceil(((maxY + minY)/2)/1000)*1000
+  /* const midY= Math.ceil((yValues[Math.floor(yValues.length/2)])/1000)*1000
+  const meanY= Math.ceil(((yValues.reduce((a,b)=> a + b, 0))/yValues.length)/1000)*1000 */
+
+  const yAxisTicks =[minY, middleY, maxY]
+  console.log(yAxisTicks)
   console.log(newDonationsArr)
   return (
     <div className="dashboard-gridcontent">
@@ -31,7 +40,7 @@ const DonationAmount = props => {
             <VictoryAxis
               crossAxis
               dependentAxis
-              tickValues={[2000, 6000, 10000, 14000]}
+              tickValues={yAxisTicks}
               tickFormat={y => {
                 if (y >= 1000) {
                   return y / 1000 + 'k'
