@@ -31,17 +31,19 @@ const DonationAmount = props => {
             <VictoryAxis
               crossAxis
               dependentAxis
+              tickValues={[2000, 6000, 10000, 14000]}
               tickFormat={y => {
                 if (y >= 1000) {
                   return y / 1000 + 'k'
                 }
               }}
               label={'Amount $'}
-              gridComponent={<LineSegment type={"grid"}/>}
-              /*  grid = */ /* {
-                {stroke: ({tick}) =>  tick === 0 ? "black" : "#A9A9A9",
-                strokeWidth: 4}  
-               } */
+              style = {{
+                grid: {stroke: ({ tick }) => "#EBEDF0"},
+                 ticks: {stroke: "grey", size: 5},
+      
+              }}
+             
             />
             <VictoryAxis crossAxis />
             <VictoryLine
