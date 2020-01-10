@@ -24,4 +24,6 @@ function dateStringOf(date) {
     return printDate;
   }
 
-  export default dateStringOf;
+  
+
+  export default dateStringOf ;

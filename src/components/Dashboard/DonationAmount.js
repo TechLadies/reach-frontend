@@ -3,14 +3,11 @@ import {
   VictoryLine,
   VictoryChart,
   VictoryAxis,
-  LineSegment,
-  VictoryTooltip,
-  VictoryLabel
+
 } from 'victory'
 import Box from './Box'
 import theme from './VictoryTheme'
-/* import dateStringOf from "./DateStringGenerator";
- */
+
 
 const DonationAmount = props => {
   if (!DonationAmount) return null
@@ -20,9 +17,8 @@ const DonationAmount = props => {
   }
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
 
-  const yValues = newDonationsArr.map(
-    e => e.y
-  ) /* .sort(function(a,b){return a-b}) */
+  const yValues = newDonationsArr.map(e => e.y)
+  const xValues = newDonationsArr.map(e => e.x)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
   const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
   const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
@@ -34,10 +30,7 @@ const DonationAmount = props => {
   const meanY= Math.ceil(((yValues.reduce((a,b)=> a + b, 0))/yValues.length)/1000)*1000 */
   const yAxisTicks = [minY, minY + diff, maxY - diff, maxY]
 
-  const xValues= newDonationsArr.map(e=>e.x)
 
-  console.log(xValues)
-  console.log(newDonationsArr)
   return (
     <div className="dashboard-gridcontent">
       <h1 className="dashboard-headertxt">Donation Amount</h1>
@@ -46,10 +39,10 @@ const DonationAmount = props => {
           <VictoryChart
             data={newDonationsArr}
             theme={theme}
-            scale={{ x: 'time' }} /* maxDomain = {{y: 3000}} */
+            scale={{ x: 'time' }}
           >
             <VictoryAxis
-              crossAxis
+              crossAxis={false}
               dependentAxis
               tickValues={yAxisTicks}
               tickFormat={y => {
@@ -67,12 +60,15 @@ const DonationAmount = props => {
                   fill: '#9FA2B4',
                   opacity: '0.5',
                   verticalAnchor: 'start'
-                },
-                
+                }
               }}
             />
             <VictoryAxis
-              crossAxis
+              crossAxis={false}
+              tickFormat={xAxisTickFormat}
+              tickValues={xValues}
+              tickCount={donationsArr.length}
+              scale={{ x: 'time' }}
               style={{
                 axis: { stroke: '#CC7503', opacity: '0.5', strokeWidth: 1.5 },
                 tickLabels: {
@@ -96,5 +92,34 @@ const DonationAmount = props => {
     </div>
   )
 }
+
+function xAxisTickFormat(x, i) {
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ]
+  const month = months[x.getMonth()]
+  const tickDate = x.getDate()
+  const dateMonthFormat = tickDate+ '\n' +month
+  
+  if (i===0) {
+    return dateMonthFormat
+  } else if (tickDate===1){
+    return dateMonthFormat
+  } else{
+    return tickDate
+  }
+}
+
 
 export default DonationAmount
