@@ -5,6 +5,8 @@ import Filterw from "../../images/filter_whitebtn.svg";
 import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
 import Box from "../Dashboard/Box.js";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const getDonorData = async (start, end) => {
   return fetch("http://localhost:3001/donors")
@@ -14,133 +16,51 @@ const getDonorData = async (start, end) => {
     });
 };
 
-function ListItem(props) {
-  let listElements = props.data;
-
-  let listComponents = listElements.map(item => {
-    return (
-      <tr key={item.idNo}>
-        {/* <tr onMouseEnter={handleClick}> */}
-        <td scope="row"> {item.idNo} </td>
-        <td>{item.name}</td>
-        <td>{item.totalAmountDonated}</td>
-        <td>{item.contactNo}</td>
-        <td>{item.email}</td>
-        <td>{item.dnc ? "Do Not Contact" : "Can Contact"}</td>
-      </tr>
-    );
-  });
-
-  return <React.Fragment>{listComponents}</React.Fragment>;
-}
-
 function DonorList(props) {
   const [filterActive, setFilterActive] = useState(false);
   const [donationList, setDonationList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [donorsPerPage] = useState(10);
+
   useEffect(() => {
     getDonorData().then(result => setDonationList(result));
+    getDonorData().then(result => setCurrentPage(result));
   }, []);
 
-  // const data = {
-  //   donationList: [
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Marx Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     },
-  //     {
-  //       IDNumber: "S1234567B",
-  //       name: "Alan Tan",
-  //       totalAmountDonated: "$56,900",
-  //       phoneNumber: "+65-1239-4193",
-  //       emailAddress: "alan_tan60@gmail.com",
-  //       DNC: "Can Contact"
-  //     }
-  //   ]
-  // };
+  // Get Current Donor
+  const indexOfLastDonor = currentPage * donorsPerPage
+  const indexOfFirstDonor = indexOfLastDonor - donorsPerPage
+  const currentDonors = donationList.slice(indexOfFirstDonor, indexOfLastDonor);
+
+  // Change page
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const today = new Date();
+  // use state start and end
+  const [startDate, setStartDate] = useState(
+    today.setMonth(today.getMonth() - 3)
+  );
+  const [endDate, setEndDate] = useState(new Date());
+
+  function ListItem(props) {
+    let listElements = props.data;
+  
+    let listComponents = listElements.map(item => {
+      return (
+        <tr key={item.idNo}>
+          <td scope="row"> {item.idNo} </td>
+          <td>{item.name}</td>
+          <td>{item.totalAmountDonated}</td>
+          <td>{item.contactNo}</td>
+          <td>{item.email}</td>
+          <td>{item.dnc ? "Do Not Contact" : "Can Contact"}</td>
+        </tr>
+      );
+    });
+  
+    return <React.Fragment>{listComponents}</React.Fragment>;
+  }
+  
 
   return (
     <div class="Donor Table">
@@ -149,6 +69,7 @@ function DonorList(props) {
           <div className="totaldonationamt">Donors</div>
           <div className="keystatslabel">15 of 233 donors listed</div>
         </div>
+        <Header.Bottom>
         <Header.Buttons>
           <button
             onClick={() => setFilterActive(!filterActive)}
@@ -163,11 +84,45 @@ function DonorList(props) {
             Export Donor List
           </button>
         </Header.Buttons>
+        </Header.Bottom>
       </Header>
 
       {filterActive ? (
         <div class="filter">
-          <Box>Donor Filters</Box>
+          <Box>
+          <div className="totaldonationamt">Donors Filters</div>
+          <div className="keystatslabel">Donor has made at least 1 donation that satisfies the following criteria</div>
+          <div className="d-flex">
+            <div>
+              <label className="datelabel-from" htmlFor="startDate">
+                {" "}
+                From &nbsp; {"      "}
+              </label>
+              <DatePicker
+                className="dateform"
+                selected={startDate}
+                onChange={date => setStartDate(date)}
+                selectsStart
+                startDate={startDate}
+                endDate={endDate}
+              />
+            </div>
+            <div>
+              <label className="datelabel-to" htmlFor="endDate">
+                {" "}
+                To &nbsp; {"      "}
+              </label>
+              <DatePicker
+                className="dateform"
+                selected={endDate}
+                onChange={date => setEndDate(date)}
+                selectsEnd
+                endDate={endDate}
+                minDate={startDate}
+              />
+            </div>
+          </div>
+          </Box>
         </div>
       ) : null}
 
@@ -187,18 +142,11 @@ function DonorList(props) {
         </tbody>
       </table>
 
-      <div className={Styles.pagination}>
-        <span>&laquo;</span>
-        <span className={Styles.active}>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-      </div>
 
       <nav aria-label="...">
         <ul class="pagination">
           <li class="page-item disabled">
-            <span class="page-link">Previous</span>
+            <span class="page-link">Prev</span>
           </li>
           <li class="page-item">
             <a class="page-link" href="#">
