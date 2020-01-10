@@ -9,6 +9,8 @@ import {
 } from 'victory'
 import Box from './Box'
 import theme from './VictoryTheme'
+/* import dateStringOf from "./DateStringGenerator";
+ */
 
 const DonationAmount = props => {
   if (!DonationAmount) return null

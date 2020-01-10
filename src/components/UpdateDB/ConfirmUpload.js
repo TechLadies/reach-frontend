@@ -3,6 +3,7 @@ import "./index.css";
 import Box from "../../components/Dashboard/Box";
 import { Line } from 'rc-progress';
 import ProgressBar from "./ProgressBar";
+import dateStringOf from "./DateStringGenerator";
 
 function ConfirmUpload(props) {
   const onCancel = () => {
@@ -53,30 +54,6 @@ function ConfirmUpload(props) {
       </div>
     </Box>
   );
-}
-
-function dateStringOf(date) {
-  const day = date.getDate();
-  const year = date.getFullYear();
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
-  const month = months[date.getMonth()];
-  const printDate = day + " " + month + " " + year;
-
-  console.log(printDate);
-  return printDate;
 }
 
 
