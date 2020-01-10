@@ -18,17 +18,23 @@ const DonationAmount = props => {
   }
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
 
-  const yValues= newDonationsArr.map(e=> e.y)/* .sort(function(a,b){return a-b}) */
-  const maxY= Math.ceil((Math.max(...yValues))/1000)*1000
-  const minY= Math.floor((Math.min(...yValues))/1000)*1000
-  const middleY = Math.ceil(((maxY + minY)/2)/1000)*1000
- /*  const q1Y= Math.floor(((middleY+minY)/2)/1000)*1000
+  const yValues = newDonationsArr.map(
+    e => e.y
+  ) /* .sort(function(a,b){return a-b}) */
+  const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
+  const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
+  const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
+  /* const middleY = Math.ceil(((maxY + minY)/2)/1000)*1000 */
+
+  /*  const q1Y= Math.floor(((middleY+minY)/2)/1000)*1000
   const q3Y= Math.floor(((middleY+maxY)/2)/1000*1000 */
   /* const midY= Math.ceil((yValues[Math.floor(yValues.length/2)])/1000)*1000
   const meanY= Math.ceil(((yValues.reduce((a,b)=> a + b, 0))/yValues.length)/1000)*1000 */
+  const yAxisTicks = [minY, minY + diff, maxY - diff, maxY]
 
-  const yAxisTicks =[minY, middleY, maxY]
-  console.log(yAxisTicks)
+  const xValues= newDonationsArr.map(e=>e.x)
+
+  console.log(xValues)
   console.log(newDonationsArr)
   return (
     <div className="dashboard-gridcontent">
@@ -44,28 +50,41 @@ const DonationAmount = props => {
               crossAxis
               dependentAxis
               tickValues={yAxisTicks}
-              
               tickFormat={y => {
                 if (y >= 1000) {
                   return y / 1000 + 'k'
                 }
               }}
               label={'Amount $'}
-              style = {{
-                grid: {stroke: ({ tick }) => "#EBEDF0"},
-                 axis: {stroke: "none"},
-                 tick: '#9FA2B4',
-                 tickLabels: {fontSize: 10, fill: '#9FA2B4', "opacity": "0.5", verticalAnchor: 'start'},
-                 label : {angle: -45}
+              style={{
+                grid: { stroke: ({ tick }) => '#EBEDF0' },
+                axis: { stroke: 'none' },
+                tick: '#9FA2B4',
+                tickLabels: {
+                  fontSize: 10,
+                  fill: '#9FA2B4',
+                  opacity: '0.5',
+                  verticalAnchor: 'start'
+                },
+                
               }}
-             
             />
-            <VictoryAxis crossAxis style= {{axis: {stroke: "#CC7503" ,"opacity": "0.5", strokeWidth: 1.5}}} />
+            <VictoryAxis
+              crossAxis
+              style={{
+                axis: { stroke: '#CC7503', opacity: '0.5', strokeWidth: 1.5 },
+                tickLabels: {
+                  fontSize: 10,
+                  fill: '#9FA2B4',
+                  opacity: '0.5',
+                  verticalAnchor: 'start'
+                }
+              }}
+            />
             <VictoryLine
               interpolation="linear"
               style={{
-                data: { stroke: '#FE5366', strokeWidth: 1.5 },
-                
+                data: { stroke: '#FE5366', strokeWidth: 1.5 }
               }}
               data={newDonationsArr}
             />
