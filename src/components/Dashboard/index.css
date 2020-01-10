@@ -49,6 +49,31 @@
     line-height: 1.6
 }
 
+.keystats {
+  font-size: 26px;
+  line-height: 33px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.keystats-smallbox {
+  display: flex;
+  align-items: center;
+}
+
+.totalnumberdonors {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+}
+
+.totaldonationamt {
+  font-size: 26px;
+  line-height: 17px;
+  color: #252631;
+}
+
 .keystatslabel {
   font-size: 14px;
   line-height: 22px;

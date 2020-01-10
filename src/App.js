@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
 import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import UpdateDb from "./components/UpdateDB";
+import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
 
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -16,6 +19,10 @@ function App() {
           </Route>
           <Route path="/dummy">
             <Dummy />
+          </Route>
+          <Route path="/update_donor_database">
+            <Navbar />
+            <UpdateDb />
           </Route>
           <ProtectedRoute path="/">
             <Navbar />

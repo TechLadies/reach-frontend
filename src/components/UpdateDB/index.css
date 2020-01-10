@@ -1,0 +1,129 @@
+.updatedb-box {
+  width: 62.1%;
+  display: flex;
+  margin: 48px auto;
+  padding: 57px 88px;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
+    0px 2px 4px rgba(128, 72, 91, 0.1);
+  border-radius: 8px;
+}
+
+.updatedetails-container {
+  margin-left: 70px;
+}
+.update-top {
+  border-bottom: solid 1px #f8e7cf;
+  padding-bottom: 10px;
+}
+
+.update-data {
+  font-size: 20px;
+  line-height: 24px;
+  margin-top: 8px;
+  color: #80485b;
+}
+
+.update-title {
+  font-size: 14px;
+  line-height: 18px;
+  color: #9fa2b4;
+  padding-bottom: 10px;
+}
+
+.upload {
+  font-size: 20px;
+  line-height: 31px;
+  color: #252631;
+  margin-bottom: 32px;
+}
+
+.update-bottom {
+  margin-top: 32px;
+}
+
+.popup-box {
+  border: 1px solid #cc7503;
+  border-radius: 4px;
+  z-index: 1;
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+}
+
+.popup-foruploadcontainer{
+  width: 430px;
+  height: 253px;
+}
+
+.popup-msg1 {
+  font-size: 16px;
+  line-height: 24px;
+}
+.popup-msg2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #252631;
+  line-height: 24px;
+}
+
+.message-container {
+  background: white;
+  height: 160px;
+  padding: 32px 40px;
+}
+
+.popup-btn {
+  display: flex;
+  background: #fdf0df;
+  height: 90px;
+  padding: 24px 55px;
+}
+
+.continue-btn {
+  background: #ffc881;
+  width: 147px;
+
+  
+}
+
+.cancel-btn{
+  background: none;
+  width: 147px;
+  border: 1px solid #F32931;
+  margin-left: 24px;
+
+}
+
+button>span {
+  color: #F32931;
+}
+
+.popup-purpletxt{
+  color: #80485b;
+  font-weight: bold;
+}
+
+.defaultinputfile{
+  display:none;
+}
+
+.popup-loadcontainer{
+  height:  196px;
+  width: 430px;
+  padding: 32px 40px;
+  
+}
+
+.percent{
+  color:#4B1E2D;
+  font-size: 22px;
+  line-height: 24px;
+  margin-top: 10px;
+}
+
+.rc-progress-line{
+  margin-top: 8px;
+}
