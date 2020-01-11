@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import "./DonorList.css";
+import Modal from "../Modal";
 
 const donorData = async (start, end) => {
   return new Promise((resolve, reject) => {
@@ -123,7 +124,7 @@ function ListItem(props) {
   let listComponents = listElements.map(item => {
     return (
       <tr>
-      {/* <tr onMouseEnter={handleClick}> */}
+        {/* <tr onMouseEnter={handleClick}> */}
         <td scope="row"> {item.IDNumber} </td>
         <td>{item.name}</td>
         <td>{item.totalAmountDonated}</td>
@@ -138,6 +139,7 @@ function ListItem(props) {
 }
 
 function DonorList(props) {
+  const [popupOpen, setPopupOpen] = useState(false);
   const data = {
     donationList: [
       {
@@ -240,27 +242,33 @@ function DonorList(props) {
   };
 
   return (
-    <div class="Donor Table">
-      <Header>
-      <Header.Content>Donors</Header.Content>
-      <Header.Buttons></Header.Buttons>
-      </Header> 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID Number</th>
-            <th scope="col">Name</th>
-            <th scope="col">Total Amt Donated</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Email Address</th>
-            <th scope="col">DNC Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ListItem data={data.donationList} />
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div class="Donor Table">
+        <Header>
+          <Header.Content>Donors</Header.Content>
+          <Header.Buttons></Header.Buttons>
+        </Header>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID Number</th>
+              <th scope="col">Name</th>
+              <th scope="col">Total Amt Donated</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">DNC Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ListItem data={data.donationList} />
+          </tbody>
+        </table>
+      </div>
+      <button onClick={() => setPopupOpen(true)}>click</button>
+      <Modal isOpen={popupOpen} onDismiss={() => setPopupOpen(false)}>
+        test
+      </Modal>
+    </>
   );
 }
 
