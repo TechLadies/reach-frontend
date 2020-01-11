@@ -1,27 +1,26 @@
 import React from "react";
-import Pagination from "react-pagination-js";
-import "react-pagination-js/dist/styles.css";
 
-function pagination(props) {
-  state = {
-    currentPage: 1
-  };
+const Pagination = ({ donorsPerPage, totalDonors, paginate }) => {
 
-  changeCurrentPage = numPage => {
-    this.setState({ currentPage: numPage });
-    //fetch a data
-    //or update a query to get data
-  };
+  const pageNumbers = [];
 
-    return (
-      <div>
-        <Pagination
-          currentPage={this.state.currentPage}
-          totalPages={10}
-          changeCurrentPage={this.changeCurrentPage}
-        />
-        <h2>current Page:{this.state.currentPage}</h2>
-      </div>
-    );
+  for (let i = 1; i <= Math.ceil(totalDonors / donorsPerPage); i++) {
+    pageNumbers.push(i);
   }
-export default pagination;
+
+  return (
+    <nav>
+      <ul className="pagination">
+        {pageNumbers.map(number => (
+          <li key={number} className="page-item">
+            <a onClick={() => paginate(number)} href="!#" className="page-link">
+              {number}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+export default Pagination;

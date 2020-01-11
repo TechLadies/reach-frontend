@@ -7,6 +7,7 @@ import Reportplus from "../../images/reportplus.svg";
 import Box from "../Dashboard/Box.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Pagination from './pagination';
 
 const getDonorData = async (start, end) => {
   return fetch("http://localhost:3001/donors")
@@ -23,8 +24,9 @@ function DonorList(props) {
   const [donorsPerPage] = useState(10);
 
   useEffect(() => {
-    getDonorData().then(result => setDonationList(result));
-    getDonorData().then(result => setCurrentPage(result));
+    getDonorData().then(result => {
+      setDonationList(result)
+    });
   }, []);
 
   // Get Current Donor
@@ -44,7 +46,6 @@ function DonorList(props) {
 
   function ListItem(props) {
     let listElements = props.data;
-  
     let listComponents = listElements.map(item => {
       return (
         <tr key={item.idNo}>
@@ -57,10 +58,9 @@ function DonorList(props) {
         </tr>
       );
     });
-  
+
     return <React.Fragment>{listComponents}</React.Fragment>;
   }
-  
 
   return (
     <div class="Donor Table">
@@ -70,58 +70,61 @@ function DonorList(props) {
           <div className="keystatslabel">15 of 233 donors listed</div>
         </div>
         <Header.Bottom>
-        <Header.Buttons>
-          <button
-            onClick={() => setFilterActive(!filterActive)}
-            className={
-              "button whitebutton " + (filterActive ? "purplebutton" : null)
-            }
-          >
-            <img src={Filterw} className="button-icon" alt="person" /> Filters
-          </button>
-          <button className="button orangebutton">
-            <img src={Reportplus} className="button-icon" alt="person" />
-            Export Donor List
-          </button>
-        </Header.Buttons>
+          <Header.Buttons>
+            <button
+              onClick={() => setFilterActive(!filterActive)}
+              className={
+                "button whitebutton " + (filterActive ? "purplebutton" : null)
+              }
+            >
+              <img src={Filterw} className="button-icon" alt="person" /> Filters
+            </button>
+            <button className="button orangebutton">
+              <img src={Reportplus} className="button-icon" alt="person" />
+              Export Donor List
+            </button>
+          </Header.Buttons>
         </Header.Bottom>
       </Header>
 
       {filterActive ? (
         <div class="filter">
           <Box>
-          <div className="totaldonationamt">Donors Filters</div>
-          <div className="keystatslabel">Donor has made at least 1 donation that satisfies the following criteria</div>
-          <div className="d-flex">
-            <div>
-              <label className="datelabel-from" htmlFor="startDate">
-                {" "}
-                From &nbsp; {"      "}
-              </label>
-              <DatePicker
-                className="dateform"
-                selected={startDate}
-                onChange={date => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-              />
+            <div className="totaldonationamt">Donors Filters</div>
+            <div className="keystatslabel">
+              Donor has made at least 1 donation that satisfies the following
+              criteria
             </div>
-            <div>
-              <label className="datelabel-to" htmlFor="endDate">
-                {" "}
-                To &nbsp; {"      "}
-              </label>
-              <DatePicker
-                className="dateform"
-                selected={endDate}
-                onChange={date => setEndDate(date)}
-                selectsEnd
-                endDate={endDate}
-                minDate={startDate}
-              />
+            <div className="d-flex">
+              <div>
+                <label className="datelabel-from" htmlFor="startDate">
+                  {" "}
+                  From &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                />
+              </div>
+              <div>
+                <label className="datelabel-to" htmlFor="endDate">
+                  {" "}
+                  To &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                  selectsEnd
+                  endDate={endDate}
+                  minDate={startDate}
+                />
+              </div>
             </div>
-          </div>
           </Box>
         </div>
       ) : null}
@@ -138,38 +141,17 @@ function DonorList(props) {
           </tr>
         </thead>
         <tbody>
-          <ListItem data={donationList} />
+          <ListItem data={currentDonors} />
         </tbody>
       </table>
 
-
-      <nav aria-label="...">
-        <ul class="pagination">
-          <li class="page-item disabled">
-            <span class="page-link">Prev</span>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li class="page-item active">
-            <span class="page-link">
-              2<span class="sr-only">(current)</span>
-            </span>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className='container mt-5'>
+      <Pagination
+        donorsPerPage={donorsPerPage}
+        totalDonors={donationList.length}
+        paginate={paginate}
+      />
+    </div>
     </div>
   );
 }

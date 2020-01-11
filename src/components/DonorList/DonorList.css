@@ -24,3 +24,16 @@ button {
     margin: 0 auto;
 }
 
+.page-link {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  margin-left: -1px;
+  color: #252631 !important;
+  background-color: #fff;
+  border: none !important;
+}
+
+
+
+
