@@ -30,6 +30,7 @@ function DonorList(props) {
   }, []);
 
   // Get Current Donor
+  const totalDonors = donationList.length
   const indexOfLastDonor = currentPage * donorsPerPage
   const indexOfFirstDonor = indexOfLastDonor - donorsPerPage
   const currentDonors = donationList.slice(indexOfFirstDonor, indexOfLastDonor);
@@ -67,7 +68,7 @@ function DonorList(props) {
       <Header>
         <div>
           <div className="totaldonationamt">Donors</div>
-          <div className="keystatslabel">15 of 233 donors listed</div>
+  <div className="keystatslabel">{donorsPerPage} of {totalDonors} donors listed</div>
         </div>
         <Header.Bottom>
           <Header.Buttons>
@@ -129,7 +130,7 @@ function DonorList(props) {
         </div>
       ) : null}
 
-      <table class="table">
+      <table class="table donortable">
         <thead>
           <tr>
             <th scope="col">ID Number</th>
@@ -145,11 +146,12 @@ function DonorList(props) {
         </tbody>
       </table>
 
-      <div className='container mt-5'>
+      <div className='pagination-center mt-5'>
       <Pagination
         donorsPerPage={donorsPerPage}
         totalDonors={donationList.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
     </div>
     </div>

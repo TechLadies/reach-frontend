@@ -1,7 +1,15 @@
+.donortable {
+  max-width: 1280px;
+  margin: 48px auto;
+}
+
+.donortable th {
+  border-top: none;
+  border-bottom: none !important;
+}
+
 th, td {
     padding: 10px;
-    position: relative;
-    left: 80px;
 }
 
 th {
@@ -20,8 +28,8 @@ button {
 
 .pagination {
     margin-top: 25px;
-    width: 50%;
-    margin: 0 auto;
+    width: 35%;
+    margin: 20px auto;
 }
 
 .page-link {
@@ -34,6 +42,11 @@ button {
   border: none !important;
 }
 
+.page-item.active .page-link {
+  background-color: #80485B !important;
+  color: white !important; 
+  border-radius: 5px !important; 
+}
 
 
 
