@@ -1,16 +1,10 @@
 import React from 'react'
-import {
-  VictoryLine,
-  VictoryChart,
-  VictoryAxis,
-
-} from 'victory'
+import { VictoryLine, VictoryChart, VictoryAxis } from 'victory'
 import Box from './Box'
 import theme from './VictoryTheme'
 
-
 const DonationAmount = props => {
-  if (!DonationAmount) return null
+ /*  if (!DonationAmount) return null */
   const donationsArr = props.data.donationAmt
   const transformDonation = donationsArr => {
     return { x: new Date(donationsArr.date), y: Number(donationsArr.amount) }
@@ -21,15 +15,8 @@ const DonationAmount = props => {
   const xValues = newDonationsArr.map(e => e.x)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
   const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
-  const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
-  /* const middleY = Math.ceil(((maxY + minY)/2)/1000)*1000 */
-
-  /*  const q1Y= Math.floor(((middleY+minY)/2)/1000)*1000
-  const q3Y= Math.floor(((middleY+maxY)/2)/1000*1000 */
-  /* const midY= Math.ceil((yValues[Math.floor(yValues.length/2)])/1000)*1000
-  const meanY= Math.ceil(((yValues.reduce((a,b)=> a + b, 0))/yValues.length)/1000)*1000 */
-  const yAxisTicks = [minY, minY + diff, maxY - diff, maxY]
-
+ /* const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
+  const yAxisTicks = [minY, minY + diff, maxY - diff, maxY] */
 
   return (
     <div className="dashboard-gridcontent">
@@ -44,12 +31,14 @@ const DonationAmount = props => {
             <VictoryAxis
               crossAxis={false}
               dependentAxis
-              tickValues={yAxisTicks}
-              tickFormat={y => {
+              domain={[minY, maxY]}
+              //tickValues={yAxisTicks}
+               tickFormat={y => {
                 if (y >= 1000) {
-                  return y / 1000 + 'k'
-                }
-              }}
+                   return y / 1000 + 'k'
+                 }
+                 return y
+               }}
               label={'Amount $'}
               style={{
                 grid: { stroke: ({ tick }) => '#EBEDF0' },
@@ -67,7 +56,7 @@ const DonationAmount = props => {
               crossAxis={false}
               tickFormat={xAxisTickFormat}
               tickValues={xValues}
-              tickCount={donationsArr.length}
+              tickCount={5}
               scale={{ x: 'time' }}
               style={{
                 axis: { stroke: '#CC7503', opacity: '0.5', strokeWidth: 1.5 },
@@ -110,16 +99,15 @@ function xAxisTickFormat(x, i) {
   ]
   const month = months[x.getMonth()]
   const tickDate = x.getDate()
-  const dateMonthFormat = tickDate+ '\n' +month
-  
-  if (i===0) {
+  const dateMonthFormat = tickDate + '\n' + month
+
+  if (i === 0) {
     return dateMonthFormat
-  } else if (tickDate===1){
+  } else if (tickDate === 1) {
     return dateMonthFormat
-  } else{
+  } else {
     return tickDate
   }
 }
-
 
 export default DonationAmount

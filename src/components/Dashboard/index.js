@@ -38,7 +38,7 @@ const Dashboard = () => {
   );
   const [endDate, setEndDate] = useState(new Date());
  
-  const [dashboardData, setDashboardData] = useState("");
+  const [dashboardData, setDashboardData] = useState(null);
 
   useEffect(() => {
     fetchData(startDate, endDate).then(data => {
@@ -46,7 +46,7 @@ const Dashboard = () => {
     });
   }, [startDate, endDate]);
   
-  if(!dashboardData) return null
+  // if(!dashboardData) return null
   console.log(dashboardData);
 
   return (
@@ -97,12 +97,12 @@ const Dashboard = () => {
         </Header.Bottom> */}
       </Header>
 
-      <div className="wrap">
+      {dashboardData ? <div className="wrap">
         <DonationAmount data= {dashboardData}/>
         <KeyStatistics data= {dashboardData}/>
         <ByProject data= {dashboardData}/>
         <ByIntent data= {dashboardData}/>
-      </div>
+      </div> : null}
     </>
   );
 };
