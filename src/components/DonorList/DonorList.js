@@ -7,7 +7,7 @@ import Reportplus from "../../images/reportplus.svg";
 import Box from "../Dashboard/Box.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Pagination from './pagination';
+import Pagination from "./pagination";
 
 const getDonorData = async (start, end) => {
   return fetch("http://localhost:3001/donors")
@@ -25,14 +25,14 @@ function DonorList(props) {
 
   useEffect(() => {
     getDonorData().then(result => {
-      setDonationList(result)
+      setDonationList(result);
     });
   }, []);
 
   // Get Current Donor
-  const totalDonors = donationList.length
-  const indexOfLastDonor = currentPage * donorsPerPage
-  const indexOfFirstDonor = indexOfLastDonor - donorsPerPage
+  const totalDonors = donationList.length;
+  const indexOfLastDonor = currentPage * donorsPerPage;
+  const indexOfFirstDonor = indexOfLastDonor - donorsPerPage;
   const currentDonors = donationList.slice(indexOfFirstDonor, indexOfLastDonor);
 
   // Change page
@@ -52,7 +52,7 @@ function DonorList(props) {
         <tr key={item.idNo}>
           <td scope="row"> {item.idNo} </td>
           <td>{item.name}</td>
-          <td>{item.totalAmountDonated}</td>
+          <td>{item.donationAmount}</td>
           <td>{item.contactNo}</td>
           <td>{item.email}</td>
           <td>{item.dnc ? "Do Not Contact" : "Can Contact"}</td>
@@ -68,7 +68,9 @@ function DonorList(props) {
       <Header>
         <div>
           <div className="totaldonationamt">Donors</div>
-  <div className="keystatslabel">{donorsPerPage} of {totalDonors} donors listed</div>
+          <div className="keystatslabel">
+            {(Math.min(totalDonors, donorsPerPage * currentPage))} of {totalDonors} donors listed
+          </div>
         </div>
         <Header.Bottom>
           <Header.Buttons>
@@ -135,7 +137,7 @@ function DonorList(props) {
           <tr>
             <th scope="col">ID Number</th>
             <th scope="col">Name</th>
-            <th scope="col">Total Amt Donated</th>
+            <th scope="col">Amount Donated</th>
             <th scope="col">Contact Number</th>
             <th scope="col">Email Address</th>
             <th scope="col">DNC Status</th>
@@ -146,14 +148,14 @@ function DonorList(props) {
         </tbody>
       </table>
 
-      <div className='pagination-center mt-5'>
-      <Pagination
-        donorsPerPage={donorsPerPage}
-        totalDonors={donationList.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
-    </div>
+      <div className="pagination-center mt-5">
+        <Pagination
+          donorsPerPage={donorsPerPage}
+          totalDonors={donationList.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 }
