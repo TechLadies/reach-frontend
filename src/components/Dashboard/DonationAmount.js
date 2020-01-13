@@ -1,5 +1,5 @@
 import React from 'react'
-import { VictoryLine, VictoryChart, VictoryAxis } from 'victory'
+import { VictoryLine, VictoryChart, VictoryAxis, VictoryLabel } from 'victory'
 import Box from './Box'
 import theme from './VictoryTheme'
 
@@ -39,7 +39,9 @@ const DonationAmount = props => {
                  }
                  return y
                }}
+               tickLabelComponent={<VictoryLabel dy= {-14} dx={15}/>}
               label={'Amount $'}
+              axisLabelComponent={<VictoryLabel angle={0} y={30} dx= {40}/>}
               style={{
                 grid: { stroke: ({ tick }) => '#EBEDF0' },
                 axis: { stroke: 'none' },
@@ -49,6 +51,10 @@ const DonationAmount = props => {
                   fill: '#9FA2B4',
                   opacity: '0.5',
                   verticalAnchor: 'start'
+                },
+                axisLabel: {
+                  fontSize:10,
+                  fill: '#929295'
                 }
               }}
             />
