@@ -61,12 +61,14 @@
 .popup-msg1 {
   font-size: 16px;
   line-height: 24px;
+  margin-bottom: 16px
 }
 .popup-msg2 {
   font-size: 20px;
   font-weight: bold;
   color: #252631;
   line-height: 24px;
+  margin-bottom: 16px;
 }
 
 .message-container {
@@ -121,9 +123,6 @@ button>span {
   color:#4B1E2D;
   font-size: 22px;
   line-height: 24px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
-.rc-progress-line{
-  margin-top: 8px;
-}

@@ -1,47 +1,60 @@
-import React, { useState } from "react";
-import Box from "../../components/Dashboard/Box";
-import UpdateDbImg from "../../images/updatedonordb.svg";
-import "./index.css";
-import FileHandlers from "./FileHandlers";
-import ConfirmUpload from "./ConfirmUpload";
-import ProgressBar from "./ProgressBar";
+import React, { useState } from 'react'
+import Box from '../../components/Dashboard/Box'
+import UpdateDbImg from '../../images/updatedonordb.svg'
+import './index.css'
+import FileHandlers from './FileHandlers'
+import ConfirmUpload from './ConfirmUpload'
+import ProgressBar from './ProgressBar'
 const fakeUpdates = {
-  lastUpdate: "16 Sep 2019, 13:94",
-  period: "1 Sep 2019 - 31 Oct 2019"
-};
+  lastUpdate: '16 Sep 2019, 13:94',
+  period: '1 Sep 2019 - 31 Oct 2019'
+}
 
 const priorUploadState = {
   showPopUp: false,
   ipcData: [],
-  uploading: false
-};
+  uploading: false,
+  failedUpload: false
+}
 
 const UpdateDb = () => {
-  const [upload, setUpload] = useState(priorUploadState);
+  const [upload, setUpload] = useState(priorUploadState)
 
   const loadIpcEntries = entries => {
     setUpload({
       showPopUp: true,
       ipcData: entries,
-      uploading: false
-    });
-  };
+      uploading: false,
+      failedUpload: false
+    })
+  }
 
   const cancelPopUp = () => {
     setUpload({
       showPopUp: false,
       ipcData: [],
-      uploading: false
-    });
-  };
+      uploading: false,
+      failedUpload: false
+    })
+  }
 
   const onYesContinue = () => {
     setUpload({
       showPopUp: false,
       ipcData: upload.ipcData,
-      uploading: true
-    });
-  };
+      uploading: true,
+      failedUpload: false
+    })
+  }
+
+  const failed = () => {
+    setUpload({
+      showPopUp: false,
+      ipcData: [],
+      uploading: false,
+      failedUpload: true
+    })
+  }
 
   return (
     <Box className="updatedb-box">
@@ -53,7 +66,7 @@ const UpdateDb = () => {
           clickYes={onYesContinue}
         />
       )}
-      {upload.uploading && (<ProgressBar/>)}
+      {upload.uploading && <ProgressBar onFailedUpload = {failed}/>}
       <img src={UpdateDbImg} alt="Update donor database" />
       <div className="updatedetails-container">
         <div className=" update-top">
@@ -75,7 +88,7 @@ const UpdateDb = () => {
         </div>
       </div>
     </Box>
-  );
-};
+  )
+}
 
-export default UpdateDb;
+export default UpdateDb

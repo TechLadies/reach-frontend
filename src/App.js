@@ -21,7 +21,7 @@ function App() {
           <Route path="/dummy">
             <Dummy />
           </Route>
-          <Route path="/update_donor_database">
+          <Route path="/update">
             <Navbar />
             <UpdateDb />
           </Route>
