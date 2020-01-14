@@ -9,6 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Pagination from "./pagination";
 import Dummy from "../Dummy";
+import Modal from "../Modal";
 
 const getDonorData = async (start, end) => {
   return fetch("http://localhost:3001/donors")
@@ -20,6 +21,7 @@ const getDonorData = async (start, end) => {
 
 function DonorList(props) {
   const [filterActive, setFilterActive] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
   const [donationList, setDonationList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
@@ -77,7 +79,10 @@ function DonorList(props) {
         <Header.Bottom>
           <Header.Buttons>
             <button
-              onClick={() => setFilterActive(!filterActive)}
+              onClick={() => {
+                setFilterActive(!filterActive);
+                setPopupOpen(true);
+              }}
               className={
                 "button whitebutton " + (filterActive ? "purplebutton" : null)
               }
@@ -94,8 +99,18 @@ function DonorList(props) {
 
       {filterActive ? (
         <div class="filter">
+          <Modal show={popupOpen} onHide={() => setPopupOpen(false)}>
+            <Modal.Header>
+              <h3>Donor Filters</h3>
+              <Modal.Close onClick={() => setPopupOpen(false)} />
+            </Modal.Header>
+            <Modal.Body>body</Modal.Body>
+            <Modal.Footer>footer</Modal.Footer>
+          </Modal>
           <Box>
-            <div className="totaldonationamt donorfilterheader">Donors Filters</div>
+            <div className="totaldonationamt donorfilterheader">
+              Donors Filters
+            </div>
             <div className="keystatslabel donorfiltersubheader">
               Donor has made at least 1 donation that satisfies the following
               criteria
@@ -130,28 +145,26 @@ function DonorList(props) {
                 />
               </div>
             </div>
-            <div class = "filterbuttons">
+            <div class="filterbuttons">
               <Header>
                 <Header.Buttons>
                   <div style={{ display: "flex" }}>
-                <button style={{ marginLeft: "auto" }}
-                    onClick={() => setFilterActive(!filterActive)}
-                    className={
-                      "button " +
-                      (filterActive ? "button" : null)
-                    }
-                  >
-                    Reset Filters
-                  </button>
-                  <button
-                    onClick={() => setFilterActive(!filterActive)}
-                    className={
-                      "button orangebutton " +
-                      (filterActive ? "orangebutton" : null)
-                    }
-                  >
-                    Apply Filters
-                  </button>
+                    <button
+                      style={{ marginLeft: "auto" }}
+                      onClick={() => setFilterActive(!filterActive)}
+                      className={"button " + (filterActive ? "button" : null)}
+                    >
+                      Reset Filters
+                    </button>
+                    <button
+                      onClick={() => setFilterActive(!filterActive)}
+                      className={
+                        "button orangebutton " +
+                        (filterActive ? "orangebutton" : null)
+                      }
+                    >
+                      Apply Filters
+                    </button>
                   </div>
                 </Header.Buttons>
               </Header>
