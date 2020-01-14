@@ -91,39 +91,39 @@ const Dashboard = () => {
     <>
       <Header>
         <Header.Top>
-          <Header.Content>Dashboard</Header.Content>
-        </Header.Top>
-        <Header.Bottom>
-          <div className="d-flex">
-            <div>
-              <label className="datelabel-from" htmlFor="startDate">
-                {" "}
-                From &nbsp; {"      "}
-              </label>
-              <DatePicker
-                className="dateform"
-                selected={startDate}
-                onChange={date => setStartDate(date)}
-                selectsStart
-                startDate={startDate}
-                endDate={endDate}
-              />
+          <Header.Content>
+            <h2>Dashboard</h2>
+            <div className="d-flex">
+              <div>
+                <label className="datelabel-from" htmlFor="startDate">
+                  {" "}
+                  From &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                />
+              </div>
+              <div>
+                <label className="datelabel-to" htmlFor="endDate">
+                  {" "}
+                  To &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                  selectsEnd
+                  endDate={endDate}
+                  minDate={startDate}
+                />
+              </div>
             </div>
-            <div>
-              <label className="datelabel-to" htmlFor="endDate">
-                {" "}
-                To &nbsp; {"      "}
-              </label>
-              <DatePicker
-                className="dateform"
-                selected={endDate}
-                onChange={date => setEndDate(date)}
-                selectsEnd
-                endDate={endDate}
-                minDate={startDate}
-              />
-            </div>
-          </div>
+          </Header.Content>
           <Header.Buttons>
             <a
               className="button orangebutton donor-list-link"
@@ -133,7 +133,7 @@ const Dashboard = () => {
               View Donor List
             </a>
           </Header.Buttons>
-        </Header.Bottom>
+        </Header.Top>
       </Header>
 
       <div className="wrap">
