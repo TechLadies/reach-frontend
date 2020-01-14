@@ -15,7 +15,8 @@
 
 .orangebutton {
   background: #ffc881;
-  min-width: 200px;
+  border-radius: 4px;
+  /* min-width: 200px; */
   color: #80485b;
 }
 

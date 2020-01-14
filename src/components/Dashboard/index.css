@@ -15,19 +15,23 @@
   border-radius: 8px;
 }
 
+.keystats-wrap {
+  margin: -10px;
+}
+
 .keystats-smallbox {
   display: flex;
   align-items: center;
+  width: 294px;
   height: 112px;
   margin: 15px;
 }
-.keystats-smallbox img {
-  margin-right: 30px;
-}
 
-.keystats-amount {
+.totalnumberdonors {
   font-size: 26px;
+  line-height: 17px;
   color: #252631;
+  line-height: 1.6;
 }
 
 .totaldonationamt {
@@ -37,14 +41,16 @@
   line-height: 1.6;
 }
 
-.keystats-label {
+.keystatslabel {
   font-size: 14px;
   line-height: 22px;
   color: #9fa2b4;
 }
 
 .steps {
-  width: 100%;
+  width: 278px;
+  height: 255px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
 }
 
 /* BySource Component */
@@ -155,9 +161,9 @@
 /* gridding the dashboard */
 .wrap {
   display: grid;
-  grid-template-columns: 66% auto;
+  grid-template-columns: 778px 294px;
   grid-template-rows: auto auto;
-  grid-column-gap: 48px;
+  grid-column-gap: 7.65%;
   grid-row-gap: 64px;
   margin: 40px 6.25%;
 }

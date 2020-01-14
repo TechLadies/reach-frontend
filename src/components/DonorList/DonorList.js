@@ -9,8 +9,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Pagination from "./pagination";
 import Dummy from "../Dummy";
-import "./DonorList.css";
-import Modal from "../Modal";
 
 const getDonorData = async (start, end) => {
   return fetch("http://localhost:3001/donors")
