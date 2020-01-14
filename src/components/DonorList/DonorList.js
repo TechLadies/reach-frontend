@@ -265,8 +265,13 @@ function DonorList(props) {
         </table>
       </div>
       <button onClick={() => setPopupOpen(true)}>click</button>
-      <Modal isOpen={popupOpen} onDismiss={() => setPopupOpen(false)}>
-        test
+      <Modal show={popupOpen} onHide={() => setPopupOpen(false)}>
+        <Modal.Header>
+          <h3>Donor Filters</h3>
+          <Modal.Close onClick={() => setPopupOpen(false)} />
+        </Modal.Header>
+        <Modal.Body>body</Modal.Body>
+        <Modal.Footer>footer</Modal.Footer>
       </Modal>
     </>
   );
