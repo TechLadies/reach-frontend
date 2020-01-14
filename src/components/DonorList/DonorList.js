@@ -70,7 +70,8 @@ function DonorList(props) {
         <div>
           <div className="totaldonationamt">Donors</div>
           <div className="keystatslabel">
-            {(Math.min(totalDonors, donorsPerPage * currentPage))} of {totalDonors} donors listed
+            {Math.min(totalDonors, donorsPerPage * currentPage)} of{" "}
+            {totalDonors} donors listed
           </div>
         </div>
         <Header.Bottom>
@@ -94,12 +95,12 @@ function DonorList(props) {
       {filterActive ? (
         <div class="filter">
           <Box>
-            <div className="totaldonationamt">Donors Filters</div>
-            <div className="keystatslabel">
+            <div className="totaldonationamt donorfilterheader">Donors Filters</div>
+            <div className="keystatslabel donorfiltersubheader">
               Donor has made at least 1 donation that satisfies the following
               criteria
             </div>
-            <div className="d-flex">
+            <div className="filterdatepicker d-flex">
               <div>
                 <label className="datelabel-from" htmlFor="startDate">
                   {" "}
@@ -128,6 +129,32 @@ function DonorList(props) {
                   minDate={startDate}
                 />
               </div>
+            </div>
+            <div class = "filterbuttons">
+              <Header>
+                <Header.Buttons>
+                  <div style={{ display: "flex" }}>
+                <button style={{ marginLeft: "auto" }}
+                    onClick={() => setFilterActive(!filterActive)}
+                    className={
+                      "button " +
+                      (filterActive ? "button" : null)
+                    }
+                  >
+                    Reset Filters
+                  </button>
+                  <button
+                    onClick={() => setFilterActive(!filterActive)}
+                    className={
+                      "button orangebutton " +
+                      (filterActive ? "orangebutton" : null)
+                    }
+                  >
+                    Apply Filters
+                  </button>
+                  </div>
+                </Header.Buttons>
+              </Header>
             </div>
           </Box>
         </div>
