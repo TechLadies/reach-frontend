@@ -9,6 +9,7 @@
 .modal-content {
   border: 1px solid #cc7503;
   box-shadow: 0px 4px 16px rgba(128, 72, 91, 0.1);
+  
 }
 
 .modal-footer {
@@ -19,4 +20,17 @@
 .modal-close {
   background: transparent;
   border: none;
+}
+
+.modal-body{
+  padding: 0;
+}
+
+ body.modal-open .modal {
+  display: flex !important;
+  height: 100%;
+}  
+
+body.modal-open .modal .modal-dialog {
+  margin: auto;
 }

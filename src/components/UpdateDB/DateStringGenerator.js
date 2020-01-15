@@ -1,4 +1,4 @@
-import React from "react";
+
 
 function dateStringOf(date) {
     const day = date.getDate();

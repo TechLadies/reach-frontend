@@ -6,7 +6,7 @@ import FileHandlers from './FileHandlers'
 import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import FailedImg from '../../images/uploadfail.svg'
-
+import Modal from '../Modal'
 
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
@@ -61,16 +61,7 @@ const UpdateDb = () => {
 
   return (
     <Box className="updatedb-box">
-      {upload.showPopUp && (
-        <ConfirmUpload
-          CPU={cancelPopUp}
-          ipcEntries={upload.ipcData}
-          resetState={priorUploadState}
-          clickYes={onYesContinue}
-        />
-      )}
-      {upload.uploading && <ProgressBar onFailedUpload={failed} />}
-      {upload.failedupload ? (
+      {upload.failedUpload ? (
         <img
           src={FailedImg}
           alt="oops, an error occurred"
@@ -84,10 +75,17 @@ const UpdateDb = () => {
         />
       )}
       <div className="updatedetails-container">
-        {upload.failedupload ? <FailMsg /> : <UploadMsg />}
-
+        {upload.failedUpload ? <FailMsg /> : <UploadMsg />}
         <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
       </div>
+      {upload.showPopUp && (
+        <ConfirmUpload
+          CPU={cancelPopUp}
+          ipcEntries={upload.ipcData}
+          clickYes={onYesContinue}
+        />
+      )}
+      {upload.uploading && <ProgressBar onFailedUpload={failed} />}
     </Box>
   )
 }

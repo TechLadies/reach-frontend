@@ -3,6 +3,8 @@ import Reportplus from "../../images/reportplus.svg";
 import "./index.css";
 import * as Papa from "papaparse";
 
+
+
 function FileHandlers(props) {
   const onCancel= () =>{
     props.CPU()
