@@ -5,6 +5,9 @@ import './index.css'
 import FileHandlers from './FileHandlers'
 import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
+import FailedImg from '../../images/uploadfail.svg'
+
+
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
   period: '1 Sep 2019 - 31 Oct 2019'
@@ -66,28 +69,59 @@ const UpdateDb = () => {
           clickYes={onYesContinue}
         />
       )}
-      {upload.uploading && <ProgressBar onFailedUpload = {failed}/>}
-      <img src={UpdateDbImg} alt="Update donor database" />
+      {upload.uploading && <ProgressBar onFailedUpload={failed} />}
+      {upload.failedupload ? (
+        <img
+          src={FailedImg}
+          alt="oops, an error occurred"
+          className="failimg"
+        />
+      ) : (
+        <img
+          src={UpdateDbImg}
+          alt="Update donor database"
+          className="uploadimg"
+        />
+      )}
       <div className="updatedetails-container">
-        <div className=" update-top">
-          <div className="update-title">
-            Last database update
-            <p className=" update-data">{fakeUpdates.lastUpdate}</p>
-          </div>
-          <div className="update-title">
-            For donations in the period of
-            <p className="update-data"> {fakeUpdates.period} </p>
-          </div>
-        </div>
-        <div className="update-bottom">
-          <div className="upload">
-            To update the database, upload the IPC file here
-          </div>
+        {upload.failedupload ? <FailMsg /> : <UploadMsg />}
 
-          <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
-        </div>
+        <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
       </div>
     </Box>
+  )
+}
+
+const UploadMsg = () => {
+  return (
+    <div>
+      <div className=" update-top">
+        <div className="update-title">
+          Last database update
+          <p className=" update-data">{fakeUpdates.lastUpdate}</p>
+        </div>
+        <div className="update-title">
+          For donations in the period of
+          <p className="update-data"> {fakeUpdates.period} </p>
+        </div>
+      </div>
+      <div className="update-bottom">
+        <div className="upload">
+          To update the database, upload the IPC file here
+        </div>
+      </div>
+    </div>
+  )
+}
+
+const FailMsg = () => {
+  return (
+    <div className="fail-container">
+      <p className="fail-title">Upload Failed</p>
+      <p className="fail-msg">
+        Oops! There was a technical issue. Please try uploading it again.
+      </p>
+    </div>
   )
 }
 
