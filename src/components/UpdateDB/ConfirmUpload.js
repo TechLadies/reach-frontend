@@ -25,7 +25,7 @@ function ConfirmUpload(props) {
   const minDate = new Date(Math.min.apply(null, getDateArray))
 
   return (
-    <Modal show={true} >
+    <Modal show={true} className= "popup-box" >
       <Modal.Body className= "message-container">
           <p className="popup-msg1">
             You are uploading{' '}

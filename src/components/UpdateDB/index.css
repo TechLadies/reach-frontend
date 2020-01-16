@@ -52,15 +52,7 @@
   margin-top: 32px;
 }
 
-.popup-box {
- /*  border: 1px solid #cc7503; */
-  border-radius: 4px;
- /*  z-index: 1; */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+
 
 .popup-msg1 {
   font-size: 16px;
