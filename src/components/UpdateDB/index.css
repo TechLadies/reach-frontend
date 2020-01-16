@@ -79,6 +79,7 @@
   height: 90px;
   padding: 24px 55px;
   justify-content: space-evenly;
+  
 }
 
 .continue-btn {
@@ -135,4 +136,11 @@ button > span {
   font-size: 16px;
 line-height: 32px;
 color: #252631;
+}
+
+.popup-box{
+ display: flex !important;
+ height: 100%;
+ margin-right: auto;
+ align-items:  center;
 }
