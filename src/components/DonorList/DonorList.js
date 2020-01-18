@@ -99,8 +99,10 @@ function DonorList(props) {
 
       {filterActive ? (
         <div class="filter">
-          <Modal show={popupOpen} onHide={() => setPopupOpen(false)}>
+          <Modal show={popupOpen} onHide={() => setPopupOpen(false)}
+          dialogClassName="modal-90w">
             <Modal.Header>
+              
               <div>
                 <h3 className="totaldonationamt">Donor Filters</h3>
                 <p className="keystatslabel">Donor has made at least 1 donation that satisfies the following
