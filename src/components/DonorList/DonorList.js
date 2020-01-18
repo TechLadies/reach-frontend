@@ -101,13 +101,73 @@ function DonorList(props) {
         <div class="filter">
           <Modal show={popupOpen} onHide={() => setPopupOpen(false)}>
             <Modal.Header>
-              <h3>Donor Filters</h3>
+              <div>
+                <h3 className="totaldonationamt">Donor Filters</h3>
+                <p className="keystatslabel">Donor has made at least 1 donation that satisfies the following
+              criteria</p>
+              </div>
+              
               <Modal.Close onClick={() => setPopupOpen(false)} />
             </Modal.Header>
-            <Modal.Body>body</Modal.Body>
-            <Modal.Footer>footer</Modal.Footer>
+            <Modal.Body>
+            <div>Date Range
+              <div className="linebreak"></div>
+            <div className="filterdatepicker d-flex">
+              <div>
+                <label className="datelabel-from" htmlFor="startDate">
+                  {" "}
+                  From &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                />
+              </div>
+              <div>
+                <label className="datelabel-to" htmlFor="endDate">
+                  {" "}
+                  To &nbsp; {"      "}
+                </label>
+                <DatePicker
+                  className="dateform"
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                  selectsEnd
+                  endDate={endDate}
+                  minDate={startDate}
+                />
+              </div>
+            </div>
+            </div>
+            </Modal.Body>
+            <Modal.Footer>
+             <Header.Buttons>
+                  <div style={{ display: "flex" }}>
+                    <button
+                      style={{ marginLeft: "auto" }}
+                      onClick={() => setFilterActive(!filterActive)}
+                      className={"button " + (filterActive ? "button" : null)}
+                    >
+                      Reset Filters
+                    </button>
+                    <button
+                      onClick={() => setFilterActive(!filterActive)}
+                      className={
+                        "button orangebutton " +
+                        (filterActive ? "orangebutton" : null)
+                      }
+                    >
+                      Apply Filters
+                    </button>
+                  </div>
+                </Header.Buttons>
+            </Modal.Footer>
           </Modal>
-          <Box>
+          {/* <Box>
             <div className="totaldonationamt donorfilterheader">
               Donors Filters
             </div>
@@ -169,7 +229,7 @@ function DonorList(props) {
                 </Header.Buttons>
               </Header>
             </div>
-          </Box>
+          </Box> */}
         </div>
       ) : null}
 

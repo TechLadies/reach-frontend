@@ -54,21 +54,11 @@ button {
   text-align: left;
 }
 
-.donorfilterheader{
-  padding-top: 50px;
-  padding-left: 50px;
-}
-
-.donorfiltersubheader{
-  padding-left: 50px;
-}
-
-.filterdatepicker {
-  line-height: 2;
-  padding: 50px;
-}
-
 .filterbuttons{
   background-color: #FFF3E2;
   padding:10px;
+}
+
+.linebreak{
+  padding-bottom: 20px;
 }
