@@ -11,6 +11,7 @@ function ConfirmUpload(props) {
 
   const onYes = () => {
     props.clickYes()
+  
   }
 
   const quantity = props.ipcEntries.length

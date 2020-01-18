@@ -17,7 +17,8 @@ const priorUploadState = {
   showPopUp: false,
   ipcData: [],
   uploading: false,
-  failedUpload: false
+  failedUpload: false,
+  percentage: 0
 }
 
 const UpdateDb = () => {
@@ -28,7 +29,8 @@ const UpdateDb = () => {
       showPopUp: true,
       ipcData: entries,
       uploading: false,
-      failedUpload: false
+      failedUpload: false, 
+      percentage: 0
     })
   }
 
@@ -37,7 +39,8 @@ const UpdateDb = () => {
       showPopUp: false,
       ipcData: [],
       uploading: false,
-      failedUpload: false
+      failedUpload: false,
+      percentage: 0
     })
   }
 
@@ -46,7 +49,9 @@ const UpdateDb = () => {
       showPopUp: false,
       ipcData: upload.ipcData,
       uploading: true,
-      failedUpload: false
+      failedUpload: false, 
+      percentage: upload.percentage += 25
+      //fetch API for upload percentage here 
     })
   }
 
@@ -55,9 +60,20 @@ const UpdateDb = () => {
       showPopUp: false,
       ipcData: [],
       uploading: false,
-      failedUpload: true
+      failedUpload: true,
+      percentage : 0
     })
   }
+
+ /*  const trackProgress = () => {
+    setUpload({
+      showPopUp: false,
+      ipcData: [],
+      uploading: false,
+      failedUpload: true,
+      percentage : upload.percentage + 1
+    })
+  } */
 
   return (
     <Box className="updatedb-box">
@@ -85,7 +101,7 @@ const UpdateDb = () => {
           clickYes={onYesContinue}
         />
       )}
-      {upload.uploading && <ProgressBar onFailedUpload={failed} />}
+      {upload.uploading && <ProgressBar onFailedUpload={failed} progress={upload.percentage} />}
     </Box>
   )
 }
