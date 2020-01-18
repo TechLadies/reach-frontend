@@ -55,7 +55,7 @@ function DonorList(props) {
         <tr key={item.idNo}>
           <td scope="row"> {item.idNo} </td>
           <td>{item.name}</td>
-          <td>{item.donationAmount}</td>
+          <td>{item.totalAmountDonated}</td>
           <td>{item.contactNo}</td>
           <td>{item.email}</td>
           <td>{item.dnc ? "Do Not Contact" : "Can Contact"}</td>
