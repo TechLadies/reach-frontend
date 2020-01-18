@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import Styles from "./DonorList.css";
 import Filterw from "../../images/filter_whitebtn.svg";
 import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
@@ -9,6 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Pagination from "./pagination";
 import Dummy from "../Dummy";
+import "./DonorList.css";
 import Modal from "../Modal";
 
 const getDonorData = async (start, end) => {
@@ -69,14 +69,14 @@ function DonorList(props) {
   return (
     <div class="Donor Table">
       <Header>
-        <div>
+        <Header.Top>
+        <Header.Content>
           <div className="totaldonationamt">Donors</div>
           <div className="keystatslabel">
             {Math.min(totalDonors, donorsPerPage * currentPage)} of{" "}
             {totalDonors} donors listed
           </div>
-        </div>
-        <Header.Bottom>
+          </Header.Content>
           <Header.Buttons>
             <button
               onClick={() => {
@@ -94,79 +94,84 @@ function DonorList(props) {
               Export Donor List
             </button>
           </Header.Buttons>
-        </Header.Bottom>
+          </Header.Top>
       </Header>
 
       {filterActive ? (
         <div class="filter">
-          <Modal show={popupOpen} onHide={() => setPopupOpen(false)}
-          dialogClassName="modal-90w">
+          <Modal
+            show={popupOpen}
+            onHide={() => setPopupOpen(false)}
+            dialogClassName="modal-90w"
+          >
             <Modal.Header>
-              
               <div>
                 <h3 className="totaldonationamt">Donor Filters</h3>
-                <p className="keystatslabel">Donor has made at least 1 donation that satisfies the following
-              criteria</p>
+                <p className="keystatslabel">
+                  Donor has made at least 1 donation that satisfies the
+                  following criteria
+                </p>
               </div>
-              
+
               <Modal.Close onClick={() => setPopupOpen(false)} />
             </Modal.Header>
             <Modal.Body>
-            <div>Date Range
-              <div className="linebreak"></div>
-            <div className="filterdatepicker d-flex">
               <div>
-                <label className="datelabel-from" htmlFor="startDate">
-                  {" "}
-                  From &nbsp; {"      "}
-                </label>
-                <DatePicker
-                  className="dateform"
-                  selected={startDate}
-                  onChange={date => setStartDate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
-                />
+                Date Range
+                <div className="linebreak"></div>
+                <div className="filterdatepicker d-flex">
+                  <div>
+                    <label className="datelabel-from" htmlFor="startDate">
+                      {" "}
+                      From &nbsp; {"      "}
+                    </label>
+                    <DatePicker
+                      className="dateform"
+                      selected={startDate}
+                      onChange={date => setStartDate(date)}
+                      selectsStart
+                      startDate={startDate}
+                      endDate={endDate}
+                    />
+                  </div>
+                  <div>
+                    <label className="datelabel-to" htmlFor="endDate">
+                      {" "}
+                      To &nbsp; {"      "}
+                    </label>
+                    <DatePicker
+                      className="dateform"
+                      selected={endDate}
+                      onChange={date => setEndDate(date)}
+                      selectsEnd
+                      endDate={endDate}
+                      minDate={startDate}
+                    />
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className="datelabel-to" htmlFor="endDate">
-                  {" "}
-                  To &nbsp; {"      "}
-                </label>
-                <DatePicker
-                  className="dateform"
-                  selected={endDate}
-                  onChange={date => setEndDate(date)}
-                  selectsEnd
-                  endDate={endDate}
-                  minDate={startDate}
-                />
-              </div>
-            </div>
-            </div>
             </Modal.Body>
             <Modal.Footer>
-             <Header.Buttons>
-                  <div style={{ display: "flex" }}>
-                    <button
-                      style={{ marginLeft: "auto" }}
-                      onClick={() => setFilterActive(!filterActive)}
-                      className={"button " + (filterActive ? "button" : null)}
-                    >
-                      Reset Filters
-                    </button>
-                    <button
-                      onClick={() => setFilterActive(!filterActive)}
-                      className={
-                        "button orangebutton " +
-                        (filterActive ? "orangebutton" : null)
-                      }
-                    >
-                      Apply Filters
-                    </button>
-                  </div>
-                </Header.Buttons>
+              <Header.Buttons>
+                <div style={{ display: "flex" }}>
+                  <button
+                    style={{ marginLeft: "auto" }}
+                    onClick={() => setFilterActive(!filterActive)}
+                    className={"button " + (filterActive ? "button" : null)}
+                  >
+                    Reset Filters
+                  </button>
+                  <button
+                    onClick={() => setFilterActive(!filterActive)}
+                    className={
+                      "button orangebutton " +
+                      (filterActive ? "orangebutton" : null)
+                    }
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </Header.Buttons>
             </Modal.Footer>
           </Modal>
           {/* <Box>

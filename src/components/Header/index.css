@@ -7,17 +7,19 @@
   /*  border: solid 1px blue; */
   display: flex;
 }
-.header-button {
-  position: relative;
+.header h2 {
+  margin-bottom: 12px;
+}
+
+.header-buttons {
+  display: flex;
+  align-items: flex-end;
   margin-left: auto;
   /* border: solid 1px green;  */
 }
 
 .header-content {
-  font-size: 32px;
-  margin-bottom: 12px;
   /* border: solid 1px red; */
-  width: 100%;
 }
 
 .header-bottom {
@@ -29,6 +31,7 @@
 .header-filters {
   /*  border: solid 1px purple; */
 }
+
 .dateform {
   background: url("../../images/calendar.svg") no-repeat;
   background-position-x: 80%;
