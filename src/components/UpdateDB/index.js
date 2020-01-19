@@ -5,6 +5,7 @@ import './index.css'
 import FileHandlers from './FileHandlers'
 import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
+import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
 import Modal from '../Modal'
 
@@ -18,7 +19,7 @@ const priorUploadState = {
   ipcData: [],
   uploading: false,
   failedUpload: false,
-  percentage: 0
+  successUpload: false
 }
 
 const UpdateDb = () => {
@@ -29,8 +30,8 @@ const UpdateDb = () => {
       showPopUp: true,
       ipcData: entries,
       uploading: false,
-      failedUpload: false, 
-      percentage: 0
+      failedUpload: false,
+      successUpload: false
     })
   }
 
@@ -40,7 +41,7 @@ const UpdateDb = () => {
       ipcData: [],
       uploading: false,
       failedUpload: false,
-      percentage: 0
+      successUpload: false
     })
   }
 
@@ -49,9 +50,8 @@ const UpdateDb = () => {
       showPopUp: false,
       ipcData: upload.ipcData,
       uploading: true,
-      failedUpload: false, 
-      percentage: upload.percentage += 25
-      //fetch API for upload percentage here 
+      failedUpload: false,
+      successUpload: false
     })
   }
 
@@ -61,48 +61,55 @@ const UpdateDb = () => {
       ipcData: [],
       uploading: false,
       failedUpload: true,
-      percentage : 0
+      successUpload: false
     })
   }
-
- /*  const trackProgress = () => {
+  const success = () => {
     setUpload({
       showPopUp: false,
       ipcData: [],
       uploading: false,
-      failedUpload: true,
-      percentage : upload.percentage + 1
+      failedUpload: false,
+      successUpload: true
     })
-  } */
+  }
 
   return (
-    <Box className="updatedb-box">
-      {upload.failedUpload ? (
-        <img
-          src={FailedImg}
-          alt="oops, an error occurred"
-          className="failimg"
-        />
+    <div>
+      {upload.successUpload ? (
+        <SuccessUpload />
       ) : (
-        <img
-          src={UpdateDbImg}
-          alt="Update donor database"
-          className="uploadimg"
-        />
+        <Box className="updatedb-box">
+          {upload.failedUpload ? (
+            <img
+              src={FailedImg}
+              alt="oops, an error occurred"
+              className="failimg"
+            />
+          ) : (
+            <img
+              src={UpdateDbImg}
+              alt="Update donor database"
+              className="uploadimg"
+            />
+          )}
+          <div className="updatedetails-container">
+            {upload.failedUpload ? <FailMsg /> : <UploadMsg />}
+            <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
+          </div>
+          {upload.showPopUp && (
+            <ConfirmUpload
+              CPU={cancelPopUp}
+              ipcEntries={upload.ipcData}
+              clickYes={onYesContinue}
+            />
+          )}
+          {upload.uploading && (
+            <ProgressBar onFailedUpload={failed} progress={upload.percentage} />
+          )}
+        </Box>
       )}
-      <div className="updatedetails-container">
-        {upload.failedUpload ? <FailMsg /> : <UploadMsg />}
-        <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
-      </div>
-      {upload.showPopUp && (
-        <ConfirmUpload
-          CPU={cancelPopUp}
-          ipcEntries={upload.ipcData}
-          clickYes={onYesContinue}
-        />
-      )}
-      {upload.uploading && <ProgressBar onFailedUpload={failed} progress={upload.percentage} />}
-    </Box>
+    </div>
   )
 }
 

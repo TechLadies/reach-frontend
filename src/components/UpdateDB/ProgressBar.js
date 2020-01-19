@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from "react";
 import "./index.css";
-import Box from "../Dashboard/Box";
 import { Line } from 'rc-progress';
 import Modal from '../Modal'
 import Success from './Success';
@@ -28,18 +27,6 @@ const ProgressBar = (props) =>{
   
   const [percent, setPercent] = useState(0)
   useInterval(() => setPercent(p => p + 1), percent < 80 ? 100 : null)
-
-//  useEffect(()=>{
-//    const interval = setInterval(()=>{
-//      setPercent(percent => percent + 1)
-//    },100)
-//    return() =>{
-//      clearInterval(interval)
-//    }
-
-//  },[])
- 
-//  if (percent===100) 
  
   // , if upload failed use props.onFailedUpload
     return (
