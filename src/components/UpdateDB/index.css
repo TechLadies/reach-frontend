@@ -36,7 +36,7 @@
 .grey-header {
   font-size: 14px;
   color: #9fa2b4;
- 
+  text-align: left;
 }
 
 .container1{
@@ -52,6 +52,7 @@
 .black-description {
   font-size: 20px;
   color: #252631;
+  text-align: left;
 }
 
 .update-bottom {
