@@ -76,7 +76,7 @@ const UpdateDb = () => {
 
   return (
     <div>
-      {upload.successUpload ? (
+      {!upload.successUpload ? (
         <SuccessUpload />
       ) : (
         <Box className="updatedb-box">
@@ -117,18 +117,24 @@ const UploadMsg = () => {
   return (
     <div>
       <div className=" update-top">
-        <div className="update-title">
-          Last database update
-          <p className=" update-data">{fakeUpdates.lastUpdate}</p>
+        <div className="container1">
+          <h1 className="grey-header">Last database update</h1>
+          <div className="container2">
+            <p className=" update-data">{fakeUpdates.lastUpdate}</p>
+          </div>
         </div>
-        <div className="update-title">
-          For donations in the period of
-          <p className="update-data"> {fakeUpdates.period} </p>
+        <div className="container1">
+          <h1 className="grey-header">For donations in the period of </h1>
+          <div className="container2">
+            <p className="update-data"> {fakeUpdates.period} </p>
+          </div>
         </div>
       </div>
       <div className="update-bottom">
-        <div className="upload">
-          To update the database, upload the IPC file here
+        <div className="container3">
+          <p className="black-description">
+            To update the database, upload the IPC file here
+          </p>
         </div>
       </div>
     </div>
