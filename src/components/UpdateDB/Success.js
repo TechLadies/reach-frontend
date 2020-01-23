@@ -34,19 +34,39 @@ const SuccessUpload = () => {
           </div>
         </div>
       </Box>
-      <div className="tab">
-        <Tabs
-          defaultActiveKey="all"
-          id="uncontrolled-tab-example"
-          className= "nav nav-tabs nav-justified"
-        >
-          <Tab eventKey="all" title={<div>All Donors</div>}>
+      <div className="navtable-container">
+        <Tabs defaultActiveKey="all" className="nav nav-tabs nav-justified">
+          <Tab
+            eventKey="all"
+            title={
+              <div className="tab-container">
+                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div>All Donors</div>
+              </div>
+            }
+          >
             <Table />
           </Tab>
-          <Tab eventKey="new" title={<div>New Donors</div>}>
+          <Tab
+            eventKey="new"
+            title={
+              <div className="tab-container">
+                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div>New Donors</div>
+              </div>
+            }
+          >
             <Table />
           </Tab>
-          <Tab eventKey="existing" title={<div>Existing Donors</div>}>
+          <Tab
+            eventKey="existing"
+            title={
+              <div className="tab-container">
+                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div>Existing Donors</div>
+              </div>
+            }
+          >
             <Table />
           </Tab>
         </Tabs>
@@ -87,22 +107,34 @@ const Table = () => {
     ]
   }
   return (
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col" width="120px">ID Number</th>
-          <th scope="col" width= "200px">Name</th>
-          <th scope="col" width= "127px">Total Amt Donated</th>
-          <th scope="col" width= "105px">No. of Donations</th>
-          <th scope="col" width= "75px">Donor Type</th>
-          <th scope="col" width= "110px">View Profile </th>
-        </tr>
-      </thead>
-      <tbody>
-        {' '}
-        <ListItem data={data.donationList} />{' '}
-      </tbody>
-    </table>
+    <div class="">
+      <table class="table">
+        <thead>
+          <tr class="d-flex">
+            <th scope="col" className="col-2">
+              ID Number
+            </th>
+            <th scope="col" className="col-2 text-left">
+              Name
+            </th>
+            <th scope="col" className="col-2 text-left">
+              Total Amt. Donated
+            </th>
+            <th scope="col" className="col-2">
+              No. of Donations
+            </th>
+            <th scope="col" className="col-2 text-left">
+              Donor Type
+            </th>
+            <th scope="col" className="col-1 text-left"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {' '}
+          <ListItem data={data.donationList} />{' '}
+        </tbody>
+      </table>
+    </div>
   )
 }
 
@@ -111,13 +143,13 @@ function ListItem(props) {
 
   let listComponents = listElements.map(item => {
     return (
-      <tr>
-        <td> {item.IDNumber} </td>
-        <td>{item.name}</td>
-        <td>{item.totalAmountDonated}</td>
-        <td>{item.noOfDonations}</td>
-        <td>{item.donorType}</td>
-        <td>
+      <tr className="d-flex">
+        <td className="col-2"> {item.IDNumber} </td>
+        <td className="col-2 text-left">{item.name}</td>
+        <td className="col-2 text-left">{item.totalAmountDonated}</td>
+        <td className="col-2">{item.noOfDonations}</td>
+        <td className="col-2 text-left">{item.donorType}</td>
+        <td className="col-1">
           <a href="{item.viewProfile}">View Profile</a>
         </td>
       </tr>
