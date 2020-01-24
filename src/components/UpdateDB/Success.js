@@ -190,7 +190,7 @@ function ListItem(props) {
         <td className="col-2">{item.noOfDonations}</td>
         <td className="col-2">{item.donorType}</td>
         <td className="col-2">
-          <a href="{item.viewProfile}" className= "profilelink">View Profile</a>
+          <a href="{item.viewProfile}" className= "profilelink">View Profile >>></a>
         </td>
       </tr>
     )
