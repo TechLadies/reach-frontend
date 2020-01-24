@@ -103,11 +103,51 @@ const Table = () => {
         noOfDonations: '1',
         donorType: 'New',
         viewProfile: ''
+      },
+      {
+        IDNumber: 'S1234567B',
+        name: 'Alan Tan',
+        totalAmountDonated: '$56,900',
+        noOfDonations: '1',
+        donorType: 'New',
+        viewProfile: ''
+      },
+      {
+        IDNumber: 'S1234567B',
+        name: 'Alan Tan',
+        totalAmountDonated: '$56,900',
+        noOfDonations: '1',
+        donorType: 'New',
+        viewProfile: ''
+      },
+      {
+        IDNumber: 'S1234567B',
+        name: 'Alan Tan',
+        totalAmountDonated: '$56,900',
+        noOfDonations: '1',
+        donorType: 'New',
+        viewProfile: ''
+      },
+      {
+        IDNumber: 'S1234567B',
+        name: 'Alan Tan',
+        totalAmountDonated: '$56,900',
+        noOfDonations: '1',
+        donorType: 'New',
+        viewProfile: ''
+      },
+      {
+        IDNumber: 'S1234567B',
+        name: 'Alan Tan',
+        totalAmountDonated: '$56,900',
+        noOfDonations: '1',
+        donorType: 'New',
+        viewProfile: ''
       }
     ]
   }
   return (
-    <div class="">
+    
       <table class="table">
         <thead>
           <tr class="d-flex">
@@ -117,16 +157,16 @@ const Table = () => {
             <th scope="col" className="col-2 text-left">
               Name
             </th>
-            <th scope="col" className="col-2 text-left">
+            <th scope="col" className="col-2">
               Total Amt. Donated
             </th>
             <th scope="col" className="col-2">
               No. of Donations
             </th>
-            <th scope="col" className="col-2 text-left">
+            <th scope="col" className="col-2">
               Donor Type
             </th>
-            <th scope="col" className="col-1 text-left"></th>
+            <th scope="col" className="col-2"></th>
           </tr>
         </thead>
         <tbody>
@@ -134,7 +174,7 @@ const Table = () => {
           <ListItem data={data.donationList} />{' '}
         </tbody>
       </table>
-    </div>
+    
   )
 }
 
@@ -143,14 +183,14 @@ function ListItem(props) {
 
   let listComponents = listElements.map(item => {
     return (
-      <tr className="d-flex">
+      <tr className="d-flex ">
         <td className="col-2"> {item.IDNumber} </td>
         <td className="col-2 text-left">{item.name}</td>
-        <td className="col-2 text-left">{item.totalAmountDonated}</td>
+        <td className="col-2">{item.totalAmountDonated}</td>
         <td className="col-2">{item.noOfDonations}</td>
-        <td className="col-2 text-left">{item.donorType}</td>
-        <td className="col-1">
-          <a href="{item.viewProfile}">View Profile</a>
+        <td className="col-2">{item.donorType}</td>
+        <td className="col-2">
+          <a href="{item.viewProfile}" className= "profilelink">View Profile</a>
         </td>
       </tr>
     )

@@ -191,6 +191,9 @@ button > span {
   border: none;
 } */
 
+.nav-tabs {
+  width: 100%;
+}
 .nav-tabs .nav-item.show .nav-link,
 .nav-tabs .nav-link.active {
   background-color: inherit;
@@ -201,12 +204,12 @@ button > span {
   color: #80485b;
 }
 
-a.nav-item.nav-link{
- font-size: 20px;
- color: #252631;
+a.nav-item.nav-link {
+  font-size: 20px;
+  color: #252631;
 }
 
-.nav-tabs.nav-link{
+.nav-tabs.nav-link {
   border: none;
 }
 .tab-container {
@@ -214,18 +217,39 @@ a.nav-item.nav-link{
   justify-content: center;
   align-items: center;
 }
-.sum-icon {
+ .sum-icon {
   width: 34px;
   height: 22px;
-  background: #80485b;
+  background: white;
   border-radius: 4px;
+  border: solid 1px black;
   margin-right: 12px;
   display: inline-block;
   padding: 0;
 }
 
+.nav-link.active .sum-icon{
+  background:#80485b;
+}
+
 .sum-txt {
-  color: #ffffff;
+  color: black;
   font-size: 14px;
   line-height: 22px;
 }
+
+.nav-link.active .sum-txt{
+  color: #ffffff;
+}
+
+
+.profilelink:hover {
+  text-decoration: none;
+  color: #cc7503;
+  font-weight: bold;
+}
+
+.profilelink{
+  color: transparent;
+}
+
