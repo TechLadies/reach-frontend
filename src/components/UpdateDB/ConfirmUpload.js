@@ -11,7 +11,13 @@ function ConfirmUpload(props) {
 
   const onYes = () => {
     props.clickYes()
-  
+    //fetch API here
+    fetch('http://localhost:3001/donations/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(props.ipcEntries)
+    }).then(res=> console.log(res))
+    .catch(err=> console.log(err))
   }
 
   const quantity = props.ipcEntries.length
@@ -26,17 +32,17 @@ function ConfirmUpload(props) {
   const minDate = new Date(Math.min.apply(null, getDateArray))
 
   return (
-    <Modal show={true} className= "popup-box" >
-      <Modal.Body className= "message-container">
-          <p className="popup-msg1">
-            You are uploading{' '}
-            <span className="popup-purpletxt">{quantity} donations</span> from
-            the period of{' '}
-            <span className="popup-purpletxt">
-              {dateStringOf(minDate)} to {dateStringOf(maxDate)}
-            </span>
-          </p>
-          <p className="popup-msg2"> Would you like to proceed?</p>
+    <Modal show={true} className="popup-box">
+      <Modal.Body className="message-container">
+        <p className="popup-msg1">
+          You are uploading{' '}
+          <span className="popup-purpletxt">{quantity} donations</span> from the
+          period of{' '}
+          <span className="popup-purpletxt">
+            {dateStringOf(minDate)} to {dateStringOf(maxDate)}
+          </span>
+        </p>
+        <p className="popup-msg2"> Would you like to proceed?</p>
       </Modal.Body>
       <Modal.Footer className="popup-btn">
         <div>
@@ -51,7 +57,6 @@ function ConfirmUpload(props) {
         </div>
       </Modal.Footer>
     </Modal>
-  
   )
 }
 

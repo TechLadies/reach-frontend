@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from "react";
 import "./index.css";
 import { Line } from 'rc-progress';
 import Modal from '../Modal'
-import Success from './Success';
+
 
 function useInterval(callback, delay) {
   const savedCallback = useRef()

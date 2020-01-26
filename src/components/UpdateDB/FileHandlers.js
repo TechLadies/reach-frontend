@@ -17,6 +17,7 @@ function FileHandlers(props) {
       download: false,
       delimiter: ",",
       skipEmptyLines: true,
+      dynamicTyping: true,
       complete: function(results) {  
         props.loadIpcEntries(results.data);
         console.log(results.data);

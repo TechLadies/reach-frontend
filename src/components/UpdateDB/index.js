@@ -76,7 +76,7 @@ const UpdateDb = () => {
 
   return (
     <div>
-      {!upload.successUpload ? (
+      {upload.successUpload ? (
         <SuccessUpload />
       ) : (
         <Box className="updatedb-box">
