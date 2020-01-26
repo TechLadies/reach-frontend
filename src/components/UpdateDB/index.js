@@ -7,7 +7,6 @@ import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
-import Modal from '../Modal'
 
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
@@ -102,6 +101,8 @@ const UpdateDb = () => {
               CPU={cancelPopUp}
               ipcEntries={upload.ipcData}
               clickYes={onYesContinue}
+              success= {success}
+              failed ={failed}
             />
           )}
           {upload.uploading && (

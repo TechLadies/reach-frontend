@@ -9,15 +9,26 @@ function ConfirmUpload(props) {
     props.CPU()
   }
 
+  const validateUpSert = res => {
+    console.log(res)
+    if (res.ok) {
+      res.json().then(function(data) {
+        console.log(data)
+        return data
+      }).then(props.success())
+    } else {
+      return props.failed()
+    }
+  }
   const onYes = () => {
     props.clickYes()
-    //fetch API here
     fetch('http://localhost:3001/donations/upload', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(props.ipcEntries)
-    }).then(res=> console.log(res))
-    .catch(err=> console.log(err))
+    })
+      .then(validateUpSert)
+      .catch(err => console.log(err))
   }
 
   const quantity = props.ipcEntries.length

@@ -26,7 +26,7 @@ function useInterval(callback, delay) {
 const ProgressBar = (props) =>{
   
   const [percent, setPercent] = useState(0)
-  useInterval(() => setPercent(p => p + 1), percent < 80 ? 100 : null)
+  useInterval(() => setPercent(p => p + 10), percent < 80 ? 100 : null)
  
   // , if upload failed use props.onFailedUpload
     return (
