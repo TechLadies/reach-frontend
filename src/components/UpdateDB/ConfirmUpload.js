@@ -1,6 +1,5 @@
 import React from 'react'
 import './index.css'
-import Box from '../../components/Dashboard/Box'
 import dateStringOf from './DateStringGenerator'
 import Modal from '../Modal'
 
@@ -8,28 +7,10 @@ function ConfirmUpload(props) {
   const onCancel = () => {
     props.CPU()
   }
-
-  const validateUpSert = res => {
-    console.log(res)
-    if (res.ok) {
-      res.json().then(function(data) {
-        console.log(data)
-        return data
-      }).then(props.success())
-    } else {
-      return props.failed()
-    }
-  }
+  
   const onYes = () => {
     props.clickYes()
-    fetch('http://localhost:3001/donations/upload', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(props.ipcEntries)
-    })
-      .then(validateUpSert)
-      .catch(err => console.log(err))
-  }
+  } 
 
   const quantity = props.ipcEntries.length
   const array = props.ipcEntries

@@ -18,7 +18,7 @@ const priorUploadState = {
   ipcData: [],
   uploading: false,
   failedUpload: false,
-  successUpload: false
+  successUpload: null
 }
 
 const UpdateDb = () => {
@@ -30,7 +30,7 @@ const UpdateDb = () => {
       ipcData: entries,
       uploading: false,
       failedUpload: false,
-      successUpload: false
+      successUpload: null
     })
   }
 
@@ -40,7 +40,7 @@ const UpdateDb = () => {
       ipcData: [],
       uploading: false,
       failedUpload: false,
-      successUpload: false
+      successUpload: null
     })
   }
 
@@ -50,9 +50,29 @@ const UpdateDb = () => {
       ipcData: upload.ipcData,
       uploading: true,
       failedUpload: false,
-      successUpload: false
+      successUpload: null
     })
+
+    const validateUpSert = res => {
+      console.log(res)
+      if (res.ok) {
+        res.json().then(function(data) {
+          return data
+        }).then(data=> success(data))
+      } else {
+        return failed()
+      }
+    }
+
+     fetch('http://localhost:3001/donations/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(upload.ipcData)
+    })
+      .then(validateUpSert)
+      .catch(err => console.log(err))
   }
+  
 
   const failed = () => {
     setUpload({
@@ -60,23 +80,23 @@ const UpdateDb = () => {
       ipcData: [],
       uploading: false,
       failedUpload: true,
-      successUpload: false
+      successUpload: null
     })
   }
-  const success = () => {
+  const success = data => {
     setUpload({
       showPopUp: false,
       ipcData: [],
       uploading: false,
       failedUpload: false,
-      successUpload: true
+      successUpload: data
     })
   }
 
   return (
     <div>
       {upload.successUpload ? (
-        <SuccessUpload />
+        <SuccessUpload donorData={upload.successUpload}/>
       ) : (
         <Box className="updatedb-box">
           {upload.failedUpload ? (

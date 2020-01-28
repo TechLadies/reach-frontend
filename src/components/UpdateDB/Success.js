@@ -6,7 +6,8 @@ import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 
-const SuccessUpload = () => {
+const SuccessUpload = props => {
+  if (!props.donorData) return null
   return (
     <div className="success-container">
       <header className="success-header">File Uploaded Successfully!</header>
@@ -40,34 +41,40 @@ const SuccessUpload = () => {
             eventKey="all"
             title={
               <div className="tab-container">
-                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div className="sum-icon">
+                  <div className="sum-txt">{props.donorData.length}</div>
+                </div>
                 <div>All Donors</div>
               </div>
             }
           >
-            <Table />
+            <Table data={props.donorData} />
           </Tab>
           <Tab
             eventKey="new"
             title={
               <div className="tab-container">
-                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div className="sum-icon">
+            <div className="sum-txt">128</div>
+                </div>
                 <div>New Donors</div>
               </div>
             }
           >
-            <Table />
+            <Table data={props.donorData} />
           </Tab>
           <Tab
             eventKey="existing"
             title={
               <div className="tab-container">
-                <div className="sum-icon"><div className="sum-txt">128</div></div>
+                <div className="sum-icon">
+                  <div className="sum-txt">128</div>
+                </div>
                 <div>Existing Donors</div>
               </div>
             }
           >
-            <Table />
+            <Table data={props.donorData} />
           </Tab>
         </Tabs>
       </div>
@@ -77,124 +84,72 @@ const SuccessUpload = () => {
 
 export default SuccessUpload
 
-const Table = () => {
-  const data = {
-    donationList: [
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      },
-      {
-        IDNumber: 'S1234567B',
-        name: 'Alan Tan',
-        totalAmountDonated: '$56,900',
-        noOfDonations: '1',
-        donorType: 'New',
-        viewProfile: ''
-      }
-    ]
-  }
+const Table = props => {
   return (
-    
-      <table class="table">
-        <thead>
-          <tr class="d-flex">
-            <th scope="col" className="col-2">
-              ID Number
-            </th>
-            <th scope="col" className="col-2 text-left">
-              Name
-            </th>
-            <th scope="col" className="col-2">
-              Total Amt. Donated
-            </th>
-            <th scope="col" className="col-2">
-              No. of Donations
-            </th>
-            <th scope="col" className="col-2">
-              Donor Type
-            </th>
-            <th scope="col" className="col-2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {' '}
-          <ListItem data={data.donationList} />{' '}
-        </tbody>
-      </table>
-    
+    <table class="table">
+      <thead>
+        <tr class="d-flex">
+          <th scope="col" className="col-2">
+            ID Number
+          </th>
+          <th scope="col" className="col-2 text-left">
+            Name
+          </th>
+          <th scope="col" className="col-2">
+            Total Amt. Donated
+          </th>
+          <th scope="col" className="col-2">
+            No. of Donations
+          </th>
+          <th scope="col" className="col-2">
+            Donor Type
+          </th>
+          <th scope="col" className="col-2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {' '}
+        <ListItem data={props.data} />{' '}
+      </tbody>
+    </table>
   )
 }
 
 function ListItem(props) {
-  let listElements = props.data
-
-  let listComponents = listElements.map(item => {
+  const listElements = props.data
+  console.log(listElements)
+  const listComponents = listElements.map(item => {
     return (
       <tr className="d-flex ">
-        <td className="col-2"> {item.IDNumber} </td>
-        <td className="col-2 text-left">{item.name}</td>
-        <td className="col-2">{item.totalAmountDonated}</td>
-        <td className="col-2">{item.noOfDonations}</td>
-        <td className="col-2">{item.donorType}</td>
         <td className="col-2">
-          <a href="{item.viewProfile}" className= "profilelink">View Profile >>></a>
+          {' '}
+          {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}{' '}
+        </td>
+        <td className="col-2 text-left">{item.name}</td>
+        <td className="col-2">{/* item.totalAmountDonated */}</td>
+        <td className="col-2">{/* item.noOfDonations */}</td>
+        <td className="col-2">
+          {item.__isNew ? <div>New</div> : <div>Existing</div>}
+        </td>
+        <td className="col-2">
+          <a href="{item.viewProfile}" className="profilelink">
+            View Profile >>>
+          </a>
         </td>
       </tr>
     )
   })
 
   return <React.Fragment>{listComponents}</React.Fragment>
+}
+
+
+
+const newDonor = (allDonor) => {
+ allDonor.filter(d => (d.__isNew))
+
+}
+
+const existingDonor = (allDonor) => {
+  allDonor.filter(d=> (!d.__isNew))
 }
