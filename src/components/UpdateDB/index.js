@@ -56,15 +56,15 @@ const UpdateDb = () => {
     const validateUpSert = res => {
       console.log(res)
       if (res.ok) {
-        res.json().then(function(data) {
-          return data
-        }).then(data=> success(data))
+        res
+          .json()
+          .then(data => success(data))
       } else {
         return failed()
       }
     }
 
-     fetch('http://localhost:3001/donations/upload', {
+    fetch('http://localhost:3001/donations/upload', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(upload.ipcData)
@@ -72,7 +72,6 @@ const UpdateDb = () => {
       .then(validateUpSert)
       .catch(err => console.log(err))
   }
-  
 
   const failed = () => {
     setUpload({
@@ -96,7 +95,7 @@ const UpdateDb = () => {
   return (
     <div>
       {upload.successUpload ? (
-        <SuccessUpload donorData={upload.successUpload}/>
+        <SuccessUpload donorData={upload.successUpload} />
       ) : (
         <Box className="updatedb-box">
           {upload.failedUpload ? (
@@ -121,8 +120,8 @@ const UpdateDb = () => {
               CPU={cancelPopUp}
               ipcEntries={upload.ipcData}
               clickYes={onYesContinue}
-              success= {success}
-              failed ={failed}
+              success={success}
+              failed={failed}
             />
           )}
           {upload.uploading && (

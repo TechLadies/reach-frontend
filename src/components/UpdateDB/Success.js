@@ -55,26 +55,30 @@ const SuccessUpload = props => {
             title={
               <div className="tab-container">
                 <div className="sum-icon">
-            <div className="sum-txt">128</div>
+                  <div className="sum-txt">
+                    {newDonor(props.donorData).length}
+                  </div>
                 </div>
                 <div>New Donors</div>
               </div>
             }
           >
-            <Table data={props.donorData} />
+            <Table data={newDonor(props.donorData)} />
           </Tab>
           <Tab
             eventKey="existing"
             title={
               <div className="tab-container">
                 <div className="sum-icon">
-                  <div className="sum-txt">128</div>
+                  <div className="sum-txt">
+                    {existingDonor(props.donorData).length}
+                  </div>
                 </div>
                 <div>Existing Donors</div>
               </div>
             }
           >
-            <Table data={props.donorData} />
+            <Table data={existingDonor(props.donorData)} />
           </Tab>
         </Tabs>
       </div>
@@ -117,7 +121,6 @@ const Table = props => {
 
 function ListItem(props) {
   const listElements = props.data
-  console.log(listElements)
   const listComponents = listElements.map(item => {
     return (
       <tr className="d-flex ">
@@ -139,17 +142,13 @@ function ListItem(props) {
       </tr>
     )
   })
-
   return <React.Fragment>{listComponents}</React.Fragment>
 }
 
-
-
-const newDonor = (allDonor) => {
- allDonor.filter(d => (d.__isNew))
-
+const newDonor = allDonor => {
+  return allDonor.filter(d => d.__isNew)
 }
 
-const existingDonor = (allDonor) => {
-  allDonor.filter(d=> (!d.__isNew))
+const existingDonor = allDonor => {
+  return allDonor.filter(d => !d.__isNew)
 }
