@@ -25,14 +25,14 @@ const SuccessUpload = props => {
           <img src={DonationCircle} className="success-img" alt="twohands" />
           <div>
             <h1 className="grey-header">Total amount collected</h1>
-            <p className="black-description">$10,120.80</p>
+            <p className="black-description">${props.donorData[1].totalAmt}</p>
           </div>
         </div>
         <div className="summary-subcontainer">
           <img src={Calendar} className="success-img" alt="twohands" />
           <div>
             <h1 className="grey-header">For the period of</h1>
-            <p className="black-description">16-30 Sep 2019</p>
+            <p className="black-description">{props.donorData[1].period}</p>
           </div>
         </div>
       </Box>
@@ -43,13 +43,13 @@ const SuccessUpload = props => {
             title={
               <div className="tab-container">
                 <div className="sum-icon">
-                  <div className="sum-txt">{props.donorData.length}</div>
+                  <div className="sum-txt">{props.donorData[1].totalCount}</div>
                 </div>
                 <div>All Donors</div>
               </div>
             }
           >
-            <Table data={props.donorData} />
+            <Table data={props.donorData[0]} />
           </Tab>
           <Tab
             eventKey="new"
@@ -57,14 +57,14 @@ const SuccessUpload = props => {
               <div className="tab-container">
                 <div className="sum-icon">
                   <div className="sum-txt">
-                    {newDonor(props.donorData).length}
+                    {newDonor(props.donorData[0]).length}
                   </div>
                 </div>
                 <div>New Donors</div>
               </div>
             }
           >
-            <Table data={newDonor(props.donorData)} />
+            <Table data={newDonor(props.donorData[0])} />
           </Tab>
           <Tab
             eventKey="existing"
@@ -72,14 +72,14 @@ const SuccessUpload = props => {
               <div className="tab-container">
                 <div className="sum-icon">
                   <div className="sum-txt">
-                    {existingDonor(props.donorData).length}
+                    {existingDonor(props.donorData[0]).length}
                   </div>
                 </div>
                 <div>Existing Donors</div>
               </div>
             }
           >
-            <Table data={existingDonor(props.donorData)} />
+            <Table data={existingDonor(props.donorData[0])} />
           </Tab>
         </Tabs>
       </div>
@@ -130,8 +130,8 @@ function ListItem(props) {
           {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}{' '}
         </td>
         <td className="col-2 text-left">{item.name}</td>
-        <td className="col-2">{/* item.totalAmountDonated */}</td>
-        <td className="col-2">{/* item.noOfDonations */}</td>
+        <td className="col-2">{item.totalAmount}</td>
+        <td className="col-2">{item.donationCount}</td>
         <td className="col-2">
           {item.__isNew ? <div>New</div> : <div>Existing</div>}
         </td>
