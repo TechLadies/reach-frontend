@@ -8,6 +8,7 @@ import { Tabs, Tab } from 'react-bootstrap'
 
 const SuccessUpload = props => {
   if (!props.donorData) return null
+  console.log(props.donorData)
   return (
     <div className="success-container">
       <header className="success-header">File Uploaded Successfully!</header>

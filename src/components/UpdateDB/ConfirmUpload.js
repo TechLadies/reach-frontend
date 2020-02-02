@@ -16,9 +16,9 @@ function ConfirmUpload(props) {
   const array = props.ipcEntries
   const getDateArray = array
     .map(value => {
-      return Date.parse(value['Date of Donation'])
+      const transformDate = (((value['Date of Donation']).split('/')).reverse()).join('-')
+      return Date.parse(transformDate)
     })
-    .sort()
 
   const maxDate = new Date(Math.max.apply(null, getDateArray))
   const minDate = new Date(Math.min.apply(null, getDateArray))
