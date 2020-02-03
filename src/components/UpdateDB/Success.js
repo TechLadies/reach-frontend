@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import HiFive from '../../images/hi-five.svg'
 import TwoHands from '../../images/two-hands-donation.svg'
 import DonationCircle from '../../images/donations-circle.svg'
 import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
+import Pagination from '../../Pagination'
 
 const SuccessUpload = props => {
-  if (!props.donorData) return null
   console.log(props.donorData)
+  const entriesPerPage = 5
+  const [currentPage, setCurrentPage] = useState(1)
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  if (!props.donorData) return null
   return (
     <div className="success-container">
       <header className="success-header">File Uploaded Successfully!</header>
@@ -18,7 +22,7 @@ const SuccessUpload = props => {
           <img src={TwoHands} className="success-img" alt="twohands" />
           <div>
             <h1 className="grey-header">Number of donations</h1>
-            <p className="black-description">313 Donations</p>
+            <p className="black-description">{props.donorData[1].totalCount}</p>
           </div>
         </div>
         <div className="summary-subcontainer">
@@ -43,13 +47,14 @@ const SuccessUpload = props => {
             title={
               <div className="tab-container">
                 <div className="sum-icon">
-                  <div className="sum-txt">{props.donorData[1].totalCount}</div>
+                  <div className="sum-txt">{props.donorData[0].length}</div>
                 </div>
                 <div>All Donors</div>
               </div>
             }
           >
             <Table data={props.donorData[0]} />
+            <Pagination totalDonors= {props.donorData[0].length} donorsPerPage={entriesPerPage} paginate={paginate}/>
           </Tab>
           <Tab
             eventKey="new"
@@ -83,6 +88,7 @@ const SuccessUpload = props => {
           </Tab>
         </Tabs>
       </div>
+      
     </div>
   )
 }
@@ -113,8 +119,7 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        {' '}
-        <ListItem data={props.data} />{' '}
+        <ListItem data={props.data} />
       </tbody>
     </table>
   )
@@ -153,3 +158,4 @@ const newDonor = allDonor => {
 const existingDonor = allDonor => {
   return allDonor.filter(d => !d.__isNew)
 }
+

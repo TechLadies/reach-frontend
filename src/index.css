@@ -85,4 +85,20 @@ color: white;
   }
 }
 
+ /* pagination style */
 
+.pagination{
+  justify-content: center;
+}
+.page-directions{
+  color: #80485B;
+}
+.page-numbers{
+  color: black;
+}
+
+/* .page-number :active {
+  background: #80485B;
+  font-weight: bold;
+  color: white;
+} */

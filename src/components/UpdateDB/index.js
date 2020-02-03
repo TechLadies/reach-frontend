@@ -8,6 +8,7 @@ import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
 
+
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
   period: '1 Sep 2019 - 31 Oct 2019'
