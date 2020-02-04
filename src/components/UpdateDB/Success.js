@@ -7,11 +7,26 @@ import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
 
+
+
 const SuccessUpload = props => {
-  console.log(props.donorData)
-  const entriesPerPage = 5
+  const uploadDonorData = props.donorData[0]
+  const entriesPerPage = 2
   const [currentPage, setCurrentPage] = useState(1)
   const paginate = pageNumber => setCurrentPage(pageNumber);
+ 
+    const begin = (currentPage- 1) * entriesPerPage
+    const end = begin + entriesPerPage
+    const pageList = uploadDonorData.slice(begin, end)
+    console.log(pageList)
+  
+  
+  /* const [currentList, nextList] = useState([loadList(1)])
+
+  const onClick = () => {
+    nextList(loadList(paginate))
+  } */
+
   if (!props.donorData) return null
   return (
     <div className="success-container">
@@ -47,14 +62,14 @@ const SuccessUpload = props => {
             title={
               <div className="tab-container">
                 <div className="sum-icon">
-                  <div className="sum-txt">{props.donorData[0].length}</div>
+                  <div className="sum-txt">{uploadDonorData.length}</div>
                 </div>
                 <div>All Donors</div>
               </div>
             }
           >
-            <Table data={props.donorData[0]} />
-            <Pagination totalDonors= {props.donorData[0].length} donorsPerPage={entriesPerPage} paginate={paginate}/>
+            <Table data={pageList} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
+            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
           </Tab>
           <Tab
             eventKey="new"
@@ -62,14 +77,15 @@ const SuccessUpload = props => {
               <div className="tab-container">
                 <div className="sum-icon">
                   <div className="sum-txt">
-                    {newDonor(props.donorData[0]).length}
+                    {newDonor(uploadDonorData).length}
                   </div>
                 </div>
                 <div>New Donors</div>
               </div>
             }
           >
-            <Table data={newDonor(props.donorData[0])} />
+            <Table data={newDonor(pageList)} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
+            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
           </Tab>
           <Tab
             eventKey="existing"
@@ -77,14 +93,15 @@ const SuccessUpload = props => {
               <div className="tab-container">
                 <div className="sum-icon">
                   <div className="sum-txt">
-                    {existingDonor(props.donorData[0]).length}
+                    {existingDonor(uploadDonorData).length}
                   </div>
                 </div>
                 <div>Existing Donors</div>
               </div>
             }
           >
-            <Table data={existingDonor(props.donorData[0])} />
+            <Table data={existingDonor(pageList)} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
+            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
           </Tab>
         </Tabs>
       </div>
@@ -119,11 +136,12 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        <ListItem data={props.data} />
+        <ListItem data={props.data} donorsPerPage={props.donorsPerPage} />
       </tbody>
     </table>
   )
 }
+
 
 function ListItem(props) {
   const listElements = props.data

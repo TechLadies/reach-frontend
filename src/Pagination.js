@@ -7,91 +7,62 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
   }
 
   return (
-    <nav className= "page-btn">
-      <ul className="pagination">
-        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-          <a
-            onClick={() => paginate(Math.max(1, currentPage - 1))}
-            href="!#"
-            className="page-link page-directions"
-          >
-            Prev
-          </a>
-        </li>
-        {pageNumbers.map(number => (
-                 <li
-            key={number}
-            className={
-              currentPage === number ? "page-item active" : "page-item"
-            }
-          >
-            <a onClick={() => paginate(number)} href="!#" className="page-link page-numbers">
-              {number}
-            </a>
+    <nav className="page-btn">
+      {pageNumbers.length > 1 ? (
+        <ul className="pagination">
+          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+            {pageNumbers.length > 2 ? (
+              <button
+                onClick={() => paginate(Math.max(1, currentPage - 1))}
+                className="page-link page-directions"
+              >
+                Prev
+              </button>
+            ) : (
+              ''
+            )}
           </li>
-        ))}
-        <li
-          className={`page-item ${
-            currentPage === pageNumbers[pageNumbers.length - 1]
-              ? 'disabled'
-              : ''
-          }`}
-        >
-          <a
-            onClick={() => paginate(Math.max(1, currentPage + 1))}
-            href="!#"
-            className="page-link page-directions"
+          {pageNumbers.map(number => (
+            <li
+              key={number}
+              className={
+                currentPage === number ? 'page-item active' : 'page-item'
+              }
+            >
+              <button
+                onClick={() => paginate(number)}
+                className="page-link page-numbers"
+              >
+                {number}
+              </button>
+            </li>
+          ))}
+          <li
+            className={`page-item ${
+              currentPage === pageNumbers[pageNumbers.length - 1]
+                ? 'disabled'
+                : ''
+            }`}
           >
-            Next 
-          </a>
-        </li>
-      </ul>
+            {pageNumbers.length > 2 ? (
+              <button
+                onClick={() => paginate(Math.max(1, currentPage + 1))}
+                className="page-link page-directions"
+              >
+                Next
+              </button>
+            ) : (
+              ''
+            )}
+          </li>
+        </ul>
+      ) : (
+        ''
+      )}
     </nav>
   )
 }
 
 export default Pagination
 
-/* const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
-  const pageNumbers = [];
 
-  for (let i = 1; i <= Math.ceil(totalDonors / donorsPerPage); i++) 
-
-  return (
-    <nav>
-      <ul className="pagination">
-        <li className={`page-item ${ currentPage===1 ? "disabled": ""}`}>
-          <a
-            onClick={() => paginate(Math.max(1, currentPage - 1))}
-            href="!#"
-            className="page-link"
-          >
-            Prev
-          </a>
-        </li>
-
-        {pageNumbers.map(number => (
-                 <li
-            key={number}
-            className={
-              currentPage === number ? "page-item active" : "page-item"
-            }
-          >
-            <a onClick={() => paginate(number)} href="!#" className="page-link">
-              {number}
-            </a>
-          </li>
-        ))}
-            <li className={`page-item ${ currentPage===pageNumbers[pageNumbers.length - 1] ? "disabled": ""}`}>
-          <a
-            onClick={() => paginate(Math.max(1, currentPage + 1))}
-            href="!#"
-            className="page-link"
-          >
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
-  )
-          } */
