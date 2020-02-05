@@ -11,7 +11,7 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
       {pageNumbers.length > 1 ? (
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-            {pageNumbers.length > 2 ? (
+            {pageNumbers.length > 1 ? (
               <button
                 onClick={() => paginate(Math.max(1, currentPage - 1))}
                 className="page-link page-directions"
@@ -44,7 +44,7 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
                 : ''
             }`}
           >
-            {pageNumbers.length > 2 ? (
+            {pageNumbers.length > 1 ? (
               <button
                 onClick={() => paginate(Math.max(1, currentPage + 1))}
                 className="page-link page-directions"

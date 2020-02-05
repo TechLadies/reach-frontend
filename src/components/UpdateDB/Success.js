@@ -11,21 +11,18 @@ import Pagination from '../../Pagination'
 
 const SuccessUpload = props => {
   const uploadDonorData = props.donorData[0]
-  const entriesPerPage = 2
+  const entriesPerPage = 5
   const [currentPage, setCurrentPage] = useState(1)
-  const paginate = pageNumber => setCurrentPage(pageNumber);
- 
-    const begin = (currentPage- 1) * entriesPerPage
-    const end = begin + entriesPerPage
-    const pageList = uploadDonorData.slice(begin, end)
-    console.log(pageList)
-  
-  
-  /* const [currentList, nextList] = useState([loadList(1)])
-
-  const onClick = () => {
-    nextList(loadList(paginate))
-  } */
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+  const begin = (currentPage - 1) * entriesPerPage
+  const end = begin + entriesPerPage
+  //for all data
+  const allDonorsList = uploadDonorData.slice(begin, end)
+  //for new data
+  const newDonorsList = newDonor(uploadDonorData).slice(begin,end)
+  //for old data
+  const existingDonorsList = existingDonor(uploadDonorData).slice(begin,end)
+  console.log(allDonorsList)
 
   if (!props.donorData) return null
   return (
@@ -56,7 +53,10 @@ const SuccessUpload = props => {
         </div>
       </Box>
       <div className="navtable-container">
-        <Tabs defaultActiveKey="all" className="nav nav-tabs nav-justified">
+        <Tabs
+          defaultActiveKey="all"
+          className="nav nav-tabs nav-justified"
+        >
           <Tab
             eventKey="all"
             title={
@@ -68,8 +68,16 @@ const SuccessUpload = props => {
               </div>
             }
           >
-            <Table data={pageList} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
-            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
+            <Table
+              data={allDonorsList}
+              donorsPerPage={entriesPerPage}
+              currentPage={currentPage}
+            />
+            <Pagination
+              totalDonors={uploadDonorData.length}
+              donorsPerPage={entriesPerPage}
+              paginate={paginate}
+            />
           </Tab>
           <Tab
             eventKey="new"
@@ -84,8 +92,16 @@ const SuccessUpload = props => {
               </div>
             }
           >
-            <Table data={newDonor(pageList)} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
-            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
+            <Table
+              data={newDonorsList}
+              donorsPerPage={entriesPerPage}
+              currentPage={currentPage}
+            />
+            <Pagination
+              totalDonors={newDonor(uploadDonorData).length}
+              donorsPerPage={entriesPerPage}
+              paginate={paginate}
+            />
           </Tab>
           <Tab
             eventKey="existing"
@@ -100,12 +116,19 @@ const SuccessUpload = props => {
               </div>
             }
           >
-            <Table data={existingDonor(pageList)} donorsPerPage={entriesPerPage} currentPage={currentPage}/>
-            <Pagination totalDonors= {uploadDonorData.length} donorsPerPage={entriesPerPage} paginate={paginate}/>
+            <Table
+              data={existingDonorsList}
+              donorsPerPage={entriesPerPage}
+              currentPage={currentPage}
+            />
+            <Pagination
+              totalDonors={existingDonor(uploadDonorData).length}
+              donorsPerPage={entriesPerPage}
+              paginate={paginate}
+            />
           </Tab>
         </Tabs>
       </div>
-      
     </div>
   )
 }
@@ -142,7 +165,6 @@ const Table = props => {
   )
 }
 
-
 function ListItem(props) {
   const listElements = props.data
   const listComponents = listElements.map(item => {
@@ -170,10 +192,9 @@ function ListItem(props) {
 }
 
 const newDonor = allDonor => {
-  return allDonor.filter(d => d.__isNew)
+  return (allDonor.filter(d => d.__isNew)).map(d => d)
 }
 
 const existingDonor = allDonor => {
-  return allDonor.filter(d => !d.__isNew)
+  return (allDonor.filter(d => !d.__isNew)).map(d=>d)
 }
-
