@@ -11,7 +11,7 @@ import Pagination from '../../Pagination'
 
 const SuccessUpload = props => {
   const uploadDonorData = props.donorData[0]
-  const entriesPerPage = 5
+  const entriesPerPage = 15
   const [currentPage, setCurrentPage] = useState(1)
   const paginate = pageNumber => setCurrentPage(pageNumber)
   const begin = (currentPage - 1) * entriesPerPage
@@ -22,7 +22,6 @@ const SuccessUpload = props => {
   const newDonorsList = newDonor(uploadDonorData).slice(begin,end)
   //for old data
   const existingDonorsList = existingDonor(uploadDonorData).slice(begin,end)
-  console.log(allDonorsList)
 
   if (!props.donorData) return null
   return (
@@ -56,6 +55,7 @@ const SuccessUpload = props => {
         <Tabs
           defaultActiveKey="all"
           className="nav nav-tabs nav-justified"
+          onSelect ={()=> setCurrentPage(1)}
         >
           <Tab
             eventKey="all"
@@ -67,6 +67,7 @@ const SuccessUpload = props => {
                 <div>All Donors</div>
               </div>
             }
+            
           >
             <Table
               data={allDonorsList}
@@ -77,6 +78,7 @@ const SuccessUpload = props => {
               totalDonors={uploadDonorData.length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
+              currentPage = {currentPage}
             />
           </Tab>
           <Tab
@@ -101,6 +103,7 @@ const SuccessUpload = props => {
               totalDonors={newDonor(uploadDonorData).length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
+              currentPage = {currentPage}
             />
           </Tab>
           <Tab
@@ -125,6 +128,7 @@ const SuccessUpload = props => {
               totalDonors={existingDonor(uploadDonorData).length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
+              currentPage = {currentPage}
             />
           </Tab>
         </Tabs>
@@ -198,3 +202,4 @@ const newDonor = allDonor => {
 const existingDonor = allDonor => {
   return (allDonor.filter(d => !d.__isNew)).map(d=>d)
 }
+

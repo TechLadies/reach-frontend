@@ -8,7 +8,7 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
 
   return (
     <nav className="page-btn">
-      {pageNumbers.length > 1 ? (
+       {pageNumbers.length > 1 ? (
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
             {pageNumbers.length > 1 ? (
@@ -16,12 +16,12 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
                 onClick={() => paginate(Math.max(1, currentPage - 1))}
                 className="page-link page-directions"
               >
-                Prev
+               {"< Prev "}
               </button>
             ) : (
               ''
             )}
-          </li>
+          </li> {console.log(pageNumbers)}
           {pageNumbers.map(number => (
             <li
               key={number}
@@ -49,10 +49,10 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
                 onClick={() => paginate(Math.max(1, currentPage + 1))}
                 className="page-link page-directions"
               >
-                Next
+                {'Next > '}
               </button>
             ) : (
-              ''
+              'disabled'
             )}
           </li>
         </ul>
