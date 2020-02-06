@@ -32,7 +32,6 @@ function DonorList(props) {
   const [donationList, setDonationList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
-  const [activeFilters, setActiveFilters] = useState(false);
   const [donorCount, setDonorCount] = useState(0);
 
   useEffect(() => {
@@ -165,34 +164,53 @@ function DonorList(props) {
             </div>
 
             <div className="modalfilter">
-              <b class="filterlabel">Tax Deductable Status</b>
-              <form className="taxstatus">
-                <div className="taxoption">
-                  <label>
-                    <input type="radio" value="Any" checked={true} />
-                    Any
-                  </label>
-                </div>
-                <div className="taxoption">
-                  <label>
-                    <input type="radio" value="Tax Deductible" />
-                    Tax Deductible
-                  </label>
-                </div>
-                <div className="taxoption">
-                  <label>
-                    <input type="radio" value="Non Tax Deductible" />
-                    Non Tax Deductible
-                  </label>
-                </div>
-              </form>
+              <strong class="filterlabel">Tax Deductable Status</strong>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="defaultInline1"
+                  name="inlineDefaultRadiosExample"
+                />
+                <label class="custom-control-label" for="defaultInline1">
+                  Any
+                </label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="defaultInline2"
+                  name="inlineDefaultRadiosExample"
+                />
+                <label class="custom-control-label" for="defaultInline2">
+                  Tax Deductible
+                </label>
+              </div>
+
+              <div class="custom-control custom-radio custom-control-inline">
+                <input
+                  type="radio"
+                  class="custom-control-input"
+                  id="defaultInline3"
+                  name="inlineDefaultRadiosExample"
+                />
+                <label class="custom-control-label" for="defaultInline3">
+                  Non Tax Deductible
+                </label>
+              </div>
             </div>
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
-              <form className="form mx-2 d-inline w-100" id="navBarSearchForm">
+              <form
+                className="form-inline my-2 my-lg-0"
+                id="sourceSearchForm"
+              >
                 <input
-                  className="form-control transparent-input"
+                  class="form-control mr-sm-2 w-75"
                   type="search"
                   placeholder="eg: Charity Dinner"
                   aria-label="Search"
@@ -202,19 +220,18 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Total Donated Amount</b>
-              <form className="form mx-2 d-inline w-100">
+              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm">
                 <input
-                  className="form-control transparent-input"
+                  class="form-control mr-sm-2"
                   type="search"
-                  placeholder="eg: Charity Dinner"
+                  placeholder="Search"
                   aria-label="Search"
                 />
-              </form>
-              <form className="form mx-2 d-inline w-100">
+                to&nbsp; {"      "}
                 <input
-                  className="form-control transparent-input"
+                  class="form-control mr-sm-2"
                   type="search"
-                  placeholder="eg: Charity Dinner"
+                  placeholder="Search"
                   aria-label="Search"
                 />
               </form>

@@ -71,7 +71,6 @@ button {
 }
 
 .modalfilter {
-  display: flex;
   flex: 50%;
   padding-bottom: 50px;
   padding: 10px;
@@ -80,6 +79,7 @@ button {
 .filterlabel {
   margin-bottom: 10px;
   padding-bottom: 10px;
+  display: block;
 }
 
 .taxstatus {
