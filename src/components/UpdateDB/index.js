@@ -94,10 +94,11 @@ const UpdateDb = () => {
   }
 
   return (
-    <div>
+    <div > 
       {upload.successUpload ? (
         <SuccessUpload donorData={upload.successUpload} />
       ) : (
+        <div className ="updatedb-wrapper">
         <Box className="updatedb-box">
           {upload.failedUpload ? (
             <img
@@ -111,11 +112,15 @@ const UpdateDb = () => {
               alt="Update donor database"
               className="uploadimg"
             />
+          
           )}
+          
           <div className="updatedetails-container">
             {upload.failedUpload ? <FailMsg /> : <UploadMsg />}
             <FileHandlers loadIpcEntries={loadIpcEntries} CPU={cancelPopUp} />
           </div>
+        
+          
           {upload.showPopUp && (
             <ConfirmUpload
               CPU={cancelPopUp}
@@ -129,14 +134,16 @@ const UpdateDb = () => {
             <ProgressBar onFailedUpload={failed} progress={upload.percentage} />
           )}
         </Box>
+        </div>
       )}
     </div>
+    
   )
 }
 
 const UploadMsg = () => {
   return (
-    <div>
+    <div >
       <div className=" update-top">
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>

@@ -7,8 +7,6 @@ import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
 
-
-
 const SuccessUpload = props => {
   const uploadDonorData = props.donorData[0]
   const entriesPerPage = 15
@@ -19,45 +17,49 @@ const SuccessUpload = props => {
   //for all data
   const allDonorsList = uploadDonorData.slice(begin, end)
   //for new data
-  const newDonorsList = newDonor(uploadDonorData).slice(begin,end)
+  const newDonorsList = newDonor(uploadDonorData).slice(begin, end)
   //for old data
-  const existingDonorsList = existingDonor(uploadDonorData).slice(begin,end)
+  const existingDonorsList = existingDonor(uploadDonorData).slice(begin, end)
 
   if (!props.donorData) return null
   return (
     <div className="success-container">
       <header className="success-header">File Uploaded Successfully!</header>
       <img src={HiFive} alt="success" className="hifive-img" />
-      <div className= "summary-wrapper">
-      <Box className="summary-container">
-        <div className="summary-subcontainer">
-          <img src={TwoHands} className="success-img" alt="twohands" />
-          <div>
-            <h1 className="grey-header">Number of donations</h1>
-            <p className="black-description">{props.donorData[1].totalCount}</p>
+      <div className="summary-wrapper">
+        <Box className="summary-container">
+          <div className="summary-subcontainer">
+            <img src={TwoHands} className="success-img" alt="twohands" />
+            <div>
+              <h1 className="grey-header">Number of donations</h1>
+              <p className="black-description">
+                {props.donorData[1].totalCount}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="summary-subcontainer">
-          <img src={DonationCircle} className="success-img" alt="twohands" />
-          <div>
-            <h1 className="grey-header">Total amount collected</h1>
-            <p className="black-description">${props.donorData[1].totalAmt}</p>
+          <div className="summary-subcontainer">
+            <img src={DonationCircle} className="success-img" alt="twohands" />
+            <div>
+              <h1 className="grey-header">Total amount collected</h1>
+              <p className="black-description">
+                ${props.donorData[1].totalAmt}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="summary-subcontainer">
-          <img src={Calendar} className="success-img" alt="twohands" />
-          <div>
-            <h1 className="grey-header">For the period of</h1>
-            <p className="black-description">{props.donorData[1].period}</p>
+          <div className="summary-subcontainer">
+            <img src={Calendar} className="success-img" alt="twohands" />
+            <div>
+              <h1 className="grey-header">For the period of</h1>
+              <p className="black-description">{props.donorData[1].period}</p>
+            </div>
           </div>
-        </div>
-      </Box>
+        </Box>
       </div>
       <div className="navtable-container">
         <Tabs
           defaultActiveKey="all"
           className="nav nav-tabs nav-justified"
-          onSelect ={()=> setCurrentPage(1)}
+          onSelect={() => setCurrentPage(1)}
         >
           <Tab
             eventKey="all"
@@ -69,7 +71,6 @@ const SuccessUpload = props => {
                 <div>All Donors</div>
               </div>
             }
-            
           >
             <Table
               data={allDonorsList}
@@ -80,7 +81,7 @@ const SuccessUpload = props => {
               totalDonors={uploadDonorData.length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
-              currentPage = {currentPage}
+              currentPage={currentPage}
             />
           </Tab>
           <Tab
@@ -105,7 +106,7 @@ const SuccessUpload = props => {
               totalDonors={newDonor(uploadDonorData).length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
-              currentPage = {currentPage}
+              currentPage={currentPage}
             />
           </Tab>
           <Tab
@@ -130,7 +131,7 @@ const SuccessUpload = props => {
               totalDonors={existingDonor(uploadDonorData).length}
               donorsPerPage={entriesPerPage}
               paginate={paginate}
-              currentPage = {currentPage}
+              currentPage={currentPage}
             />
           </Tab>
         </Tabs>
@@ -143,9 +144,9 @@ export default SuccessUpload
 
 const Table = props => {
   return (
-    <table class="table">
+    <table className="table">
       <thead>
-        <tr class="d-flex">
+        <tr className="d-flex">
           <th scope="col" className="col-2">
             ID Number
           </th>
@@ -175,10 +176,9 @@ function ListItem(props) {
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
-      <tr className="d-flex ">
+      <tr className="d-flex " >
         <td className="col-2">
-          {' '}
-          {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}{' '}
+          {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}
         </td>
         <td className="col-2 text-left">{item.name}</td>
         <td className="col-2">{item.totalAmount}</td>
@@ -198,10 +198,9 @@ function ListItem(props) {
 }
 
 const newDonor = allDonor => {
-  return (allDonor.filter(d => d.__isNew)).map(d => d)
+  return allDonor.filter(d => d.__isNew).map(d => d)
 }
 
 const existingDonor = allDonor => {
-  return (allDonor.filter(d => !d.__isNew)).map(d=>d)
+  return allDonor.filter(d => !d.__isNew).map(d => d)
 }
-
