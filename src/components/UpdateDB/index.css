@@ -74,7 +74,6 @@
 }
 
 .message-container {
-  background: white;
   height: 160px;
   padding: 32px 40px;
   width: 430px;
@@ -191,6 +190,12 @@ button > span {
   text-align: center;
   padding: 88px 80px;
   margin-top: 56px;
+}
+
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+  border: none;
+  color:  #80485b;
+  font-weight: bold;
 }
 /* 
 .nav-tabs .nav-link{
