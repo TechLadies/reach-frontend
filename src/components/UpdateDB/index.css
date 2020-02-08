@@ -154,15 +154,20 @@ button > span {
   text-align: center;
   margin-top: 48px;
 }
+
+.summary-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
 .summary-container {
-  width: 71.2%;
   height: 112px;
   padding: 24px 40px;
   display: flex;
   justify-content: space-between;
   border: 1px solid #ffc881;
   z-index: 10;
-  position: absolute;
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -245,11 +250,16 @@ a.nav-item.nav-link {
 
 
 .profilelink:hover {
+  color: #cc7503;
   text-decoration: none;
+}
+
+.profilelink{
+  visibility: hidden;
   color: #cc7503;
   font-weight: bold;
 }
 
-.profilelink{
-  color: transparent;
+tr:hover .profilelink{
+  visibility: visible;
 }

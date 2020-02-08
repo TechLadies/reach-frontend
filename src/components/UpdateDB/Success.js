@@ -28,6 +28,7 @@ const SuccessUpload = props => {
     <div className="success-container">
       <header className="success-header">File Uploaded Successfully!</header>
       <img src={HiFive} alt="success" className="hifive-img" />
+      <div className= "summary-wrapper">
       <Box className="summary-container">
         <div className="summary-subcontainer">
           <img src={TwoHands} className="success-img" alt="twohands" />
@@ -51,6 +52,7 @@ const SuccessUpload = props => {
           </div>
         </div>
       </Box>
+      </div>
       <div className="navtable-container">
         <Tabs
           defaultActiveKey="all"
