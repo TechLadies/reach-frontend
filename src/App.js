@@ -7,7 +7,8 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import UpdateDb from "./components/UpdateDB";
-import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
+import DonorDetails from "./components/DonorDetails";
+
 
 function App() {
   
@@ -24,6 +25,10 @@ function App() {
           <Route path="/update">
             <Navbar />
             <UpdateDb />
+          </Route>
+          <Route path="/details">
+            <Navbar />
+            <DonorDetails />
           </Route>
           <ProtectedRoute path="/" exact>
             <Navbar />
