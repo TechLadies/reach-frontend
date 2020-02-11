@@ -6,6 +6,7 @@ import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
+import Donordetails from "./components/Donordetails";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
           <Route path="/donorlist">
             <Navbar />
             <DonorList />
+          </Route>
+          <Route path="/donordetails">
+            <Navbar />
+            <Donordetails />
           </Route>
         </Switch>
       </BrowserRouter>
