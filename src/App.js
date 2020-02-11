@@ -6,7 +6,7 @@ import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
-import Donordetails from "./components/Donordetails";
+import Donordetails from "./components/DonorDetails";
 
 function App() {
   return (
