@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from "react";
 //import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
-import '../css/Table.css';
+//import '../css/Table.css';
 import "./DonorDetails.css";
 
 
@@ -129,4 +129,4 @@ render() {
           
    
  
-export default App;
+export default Donordetails;
