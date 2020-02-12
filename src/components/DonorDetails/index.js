@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Box from '../../components/Dashboard/Box'
+import Box from '../Dashboard/Box'
 import './index.css'
 
 function DonorDetails () {
