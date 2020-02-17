@@ -10,6 +10,8 @@ import Pagination from "./pagination";
 import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
 
 const getDonorData = async page => {
   return fetch(`http://localhost:3001/donors${page ? `?page=${page}` : ""}`)
@@ -26,6 +28,7 @@ const getDonorCount = async () => {
       console.log("err: ", JSON.stringify(err));
     });
 };
+
 
 function DonorList(props) {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -103,7 +106,13 @@ function DonorList(props) {
             >
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
-            <button className="button orangebutton">
+            <button 
+            onClick={() => {
+                setFilterOpen(true);
+              }}
+            
+            
+            className="button orangebutton">
               <img src={Reportplus} className="button-icon" alt="person" />
               Export Donor List
             </button>
