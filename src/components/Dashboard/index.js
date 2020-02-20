@@ -12,12 +12,17 @@ import "./index.css";
 
  const fetchData = (start, end) => {
   return (
-     fetch("http://reach-backend.herokuapp.com/api/dashboard", {
+     fetch("http://reach-backend.herokuapp.com/donations/dashboard", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json"
+       /*  Authorization: "Bearer " + localStorage.getItem("token"), */
       },
+      body: JSON.stringify({
+        startDate: start,
+        endDate: end
+
+      })
     }).then(function(response) {
     console.log(response)
     return response.json()
