@@ -6,12 +6,9 @@ import Dummy from "./components/Dummy";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
-<<<<<<< HEAD
 import Donordetails from "./components/DonorDetails/DonorDetails.js";
-=======
 import UpdateDb from "./components/UpdateDB";
 import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
->>>>>>> master
 
 function App() {
   
