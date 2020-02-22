@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import "./DonorList.css";
 import Modal from "../Modal";
+import Pagination from "../../Pagination"
 
 const donorData = async (start, end) => {
   return new Promise((resolve, reject) => {
@@ -273,6 +274,7 @@ function DonorList(props) {
         <Modal.Body>body</Modal.Body>
         <Modal.Footer>footer</Modal.Footer>
       </Modal>
+      <Pagination/>
     </>
   );
 }

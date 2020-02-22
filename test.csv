@@ -1,0 +1,11 @@
+ID Type,ID No,Salutation,Name,Individual Indicator,Add 1,Add 2,Add 3,Postal Code,Email Address,Tel No,Type of Payment,Type of Donation,Date of Donation,Cheque No/Mode,Amount,Prefix,Receipt Serial No,Date of Printing,Print Indicator,Void,Converted,Project,Remarks,Name of Fund
+OTHERS,,,Abc Def,Yes,abc,abc,abc,765438,hairy17@techladies.co,98796543,Cash,Outright Cash,2019-06-26,,50,RCSS,869,,,No,No,Flag Day 2019,,Non-Tax Deductible Donations
+OTHERS,,,CHEANG KUM TENG VIOLET,Yes,,,,,,,GIRO,Outright Cash,2019-02-28,,10,RCSS,730,,,No,No,Monthly donation,,Non-Tax Deductible Donations
+NRIC,S90876592A,,Rain Rain,Yes,,,,,rayrin1990@gmail.com,82938101,Credit Card,Outright Cash,2019-01-23,,110,RCSS,13257,,,Yes,No,General donation,Reach Dragon,Donation
+UEN-LOCAL COMPANY,19880987G,,Eagle Inc,No,150 Orchard Road,#06-14 Orchard Plaza,Ms Tang,238841,tang@eagle.com,63789011,Cheque,Outright Cash,2019-06-03,OCBC 763626,50000,RCSS,13716,29/8/2019,P,No,No,General donation,,Donation
+UEN-BUSINESS,52876987A,,Goodland Pte Ltd,No,1 Tanjong Pagar Road,"#02-29, Tanjong Pagar Plaza",,82001,cy@goodland.com.sg,97837383,Cheque,Outright Cash,2019-04-05,SCB 860996,200,RCSS,13506,,,No,No,Charity Golf,,Donation
+UEN-OTHERS,S7809879P,,Grace Assembly Of God,No,1 Bukit Batok West Avenue 4,,,659125,,,Cheque,Outright Cash,2019-02-20,UOB 256827,61.48,RCSS,13340,,,Yes,No,Church donation,Vending machine,Donation
+FIN,G0987652K,,S Anwar,Yes,,,,,anwarshami@gmail.com,,Credit Card,Outright Cash,2019-02-21,,25,RCSS,13414,,,No,No,Giving.SG,,Donation
+NRIC,S69098765D,MR,Teo Tze Wei,Yes,22 Jalan Membina #15-70,,,166022,tzewei.teo@reach.org.sg,98373650,Others,Outright Cash,2019-01-31,PayNow,20,RCSS,13252,,,No,No,General donation,,Donation
+UEN-LOCAL COMPANY,200790987Z,,Will And Legacy Pte ltd,No,14 Zion Road,,,247733,tp@willandlegacy.com,,GIRO,Outright Cash,2019-04-29,,100,RCSS,13584,,,No,No,Monthly donation,,Donation
+NRIC,S76098723B,,Zhou Yu,Yes,,,,,verycloudy@hotmail.com,98765420,Cash,Outright Cash,2019-04-26,,610,RCSS,13535,,,No,No,General donation,RY- Arena programme,Donation
