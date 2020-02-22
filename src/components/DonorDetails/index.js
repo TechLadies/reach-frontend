@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
+import DonorTable from './DonorTable'
+
 
 function DonorDetails () {
+   
   return (
   <div>
     <Particulars/>
     <Contact/>
-    <Donordetails />
+    <DonorTable />
   </div>
   )
 }
@@ -16,11 +19,11 @@ const Particulars = () => {
   return(
   <Box>
     <div className="double-field">
-      <div>
+      <div className= "id-style">
         <p>ID Number</p>
         <p>S0980213A</p>
       </div>
-      <div>
+      <div className= "id-style">
         <p>ID Type</p>
         <p>NRIC</p>
       </div>
@@ -70,67 +73,4 @@ const Contact = () => {
   )
 }
 
-// function to fetch the API will be here  function donordetails{}
-class Donordetails extends Component {
-  constructor(props) {
-   super(props);
-   this.state = {
-   Donordetails: [],
-   loading: false
- }
- this.getDonordetails = this.getDonordetails.bind(this);
-}
-
-getDonordetails() {
- this.setState({ loading: true });
- fetch('https://reach-backend.herokuapp.com/donor/details')
-   .then(res => res.json())
-   .then(res => {
-     setTimeout(() => {
-       this.setState({ loading: false, userList: res.data });
-     }, 2000);
-     })
- }
-
-render() {
- const { Donordetails, loading } = this.state;
-
- return (
-   <div className="container App">
-
-    <h4 className="d-inline-block">REACH Community</h4>
-    <button className="btn btn-info float-right" onClick={this.getDonordetails} disabled={loading}>{loading ? 'Loading...' : 'Get donor details'}</button>
-    <div className="clearfix"></div>
-
-     <table class="table table-bordered donordetails">
-         <thead>
-             <th scope="col">Date</th>
-             <th scope="col">Amount</th>
-             <th scope="col">Source</th>
-             <th scope="col">Mode</th>
-             <th scope="col">Tax</th>
-             <th scope="col">Remarks</th>
-         </thead>
-         <tbody>
-         {Donordetails.map(x => <tr>
-           <td>{x.date}</td>
-           <td>{x.amount}</td>
-           <td>{x.source}</td>
-           <td>{x.mode}</td>
-           <td>{x.tax}</td>
-           <td>{x.remarks}</td>
-          
-         </tr>)}
-         {Donordetails.length == 0 && <tr>
-           <td className="text-center" colSpan="4">
-             <b>No data found to display.</b>
-           </td>
-         </tr>}
-       </tbody>
-     </table>
-
-   </div>
- );
-}
-}
 export default DonorDetails
