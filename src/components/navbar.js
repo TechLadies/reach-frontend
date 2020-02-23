@@ -43,7 +43,23 @@ const Dropdown = () => {
   );
 };
 
+
 function Navbar(props) {
+  const [search, setSearch] = useState("")
+  const onSearch = (e) =>{
+    setSearch({
+      ...search,
+      [e.target.name]: e.target.value
+    })
+  }
+/* 
+  const handleSearch = () => {
+    fetch('https://reach-backend.herokuapp.com/donors/details',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(search)
+    })
+     */
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -79,6 +95,9 @@ function Navbar(props) {
           type="search"
           placeholder="Search Donor ID"
           aria-label="Search"
+          value= {search}
+          onChange = {onSearch}
+          name = "id"
         />
       </form>
 

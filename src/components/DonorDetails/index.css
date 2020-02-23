@@ -1,0 +1,10 @@
+.double-field{
+    display: flex;
+    justify-content: center;
+    border: 1px solid red;
+    width: 540px;
+}
+
+.id-style{
+    border: 1px solid blue;
+}

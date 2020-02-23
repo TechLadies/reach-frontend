@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
-import Box from '../../components/Dashboard/Box'
+import Box from '../Dashboard/Box'
 import './index.css'
+import DonorTable from './DonorTable'
+
 
 function DonorDetails () {
+   
   return (
   <div>
     <Particulars/>
     <Contact/>
+    <DonorTable />
   </div>
   )
 }
@@ -15,11 +19,11 @@ const Particulars = () => {
   return(
   <Box>
     <div className="double-field">
-      <div>
+      <div className= "id-style">
         <p>ID Number</p>
         <p>S0980213A</p>
       </div>
-      <div>
+      <div className= "id-style">
         <p>ID Type</p>
         <p>NRIC</p>
       </div>
