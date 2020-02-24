@@ -9,11 +9,11 @@ const ByProject = (props) =>{
   const donationSourceData = props.data.NoOfDonationBySource
 
   const bySourceData = [
-    { x: donationSourceData[0].sourceName, y: donationSourceData[0].noOfDonations, fill: "#FFA001" },
-    { x: donationSourceData[1].sourceName, y: donationSourceData[1].noOfDonations, fill: "#FE5366" },
-    { x: donationSourceData[2].sourceName, y: donationSourceData[2].noOfDonations, fill: "#FF9A85" },
-    { x: donationSourceData[3].sourceName, y: donationSourceData[3].noOfDonations, fill: "#80485B" },
-    { x: donationSourceData[4].sourceName, y: donationSourceData[4].noOfDonations, fill: "#CB87B0" }
+    { x: donationSourceData[0].sourceDescription, y: donationSourceData[0].totalAmountDonated, fill: "#FFA001" },
+    { x: donationSourceData[1].sourceDescription, y: donationSourceData[1].totalAmountDonated, fill: "#FE5366" },
+    { x: donationSourceData[2].sourceDescription, y: donationSourceData[2].totalAmountDonated, fill: "#FF9A85" },
+    { x: donationSourceData[3].sourceDescription, y: donationSourceData[3].totalAmountDonated, fill: "#80485B" },
+    { x: donationSourceData[4].sourceDescription, y: donationSourceData[4].totalAmountDonated, fill: "#CB87B0" }
   ];
 
   return(
