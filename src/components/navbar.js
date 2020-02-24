@@ -46,12 +46,18 @@ const Dropdown = () => {
 
 function Navbar(props) {
   const [search, setSearch] = useState("")
-  const onSearch = (e) =>{
+  const onSearch = e => {
     setSearch({
-      ...search,
-      [e.target.name]: e.target.value
-    })
-  }
+      ...state,
+        fetch("https://reach-backend.herokuapp.com/donor/details",{
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({donorId: state.donorId})
+      })
+       
+    }) 
+  }      
+ 
 /* 
   const handleSearch = () => {
     fetch('https://reach-backend.herokuapp.com/donors/details',{
@@ -61,6 +67,15 @@ function Navbar(props) {
     })
      */
   return (
+    // <form onSearch ={onSerach}>
+    //   <label>
+    //     Donor ID:
+    //     <input 
+    //       type ="text"
+    //       value={search}
+    //       onChange={e => setSearch(e.target.value)} />  
+    //   </label>
+    // </form>
     <nav
       className="navbar navbar-expand-lg"
       style={{ backgroundColor: "#FFF3E2" }}
@@ -100,6 +115,7 @@ function Navbar(props) {
           name = "id"
         />
       </form>
+    
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">

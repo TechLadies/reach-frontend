@@ -3,7 +3,6 @@ import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
 
-
 function DonorDetails () {
    
   return (
@@ -37,11 +36,11 @@ const Particulars = () => {
       <p>28 Nov 2019</p>
     </div>
     <div className="double-field">
-      <div>
+      <div className="total-donations">
         <p>Total Donations</p>
         <p>57</p>
       </div>
-      <div>
+      <div className="total-donation-amount">
       <p>Total Donation Amount</p>
         <p>$5412432</p>
       </div>
@@ -73,4 +72,6 @@ const Contact = () => {
   )
 }
 
+
+   
 export default DonorDetails
