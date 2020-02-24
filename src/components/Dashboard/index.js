@@ -50,9 +50,8 @@ const Dashboard = () => {
     });
   }, [startDate, endDate]);
   
-  // if(!dashboardData) return null
   console.log(dashboardData);
-
+ if (!dashboardData) return null
   return (
     <>
    
@@ -71,8 +70,8 @@ const Dashboard = () => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
+                  /* startDate={startDate}
+                  endDate={endDate} */
                 />
               </div>
               <div>
@@ -85,8 +84,8 @@ const Dashboard = () => {
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd
-                  endDate={endDate}
-                  minDate={startDate}
+                  /* endDate={endDate}
+                  minDate={startDate} */
                 />
               </div>
             </div>

@@ -4,13 +4,11 @@ import Box from './Box'
 import theme from './VictoryTheme'
 
 const DonationAmount = props => {
- /*  if (!DonationAmount) return null */
   const donationsArr = props.data.donationAmt
   const transformDonation = donationsArr => {
     return { x: new Date(donationsArr.donationDate), y: Number(donationsArr.donationAmount) }
   }
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
-console.log(newDonationsArr)
   const yValues = newDonationsArr.map(e => e.y)
   const xValues = newDonationsArr.map(e => e.x)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000

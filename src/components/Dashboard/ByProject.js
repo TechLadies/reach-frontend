@@ -7,6 +7,7 @@ import { VictoryPie, VictoryAxis, VictoryContainer } from "victory";
 
 const ByProject = (props) =>{
   const donationSourceData = props.data.NoOfDonationBySource
+  
 
   const bySourceData = [
     { x: donationSourceData[0].sourceDescription, y: donationSourceData[0].totalAmountDonated, fill: "#FFA001" },
