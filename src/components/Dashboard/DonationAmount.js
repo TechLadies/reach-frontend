@@ -5,6 +5,7 @@ import theme from './VictoryTheme'
 
 const DonationAmount = props => {
   const donationsArr = props.data.donationAmt
+  console.log(donationsArr)
   const transformDonation = donationsArr => {
     return { x: new Date(donationsArr.donationDate), y: Number(donationsArr.donationAmount) }
   }
@@ -16,13 +17,13 @@ const DonationAmount = props => {
  /* const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
   const yAxisTicks = [minY, minY + diff, maxY - diff, maxY] */
 
-  return (
+  return ( 
     <div>
       <h1 className="dashboard-headertxt">Donation Amount</h1>
       <Box>
         <div className="line-chart">
           <VictoryChart
-            data={newDonationsArr}
+            data={newDonationsArr.length===0 ? null :newDonationsArr}
             theme={theme}
             scale={{ x: 'time' }}
             height = {265}
@@ -61,7 +62,7 @@ const DonationAmount = props => {
               crossAxis={false}
               tickFormat={xAxisTickFormat}
               tickValues={xValues}
-              tickCount={5}
+              tickCount={10}
               scale={{ x: 'time' }}
               style={{
                 axis: { stroke: '#CC7503', opacity: '0.5', strokeWidth: 1.5 },
@@ -84,6 +85,7 @@ const DonationAmount = props => {
         </div>
       </Box>
     </div>
+   
   )
 }
 
