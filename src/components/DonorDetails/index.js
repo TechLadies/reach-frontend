@@ -6,12 +6,14 @@ import DonorTable from './DonorTable'
 function DonorDetails () {
    
   return (
-  <div>
+  <div class="container1">
     <Particulars/>
     <Contact/>
     <DonorTable />
+   
   </div>
   )
+  
 }
 
 const Particulars = () => {
