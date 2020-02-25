@@ -61,15 +61,6 @@ const [search, setSearch] = useState("");
   }
      
   return (
-    // <form onSearch ={handleSearch}>
-    //   <label>
-    //     Donor ID:
-    //     <input 
-    //       type ="text"
-    //       value={search}
-    //       onChange={e => setSearch(e.target.value)} />  
-    //   </label>
-    // </form>
     
     <nav 
     className="navbar navbar-expand-lg"

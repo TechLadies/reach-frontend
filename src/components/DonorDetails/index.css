@@ -1,14 +1,16 @@
-.container1{
-width:540px;
-height:320px;
-background-color: #ccc;
+/* .container1{
 display: flex;
-flex:1;
 flex-direction: 'row';
 flex-wrap:wrap;  
 flex-basis:auto;
 justify-content: center ;
 align-content:'space-around';
+} */
+.container2{
+  position: relative ;
+  justify-content: center ;
+  align-content:'space-around';
+  display: flex;
 }
 .double-field{
     border: 1px solid rgb(241, 218, 218);
@@ -17,7 +19,6 @@ align-content:'space-around';
     font-size: 10px;
     color: #252631;
     display: flex;
-    flex:1;
     flex-direction: 'row';
     flex-wrap:nowrap;  
     flex-basis:auto;
@@ -26,50 +27,104 @@ align-content:'space-around';
    
 }
 .single-field{
-    border: 1px solid rgb(241, 218, 218);
     width: 200px;
     height:60px;
     font-size: 10px;
-    color: #252631;
-    flex:2;
     justify-content: center;
     align-content:'space-around';
-}
+    }
 .id-style{
-    border: 1px solid rgb(241, 218, 218);
+    width:200px;
     height:50px;
-    width:90px;
     font-size: 10px;
     line-height: 10px;
-    color: #252631;
-    
- 
+    color:#252631;
+}
+.idnumberlabel { 
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+  }
+.idnumbertext{ 
+    width:50px;
+    height:20px;
+    font-size: 10px;
+    color:#252631;
+}
+.donornamelabel{ 
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+  }
+.donorname{ 
+    width:60px;
+    height:20px;
+    font-size: 10px;
+    color:#252631;
+    }
+.birthdatelabel{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5; 
+}
+.birthdate{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
+}
+.donation-style{
+  width:300px;
+  height:50px;
+  font-size: 10px;
+  line-height: 10px;
+  color:#252631;
+}
+.totaldonationslabel{
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
 }
 .total-donations{
-    border: 1px solid rgb(214, 218, 218);
-    height:50px;
-    width:250px;
-    font-size: 10px;
-    line-height: 10px;
-    color: #252631;
-    
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
 }
+.totaldonationamountlabel{
+  width:70px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+}  
 .total-donation-amount{
-    border: 1px solid rgb(214, 218, 218);
-    height:50px;
-    width:250px;
-    font-size: 10px;
-    line-height: 10px;
-    color: #252631;
-    
-  
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
 }
-
+.remarklabel{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5; 
+}
+.remark{
+  width:200px;
+  height:20px;
+  font-size: 10px;
+  color:#252631; 
+}
 .particulars-wrapper{
     display: flex;
   }
   .particulars-box {
     display: flex;
+    flex-wrap: wrap;
     margin: 48px auto;
     background: #ffffff;
     box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
