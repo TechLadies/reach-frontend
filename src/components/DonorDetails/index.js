@@ -21,7 +21,8 @@ function DonorDetails () {
 
 const Particulars = () => {
   return(
-  <Box >
+  <div className="particulars-wrapper">
+  <Box className="particulars-box">
     <div className="double-field">
       {/* <div className= "id-number-style"> */}
       {/* <div className= "id-style">
@@ -62,12 +63,14 @@ const Particulars = () => {
         <p className="remarks">Mr Lee and family members are major donors of church</p>
     </div>
   </Box>
+  </div>
   )
 }
 
 const Contact = () => {
   return(
-    <Box>
+    <div className="contact-wrapper">
+    <Box className="contact-box">
       <div className="single-field">
       <p className="idnumberlabel">Phone Number</p>
         <p className="idnumbertext">09876234</p>
@@ -81,6 +84,7 @@ const Contact = () => {
         <p className="remark"> Blk 123 Havery Road Singapore 798724832</p>
     </div>
     </Box>
+    </div>
   )
 }
 
