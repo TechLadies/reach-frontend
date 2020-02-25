@@ -47,12 +47,18 @@ const Dropdown = () => {
 function Navbar(props) {
 const [search, setSearch] = useState("");
    
-  // const handleSearch = () => {
-  //   fetch("https://reach-backend.herokuapp.com/donors/details",{
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json"},
-  //     body: JSON.stringify({donorId :search})
-  //   })
+  const handleSearch = () => {
+    fetch("https://reach-backend.herokuapp.com/donors/details",{
+      method: "POST",
+      headers: { "Content-Type": "application/json"},
+      body: JSON.stringify({donorId :search})
+    }). then (res => {
+      console.log(res)
+      return res.json()
+    }).then(data=> {
+      console.log(data)
+    })
+  }
      
   return (
     // <form onSearch ={handleSearch}>

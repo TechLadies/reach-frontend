@@ -27,7 +27,7 @@ const Particulars = () => {
       <div className= "id-style">
         <p>ID Type</p>
         <p>NRIC</p>
-      </div>
+      </div> ''
     </div>
     <div className="single-field">
       <p>Donor Name</p>
