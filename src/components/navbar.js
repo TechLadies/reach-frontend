@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Dropdown = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false)
   const toggleOpen = e => {
-    setIsVisible(!isVisible);
-    e.preventDefault();
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-  };
-  document.addEventListener("click", () => {
-    console.log("click");
-    setIsVisible(false);
-  });
+    setIsVisible(!isVisible)
+    e.preventDefault()
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+  }
+  document.addEventListener('click', () => {
+    console.log('click')
+    setIsVisible(false)
+  })
 
   return (
     <>
@@ -29,8 +29,8 @@ const Dropdown = () => {
       </a>
       <div
         className={
-          "dropdown-menu toggle dropdown-menu-right " +
-          (isVisible ? "show" : "")
+          'dropdown-menu toggle dropdown-menu-right ' +
+          (isVisible ? 'show' : '')
         }
         aria-labelledby="navbarDropdown"
       >
@@ -40,30 +40,29 @@ const Dropdown = () => {
         </a>
       </div>
     </>
-  );
-};
-
+  )
+}
 
 function Navbar(props) {
-  const [search, setSearch] = useState("")
-  const onSearch = (e) =>{
-    setSearch({
-      ...search,
-      [e.target.name]: e.target.value
+  const [search, setSearch] = useState('')
+
+  const handleSearch = () => {
+    fetch('https://reach-backend.herokuapp.com/donors/details', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ donorIdNo: search })
+    }).then(res => {
+      console.log(res)
+      return res.json()
+    }).then(data => {
+      console.log(data)
     })
   }
-/* 
-  const handleSearch = () => {
-    fetch('https://reach-backend.herokuapp.com/donors/details',{
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify(search)
-    })
-     */
+
   return (
     <nav
       className="navbar navbar-expand-lg"
-      style={{ backgroundColor: "#FFF3E2" }}
+      style={{ backgroundColor: '#FFF3E2' }}
     >
       <span className="logo_navbar">
         <img
@@ -89,16 +88,20 @@ function Navbar(props) {
         <img src="/search.svg" />
       </span>
 
-      <form className="form mx-2 d-inline w-100" id="navBarSearchForm">
+      <form
+        className="form mx-2 d-inline w-100"
+        id="navBarSearchForm"
+        onSubmit={handleSearch()}
+      >
         <input
           className="form-control transparent-input"
           type="search"
           placeholder="Search Donor ID"
           aria-label="Search"
-          value= {search}
-          onChange = {onSearch}
-          name = "id"
+          onChange={e => setSearch(e.target.value)}
+          value={search}
         />
+       
       </form>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -125,6 +128,6 @@ function Navbar(props) {
         </ul>
       </div>
     </nav>
-  );
+  )
 }
-export default Navbar;
+export default Navbar
