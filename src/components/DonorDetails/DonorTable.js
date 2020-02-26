@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import Pagination from "../../Pagination"
 
-
 function DonorTable (){
-
-
     return (
             <div className="container App">
         
-             <h4 className="d-inline-block">REACH Community</h4>
+             <h4 className="d-inline-block">Donations</h4>
              <div className="clearfix"></div>
         
-              <table class="table table-bordered donordetails">
+              <table class="table donordetails">
                   <thead>
                       <th scope="col">Date</th>
                       <th scope="col">Amount</th>

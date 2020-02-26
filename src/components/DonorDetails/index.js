@@ -6,14 +6,12 @@ import DonorTable from './DonorTable'
 function DonorDetails () {
    
   return (
-  <div class="container1">
+  <div >
     <div class="container2">
-    <Particulars/>
-    <Contact/>
+       <Particulars/>
+       <Contact/>
     </div>
-    
     <DonorTable />
-   
   </div>
   )
   
@@ -21,16 +19,13 @@ function DonorDetails () {
 
 const Particulars = () => {
   return(
+    
   <div className="particulars-wrapper">
+  <div>
+    <p className="label"> Donor Details </p>
+    </div>
   <Box className="particulars-box">
     <div className="double-field">
-      {/* <div className= "id-number-style"> */}
-      {/* <div className= "id-style">
-        <p>ID Number</p>
-      </div>
-      <div className ="id-style">
-        <p>S0980213A</p>
-      </div> */}
       <div className ="id-style">
         <p className="idnumberlabel"> ID Number </p>
         <p className="idnumbertext">S0980213A</p>
@@ -70,6 +65,11 @@ const Particulars = () => {
 const Contact = () => {
   return(
     <div className="contact-wrapper">
+    <div>
+    <p className="edit"> 
+       <img src="./src/images/1159633.jpg" alt=""/> Edit Profile
+    </p>
+    </div>
     <Box className="contact-box">
       <div className="single-field">
       <p className="idnumberlabel">Phone Number</p>
