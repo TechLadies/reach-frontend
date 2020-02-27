@@ -4,7 +4,11 @@ import Box from './Box'
 import theme from './VictoryTheme'
 
 const DonationAmount = props => {
-  const donationsArr = props.data.donationAmt
+  const donationsArr = props.data.donationAmt.sort((function compare(a, b) {
+    var dateA = new Date(a.donationDate);
+    var dateB = new Date(b.donationDate);
+    return dateA - dateB;
+  }))
   console.log(donationsArr)
   const transformDonation = donationsArr => {
     return { x: new Date(donationsArr.donationDate), y: Number(donationsArr.donationAmount) }
@@ -12,6 +16,7 @@ const DonationAmount = props => {
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
   const yValues = newDonationsArr.map(e => e.y)
   const xValues = newDonationsArr.map(e => e.x)
+  console.log(xValues)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
   const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
  /* const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
@@ -115,6 +120,7 @@ function xAxisTickFormat(x, i) {
   } else {
     return tickDate
   }
+  
 }
 
 export default DonationAmount
