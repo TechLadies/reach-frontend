@@ -103,6 +103,7 @@ function Navbar(props) {
         />
        
       </form>
+    
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
