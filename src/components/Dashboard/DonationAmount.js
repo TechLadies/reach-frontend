@@ -4,7 +4,6 @@ import Box from './Box'
 import theme from './VictoryTheme'
 
 const DonationAmount = props => {
-  if (!props.data.donationAmt) return null
   const donationsArr = props.data.donationAmt.sort(function compare(a, b) {
     var dateA = new Date(a.donationDate)
     var dateB = new Date(b.donationDate)
@@ -42,15 +41,10 @@ const DonationAmount = props => {
               dependentAxis
               domain={[minY, maxY]}
               //tickValues={yAxisTicks}
-              tickFormat={y => {
-                if (y >= 1000) {
-                  return y / 1000 + 'k'
-                }
-                return y
-              }}
+              tickFormat={yAxisTickFormat}
               tickLabelComponent={<VictoryLabel dy={-14} dx={15} />}
               label={'Amount $'}
-              axisLabelComponent={<VictoryLabel angle={0} y={30} dx={40} />}
+              axisLabelComponent={<VictoryLabel angle={0} y={30} dx={35} />}
               style={{
                 grid: { stroke: ({ tick }) => '#EBEDF0' },
                 axis: { stroke: 'none' },
@@ -115,18 +109,25 @@ function xAxisTickFormat(current, i, arr) {
   const month = months[current.getMonth()]
   const tickDate = current.getDate()
   const dateMonthFormat = tickDate + '\n' + month
-
   // at origin, always return date and month
   if (i === 0) {
     return dateMonthFormat
   }
-  const previous = arr[i-1]
+  const previous = arr[i - 1]
   if (previous.getMonth() === current.getMonth()) {
     return tickDate
   } else {
     return dateMonthFormat
   }
+  
+}
 
+function yAxisTickFormat(y) {
+  if (y >= 1000 && y <= 100000) {
+    return y / 1000 + 'k'
+  } else if (y >= 1000000) {
+    return y / 1000000 + 'M'
+  } else return y
 }
 
 export default DonationAmount
