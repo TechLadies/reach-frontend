@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
-
+import Pencil from '../../images/pencil.svg';
 function DonorDetails () {
    
   return (
@@ -23,7 +23,7 @@ const Particulars = () => {
   <div className="particulars-wrapper">
   <div>
     <p className="label"> Donor Details </p>
-    </div>
+  </div>
   <Box className="particulars-box">
     <div className="double-field">
       <div className ="id-style">
@@ -58,7 +58,7 @@ const Particulars = () => {
         <p className="remarks">Mr Lee and family members are major donors of church</p>
     </div>
   </Box>
-  </div>
+ </div>
   )
 }
 
@@ -66,10 +66,11 @@ const Contact = () => {
   return(
     <div className="contact-wrapper">
     <div>
-    <p className="edit"> 
-       <img src="./src/images/1159633.jpg" alt=""/> Edit Profile
-    </p>
-    </div>
+    {/* <div> */}
+      <button className= "button purplebutton">
+      <img src={Pencil} className="button-icon"/>Edit Profile</button>
+    {/* </div> */}
+     </div>
     <Box className="contact-box">
       <div className="single-field">
       <p className="idnumberlabel">Phone Number</p>
