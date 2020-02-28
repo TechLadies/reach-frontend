@@ -25,7 +25,7 @@ const KeyStatistics = (props) => {
           <div className="keystats-smallbox">
             <img src={twoHandsDonation} alt="twohandsdonation" />
             <div>
-              <div className="totalnumberdonors">{props.data.totalNoOfDonations}</div>
+              <div className="keystats-amount">{props.data.totalNoOfDonations}</div>
               <div className="keystats-label">Total Number of Donations</div>
             </div>
           </div>
