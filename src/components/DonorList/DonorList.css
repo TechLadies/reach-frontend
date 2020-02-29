@@ -1,13 +1,93 @@
-th, td {
-    position: relative;
+.donortable {
+  max-width: 1280px;
+  margin: 48px auto;
 }
 
+.donortable th {
+  border-top: none;
+  border-bottom: none !important;
+}
+
+/* th,
+td {
+  padding: 10px;
+} */
+
 th {
-    color: #A78F6C;
-    border: 1px; 
+  color: #a78f6c;
+  border: 1px;
 }
 
 tr:hover {
-    background-color: #FFF3E2;
-    border-radius: 10px;
-  }
+  background-color: #fff3e2;
+  border-radius: 10px;
+}
+
+button {
+  margin-left: 10px;
+}
+
+.pagination {
+  margin-top: 25px;
+  width: 35%;
+  margin: 20px auto;
+}
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  color: #252631 !important;
+  background-color: #fff;
+  border: none !important;
+}
+
+.page-item.active .page-link {
+  background-color: #80485b !important;
+  color: white !important;
+  border-radius: 5px !important;
+}
+
+/* .filter {
+  border: 1px solid #CC7503;
+  position: relative;
+  text-align: left;
+} */
+
+.filterbuttons {
+  background-color: #fff3e2;
+  padding: 10px;
+}
+
+.modal-90w {
+  max-width: 1200px;
+}
+
+.modalbody {
+  display: flex;
+  flex: 50%;
+  flex-wrap: wrap;
+}
+
+.modalfilter {
+  flex: 50%;
+  padding-bottom: 50px;
+  padding: 10px;
+}
+
+.filterlabel {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  display: block;
+}
+
+.taxstatus {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.taxoption {
+  display: flex;
+  padding: 10px;
+}
