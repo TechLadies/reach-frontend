@@ -1,33 +1,52 @@
-.container2{
-  height: 300px;
-  font-size: 10px;
-  justify-content: center;
+.title{
+  font-size: 32px;
+}
+.header-container{
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px blue;
+}
+.cards-container{
+/*   height: 300px;
+  font-size: 10px; */
+ /*  justify-content: center;
   justify-content: space-between ;
   justify-content: space-around ;
   justify-content: space-evenly;
   align-items: stretch;
-  align-content:'space-around';
+  align-content:'space-around'; */
   display: flex;
+  padding: 0 80px 48px 80px;
+  border: solid 1px red;
+ 
 }
 .double-field{
-    width: 300px;
-    height:60px;
-    color: #252631;
+   /*  width: 300px;
+    height:60px */
+/*     color: #252631; */
     display: flex;
-    flex-direction: 'row';
+    justify-content: space-between;
+    width:400px;
+    
+    /* flex-direction: 'row';
     flex-wrap:nowrap;  
     flex-basis:auto;
-    justify-content: center ;
-    align-content:'space-around';
-   
+    align-content:'space-around'; */
 }
 .label
 {
-  width: 200px;
-  height:13px;
-  font-size: 10px;
+  font-size: 14px;
+  color: #9FA2B4;
+  margin-bottom: 8px;
+  line-height: 18px;
 }
-.edit{
+.text{
+  font-size: 20px;
+  color:#252631;
+  line-height: 25px;
+  margin-bottom: 32px;
+}
+/* .edit{
   width: 100px;
   height:19px;
   font-size: 10px;
@@ -36,46 +55,26 @@
   margin-left: 10px;
   border: 1px solid black;
 
- }
- .button-icon {
+ } */
+ 
+ /* .button-icon {
   margin-right: 1px;
-}
- .purplebutton {
-  width: 136px;
-  height:30px;
-  margin-top: 2px;
-  font-size: 10px;
-  color:#834242;
-  text-align: end;
-  background:#ffffff;
-  border:1px solid ;
+} */
 
-  }
 .single-field{
-    width: 200px;
+    width: inherit;
     height:60px;
     justify-content: center;
     align-content:'space-around';
     }
 .id-style{
-    width:200px;
-    height:30px;
-    font-size: 10px;
+    /* width:200px;
+    height:30px; */
+    /* font-size: 10px; */
     line-height: 10px;
-    color:#252631;
+/*     color:#252631; */
 }
-.idnumberlabel { 
-  width:50px;
-  height:20px;
-  font-size: 10px;
-  color:#e2d5d5;
-  }
-.idnumbertext{ 
-    width:50px;
-    height:20px;
-    font-size: 10px;
-    color:#252631;
-}
+/* 
 .donornamelabel{ 
   width:60px;
   height:20px;
@@ -87,8 +86,8 @@
     height:20px;
     font-size: 10px;
     color:#252631;
-    }
-.birthdatelabel{
+    } */
+/* .birthdatelabel{
   width:60px;
   height:20px;
   font-size: 10px;
@@ -99,15 +98,15 @@
   height:20px;
   font-size: 10px;
   color:#252631;
-}
-.donation-style{
+} */
+/* .donation-style{
   width:300px;
   height:30px;
   font-size: 10px;
   line-height: 10px;
   color:#252631;
-}
-.totaldonationslabel{
+} */
+/* .totaldonationslabel{
   width:50px;
   height:20px;
   font-size: 10px;
@@ -130,23 +129,25 @@
   height:20px;
   font-size: 10px;
   color:#252631;
-}
-.remarklabel{
+} */
+/* .remarklabel{
   width:60px;
   height:20px;
   font-size: 10px;
   color:#e2d5d5; 
-}
-.remark{
+} */
+/* .remark{
   width:300px;
   height:20px;
   font-size: 10px;
   color:#252631; 
-}
+} */
 .particulars-wrapper{
-  
+  display:flex;
   }
   .particulars-box {
+    padding: 32px 40px;
+  /*   padding: 32px 40px;
     width:300px;
     height:300px;
     padding:10px;
@@ -156,13 +157,18 @@
     box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
       0px 2px 4px rgba(128, 72, 91, 0.1);
     border-radius: 8px;
-    border: 0px solid rgb(241, 218, 218); 
+    border: 0px solid rgb(241, 218, 218);  */
   }
   .contact-wrapper{
+  display:flex;
+  }
   
+  .contact-row{
+    display: flex;
   }
   .contact-box {
-    width:300px;
+    padding: 35px 40px;
+  /*   width:300px;
     height:200px;
     padding:10px;
     margin: 10px auto;
@@ -171,14 +177,14 @@
     box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
       0px 2px 4px rgba(128, 72, 91, 0.1);
     border-radius: 8px;
-    border: 0px solid rgb(241, 218, 218); 
+    border: 0px solid rgb(241, 218, 218);  */
   }
 .d-inline-block {
-  padding:5px;
+ /*  padding:5px;
   margin: 10px auto;
   background: #ffffff;
   font-size: 10px;
-  color: #252631;
+  color: #252631; */
 }
  .table {
       font-size: 10px;

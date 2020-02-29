@@ -3,12 +3,12 @@ import Pagination from "../../Pagination"
 
 function DonorTable (){
     return (
-            <div className="container App">
+            <div className="">
         
              <h4 className="d-inline-block">Donations</h4>
              <div className="clearfix"></div>
         
-              <table class="table donordetails">
+              <table className="table donordetails">
                   <thead>
                       <th scope="col">Date</th>
                       <th scope="col">Amount</th>
