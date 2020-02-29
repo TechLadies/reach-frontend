@@ -5,6 +5,7 @@ import theme from './VictoryTheme'
 
 const DonationAmount = props => {
   const donationsArr = props.data.donationAmt
+  if(!donationsArr) return null
   const transformDonation = donationsArr => {
     return {
       x: new Date(donationsArr.donationDate),
@@ -98,17 +99,24 @@ function xAxisTickFormat(current, i, arr) {
   ]
   const month = months[current.getMonth()]
   const tickDate = current.getDate()
+  const tickYear = ((current.getFullYear()).toString()).substring(2)
   const dateMonthFormat = tickDate + '\n' + month
+  const dateMonthYearFormat = tickDate + '\n' + month + " " + tickYear
   // at origin, always return date and month
+  console.log(arr[1].getFullYear())
   if (i === 0) {
     return dateMonthFormat
   }
   const previous = arr[i - 1]
+  if (!(previous.getFullYear() === current.getFullYear())){
+    return dateMonthYearFormat
+  }
   if (previous.getMonth() === current.getMonth()) {
     return tickDate
   } else {
     return dateMonthFormat
   }
+ 
   
 }
 
