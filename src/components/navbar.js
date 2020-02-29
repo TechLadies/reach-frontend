@@ -95,7 +95,7 @@ function Navbar(props) {
             </NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/update_donor_database">
+            <NavLink className="nav-link" to="/update">
               Update Donor Database
             </NavLink>
           </li>

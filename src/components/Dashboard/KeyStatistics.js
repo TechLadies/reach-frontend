@@ -1,20 +1,21 @@
-import React, { useState } from "react";
-import { VictoryLine, VictoryChart, VictoryTheme } from "victory";
+import React from "react";
 import Box from "./Box";
 import donationsCircle from "../../images/donations-circle.svg";
 import twoHandsDonation from "../../images/two-hands-donation.svg";
-import Steps from "../../images/steps.png";
+import Steps from "../../images/steps.svg";
 
-const KeyStatistics = () => {
+const KeyStatistics = (props) => {
+  
   return (
     <>
       <div className="keystats">
         <h1 className="dashboard-headertxt">Key Statistics</h1>
+       < div className="keystats-wrap">
         <Box>
           <div className="keystats-smallbox">
             <img src={donationsCircle} alt="donationscircle" />
             <div>
-              <div className="keystats-amount">$12,154.00</div>
+              <div className="keystats-amount">${props.data.totalDonationAmt}</div>
               <div className="keystats-label">Total Donation Amount</div>
             </div>
           </div>
@@ -24,12 +25,13 @@ const KeyStatistics = () => {
           <div className="keystats-smallbox">
             <img src={twoHandsDonation} alt="twohandsdonation" />
             <div>
-              <div className="keystats-amount">6329</div>
-              <div className="keystats-label">Total Number of Donors</div>
+              <div className="totalnumberdonors">{props.data.totalNoOfDonations}</div>
+              <div className="keystats-label">Total Number of Donations</div>
             </div>
           </div>
         </Box>
         <img src={Steps} className="steps" alt="steps" />
+      </div>
       </div>
     </>
   );

@@ -6,12 +6,12 @@ import Reportplus from "../../images/reportplus.svg";
 import Box from "../Dashboard/Box.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Pagination from "./pagination";
 import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+import Pagination from "../../Pagination";
 
 const getDonorData = async page => {
   return fetch(`http://localhost:3001/donors${page ? `?page=${page}` : ""}`)
@@ -28,7 +28,6 @@ const getDonorCount = async () => {
       console.log("err: ", JSON.stringify(err));
     });
 };
-
 
 function DonorList(props) {
   const [filterOpen, setFilterOpen] = useState(false);
@@ -68,9 +67,9 @@ function DonorList(props) {
 
   function ListItem(props) {
     let listElements = props.data;
-    let listComponents = listElements.map(item => {
+    let listComponents = listElements.map((item, i) => {
       return (
-        <tr key={item.idNo}>
+        <tr key={i}>
           <td scope="row"> {item.idNo} </td>
           <td>{item.name}</td>
           <td>{item.totalAmountDonated}</td>
@@ -106,13 +105,12 @@ function DonorList(props) {
             >
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
-            <button 
-            onClick={() => {
+            <button
+              onClick={() => {
                 setFilterOpen(true);
               }}
-            
-            
-            className="button orangebutton">
+              className="button orangebutton"
+            >
               <img src={Reportplus} className="button-icon" alt="person" />
               Export Donor List
             </button>
@@ -214,10 +212,7 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
-              <form
-                className="form-inline my-2 my-lg-0"
-                id="sourceSearchForm"
-              >
+              <form className="form-inline my-2 my-lg-0" id="sourceSearchForm">
                 <input
                   class="form-control mr-sm-2 w-75"
                   type="search"
