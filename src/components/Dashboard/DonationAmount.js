@@ -4,12 +4,7 @@ import Box from './Box'
 import theme from './VictoryTheme'
 
 const DonationAmount = props => {
-  const donationsArr = props.data.donationAmt.sort(function compare(a, b) {
-    var dateA = new Date(a.donationDate)
-    var dateB = new Date(b.donationDate)
-    return dateA - dateB
-  })
-  console.log(donationsArr)
+  const donationsArr = props.data.donationAmt
   const transformDonation = donationsArr => {
     return {
       x: new Date(donationsArr.donationDate),
@@ -19,12 +14,8 @@ const DonationAmount = props => {
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
   const yValues = newDonationsArr.map(e => e.y)
   const xValues = newDonationsArr.map(e => e.x)
-  console.log(xValues)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
   const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
-  /* const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
-  const yAxisTicks = [minY, minY + diff, maxY - diff, maxY] */
-
   return (
     <div>
       <h1 className="dashboard-headertxt">Donation Amount</h1>
@@ -40,7 +31,6 @@ const DonationAmount = props => {
               crossAxis={false}
               dependentAxis
               domain={[minY, maxY]}
-              //tickValues={yAxisTicks}
               tickFormat={yAxisTickFormat}
               tickLabelComponent={<VictoryLabel dy={-14} dx={15} />}
               label={'Amount $'}
