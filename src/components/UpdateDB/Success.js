@@ -8,7 +8,9 @@ import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
 
 const SuccessUpload = props => {
-  const uploadDonorData = props.donorData[0]
+  console.log(props.donorData)
+  const uploadDonorData = props.donorData.data
+  const uploadSummary = props.donorData.summary
   const entriesPerPage = 15
   const [currentPage, setCurrentPage] = useState(1)
   const paginate = pageNumber => setCurrentPage(pageNumber)
@@ -33,7 +35,7 @@ const SuccessUpload = props => {
             <div>
               <h1 className="grey-header">Number of donations</h1>
               <p className="black-description">
-                {props.donorData[1].totalCount}
+                {uploadSummary.totalCount}
               </p>
             </div>
           </div>
@@ -42,7 +44,7 @@ const SuccessUpload = props => {
             <div>
               <h1 className="grey-header">Total amount collected</h1>
               <p className="black-description">
-                ${props.donorData[1].totalAmt}
+                ${uploadSummary.totalAmt}
               </p>
             </div>
           </div>
@@ -50,7 +52,7 @@ const SuccessUpload = props => {
             <img src={Calendar} className="success-img" alt="twohands" />
             <div>
               <h1 className="grey-header">For the period of</h1>
-              <p className="black-description">{props.donorData[1].period}</p>
+              <p className="black-description">{uploadSummary.period}</p>
             </div>
           </div>
         </Box>
