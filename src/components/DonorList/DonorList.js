@@ -13,8 +13,13 @@ import Modal from "../Modal";
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
-const getDonorData = async page => {
-  return fetch(`http://localhost:3001/donors${page ? `?page=${page}` : ""}`)
+const getDonorData = async (page, from, to) => {
+  let params = []
+  if (page){params.push(`page=${page}`)}
+  if (from){params.push(`from=${from}`)}
+  if (to){params.push(`to=${to}`)}
+  params=params.join("&")
+  return fetch(`http://localhost:3001/donors${params ? `?${params}` : ""}`)
     .then(resp => resp.json())
     .catch(err => {
       console.log("err: ", JSON.stringify(err));
@@ -29,13 +34,15 @@ const getDonorCount = async () => {
     });
 };
 
-
 function DonorList(props) {
   const [filterOpen, setFilterOpen] = useState(false);
   const [donationList, setDonationList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
+  const [donationSource, setDonationSource] = useState();
+  const [taxDeductibleStatus, setTaxDeductibleStatus] = useState("any");
+  const [totalDonatedAmount, setTotalDonatedAmount] = useState();
 
   useEffect(() => {
     getDonorCount().then(result => {
@@ -50,6 +57,22 @@ function DonorList(props) {
   function handlePageChange(number) {
     setCurrentPage(number);
     getDonorData(number).then(result => {
+      setDonationList(result.data);
+    });
+  }
+
+  function handleFilterApply() {
+    setCurrentPage(1);
+    getDonorData(1, startDate, endDate).then(result => {
+      result.filter(item => {
+        item.donations.some(donation => {
+          if (taxDeductibleStatus !== "any") {
+            if (taxDeductibleStatus === "true") && donation.taxDeductible return true
+            if (taxDeductibleStatus === "false") && !donation.taxDeductible return true
+          }
+        })
+        
+      })
       setDonationList(result.data);
     });
   }

@@ -43,6 +43,38 @@ const Dropdown = () => {
   );
 };
 
+const Search = (props) => {
+  const [searchValue, setSearchValue] = useState("");
+  
+  const handleSearchInputChanges = (e) => {
+    setSearchValue(e.target.value);
+  }
+
+  const resetInputField = () => {
+    setSearchValue("")
+  }
+
+  const callSearchFunction = (e) => {
+    e.preventDefault();
+    props.search(searchValue);
+    resetInputField();
+  }
+
+  return (
+    <form className="form mx-2 d-inline w-100" id="navBarSearchForm">
+      <input
+        className="form-control transparent-input"
+        type="search"
+        laceholder="Search Donor ID"
+        value={searchValue}
+        onChange={handleSearchInputChanges}
+        aria-label="Search"
+      />
+      <input onClick={callSearchFunction} type="submit" value="SEARCH" />
+    </form>
+  );
+}
+
 function Navbar(props) {
   return (
     <nav
