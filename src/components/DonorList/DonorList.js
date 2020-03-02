@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
-import * as FileSaver from "file-saver";
+/* import * as FileSaver from "file-saver"; */
 import * as XLSX from "xlsx";
 import Pagination from "../../Pagination";
 

@@ -1,50 +1,51 @@
-.title{
+.title {
   font-size: 32px;
 }
-.header-container{
+.header-container {
   display: flex;
   justify-content: space-between;
   border: solid 1px blue;
 }
-.cards-container{
-/*   height: 300px;
+.cards-container {
+  /*   height: 300px;
   font-size: 10px; */
- /*  justify-content: center;
+  /*  justify-content: center;
   justify-content: space-between ;
   justify-content: space-around ;
   justify-content: space-evenly;
   align-items: stretch;
   align-content:'space-around'; */
   display: flex;
-  padding: 0 80px 48px 80px;
-  border: solid 1px red;
- 
+  padding: 0 80px 48px;
+  justify-content: space-around;
 }
-.double-field{
-   /*  width: 300px;
+.double-field {
+  /*  width: 300px;
     height:60px */
-/*     color: #252631; */
-    display: flex;
-    justify-content: space-between;
-    width:400px;
-    
-    /* flex-direction: 'row';
+  /*     color: #252631; */
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+
+  /* flex-direction: 'row';
     flex-wrap:nowrap;  
     flex-basis:auto;
     align-content:'space-around'; */
 }
-.label
-{
+.label {
   font-size: 14px;
-  color: #9FA2B4;
+  color: #9fa2b4;
   margin-bottom: 8px;
   line-height: 18px;
 }
-.text{
+.text {
   font-size: 20px;
-  color:#252631;
+  color: #252631;
   line-height: 25px;
   margin-bottom: 32px;
+}
+.donordetails > .header {
+  border-bottom: none;
 }
 /* .edit{
   width: 100px;
@@ -56,23 +57,27 @@
   border: 1px solid black;
 
  } */
- 
- /* .button-icon {
+
+/* .button-icon {
   margin-right: 1px;
 } */
 
-.single-field{
-    width: inherit;
-    height:60px;
-    justify-content: center;
-    align-content:'space-around';
-    }
-.id-style{
-    /* width:200px;
+.single-field {
+  width: inherit;
+  /*   height:60px; */
+  justify-content: center;
+  align-content: 'space-around';
+}
+.id-style {
+  /* width:200px;
     height:30px; */
-    /* font-size: 10px; */
-    line-height: 10px;
-/*     color:#252631; */
+  /* font-size: 10px; */
+  line-height: 10px;
+  /*     color:#252631; */
+}
+.contact-icon {
+  padding-right: 24px;
+  padding-bottom: 20px;
 }
 /* 
 .donornamelabel{ 
@@ -142,11 +147,15 @@
   font-size: 10px;
   color:#252631; 
 } */
-.particulars-wrapper{
-  display:flex;
-  }
-  .particulars-box {
-    padding: 32px 40px;
+.particulars-wrapper {
+  display: flex;
+  height:auto;
+}
+.particulars-box {
+  padding: 32px 40px;
+  min-width: 540px;
+  height: auto;
+
   /*   padding: 32px 40px;
     width:300px;
     height:300px;
@@ -158,16 +167,20 @@
       0px 2px 4px rgba(128, 72, 91, 0.1);
     border-radius: 8px;
     border: 0px solid rgb(241, 218, 218);  */
-  }
-  .contact-wrapper{
-  display:flex;
-  }
-  
-  .contact-row{
-    display: flex;
-  }
-  .contact-box {
-    padding: 35px 40px;
+}
+.contact-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.contact-row {
+  display: flex;
+}
+.contact-box {
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+
   /*   width:300px;
     height:200px;
     padding:10px;
@@ -178,35 +191,57 @@
       0px 2px 4px rgba(128, 72, 91, 0.1);
     border-radius: 8px;
     border: 0px solid rgb(241, 218, 218);  */
-  }
-.d-inline-block {
- /*  padding:5px;
+}
+.indicator {
+  background-color: #e4f9ed;
+  border-radius: 4px;
+  padding: 3px 12px;
+  margin-left: 11px;
+}
+.indicator-text {
+  font-size: 14px;
+  color: black;
+  opacity: 1;
+  line-height: 17px;
+}
+.header-indicator-box {
+  display: flex;
+}
+.table-title {
+  font-size: 32px;
+}
+.listing {
+  color: #252631;
+  opacity: 0.5;
+}
+/* .d-inline-block {
+   padding:5px;
   margin: 10px auto;
   background: #ffffff;
   font-size: 10px;
-  color: #252631; */
+  color: #252631;
+} */
+.details-table {
+  padding: 40px 80px;
+  border-top: 1px solid  #ECDFDC;
 }
- .table {
-      font-size: 10px;
-  }
-.td, th {
-    /* padding: 0.5rem; */
-    font-size: 10px;
-    color: #A78F6C;
-  }
-.th {
-    font-size: 10px;
-    color: #A78F6C;
-   
+/* .td,
+th {
+  padding: 0.5rem;
+  font-size: 10px;
+  color: #a78f6c;
+} */
+/* .th {
+  font-size: 10px;
+  color: #a78f6c;
 }
-
-tr:hover {
-    background-color: #FFF3E2;
-    border-radius: 10px;
-  
-  }
-.tr { 
-  color: #A78F6C;
+ */
+/* tr:hover {
+  background-color: #fff3e2;
+  border-radius: 10px;
+} */
+/* .tr {
+  color: #a78f6c;
   font-size: 8px;
 }
-
+ */
