@@ -103,7 +103,7 @@ function xAxisTickFormat(current, i, arr) {
   const dateMonthFormat = tickDate + '\n' + month
   const dateMonthYearFormat = tickDate + '\n' + month + " " + tickYear
   // at origin, always return date and month
-  console.log(arr[1].getFullYear())
+
   if (i === 0) {
     return dateMonthFormat
   }
