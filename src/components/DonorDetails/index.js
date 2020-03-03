@@ -6,7 +6,8 @@ import Pencil from '../../images/pencil.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
-import Person from '../../images/contact-person.svg'
+// import Person from '../../images/contact-person.svg'
+import Person from '../../images/person.svg'
 import Header from '../Header'
 
 function DonorDetails() {
