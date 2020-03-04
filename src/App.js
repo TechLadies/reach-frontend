@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import Donordetails from "./components/DonorDetails";
+import Dummyedit from "./components/DonorDetails/Dummyedit";
 import UpdateDb from "./components/UpdateDB";
 import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
 
@@ -37,6 +38,10 @@ function App() {
           <Route path="/donordetails">
             <Navbar />
             <Donordetails />
+          </Route>
+          <Route path="/dummyedit">
+            <Navbar />
+            <Dummyedit />
           </Route>
         </Switch>
       </BrowserRouter>
