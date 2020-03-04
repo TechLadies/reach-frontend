@@ -2,6 +2,7 @@
   font-size: 32px;
 }
 .header-container {
+<<<<<<< HEAD
   display: flex;
   justify-content: space-between;
   border: solid 1px blue;
@@ -22,6 +23,43 @@
  color: #9fa2b4;
  margin-bottom: 8px;
  line-height: 18px;
+=======
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px blue;
+}
+.cards-container {
+  /*   height: 300px;
+  font-size: 10px; */
+  /*  justify-content: center;
+  justify-content: space-between ;
+  justify-content: space-around ;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content:'space-around'; */
+  display: flex;
+  padding: 0 80px 48px;
+  justify-content: space-around;
+}
+.double-field {
+  /*  width: 300px;
+    height:60px */
+  /*     color: #252631; */
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+
+  /* flex-direction: 'row';
+    flex-wrap:nowrap;  
+    flex-basis:auto;
+    align-content:'space-around'; */
+}
+.label {
+  font-size: 14px;
+  color: #9fa2b4;
+  margin-bottom: 8px;
+  line-height: 18px;
+>>>>>>> clk/donor-details
 }
 .text {
   font-size: 20px;
@@ -32,6 +70,7 @@
 .donordetails > .header {
   border-bottom: none;
 }
+<<<<<<< HEAD
 .single-field{
   width: 200px;
   height:60px;
@@ -40,10 +79,72 @@
   }
 .id-style{
   width:200px;
+=======
+/* .edit{
+  width: 100px;
+  height:19px;
+  font-size: 10px;
+  text-align: end;
+  color:red;
+  margin-left: 10px;
+  border: 1px solid black;
+
+ } */
+
+/* .button-icon {
+  margin-right: 1px;
+} */
+
+.single-field {
+  width: inherit;
+  /*   height:60px; */
+  justify-content: center;
+  align-content: 'space-around';
+}
+.id-style {
+  /* width:200px;
+    height:30px; */
+  /* font-size: 10px; */
+  line-height: 10px;
+  /*     color:#252631; */
+}
+.contact-icon {
+  padding-right: 24px;
+  padding-bottom: 20px;
+}
+/* 
+.donornamelabel{ 
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+  }
+.donorname{ 
+    width:60px;
+    height:20px;
+    font-size: 10px;
+    color:#252631;
+    } */
+/* .birthdatelabel{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5; 
+}
+.birthdate{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
+} */
+/* .donation-style{
+  width:300px;
+>>>>>>> clk/donor-details
   height:30px;
   font-size: 10px;
   line-height: 10px;
   color:#252631;
+<<<<<<< HEAD
 }
 .contact-icon{
   padding-right: 24px;
@@ -75,6 +176,90 @@ height: auto;
   border-top: 1px solid  #ECDFDC;
 }
 
+=======
+} */
+/* .totaldonationslabel{
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+}
+.total-donations{
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
+}
+.totaldonationamountlabel{
+  width:90px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5;
+}  
+.total-donation-amount{
+  width:50px;
+  height:20px;
+  font-size: 10px;
+  color:#252631;
+} */
+/* .remarklabel{
+  width:60px;
+  height:20px;
+  font-size: 10px;
+  color:#e2d5d5; 
+} */
+/* .remark{
+  width:300px;
+  height:20px;
+  font-size: 10px;
+  color:#252631; 
+} */
+.particulars-wrapper {
+  display: flex;
+  height:auto;
+}
+.particulars-box {
+  padding: 32px 40px;
+  min-width: 540px;
+  height: auto;
+
+  /*   padding: 32px 40px;
+    width:300px;
+    height:300px;
+    padding:10px;
+    margin: 10px auto;
+    margin-right:30px;
+    background: #ffffff;
+    box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
+      0px 2px 4px rgba(128, 72, 91, 0.1);
+    border-radius: 8px;
+    border: 0px solid rgb(241, 218, 218);  */
+}
+.contact-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.contact-row {
+  display: flex;
+}
+.contact-box {
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+
+  /*   width:300px;
+    height:200px;
+    padding:10px;
+    margin: 10px auto;
+    margin-left:30px;
+    background: #ffffff;
+    box-shadow: 0px 2px 16px rgba(128, 72, 91, 0.05),
+      0px 2px 4px rgba(128, 72, 91, 0.1);
+    border-radius: 8px;
+    border: 0px solid rgb(241, 218, 218);  */
+}
+>>>>>>> clk/donor-details
 .indicator {
   background-color: #e4f9ed;
   border-radius: 4px;
@@ -96,9 +281,44 @@ height: auto;
 .listing {
   color: #252631;
   opacity: 0.5;
+<<<<<<< HEAD
 }
   .details-table {
     padding: 40px 80px;
     border-top: 1px solid  #ECDFDC;
   } 
 
+=======
+}
+/* .d-inline-block {
+   padding:5px;
+  margin: 10px auto;
+  background: #ffffff;
+  font-size: 10px;
+  color: #252631;
+} */
+.details-table {
+  padding: 40px 80px;
+  border-top: 1px solid  #ECDFDC;
+}
+/* .td,
+th {
+  padding: 0.5rem;
+  font-size: 10px;
+  color: #a78f6c;
+} */
+/* .th {
+  font-size: 10px;
+  color: #a78f6c;
+}
+ */
+/* tr:hover {
+  background-color: #fff3e2;
+  border-radius: 10px;
+} */
+/* .tr {
+  color: #a78f6c;
+  font-size: 8px;
+}
+ */
+>>>>>>> clk/donor-details

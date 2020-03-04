@@ -6,8 +6,6 @@ import Reportplus from '../images/reportplus.svg';
 import Pencil from '../images/pencil.svg';
 import Person from '../images/person.svg';
 
-
-
 function Dummy() {
   return (
     <div className= "button">

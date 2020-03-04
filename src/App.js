@@ -9,7 +9,8 @@ import DonorList from "./components/DonorList/DonorList";
 import Donordetails from "./components/DonorDetails";
 import Dummyedit from "./components/DonorDetails/Dummyedit";
 import UpdateDb from "./components/UpdateDB";
-import ConfirmUpload from "./components/UpdateDB/ConfirmUpload";
+import DonorDetails from "./components/DonorDetails";
+
 
 function App() {
   
@@ -26,6 +27,10 @@ function App() {
           <Route path="/update">
             <Navbar />
             <UpdateDb />
+          </Route>
+          <Route path="/details">
+            <Navbar />
+            <DonorDetails />
           </Route>
           <ProtectedRoute path="/" exact>
             <Navbar />
