@@ -12,12 +12,17 @@ import "./index.css";
 
  const fetchData = (start, end) => {
   return (
-     fetch("http://reach-backend.herokuapp.com/api/dashboard", {
+     fetch("http://reach-backend.herokuapp.com/donations/dashboard", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json"
+       /*  Authorization: "Bearer " + localStorage.getItem("token"), */
       },
+      body: JSON.stringify({
+        startDate: start,
+        endDate: end
+
+      })
     }).then(function(response) {
     console.log(response)
     return response.json()
@@ -45,9 +50,8 @@ const Dashboard = () => {
     });
   }, [startDate, endDate]);
   
-  // if(!dashboardData) return null
   console.log(dashboardData);
-
+ if (!dashboardData) return null
   return (
     <>
    
@@ -66,8 +70,8 @@ const Dashboard = () => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
+                  /* startDate={startDate}
+                  endDate={endDate} */
                 />
               </div>
               <div>
@@ -80,8 +84,8 @@ const Dashboard = () => {
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd
-                  endDate={endDate}
-                  minDate={startDate}
+                  /* endDate={endDate}
+                  minDate={startDate} */
                 />
               </div>
             </div>
