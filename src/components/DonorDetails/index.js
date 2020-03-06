@@ -8,9 +8,26 @@ import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
 import Person from '../../images/contact-person.svg'
 import Header from '../Header'
-function DonorDetails() {
+import { useParams } from 'react-router-dom'
+
+function DonorDetails(props) {
+  const id = useParams()
+  console.log(id.idNo)
+  fetch('http://reach-backend.herokuapp.com/donors/details', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ donorIdNo: id.idNo })
+  })
+    .then(res => {
+      console.log(res)
+      return res.json()
+    })
+    .then(data => 
+      console.log(data)
+    )
+
   return (
-    <div className= "donordetails">
+    <div className="donordetails">
       <Header>
         <Header.Top>
           <Header.Content>
@@ -97,7 +114,9 @@ const Contact = () => {
         <div className="contact-row">
           <img src={Phone} alt="phone" className="contact-icon" />
           <div className="single-field">
-            <div className= "header-indicator-box"><p className="label">Phone Number</p> <PreferenceIndicator/></div>
+            <div className="header-indicator-box">
+              <p className="label">Phone Number</p> <PreferenceIndicator />
+            </div>
             <p className="text">09876234</p>
           </div>
         </div>

@@ -6,8 +6,7 @@ import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
-import direct from '../../DirectToDetails'
-import { BrowserRouter, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const SuccessUpload = props => {
   console.log(props.donorData)
@@ -173,8 +172,6 @@ const Table = props => {
 }
 
 function ListItem(props) {
-
-  
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
@@ -190,9 +187,9 @@ function ListItem(props) {
         </td>
         <td className="col-2">
           <Link
-            to="/test"
+            to={'/details/' + item.idNo}
             className="profilelink"
-            onClick={()=> {return direct(item.idNo)}}
+            /*   onClick={()=> {return direct(item.idNo)}} */
           >
             View Profile >
           </Link>
@@ -210,4 +207,3 @@ const newDonor = allDonor => {
 const existingDonor = allDonor => {
   return allDonor.filter(d => !d.__isNew).map(d => d)
 }
-
