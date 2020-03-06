@@ -6,6 +6,8 @@ import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
+import direct from '../../DirectToDetails'
+import { BrowserRouter, Link } from 'react-router-dom'
 
 const SuccessUpload = props => {
   console.log(props.donorData)
@@ -34,18 +36,14 @@ const SuccessUpload = props => {
             <img src={TwoHands} className="success-img" alt="twohands" />
             <div>
               <h1 className="grey-header">Number of donations</h1>
-              <p className="black-description">
-                {uploadSummary.totalCount}
-              </p>
+              <p className="black-description">{uploadSummary.totalCount}</p>
             </div>
           </div>
           <div className="summary-subcontainer">
             <img src={DonationCircle} className="success-img" alt="twohands" />
             <div>
               <h1 className="grey-header">Total amount collected</h1>
-              <p className="black-description">
-                ${uploadSummary.totalAmt}
-              </p>
+              <p className="black-description">${uploadSummary.totalAmt}</p>
             </div>
           </div>
           <div className="summary-subcontainer">
@@ -175,10 +173,12 @@ const Table = props => {
 }
 
 function ListItem(props) {
+
+  
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
-      <tr className="d-flex " >
+      <tr className="d-flex ">
         <td className="col-2">
           {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}
         </td>
@@ -189,9 +189,13 @@ function ListItem(props) {
           {item.__isNew ? <div>New</div> : <div>Existing</div>}
         </td>
         <td className="col-2">
-          <a href="{item.viewProfile}" className="profilelink">
-            View Profile >>>
-          </a>
+          <Link
+            to="/test"
+            className="profilelink"
+            onClick={()=> {return direct(item.idNo)}}
+          >
+            View Profile >
+          </Link>
         </td>
       </tr>
     )
@@ -206,3 +210,4 @@ const newDonor = allDonor => {
 const existingDonor = allDonor => {
   return allDonor.filter(d => !d.__isNew).map(d => d)
 }
+
