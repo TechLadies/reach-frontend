@@ -38,7 +38,8 @@ const Dashboard = () => {
   const today = new Date();
   // use state start and end
   const [startDate, setStartDate] = useState(
-    today.setMonth(today.getMonth() - 3)
+  /*   today.setMonth(today.getMonth() - 3) */
+      new Date (today.getFullYear(), 0, 1)
   );
   const [endDate, setEndDate] = useState(new Date());
  
