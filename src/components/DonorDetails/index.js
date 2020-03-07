@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
@@ -10,44 +10,49 @@ import Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
 
-function DonorDetails(props) {
-  const id = useParams()
-  console.log(id.idNo)
-  fetch('http://reach-backend.herokuapp.com/donors/details', {
+const onLoadPage = async id => {
+  const res = await fetch('http://reach-backend.herokuapp.com/donors/details', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ donorIdNo: id.idNo })
   })
-    .then(res => {
-      console.log(res)
-      return res.json()
-    })
-    .then(data => 
-      console.log(data)
-    )
+  const data = await res.json()
+  return data
+}
 
-  return (
-    <div className="donordetails">
-      <Header>
-        <Header.Top>
-          <Header.Content>
-            <h1 className="title">Donors Details</h1>
-          </Header.Content>
-          <Header.Buttons>
-            <button className="button purplebutton">
-              <img src={Pencil} className="button-icon" />
-              Edit Profile
-            </button>
-          </Header.Buttons>
-        </Header.Top>
-      </Header>
-      <div className="cards-container">
-        <Particulars />
-        <Contact />
+function DonorDetails(props) {
+  const id = useParams()
+  const [donorInfo, setDonorInfo] = useState(null)
+
+  useEffect(() => {
+    onLoadPage(id).then(data => setDonorInfo(data))
+  }, [id])
+
+  console.log(donorInfo)
+  if (donorInfo) {
+    return (
+      <div className="donordetails">
+        <Header>
+          <Header.Top>
+            <Header.Content>
+              <h1 className="title">Donors Details</h1>
+            </Header.Content>
+            <Header.Buttons>
+              <button className="button purplebutton">
+                <img src={Pencil} className="button-icon" />
+                Edit Profile
+              </button>
+            </Header.Buttons>
+          </Header.Top>
+        </Header>
+        <div className="cards-container">
+          <Particulars />
+          <Contact />
+        </div>
+        <DonorTable />
       </div>
-      <DonorTable />
-    </div>
-  )
+    )
+  } else return null
 }
 
 const Particulars = () => {
@@ -97,12 +102,6 @@ const Particulars = () => {
 const Contact = () => {
   return (
     <div className="contact-wrapper">
-      {/*  <div>
-  
-      <button className= "button purplebutton">
-      <img src={Pencil} className="button-icon"/>Edit Profile</button>
-  
-     </div> */}
       <Box className="contact-box">
         <div className="contact-row">
           <img src={Person} alt="phone" className="contact-icon" />
