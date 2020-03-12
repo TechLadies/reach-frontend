@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import Donordetails from "./components/DonorDetails";
 import Dummyedit from "./components/DonorDetails/Dummyedit";
+import EditDonor from "./components/DonorDetails/EditDonor";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
 
@@ -47,6 +48,10 @@ function App() {
           <Route path="/dummyedit">
             <Navbar />
             <Dummyedit />
+          </Route>
+          <Route path="/editdonor">
+            <Navbar />
+            <EditDonor />
           </Route>
         </Switch>
       </BrowserRouter>
