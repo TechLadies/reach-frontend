@@ -100,3 +100,18 @@
   padding: 40px 80px;
   border-top: 1px solid  #ECDFDC;
 }
+
+/* popup edit-donor */
+
+.title-box{ 
+
+}
+
+.body-wrapper{
+  display: flex;
+}
+
+.edit-modal{
+
+}
+
