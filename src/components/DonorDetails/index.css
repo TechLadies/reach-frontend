@@ -1,0 +1,99 @@
+.title {
+  font-size: 32px;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  border: solid 1px blue;
+}
+.cards-container {
+  display: flex;
+  padding: 0 80px 48px;
+  justify-content: space-around;
+}
+.double-field {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+
+}
+.label {
+  font-size: 14px;
+  color: #9fa2b4;
+  margin-bottom: 8px;
+  line-height: 18px;
+}
+.text {
+  font-size: 20px;
+  color: #252631;
+  line-height: 25px;
+  margin-bottom: 32px;
+}
+.donordetails > .header {
+  border-bottom: none;
+}
+
+
+.single-field {
+  width: inherit;
+  justify-content: center;
+  align-content: 'space-around';
+}
+.id-style {
+  line-height: 10px;
+
+}
+.contact-icon {
+  padding-right: 24px;
+  padding-bottom: 20px;
+}
+
+.particulars-wrapper {
+  display: flex;
+  height:auto;
+}
+.particulars-box {
+  padding: 32px 40px;
+  min-width: 540px;
+  height: auto;
+}
+.contact-wrapper {
+  display: flex;
+  height: auto;
+}
+
+.contact-row {
+  display: flex;
+}
+.contact-box {
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+}
+.indicator {
+  background-color: #e4f9ed;
+  border-radius: 4px;
+  padding: 3px 12px;
+  margin-left: 11px;
+}
+.indicator-text {
+  font-size: 14px;
+  color: black;
+  opacity: 1;
+  line-height: 17px;
+}
+.header-indicator-box {
+  display: flex;
+}
+.table-title {
+  font-size: 32px;
+}
+.listing {
+  color: #252631;
+  opacity: 0.5;
+}
+
+.details-table {
+  padding: 40px 80px;
+  border-top: 1px solid  #ECDFDC;
+}

@@ -6,9 +6,9 @@ import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../Pagination'
+import { Link } from 'react-router-dom'
 
 const SuccessUpload = props => {
-  console.log(props.donorData)
   const uploadDonorData = props.donorData.data
   const uploadSummary = props.donorData.summary
   const entriesPerPage = 15
@@ -34,18 +34,14 @@ const SuccessUpload = props => {
             <img src={TwoHands} className="success-img" alt="twohands" />
             <div>
               <h1 className="grey-header">Number of donations</h1>
-              <p className="black-description">
-                {uploadSummary.totalCount}
-              </p>
+              <p className="black-description">{uploadSummary.totalCount}</p>
             </div>
           </div>
           <div className="summary-subcontainer">
             <img src={DonationCircle} className="success-img" alt="twohands" />
             <div>
               <h1 className="grey-header">Total amount collected</h1>
-              <p className="black-description">
-                ${uploadSummary.totalAmt}
-              </p>
+              <p className="black-description">${uploadSummary.totalAmt}</p>
             </div>
           </div>
           <div className="summary-subcontainer">
@@ -80,8 +76,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={uploadDonorData.length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={uploadDonorData.length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -105,8 +101,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={newDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={newDonor(uploadDonorData).length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -130,8 +126,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={existingDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={existingDonor(uploadDonorData).length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -168,17 +164,17 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        <ListItem data={props.data} donorsPerPage={props.donorsPerPage} />
+        <SuccessUploadList data={props.data} donorsPerPage={props.donorsPerPage} />
       </tbody>
     </table>
   )
 }
 
-function ListItem(props) {
+function SuccessUploadList(props) {
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
-      <tr className="d-flex " >
+      <tr className="d-flex ">
         <td className="col-2">
           {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}
         </td>
@@ -189,9 +185,12 @@ function ListItem(props) {
           {item.__isNew ? <div>New</div> : <div>Existing</div>}
         </td>
         <td className="col-2">
-          <a href="{item.viewProfile}" className="profilelink">
-            View Profile >>>
-          </a>
+          <Link
+            to={'/details/' + item.idNo}
+            className="profilelink"
+          >
+            View Profile >
+          </Link>
         </td>
       </tr>
     )
