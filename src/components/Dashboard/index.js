@@ -6,9 +6,8 @@ import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
 import ByProject from "./ByProject";
 import Header from "../Header/index.js";
+import logout from "../../lib/logout"
 import "./index.css";
-
-
 
  const fetchData = (start, end) => {
   return (
@@ -24,12 +23,14 @@ import "./index.css";
 
       })
     }).then(function(response) {
-    console.log(response)
-    return response.json()
-    }).then(function(data){
-    /* console.log(data); */
-    return data  
-    }).catch(err => {console.log(err)})
+      console.log(response)
+      if (response.ok) {
+        return response.json()
+      }
+      if (response.status === 403) {
+        throw Error(response.status)
+      }
+    })
  
   )}; 
 
@@ -48,6 +49,8 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData(startDate, endDate).then(data => {
       setDashboardData(data);
+    }).catch(err => {console.log(err);
+      if (err.message === '403') logout()
     });
   }, [startDate, endDate]);
   
