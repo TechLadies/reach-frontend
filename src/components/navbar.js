@@ -66,11 +66,13 @@ function Navbar(props) {
       style={{ backgroundColor: '#FFF3E2' }}
     >
       <span className="logo_navbar">
-        <img
-          src="/reach_logo.png"
-          height="30px"
-          alt="Reach Community Services"
-        />
+        <NavLink to="/">
+          <img
+            src="/reach_logo.png"
+            height="30px"
+            alt="Reach Community Services"
+          />
+        </NavLink>
       </span>
 
       <button
