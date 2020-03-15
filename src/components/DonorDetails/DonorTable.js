@@ -13,7 +13,7 @@ function DonorTable(props) {
   return (
     <div className="details-table">
       <h4 className="table-title">Donations</h4>
-      <p className="listing">15 out of 57 donations listed</p>
+      <p className="listing">{paginateDonations.length} out of {totalDonations} donations listed</p>
 
       <table className="table">
         <thead>
@@ -43,8 +43,8 @@ function DonorTable(props) {
         </tbody>
       </table>
       <Pagination
-      totalDonors={totalDonations}
-      donorsPerPage={entriesPerPage}
+      totalEntries={totalDonations}
+      entriesPerPage={entriesPerPage}
       paginate={paginate}
       currentPage={currentPage}
       />

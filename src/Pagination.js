@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
+const Pagination = ({ entriesPerPage, totalEntries, currentPage, paginate }) => {
   const pageNumbers = []
-  for (let i = 1; i <= Math.ceil(totalDonors / donorsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalEntries / entriesPerPage); i++) {
     pageNumbers.push(i)
   }
 
@@ -21,7 +21,7 @@ const Pagination = ({ donorsPerPage, totalDonors, currentPage, paginate }) => {
             ) : (
               ''
             )}
-          </li> {console.log(pageNumbers)}
+          </li> 
           {pageNumbers.map(number => (
             <li
               key={number}

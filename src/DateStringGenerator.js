@@ -20,7 +20,6 @@ function dateStringOf(date) {
     const month = months[date.getMonth()];
     const printDate = day + " " + month + " " + year;
   
-    console.log(printDate);
     return printDate;
   }
 

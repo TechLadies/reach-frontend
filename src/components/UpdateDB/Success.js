@@ -9,7 +9,6 @@ import Pagination from '../../Pagination'
 import { Link } from 'react-router-dom'
 
 const SuccessUpload = props => {
-  console.log(props.donorData)
   const uploadDonorData = props.donorData.data
   const uploadSummary = props.donorData.summary
   const entriesPerPage = 15
@@ -77,8 +76,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={uploadDonorData.length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={uploadDonorData.length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -102,8 +101,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={newDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={newDonor(uploadDonorData).length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -127,8 +126,8 @@ const SuccessUpload = props => {
               currentPage={currentPage}
             />
             <Pagination
-              totalDonors={existingDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
+              totalEntries={existingDonor(uploadDonorData).length}
+              entriesPerPage={entriesPerPage}
               paginate={paginate}
               currentPage={currentPage}
             />
@@ -173,7 +172,6 @@ const Table = props => {
 
 function SuccessUploadList(props) {
   const listElements = props.data
-  console.log(listElements)
   const listComponents = listElements.map(item => {
     return (
       <tr className="d-flex ">

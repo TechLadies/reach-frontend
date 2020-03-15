@@ -28,7 +28,6 @@ function DonorDetails(props) {
     onLoadPage(id).then(data => setDonorInfo(data))
   }, [id])
 
-  console.log(donorInfo)
   if (donorInfo) {
     return (
       <div className="donordetails">

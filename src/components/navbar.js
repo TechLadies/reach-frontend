@@ -46,11 +46,12 @@ const Dropdown = () => {
 function Navbar(props) {
   const [search, setSearch] = useState('')
 
+  //Backend API incomplete?
   const handleSearch = () => {
-    fetch('https://reach-backend.herokuapp.com/donors/details', {
+    fetch('https://reach-backend.herokuapp.com/donors/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ donorIdNo: search })
+      body: JSON.stringify({ name: search })
     }).then(res => {
       console.log(res)
       return res.json()

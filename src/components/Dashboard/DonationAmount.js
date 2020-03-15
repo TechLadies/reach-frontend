@@ -56,7 +56,7 @@ const DonationAmount = props => {
               crossAxis={false}
               tickFormat={xAxisTickFormat}
               tickValues={xValues}
-              tickCount={10}
+              tickCount={5}
               scale={{ x: 'time' }}
               style={{
                 axis: { stroke: '#CC7503', opacity: '0.5', strokeWidth: 1.5 },
