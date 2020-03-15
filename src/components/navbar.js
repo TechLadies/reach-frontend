@@ -48,7 +48,7 @@ function Navbar(props) {
 
   //Backend API incomplete?
   const handleSearch = () => {
-    fetch('https://reach-backend.herokuapp.com/donors/search', {
+    fetch(`${process.env.REACT_APP_API}/donors/search`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: search })
