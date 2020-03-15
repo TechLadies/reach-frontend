@@ -91,7 +91,7 @@ function Navbar(props) {
       <form
         className="form mx-2 d-inline w-100"
         id="navBarSearchForm"
-        onSubmit={handleSearch()}
+        onSubmit={handleSearch}
       >
         <input
           className="form-control transparent-input"
