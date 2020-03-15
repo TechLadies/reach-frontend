@@ -165,14 +165,15 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        <listItem data={props.data} donorsPerPage={props.donorsPerPage} />
+        <SuccessUploadList data={props.data} donorsPerPage={props.donorsPerPage} />
       </tbody>
     </table>
   )
 }
 
-function listItem(props) {
+function SuccessUploadList(props) {
   const listElements = props.data
+  console.log(listElements)
   const listComponents = listElements.map(item => {
     return (
       <tr className="d-flex ">

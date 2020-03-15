@@ -3,7 +3,13 @@ import Pagination from '../../Pagination'
 import dateStringOf from '../../DateStringGenerator'
 
 function DonorTable(props) {
-  const donations = props.donorDetails.donations
+  const totalDonations = props.donorDetails.donations.length
+  const entriesPerPage = 15
+  const [currentPage, setCurrentPage] = useState(1)
+  const paginate = pageNumber => setCurrentPage(pageNumber)
+  const begin = (currentPage - 1) * entriesPerPage
+  const end = begin + entriesPerPage
+  const paginateDonations = props.donorDetails.donations.slice(begin,end)
   return (
     <div className="details-table">
       <h4 className="table-title">Donations</h4>
@@ -33,9 +39,15 @@ function DonorTable(props) {
           </tr>
         </thead>
         <tbody>
-          <DonationList data={donations} />
+          <DonationList data={paginateDonations} />
         </tbody>
       </table>
+      <Pagination
+      totalDonors={totalDonations}
+      donorsPerPage={entriesPerPage}
+      paginate={paginate}
+      currentPage={currentPage}
+      />
     </div>
   )
 }
