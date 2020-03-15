@@ -165,13 +165,13 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        <ListItem data={props.data} donorsPerPage={props.donorsPerPage} />
+        <listItem data={props.data} donorsPerPage={props.donorsPerPage} />
       </tbody>
     </table>
   )
 }
 
-function ListItem(props) {
+function listItem(props) {
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
@@ -189,7 +189,6 @@ function ListItem(props) {
           <Link
             to={'/details/' + item.idNo}
             className="profilelink"
-            /*   onClick={()=> {return direct(item.idNo)}} */
           >
             View Profile >
           </Link>

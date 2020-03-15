@@ -39,98 +39,104 @@ function DonorDetails(props) {
             </Header.Content>
             <Header.Buttons>
               <button className="button purplebutton">
-                <img src={Pencil} className="button-icon" />
+                <img src={Pencil} className="button-icon" alt = "editprofile" />
                 Edit Profile
               </button>
             </Header.Buttons>
           </Header.Top>
         </Header>
         <div className="cards-container">
-          <Particulars />
-          <Contact />
+          <Particulars donorDetails={donorInfo} />
+          <Contact donorDetails={donorInfo} />
         </div>
-        <DonorTable />
+        <DonorTable donorDetails= {donorInfo} />
       </div>
     )
   } else return null
 }
 
-const Particulars = () => {
+const Particulars = props => {
+  const donorDetails = props.donorDetails.details
   return (
     <div className="particulars-wrapper">
-      <div>{/* <p className="label"> Donor Details </p> */}</div>
       <Box className="particulars-box">
         <div className="double-field">
           <div className="id-style">
             <p className="label"> ID Number </p>
-            <p className="text">S0980213A</p>
+            <p className="text">{handleNull(donorDetails.idNo)}</p>
           </div>
           <div className="id-style">
             <p className="label"> ID Type</p>
-            <p className="text"> NRIC</p>
+            <p className="text">{handleNull(donorDetails.idType)}</p>
           </div>
         </div>
         <div className="single-field">
           <p className="label">Donor Name</p>
-          <p className="text">Mr Keith Wee Liang</p>
+          <p className="text">{handleNull(donorDetails.name)}</p>
         </div>
         <div className="single-field">
           <p className="label"> Date of Birth</p>
-          <p className="text">28 Nov 2019</p>
+          <p className="text">{handleNull(donorDetails.dateOfBirth)}</p>
         </div>
         <div className="double-field">
           <div className="id-style">
             <p className="label">Total Donations</p>
-            <p className="text"> 57 </p>
+            <p className="text"> {handleNull(donorDetails.donationCount)} </p>
           </div>
           <div className="id-style">
             <p className="label">Total Donation Amount</p>
-            <p className="text">$5412432</p>
+            <p className="text">$ {handleNull(donorDetails.donationSum)}</p>
           </div>
         </div>
         <div className="single-field">
           <p className="label">Remarks</p>
-          <p className="text">
-            Mr Lee and family members are major donors of church
-          </p>
+          <p className="text">{handleNull(donorDetails.remarks)}</p>
         </div>
       </Box>
     </div>
   )
 }
 
-const Contact = () => {
+const Contact = props => {
+  const donorContact = props.donorDetails.contact
+  const donorDetails = props.donorDetails.details
+  const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
     <div className="contact-wrapper">
       <Box className="contact-box">
-        <div className="contact-row">
-          <img src={Person} alt="phone" className="contact-icon" />
-          <div className="single-field">
-            <p className="label">Contact Person</p>
-            <p className="text">Mr. Keith Lee Wei Yong</p>
+        {lowerCaseIdType.includes('uen') ? (
+          <div className="contact-row">
+            <img src={Person} alt="phone" className="contact-icon" />
+            <div className="single-field">
+              <p className="label">Contact Person</p>
+              <p className="text">{handleNull(donorContact.contactPerson)}</p>
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="contact-row">
           <img src={Phone} alt="phone" className="contact-icon" />
           <div className="single-field">
             <div className="header-indicator-box">
-              <p className="label">Phone Number</p> <PreferenceIndicator />
+              <p className="label">Phone Number</p>{' '}
+              {donorContact.preferredContact ? (
+                <PreferenceIndicator />
+              ) : null}
             </div>
-            <p className="text">09876234</p>
+            <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
           <div className="single-field">
             <p className="label">Email Address</p>
-            <p className="text">keith@gmail.com</p>
+            <p className="text">{handleNull(donorContact.email)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Location} alt="address" className="contact-icon" />
           <div className="single-field">
             <p className="label">Mailing Address</p>
-            <p className="text"> Blk 123 Havery Road Singapore 798724832</p>
+            <p className="text"> {handleNull(donorContact.mail)}</p>
           </div>
         </div>
       </Box>
@@ -146,3 +152,9 @@ const PreferenceIndicator = () => {
   )
 }
 export default DonorDetails
+
+const handleNull = data => {
+  if (!data) {
+    return '-'
+  } else return data
+}
