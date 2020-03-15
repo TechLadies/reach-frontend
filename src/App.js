@@ -3,7 +3,8 @@ import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
 import Dummy from "./components/Dummy";
-import { BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
+import history from "./lib/history"
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import UpdateDb from "./components/UpdateDB";
@@ -14,7 +15,7 @@ function App() {
   
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route path="/login">
             <Login />
@@ -43,7 +44,7 @@ function App() {
             <Donordetails />
           </Route> */}
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }
