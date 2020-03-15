@@ -40,7 +40,7 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch("https://reach-backend.herokuapp.com/login", {
+    fetch(`${process.env.REACT_APP_API}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

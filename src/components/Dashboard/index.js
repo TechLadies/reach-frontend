@@ -12,7 +12,7 @@ import "./index.css";
 
  const fetchData = (start, end) => {
   return (
-     fetch("http://reach-backend.herokuapp.com/api/dashboard", {
+     fetch(`${process.env.REACT_APP_API}/api/dashboard`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

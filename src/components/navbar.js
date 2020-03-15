@@ -47,7 +47,7 @@ function Navbar(props) {
   const [search, setSearch] = useState('')
 
   const handleSearch = () => {
-    fetch('https://reach-backend.herokuapp.com/donors/details', {
+    fetch(`${process.env.REACT_APP_API}/donors/details`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ donorIdNo: search })

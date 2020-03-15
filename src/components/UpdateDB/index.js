@@ -65,7 +65,7 @@ const UpdateDb = () => {
       }
     }
 
-    fetch('http://reach-backend.herokuapp.com/donations/upload', {
+    fetch(`${process.env.REACT_APP_API}/donations/upload`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(upload.ipcData)
