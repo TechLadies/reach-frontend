@@ -120,9 +120,11 @@ const Contact = props => {
               {donorContact.preferredContact ? (
                 <PreferenceIndicator />
               ) : null}
+
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
+          { donorContact.dnc && <DNCIndicator/>}
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
@@ -150,10 +152,19 @@ const PreferenceIndicator = () => {
     </div>
   )
 }
-export default DonorDetails
+
+const DNCIndicator = () => {
+  return (
+    <div className="dnc-indicator">
+      <div className="dnc-indicator-text">Do Not Contact</div>
+    </div>
+  )
+}
 
 const handleNull = data => {
   if (!data) {
     return '-'
   } else return data
 }
+
+export default DonorDetails
