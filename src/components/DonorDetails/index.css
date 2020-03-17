@@ -71,12 +71,18 @@
   min-width: 540px;
   height: auto;
 }
+.dnc-contact-box{
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+  border: solid 1px #EB5757;
+}
 .dnc-indicator{
   background-color:#fbdddd;
   border-radius: 4px;
   padding: 3px 12px;
-  margin-left: 11px;
-  align-self: flex-start
+  margin-left: 70%;
+  position: sticky;
   
 }
 .dnc-indicator-text{
@@ -94,8 +100,7 @@
 }
 .indicator-text {
   font-size: 14px;
-  font-weight: bold;
-  color: black;
+  color: #219653;
   opacity: 1;
 }
 .header-indicator-box {
