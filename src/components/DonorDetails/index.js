@@ -11,7 +11,7 @@ import Header from '../Header'
 import { useParams } from 'react-router-dom'
 
 const onLoadPage = async id => {
-  const res = await fetch('http://reach-backend.herokuapp.com/donors/details', {
+  const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ donorIdNo: id.idNo })
