@@ -14,7 +14,9 @@ import * as XLSX from "xlsx";
 import Pagination from "../../Pagination";
 
 const getDonorData = async page => {
-  return fetch(`http://localhost:3001/donors${page ? `?page=${page}` : ""}`)
+  return fetch(
+    `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
+  )
     .then(resp => resp.json())
     .catch(err => {
       console.log("err: ", JSON.stringify(err));
@@ -22,7 +24,7 @@ const getDonorData = async page => {
 };
 
 const getDonorCount = async () => {
-  return fetch(`http://localhost:3001/donors/count`)
+  return fetch(`${process.env.REACT_APP_API}/donors/count`)
     .then(resp => resp.json())
     .catch(err => {
       console.log("err: ", JSON.stringify(err));
