@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
+import history from "../../lib/history";
 /* import * as FileSaver from "file-saver"; */
 import * as XLSX from "xlsx";
 import Pagination from "../../Pagination";
@@ -71,7 +72,11 @@ function DonorList(props) {
     let listElements = props.data;
     let listComponents = listElements.map((item, i) => {
       return (
-        <tr key={i}>
+        <tr
+          key={i}
+          className={item.idNo ? "donorlink" : ""}
+          onClick={item.idNo && (() => history.push(`/details/${item.idNo}`))}
+        >
           <td scope="row"> {item.idNo} </td>
           <td>{item.name}</td>
           <td>{item.totalAmountDonated}</td>
