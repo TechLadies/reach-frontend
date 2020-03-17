@@ -64,12 +64,34 @@
 
 .contact-row {
   display: flex;
+  
 }
 .contact-box {
   padding: 35px 40px;
   min-width: 540px;
   height: auto;
 }
+.dnc-contact-box{
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+  border: solid 1px #EB5757;
+}
+.dnc-indicator{
+  background-color:#fbdddd;
+  border-radius: 4px;
+  padding: 3px 12px;
+  margin-left: 70%;
+  position: sticky;
+  
+}
+.dnc-indicator-text{
+  color: #EB5757;
+  font-weight: bold;
+  font-size: 14px;
+
+}
+
 .indicator {
   background-color: #e4f9ed;
   border-radius: 4px;
@@ -78,12 +100,12 @@
 }
 .indicator-text {
   font-size: 14px;
-  color: black;
+  color: #219653;
   opacity: 1;
-  line-height: 17px;
 }
 .header-indicator-box {
   display: flex;
+  
 }
 .table-title {
   font-size: 32px;

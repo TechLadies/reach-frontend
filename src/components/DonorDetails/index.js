@@ -102,10 +102,11 @@ const Contact = props => {
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
     <div className="contact-wrapper">
-      <Box className="contact-box">
+      <Box className= {donorContact.dnc ? "dnc-contact-box" : "contact-box"}>
+      {donorContact.dnc && <DNCIndicator/>}
         {lowerCaseIdType.includes('uen') ? (
           <div className="contact-row">
-            <img src={Person} alt="phone" className="contact-icon" />
+            <img src={Person} alt="contact person" className="contact-icon" />
             <div className="single-field">
               <p className="label">Contact Person</p>
               <p className="text">{handleNull(donorContact.contactPerson)}</p>
@@ -117,12 +118,12 @@ const Contact = props => {
           <div className="single-field">
             <div className="header-indicator-box">
               <p className="label">Phone Number</p>{' '}
-              {donorContact.preferredContact ? (
-                <PreferenceIndicator />
-              ) : null}
+              {donorContact.preferredContact && <PreferenceIndicator />}
+
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
+         
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
@@ -150,10 +151,19 @@ const PreferenceIndicator = () => {
     </div>
   )
 }
-export default DonorDetails
+
+const DNCIndicator = () => {
+  return (
+    <div className="dnc-indicator">
+      <div className="dnc-indicator-text">Do Not Contact</div>
+    </div>
+  )
+}
 
 const handleNull = data => {
   if (!data) {
     return '-'
   } else return data
 }
+
+export default DonorDetails
