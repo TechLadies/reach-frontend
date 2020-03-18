@@ -1,14 +1,41 @@
-import React ,{Component} from "react";
+import React ,{Component, useState, useEffect} from "react";
 import "./index.css";
 import Modal from '../Modal'
 
 function DummyEdit(props) { 
+  // const [remarks,setRemarks] = usestate();
+  // const [dnc,setDnc] = usestate();
+
+  // useEffect(() => {
+  //   getRemarks().then(result => {
+  //     console.log(result);
+  //     setRemarks(result.data);
+
+  //   }); 
+  //   getDnc().then(result => {
+  //     console.log(result);
+  //     setDnc(result.data);
+  //   }); 
+  // }, []);
+
+  // useEffect(() => {});
+  const onCancel = () => {
+    props.CPU()
+  }
+  const onYes =()=> {
+    console.log('you pressed yes');
+  }
+
 
        return (
-        <Modal show={true} dialogClassName="modal-90w">
+        <Modal show={true} 
+        dialogClassName="modal-90w">
           <div className = "edit-modal">
+
           <Modal.Header className = "title-box">
           <header className = "title">Edit Donor Information</header>
+          
+          {/* <Modal.Close onClick={() => setFilterOpen(false)} /> */}
           </Modal.Header>
           <Modal.Body className="">
         <div className = "body-wrapper">
@@ -31,10 +58,13 @@ function DummyEdit(props) {
           </Modal.Body>
            <Modal.Footer className="popup-btn"> 
             <div>
-              <button className="button cancel-btn">
+              <button className="button cancel-btn" onClick={oncancel}>
                 <span>Cancel</span>
               </button>
-              <div><button className= "button orangebutton">Save Donor Details</button></div><br/>
+              <div>
+                <button className= "button orangebutton" onClick={onYes}>Save Donor Details </button>
+              </div>
+              <br/>
             </div> 
            </Modal.Footer> 
            </div>

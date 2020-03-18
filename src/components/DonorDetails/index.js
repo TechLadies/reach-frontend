@@ -1,14 +1,33 @@
-import React, { useState } from 'react'
+import React, {Component, useState } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
+import DummyEdit from './Dummyedit'
 import Pencil from '../../images/pencil.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
 import Person from '../../images/contact-person.svg'
 import Header from '../Header'
+
+// function App() {
+//   const [show,setShow] = useState(false);
+//   const openModal = () => setShow(true);
+//   const closeModal = () => setShow(false);
+//   return(
+//     <div className="App">
+// <h1> creating edit profile modal </h1>
+// {!show && <button onclick={openModal}>Show modal</button>}
+//     </div>
+//   );
+// }
+// export default App;
+
+
 function DonorDetails() {
+  const [show, setShow] = useState(false);
+  const openModal = () => setShow(true);
+  const closeModal = () => setShow(false);
   return (
     <div className= "donordetails">
       <Header>
@@ -17,7 +36,7 @@ function DonorDetails() {
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton">
+            <button className="button purplebutton" onclick ={openModal}> 
               <img src={Pencil} className="button-icon" />
               Edit Profile
             </button>
