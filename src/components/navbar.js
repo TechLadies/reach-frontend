@@ -46,12 +46,12 @@ const Dropdown = () => {
 function Navbar(props) {
   const [search, setSearch] = useState('')
 
-  //Backend API incomplete?
-  const handleSearch = () => {
-    fetch(`${process.env.REACT_APP_API}/donors/search`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: search })
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.REACT_APP_API}/donors/search?name=${search}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
     }).then(res => {
       console.log(res)
       return res.json()
