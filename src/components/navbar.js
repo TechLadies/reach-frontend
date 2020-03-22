@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory} from 'react-router-dom'
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -45,7 +45,7 @@ const Dropdown = () => {
 
 function Navbar(props) {
   const [search, setSearch] = useState('')
-
+  const history = useHistory()
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -56,7 +56,10 @@ function Navbar(props) {
       console.log(res)
       return res.json()
     }).then(data => {
-      console.log(data)
+      history.push({
+        pathname:'/search/' + search,
+        state: data
+      })
     })
   }
 
