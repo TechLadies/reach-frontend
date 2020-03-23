@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Pagination from '../../Pagination'
 
-function ResultsTable() {
+function ResultsTable(props) {
   return (
-    <table className="table">
+    <table className="table donortable">
       <thead>
         <tr className="d-flex">
           <th scope="col" className="col-2">
@@ -27,9 +27,9 @@ function ResultsTable() {
         </tr>
       </thead>
       <tbody>
-         <SearchList
-        /*   data={props.data}
-          donorsPerPage={props.donorsPerPage} */
+        <SearchList
+          data={props.data}
+          /* donorsPerPage={props.donorsPerPage} */
         />
       </tbody>
     </table>
@@ -37,30 +37,27 @@ function ResultsTable() {
 }
 
 function SearchList(props) {
-    return(
-        <tr className="d-flex">
-        <td className="col-2">IC Number</td>
-        <td className="col-2">Name</td>
-        <td className="col-2">$1000</td>
-        <td className="col-2">Phone Number</td>
-        <td className="col-2">Email Address</td>
-        <td className="col-2">DNC Status</td>
-      </tr>
-    )
-  /* const listElements = props.data
+  const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
       <tr className="d-flex">
-        <td className="col-2">IC Number</td>
-        <td className="col-2">Name</td>
-        <td className="col-2">$1000</td>
-        <td className="col-2">Phone Number</td>
-        <td className="col-2">Email Address</td>
-        <td className="col-2">DNC Status</td>
+        <td className="col-2">{item.idNo}</td>
+        <td className="col-2">{item.name}</td>
+        <td className="col-2">$ {item.totalDonatedAmount}</td>
+        <td className="col-2">{item.contactNo}</td>
+        <td className="col-2">{item.email}</td>
+        <td className="col-2">{handleNull(item.dnc)}</td>
       </tr>
     )
   })
-  return <React.Fragment>{listComponents}</React.Fragment> */
+  return <React.Fragment>{listComponents}</React.Fragment>
 }
 
+const handleNull = boolean => {
+  if (boolean == null) {
+    return '-'
+  } else {
+    return boolean
+  }
+}
 export default ResultsTable
