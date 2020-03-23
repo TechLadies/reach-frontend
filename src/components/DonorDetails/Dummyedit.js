@@ -1,6 +1,7 @@
 import React ,{Component, useState, useEffect} from "react";
 import "./index.css";
 import Modal from '../Modal'
+import { Button } from "react-bootstrap";
 
 function DummyEdit(props) { 
   // const [remarks,setRemarks] = usestate();
@@ -19,15 +20,20 @@ function DummyEdit(props) {
   // }, []);
 
   // useEffect(() => {});
-  const onCancel = () => {
-    props.CPU()
-  }
-  const onYes =()=> {
-    console.log('you pressed yes');
-  }
+  // const onCancel = () => {
+  //   props.CPU()
+  // }
+  // const onYes =()=> {
+  //   console.log('you pressed yes');
+  // }
+  const [show,setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-       return (
+  return (
+    <>
+    
         <Modal show={true} 
         dialogClassName="modal-90w">
           <div className = "edit-modal">
@@ -57,7 +63,7 @@ function DummyEdit(props) {
         </div>
           </Modal.Body>
            <Modal.Footer className="popup-btn"> 
-            <div>
+            {/* <div>
               <button className="button cancel-btn" onClick={oncancel}>
                 <span>Cancel</span>
               </button>
@@ -65,10 +71,18 @@ function DummyEdit(props) {
                 <button className= "button orangebutton" onClick={onYes}>Save Donor Details </button>
               </div>
               <br/>
-            </div> 
-           </Modal.Footer> 
+            </div>  */}
+            <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+         
            </div>
         </Modal>
+      </>
       )
     }
 

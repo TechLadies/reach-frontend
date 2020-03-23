@@ -9,6 +9,8 @@ import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
 import Person from '../../images/contact-person.svg'
 import Header from '../Header'
+import Modal from '../Modal'
+import { Button } from "react-bootstrap";
 
 // function App() {
 //   const [show,setShow] = useState(false);
@@ -25,10 +27,65 @@ import Header from '../Header'
 
 
 function DonorDetails() {
-  const [show, setShow] = useState(false);
-  const openModal = () => setShow(true);
-  const closeModal = () => setShow(false);
+  const [show,setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
+     <>
+    <Button variant="primary" onClick={handleShow}>
+        Launch edit  modal
+      </Button>
+      {/* <button className="button purplebutton" onclick ={handleShow}> 
+              <img src={Pencil} className="button-icon" />
+              Edit Profile
+            </button> */}
+      <Modal show={show} 
+          dialogClassName="modal-90w" 
+          onHide={handleClose}>
+       <div className = "edit-modal">
+        {/* <Modal.Header closeButton>
+          <Modal.Title>Edit Donor Profile</Modal.Title>
+        </Modal.Header> */}
+        <Modal.Header className = "title-box">
+          <header className = "title"> REACH Community-Edit Donor Information</header>
+        </Modal.Header>
+
+        {/* <Modal.Body> you can only edit Donor remarks and DNC status!</Modal.Body> */}
+        Modal.Body className="">
+        <div className = "body-wrapper">
+          <div className= "remarks-container">
+            <p> Remarks</p>
+            <input form = "text"></input>
+          </div>
+          <div className= "preference-container">
+            <header className = "title">  </header>
+            <input type="radio" value = "phone"></input>
+            <label for = "phone">Phone Number</label>
+            <input type="radio" value = "email"></input>
+            <label for = "email">Email Address</label>
+            <input type="radio" value = "mail"></input>
+            <label for = "mail">Mailing Address</label>
+            <input type="radio" value = "phone"></input>
+            <label for ="dnc">Do Not Contact</label>          
+          </div>
+        </div>
+
+          </Modal.Body>
+
+        <Modal.Footer className ="popup-btn">
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+    
+      </Modal>
+    </>
+  )
+
     <div className= "donordetails">
       <Header>
         <Header.Top>
@@ -36,7 +93,7 @@ function DonorDetails() {
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton" onclick ={openModal}> 
+            <button className="button purplebutton" onclick ={handleShow}> 
               <img src={Pencil} className="button-icon" />
               Edit Profile
             </button>
@@ -49,6 +106,7 @@ function DonorDetails() {
       </div>
       <DonorTable />
     </div>
+   
   )
 }
 
