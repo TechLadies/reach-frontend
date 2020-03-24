@@ -1,21 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {useLocation, useParams} from 'react-router-dom'
 import Header from "../Header";
 import ResultsTable from './ResultsTable';
+import './index.css';
 
 function SearchResults () {
     const location = useLocation()
-    const search = useParams()
+    const searched = useParams()
     const searchResults = location.state
+    console.log(searchResults)
 
     return (
         <div>
             <Header>
         <Header.Top>
           <Header.Content>
-            <div className="totaldonationamt">Search Results for "{search.name}" </div>
+            <div className="totaldonationamt">Search Results for "{searched.name}" </div>
             <div className="keystatslabel">
-              1 out of 4 donors found
+              {message(searchResults.length)}
             </div>
           </Header.Content>
         </Header.Top>
@@ -26,4 +28,13 @@ function SearchResults () {
     )
 }
 
+const message = (count) => {
+  if (count === 0){
+    return "No donors found"
+  } else if (count > 1) {
+    return `${count} donors found` 
+  } else{
+    return `${count} donor found`
+  }
+}
 export default SearchResults

@@ -12,8 +12,13 @@
   cursor: pointer;
 }
 
+.donortable .donorlink:hover {
+  border: 1px solid #FFC881;
+}
+
 .donortable .donorlink:hover td:first-child {
   color: #cc7503;
+
 }
 
 /* th,
