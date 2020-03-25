@@ -8,6 +8,7 @@ import ByProject from "./ByProject";
 import Header from "../Header/index.js";
 import logout from "../../lib/logout"
 import "./index.css";
+import Spin from "../../lib/spinner";
 
  const fetchData = (start, end) => {
   return (
@@ -23,7 +24,6 @@ import "./index.css";
 
       })
     }).then(function(response) {
-      console.log(response)
       if (response.ok) {
         return response.json()
       }
@@ -53,12 +53,9 @@ const Dashboard = () => {
       if (err.message === '403') logout()
     });
   }, [startDate, endDate]);
-  
-  console.log(dashboardData);
- if (!dashboardData) return null
+
   return (
     <>
-   
       <Header>
         <Header.Top>
           <Header.Content>
@@ -74,6 +71,7 @@ const Dashboard = () => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
+                  dateFormat='dd-MM-yyyy' 
                   /* startDate={startDate}
                   endDate={endDate} */
                 />
@@ -88,6 +86,7 @@ const Dashboard = () => {
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd
+                  dateFormat= "dd-MM-yyyy"
                   /* endDate={endDate}
                   minDate={startDate} */
                 />
@@ -110,7 +109,7 @@ const Dashboard = () => {
         <DonationAmount data= {dashboardData}/>
         <KeyStatistics data= {dashboardData}/>
         <ByProject data= {dashboardData}/>
-      </div> : null}
+      </div> : <Spin/>}
     </>
   );
 };

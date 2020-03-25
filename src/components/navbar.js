@@ -49,17 +49,8 @@ function Navbar(props) {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    fetch(`${process.env.REACT_APP_API}/donors/search?name=${search}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }).then(res => {
-      console.log(res)
-      return res.json()
-    }).then(data => {
-      history.push({
-        pathname:'/search/' + search,
-        state: data
-      })
+    history.push({
+      pathname: '/search/' + search
     })
   }
 

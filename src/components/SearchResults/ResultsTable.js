@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Pagination from '../../Pagination'
+import Pagination from '../../lib/pagination'
 import history from '../../lib/history'
 
 function ResultsTable(props) {

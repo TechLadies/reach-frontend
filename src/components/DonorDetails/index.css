@@ -38,6 +38,7 @@
   width: inherit;
   justify-content: center;
   align-content: 'space-around';
+  max-width: 314px;
 }
 .id-style {
   line-height: 10px;

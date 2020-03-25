@@ -9,6 +9,7 @@ import Phone from '../../images/phone.svg'
 import Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
+import Spin from '../../lib/spinner'
 
 const onLoadPage = async id => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
@@ -38,7 +39,7 @@ function DonorDetails(props) {
             </Header.Content>
             <Header.Buttons>
               <button className="button purplebutton">
-                <img src={Pencil} className="button-icon" alt = "editprofile" />
+                <img src={Pencil} className="button-icon" alt="editprofile" />
                 Edit Profile
               </button>
             </Header.Buttons>
@@ -48,10 +49,10 @@ function DonorDetails(props) {
           <Particulars donorDetails={donorInfo} />
           <Contact donorDetails={donorInfo} />
         </div>
-        <DonorTable donorDetails= {donorInfo} />
+        <DonorTable donorDetails={donorInfo} />
       </div>
     )
-  } else return null
+  } else return <Spin />
 }
 
 const Particulars = props => {
@@ -98,12 +99,13 @@ const Particulars = props => {
 
 const Contact = props => {
   const donorContact = props.donorDetails.contact
+  console.log(donorContact)
   const donorDetails = props.donorDetails.details
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
     <div className="contact-wrapper">
-      <Box className= {donorContact.dnc ? "dnc-contact-box" : "contact-box"}>
-      {donorContact.dnc && <DNCIndicator/>}
+      <Box className={donorContact.dnc ? 'dnc-contact-box' : 'contact-box'}>
+        {donorContact.dnc && <DNCIndicator />}
         {lowerCaseIdType.includes('uen') ? (
           <div className="contact-row">
             <img src={Person} alt="contact person" className="contact-icon" />
@@ -119,11 +121,9 @@ const Contact = props => {
             <div className="header-indicator-box">
               <p className="label">Phone Number</p>{' '}
               {donorContact.preferredContact && <PreferenceIndicator />}
-
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
-         
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
