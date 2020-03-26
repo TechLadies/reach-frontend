@@ -48,7 +48,6 @@ function Navbar(props) {
   const history = useHistory()
 
   const handleSearch = (e) => {
-    e.preventDefault()
     if (search.length > 0) {
     history.push({
       pathname: '/search/' + search
