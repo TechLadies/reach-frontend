@@ -19,13 +19,6 @@ function DummyEdit(props) {
   //   }); 
   // }, []);
 
-  // useEffect(() => {});
-  // const onCancel = () => {
-  //   props.CPU()
-  // }
-  // const onYes =()=> {
-  //   console.log('you pressed yes');
-  // }
   const [show,setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -51,33 +44,35 @@ function DummyEdit(props) {
           </div>
           <div className= "preference-container">
             <header className = "title">  </header>
-            <input type="radio" value = "phone"></input>
+            {/* <input type="radio" value = "phone"></input>
             <label for = "phone">Phone Number</label>
             <input type="radio" value = "email"></input>
             <label for = "email">Email Address</label>
             <input type="radio" value = "mail"></input>
             <label for = "mail">Mailing Address</label>
-            <input type="radio" value = "phone"></input>
-            <label for ="dnc">Do Not Contact</label>          
+            <input type="radio" value = "phone"></input> */}
+            <input type ="radio" value ="DNC"></input>
+            <label for ="dnc">Do Not Contact</label>  
+                    
           </div>
         </div>
           </Modal.Body>
            <Modal.Footer className="popup-btn"> 
-            {/* <div>
-              <button className="button cancel-btn" onClick={oncancel}>
+            <div>
+              <button className="button cancel-btn" onClick={handleClose}>
                 <span>Cancel</span>
               </button>
               <div>
-                <button className= "button orangebutton" onClick={onYes}>Save Donor Details </button>
+                <button className= "button orangebutton" onClick={handleClose}>Save Donor Details </button>
               </div>
               <br/>
-            </div>  */}
-            <Button variant="secondary" onClick={handleClose}>
+            </div> 
+            {/* <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleClose}>
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
          
            </div>

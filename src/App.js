@@ -11,7 +11,8 @@ import Dummyedit from "./components/DonorDetails/Dummyedit";
 import EditDonor from "./components/DonorDetails/EditDonor";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
-
+// import Modal from "./components/DonoeDetails/ModaleditDonor";
+import List from "./components/DonorDetails/List";
 
 function App() {
   
@@ -53,6 +54,14 @@ function App() {
             <Navbar />
             <EditDonor />
           </Route>
+          <Route path="/list">
+            <Navbar />
+            <List />
+          </Route>
+          {/* <Route path="/modaleditdonor">
+            <Navbar />
+            <ModalEditDonor />
+          </Route> */}
         </Switch>
       </BrowserRouter>
     </div>
