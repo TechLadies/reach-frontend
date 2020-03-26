@@ -51,7 +51,7 @@ function Navbar(props) {
     if (search.length > 0) {
     history.push({
       pathname: '/search/' + search
-    }) } else return null
+    }) } else return e.preventDefault()
   }
 
   return (
