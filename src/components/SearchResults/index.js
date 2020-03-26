@@ -27,26 +27,24 @@ function SearchResults() {
     })
   }, [searched])
 
-  if (searchResults) {
-    return (
-      <div>
-        {console.log(searchResults)}
-        <Header>
-          <Header.Top>
-            <Header.Content>
-              <div className="totaldonationamt">
-                Search Results for "{searched}"
-              </div>
-              <div className="keystatslabel">
-                {message(searchResults.length)}
-              </div>
-            </Header.Content>
-          </Header.Top>
-        </Header>
-        <ResultsTable data={searchResults} />
-      </div>
-    )
-  } else return <Spin />
+  return searchResults ? (
+    <div>
+      {console.log(searchResults)}
+      <Header>
+        <Header.Top>
+          <Header.Content>
+            <div className="totaldonationamt">
+              Search Results for "{searched}"
+            </div>
+            <div className="keystatslabel">{message(searchResults.length)}</div>
+          </Header.Content>
+        </Header.Top>
+      </Header>
+     {searchResults.length > 0 ? <ResultsTable data={searchResults} /> : null}
+    </div>
+  ) : (
+    <Spin />
+  )
 }
 
 const message = count => {

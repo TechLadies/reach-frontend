@@ -29,30 +29,30 @@ function DonorDetails(props) {
     onLoadPage(id).then(data => setDonorInfo(data))
   }, [id])
 
-  if (donorInfo) {
-    return (
-      <div className="donordetails">
-        <Header>
-          <Header.Top>
-            <Header.Content>
-              <h1 className="title">Donors Details</h1>
-            </Header.Content>
-            <Header.Buttons>
-              <button className="button purplebutton">
-                <img src={Pencil} className="button-icon" alt="editprofile" />
-                Edit Profile
-              </button>
-            </Header.Buttons>
-          </Header.Top>
-        </Header>
-        <div className="cards-container">
-          <Particulars donorDetails={donorInfo} />
-          <Contact donorDetails={donorInfo} />
-        </div>
-        <DonorTable donorDetails={donorInfo} />
+  return donorInfo ? (
+    <div className="donordetails">
+      <Header>
+        <Header.Top>
+          <Header.Content>
+            <h1 className="title">Donors Details</h1>
+          </Header.Content>
+          <Header.Buttons>
+            <button className="button purplebutton">
+              <img src={Pencil} className="button-icon" alt="editprofile" />
+              Edit Profile
+            </button>
+          </Header.Buttons>
+        </Header.Top>
+      </Header>
+      <div className="cards-container">
+        <Particulars donorDetails={donorInfo} />
+        <Contact donorDetails={donorInfo} />
       </div>
-    )
-  } else return <Spin />
+      <DonorTable donorDetails={donorInfo} />
+    </div>
+  ) : (
+    <Spin />
+  )
 }
 
 const Particulars = props => {

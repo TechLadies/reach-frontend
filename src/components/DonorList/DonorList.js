@@ -13,6 +13,7 @@ import history from "../../lib/history";
 /* import * as FileSaver from "file-saver"; */
 import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
+import Spin from "../../lib/spinner";
 
 const getDonorData = async page => {
   return fetch(
@@ -90,7 +91,7 @@ function DonorList(props) {
     return <React.Fragment>{listComponents}</React.Fragment>;
   }
 
-  return (
+  return  (
     <div class="Donor Table">
       <Header>
         <Header.Top>
@@ -268,7 +269,7 @@ function DonorList(props) {
           </Header.Buttons>
         </Modal.Footer>
       </Modal>
-
+      {donationList.length > 0 ? (        
       <table class="table donortable">
         <thead>
           <tr>
@@ -283,7 +284,7 @@ function DonorList(props) {
         <tbody>
           <ListItem data={donationList} />
         </tbody>
-      </table>
+      </table> ) : <Spin/>}
 
       <div className="pagination-center mt-5">
         <Pagination
