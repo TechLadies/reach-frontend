@@ -21,15 +21,15 @@ function SearchResults() {
   const searched = useParams().name
   const [searchResults, setSearchResults] = useState('')
 
-  useEffect(() => {
+  
+ useEffect(() => {
     onLoadSearch(searched).then(data => {
       setSearchResults(data)
     })
   }, [searched])
-
+  
   return searchResults ? (
     <div>
-      {console.log(searchResults)}
       <Header>
         <Header.Top>
           <Header.Content>
@@ -56,4 +56,5 @@ const message = count => {
     return `${count} donor found`
   }
 }
+
 export default SearchResults

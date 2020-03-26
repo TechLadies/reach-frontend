@@ -44,14 +44,15 @@ const Dropdown = () => {
 }
 
 function Navbar(props) {
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState("")
   const history = useHistory()
 
   const handleSearch = (e) => {
     e.preventDefault()
+    if (search.length > 0) {
     history.push({
       pathname: '/search/' + search
-    })
+    }) } else return null
   }
 
   return (
@@ -91,9 +92,9 @@ function Navbar(props) {
         onSubmit={handleSearch}
       >
         <input
-          className="form-control transparent-input"
+          className="transparent-input"
           type="search"
-          placeholder="Search Donor ID"
+          placeholder="Search Donor name"
           aria-label="Search"
           onChange={e => setSearch(e.target.value)}
           value={search}
