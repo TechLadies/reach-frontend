@@ -9,6 +9,7 @@ import Phone from '../../images/phone.svg'
 import Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
+import Spin from '../../lib/spinner'
 
 const onLoadPage = async id => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
@@ -28,30 +29,30 @@ function DonorDetails(props) {
     onLoadPage(id).then(data => setDonorInfo(data))
   }, [id])
 
-  if (donorInfo) {
-    return (
-      <div className="donordetails">
-        <Header>
-          <Header.Top>
-            <Header.Content>
-              <h1 className="title">Donors Details</h1>
-            </Header.Content>
-            <Header.Buttons>
-              <button className="button purplebutton">
-                <img src={Pencil} className="button-icon" alt = "editprofile" />
-                Edit Profile
-              </button>
-            </Header.Buttons>
-          </Header.Top>
-        </Header>
-        <div className="cards-container">
-          <Particulars donorDetails={donorInfo} />
-          <Contact donorDetails={donorInfo} />
-        </div>
-        <DonorTable donorDetails= {donorInfo} />
+  return donorInfo ? (
+    <div className="donordetails">
+      <Header>
+        <Header.Top>
+          <Header.Content>
+            <h1 className="title">Donors Details</h1>
+          </Header.Content>
+          <Header.Buttons>
+            <button className="button purplebutton">
+              <img src={Pencil} className="button-icon" alt="editprofile" />
+              Edit Profile
+            </button>
+          </Header.Buttons>
+        </Header.Top>
+      </Header>
+      <div className="cards-container">
+        <Particulars donorDetails={donorInfo} />
+        <Contact donorDetails={donorInfo} />
       </div>
-    )
-  } else return null
+      <DonorTable donorDetails={donorInfo} />
+    </div>
+  ) : (
+    <Spin />
+  )
 }
 
 const Particulars = props => {
@@ -98,12 +99,13 @@ const Particulars = props => {
 
 const Contact = props => {
   const donorContact = props.donorDetails.contact
+  console.log(donorContact)
   const donorDetails = props.donorDetails.details
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
     <div className="contact-wrapper">
-      <Box className= {donorContact.dnc ? "dnc-contact-box" : "contact-box"}>
-      {donorContact.dnc && <DNCIndicator/>}
+      <Box className={donorContact.dnc ? 'dnc-contact-box' : 'contact-box'}>
+        {donorContact.dnc && <DNCIndicator />}
         {lowerCaseIdType.includes('uen') ? (
           <div className="contact-row">
             <img src={Person} alt="contact person" className="contact-icon" />
@@ -119,11 +121,9 @@ const Contact = props => {
             <div className="header-indicator-box">
               <p className="label">Phone Number</p>{' '}
               {donorContact.preferredContact && <PreferenceIndicator />}
-
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
-         
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />

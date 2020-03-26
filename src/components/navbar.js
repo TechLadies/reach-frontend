@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory} from 'react-router-dom'
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -44,20 +44,14 @@ const Dropdown = () => {
 }
 
 function Navbar(props) {
-  const [search, setSearch] = useState('')
-
+  const [search, setSearch] = useState("")
+  const history = useHistory()
 
   const handleSearch = (e) => {
-    e.preventDefault()
-    fetch(`${process.env.REACT_APP_API}/donors/search?name=${search}`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    }).then(res => {
-      console.log(res)
-      return res.json()
-    }).then(data => {
-      console.log(data)
-    })
+    if (search.length > 0) {
+    history.push({
+      pathname: '/search/' + search
+    }) } else return e.preventDefault()
   }
 
   return (
@@ -97,9 +91,9 @@ function Navbar(props) {
         onSubmit={handleSearch}
       >
         <input
-          className="form-control transparent-input"
+          className="transparent-input"
           type="search"
-          placeholder="Search Donor ID"
+          placeholder="Search Donor name"
           aria-label="Search"
           onChange={e => setSearch(e.target.value)}
           value={search}

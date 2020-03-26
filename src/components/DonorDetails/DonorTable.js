@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Pagination from '../../Pagination'
-import dateStringOf from '../../DateStringGenerator'
+import Pagination from '../../lib/pagination'
+import dateStringOf from '../../lib/dateStringGenerator'
 
 function DonorTable(props) {
   const totalDonations = props.donorDetails.donations.length

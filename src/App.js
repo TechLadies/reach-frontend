@@ -9,6 +9,7 @@ import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
+import SearchResults from "./components/SearchResults";
 
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
             <Navbar />
             <DonorDetails/>
           </Route>
+          <Route path="/search/:name">
+            <Navbar />
+            <SearchResults/>
+          </Route>
           <ProtectedRoute path="/" exact>
             <Navbar />
             <Dashboard />
@@ -39,10 +44,6 @@ function App() {
             <Navbar />
             <DonorList />
           </Route>
-         {/*  <Route path="/donordetails">
-            <Navbar />
-            <Donordetails />
-          </Route> */}
         </Switch>
       </Router>
     </div>
