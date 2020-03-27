@@ -6,25 +6,31 @@ import KeyStatistics from "./KeyStatistics";
 import Person from "../../images/person.svg";
 import ByProject from "./ByProject";
 import Header from "../Header/index.js";
+import logout from "../../lib/logout"
 import "./index.css";
-
-
+import Spin from "../../lib/spinner";
 
  const fetchData = (start, end) => {
   return (
-     fetch(`${process.env.REACT_APP_API}/api/dashboard`, {
+     fetch(`${process.env.REACT_APP_API}/donations/dashboard`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json"
+       /*  Authorization: "Bearer " + localStorage.getItem("token"), */
       },
+      body: JSON.stringify({
+        startDate: start,
+        endDate: end
+
+      })
     }).then(function(response) {
-    console.log(response)
-    return response.json()
-    }).then(function(data){
-    /* console.log(data); */
-    return data  
-    }).catch(err => {console.log(err)})
+      if (response.ok) {
+        return response.json()
+      }
+      if (response.status === 403) {
+        throw Error(response.status)
+      }
+    })
  
   )}; 
 
@@ -33,7 +39,8 @@ const Dashboard = () => {
   const today = new Date();
   // use state start and end
   const [startDate, setStartDate] = useState(
-    today.setMonth(today.getMonth() - 3)
+  /*   today.setMonth(today.getMonth() - 3) */
+      new Date (today.getFullYear(), 0, 1)
   );
   const [endDate, setEndDate] = useState(new Date());
  
@@ -42,15 +49,13 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData(startDate, endDate).then(data => {
       setDashboardData(data);
+    }).catch(err => {console.log(err);
+      if (err.message === '403') logout()
     });
   }, [startDate, endDate]);
-  
-  // if(!dashboardData) return null
-  console.log(dashboardData);
 
   return (
     <>
-   
       <Header>
         <Header.Top>
           <Header.Content>
@@ -66,8 +71,9 @@ const Dashboard = () => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
+                  dateFormat='dd-MM-yyyy' 
+                  /* startDate={startDate}
+                  endDate={endDate} */
                 />
               </div>
               <div>
@@ -80,8 +86,9 @@ const Dashboard = () => {
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd
-                  endDate={endDate}
-                  minDate={startDate}
+                  dateFormat= "dd-MM-yyyy"
+                  /* endDate={endDate}
+                  minDate={startDate} */
                 />
               </div>
             </div>
@@ -102,7 +109,7 @@ const Dashboard = () => {
         <DonationAmount data= {dashboardData}/>
         <KeyStatistics data= {dashboardData}/>
         <ByProject data= {dashboardData}/>
-      </div> : null}
+      </div> : <Spin/>}
     </>
   );
 };

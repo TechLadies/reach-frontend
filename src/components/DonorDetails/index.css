@@ -1,19 +1,18 @@
-.title {
+ .title {
   font-size: 32px;
 }
+
 .header-container {
   display: flex;
   justify-content: space-between;
   border: solid 1px blue;
 }
 .cards-container {
-  
   display: flex;
   padding: 0 80px 48px;
   justify-content: space-around;
 }
 .double-field {
-  
   display: flex;
   justify-content: space-between;
   width: 400px;
@@ -39,7 +38,8 @@
 .single-field {
   width: inherit;
   justify-content: center;
-  align-content: 'space-around';
+  align-content: space-around;
+  max-width: 314px;
 }
 .id-style {
   line-height: 10px;
@@ -57,7 +57,6 @@
   padding: 32px 40px;
   min-width: 540px;
   height: auto;
-
 }
 .contact-wrapper {
   display: flex;
@@ -66,13 +65,34 @@
 
 .contact-row {
   display: flex;
+  
 }
 .contact-box {
   padding: 35px 40px;
   min-width: 540px;
   height: auto;
+}
+.dnc-contact-box{
+  padding: 35px 40px;
+  min-width: 540px;
+  height: auto;
+  border: solid 1px #EB5757;
+}
+.dnc-indicator{
+  background-color:#fbdddd;
+  border-radius: 4px;
+  padding: 3px 12px;
+  margin-left: 70%;
+  position: sticky;
+  
+}
+.dnc-indicator-text{
+  color: #EB5757;
+  font-weight: bold;
+  font-size: 14px;
 
 }
+
 .indicator {
   background-color: #e4f9ed;
   border-radius: 4px;
@@ -81,12 +101,12 @@
 }
 .indicator-text {
   font-size: 14px;
-  color: black;
+  color: #219653;
   opacity: 1;
-  line-height: 17px;
 }
 .header-indicator-box {
   display: flex;
+  
 }
 .table-title {
   font-size: 32px;
@@ -99,19 +119,5 @@
 .details-table {
   padding: 40px 80px;
   border-top: 1px solid  #ECDFDC;
-}
-
-/* popup edit-donor */
-
-.title-box{ 
-
-}
-
-.body-wrapper{
-  display: flex;
-}
-
-.edit-modal{
-
 }
 

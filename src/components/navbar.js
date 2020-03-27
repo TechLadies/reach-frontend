@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory} from 'react-router-dom'
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -44,19 +44,13 @@ const Dropdown = () => {
 }
 
 function Navbar(props) {
-  const [search, setSearch] = useState('')
-
-  const handleSearch = () => {
-    fetch(`${process.env.REACT_APP_API}/donors/details`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ donorIdNo: search })
-    }).then(res => {
-      console.log(res)
-      return res.json()
-    }).then(data => {
-      console.log(data)
-    })
+  const [search, setSearch] = useState("")
+  const history = useHistory()
+  const handleSearch = (e) => {
+    if (search.length > 0) {
+    history.push({
+      pathname: '/search/' + search
+    }) } else return e.preventDefault()
   }
 
   return (
@@ -65,11 +59,13 @@ function Navbar(props) {
       style={{ backgroundColor: '#FFF3E2' }}
     >
       <span className="logo_navbar">
-        <img
-          src="/reach_logo.png"
-          height="30px"
-          alt="Reach Community Services"
-        />
+        <NavLink to="/">
+          <img
+            src="/reach_logo.png"
+            height="30px"
+            alt="Reach Community Services"
+          />
+        </NavLink>
       </span>
 
       <button
@@ -94,9 +90,9 @@ function Navbar(props) {
         onSubmit={handleSearch}
       >
         <input
-          className="form-control transparent-input"
+          className="transparent-input"
           type="search"
-          placeholder="Search Donor ID"
+          placeholder="Search Donor name"
           aria-label="Search"
           onChange={e => setSearch(e.target.value)}
           value={search}

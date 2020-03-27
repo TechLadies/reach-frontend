@@ -5,10 +5,11 @@ import DonationCircle from '../../images/donations-circle.svg'
 import Calendar from '../../images/calendar-circle.svg'
 import Box from '../../components/Dashboard/Box'
 import { Tabs, Tab } from 'react-bootstrap'
-import Pagination from '../../Pagination'
+import Pagination from '../../lib/pagination'
+import { Link } from 'react-router-dom'
+import Spin from '../../lib/spinner'
 
 const SuccessUpload = props => {
-  console.log(props.donorData)
   const uploadDonorData = props.donorData.data
   const uploadSummary = props.donorData.summary
   const entriesPerPage = 15
@@ -23,123 +24,124 @@ const SuccessUpload = props => {
   //for old data
   const existingDonorsList = existingDonor(uploadDonorData).slice(begin, end)
 
-  if (!props.donorData) return null
-  return (
-    <div className="success-container">
-      <header className="success-header">File Uploaded Successfully!</header>
-      <img src={HiFive} alt="success" className="hifive-img" />
-      <div className="summary-wrapper">
-        <Box className="summary-container">
-          <div className="summary-subcontainer">
-            <img src={TwoHands} className="success-img" alt="twohands" />
-            <div>
-              <h1 className="grey-header">Number of donations</h1>
-              <p className="black-description">
-                {uploadSummary.totalCount}
-              </p>
-            </div>
-          </div>
-          <div className="summary-subcontainer">
-            <img src={DonationCircle} className="success-img" alt="twohands" />
-            <div>
-              <h1 className="grey-header">Total amount collected</h1>
-              <p className="black-description">
-                ${uploadSummary.totalAmt}
-              </p>
-            </div>
-          </div>
-          <div className="summary-subcontainer">
-            <img src={Calendar} className="success-img" alt="twohands" />
-            <div>
-              <h1 className="grey-header">For the period of</h1>
-              <p className="black-description">{uploadSummary.period}</p>
-            </div>
-          </div>
-        </Box>
-      </div>
-      <div className="navtable-container">
-        <Tabs
-          defaultActiveKey="all"
-          className="nav nav-tabs nav-justified"
-          onSelect={() => setCurrentPage(1)}
-        >
-          <Tab
-            eventKey="all"
-            title={
-              <div className="tab-container">
-                <div className="sum-icon">
-                  <div className="sum-txt">{uploadDonorData.length}</div>
-                </div>
-                <div>All Donors</div>
+  if (props.donorData) {
+    return (
+      <div className="success-container">
+        <header className="success-header">File Uploaded Successfully!</header>
+        <img src={HiFive} alt="success" className="hifive-img" />
+        <div className="summary-wrapper">
+          <Box className="summary-container">
+            <div className="summary-subcontainer">
+              <img src={TwoHands} className="success-img" alt="twohands" />
+              <div>
+                <h1 className="grey-header">Number of donations</h1>
+                <p className="black-description">{uploadSummary.totalCount}</p>
               </div>
-            }
+            </div>
+            <div className="summary-subcontainer">
+              <img
+                src={DonationCircle}
+                className="success-img"
+                alt="twohands"
+              />
+              <div>
+                <h1 className="grey-header">Total amount collected</h1>
+                <p className="black-description">${uploadSummary.totalAmt}</p>
+              </div>
+            </div>
+            <div className="summary-subcontainer">
+              <img src={Calendar} className="success-img" alt="twohands" />
+              <div>
+                <h1 className="grey-header">For the period of</h1>
+                <p className="black-description">{uploadSummary.period}</p>
+              </div>
+            </div>
+          </Box>
+        </div>
+        <div className="navtable-container">
+          <Tabs
+            defaultActiveKey="all"
+            className="nav nav-tabs nav-justified"
+            onSelect={() => setCurrentPage(1)}
           >
-            <Table
-              data={allDonorsList}
-              donorsPerPage={entriesPerPage}
-              currentPage={currentPage}
-            />
-            <Pagination
-              totalDonors={uploadDonorData.length}
-              donorsPerPage={entriesPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          </Tab>
-          <Tab
-            eventKey="new"
-            title={
-              <div className="tab-container">
-                <div className="sum-icon">
-                  <div className="sum-txt">
-                    {newDonor(uploadDonorData).length}
+            <Tab
+              eventKey="all"
+              title={
+                <div className="tab-container">
+                  <div className="sum-icon">
+                    <div className="sum-txt">{uploadDonorData.length}</div>
                   </div>
+                  <div>All Donors</div>
                 </div>
-                <div>New Donors</div>
-              </div>
-            }
-          >
-            <Table
-              data={newDonorsList}
-              donorsPerPage={entriesPerPage}
-              currentPage={currentPage}
-            />
-            <Pagination
-              totalDonors={newDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          </Tab>
-          <Tab
-            eventKey="existing"
-            title={
-              <div className="tab-container">
-                <div className="sum-icon">
-                  <div className="sum-txt">
-                    {existingDonor(uploadDonorData).length}
+              }
+            >
+              <Table
+                data={allDonorsList}
+                donorsPerPage={entriesPerPage}
+                currentPage={currentPage}
+              />
+              <Pagination
+                totalEntries={uploadDonorData.length}
+                entriesPerPage={entriesPerPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </Tab>
+            <Tab
+              eventKey="new"
+              title={
+                <div className="tab-container">
+                  <div className="sum-icon">
+                    <div className="sum-txt">
+                      {newDonor(uploadDonorData).length}
+                    </div>
                   </div>
+                  <div>New Donors</div>
                 </div>
-                <div>Existing Donors</div>
-              </div>
-            }
-          >
-            <Table
-              data={existingDonorsList}
-              donorsPerPage={entriesPerPage}
-              currentPage={currentPage}
-            />
-            <Pagination
-              totalDonors={existingDonor(uploadDonorData).length}
-              donorsPerPage={entriesPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
-          </Tab>
-        </Tabs>
+              }
+            >
+              <Table
+                data={newDonorsList}
+                donorsPerPage={entriesPerPage}
+                currentPage={currentPage}
+              />
+              <Pagination
+                totalEntries={newDonor(uploadDonorData).length}
+                entriesPerPage={entriesPerPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </Tab>
+            <Tab
+              eventKey="existing"
+              title={
+                <div className="tab-container">
+                  <div className="sum-icon">
+                    <div className="sum-txt">
+                      {existingDonor(uploadDonorData).length}
+                    </div>
+                  </div>
+                  <div>Existing Donors</div>
+                </div>
+              }
+            >
+              <Table
+                data={existingDonorsList}
+                donorsPerPage={entriesPerPage}
+                currentPage={currentPage}
+              />
+              <Pagination
+                totalEntries={existingDonor(uploadDonorData).length}
+                entriesPerPage={entriesPerPage}
+                paginate={paginate}
+                currentPage={currentPage}
+              />
+            </Tab>
+          </Tabs>
+        </div>
       </div>
-    </div>
-  )
+    )
+  } else return <Spin />
 }
 
 export default SuccessUpload
@@ -168,18 +170,21 @@ const Table = props => {
         </tr>
       </thead>
       <tbody>
-        <ListItem data={props.data} donorsPerPage={props.donorsPerPage} />
+        <SuccessUploadList
+          data={props.data}
+          donorsPerPage={props.donorsPerPage}
+        />
       </tbody>
     </table>
   )
 }
 
-function ListItem(props) {
+function SuccessUploadList(props) {
   const listElements = props.data
   const listComponents = listElements.map(item => {
     return (
-      <tr className="d-flex " >
-        <td className="col-2">
+      <tr className="d-flex ">
+        <td className="col-2 id-num">
           {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}
         </td>
         <td className="col-2 text-left">{item.name}</td>
@@ -189,9 +194,9 @@ function ListItem(props) {
           {item.__isNew ? <div>New</div> : <div>Existing</div>}
         </td>
         <td className="col-2">
-          <a href="{item.viewProfile}" className="profilelink">
-            View Profile >>>
-          </a>
+          <Link to={'/details/' + item.idNo} className="profilelink">
+            View Profile >
+          </Link>
         </td>
       </tr>
     )

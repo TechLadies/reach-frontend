@@ -3,22 +3,20 @@ import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
 import Dummy from "./components/Dummy";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
+import history from "./lib/history"
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
-import Donordetails from "./components/DonorDetails";
 import Dummyedit from "./components/DonorDetails/Dummyedit";
-import EditDonor from "./components/DonorDetails/EditDonor";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
-// import Modal from "./components/DonoeDetails/ModaleditDonor";
-import List from "./components/DonorDetails/List";
-
+import SearchResults from "./components/SearchResults";
+ 
 function App() {
   
   return (
     <div className="App">
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route path="/login">
             <Login />
@@ -30,9 +28,13 @@ function App() {
             <Navbar />
             <UpdateDb />
           </Route>
-          <Route path="/details">
+          <Route path="/details/:idNo">
             <Navbar />
-            <DonorDetails />
+            <DonorDetails/>
+          </Route>
+          <Route path="/search/:name">
+            <Navbar />
+            <SearchResults/>
           </Route>
           <ProtectedRoute path="/" exact>
             <Navbar />
@@ -42,28 +44,12 @@ function App() {
             <Navbar />
             <DonorList />
           </Route>
-          <Route path="/donordetails">
-            <Navbar />
-            <Donordetails />
-          </Route>
           <Route path="/dummyedit">
             <Navbar />
             <Dummyedit />
           </Route>
-          <Route path="/editdonor">
-            <Navbar />
-            <EditDonor />
-          </Route>
-          <Route path="/list">
-            <Navbar />
-            <List />
-          </Route>
-          {/* <Route path="/modaleditdonor">
-            <Navbar />
-            <ModalEditDonor />
-          </Route> */}
         </Switch>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

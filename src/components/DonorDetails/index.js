@@ -1,4 +1,4 @@
-import React, {Component, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
@@ -7,174 +7,137 @@ import Pencil from '../../images/pencil.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
-import Person from '../../images/contact-person.svg'
+import  Person from '../../images/contact-person.svg'
 import Header from '../Header'
-import Modal from '../Modal'
-import { Button } from "react-bootstrap";
+import { useParams } from 'react-router-dom'
+import Spin from '../../lib/spinner'
 
-function DonorDetails() {
-  const [show,setShow] = useState(false);
+const onLoadPage = async id => {
+  const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ donorIdNo: id.idNo })
+  })
+  const data = await res.json()
+  return data
+}
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  return (
-      <>
-    {/* <Button variant="primary" onClick={handleShow}>
-        Launch edit  modal
-      </Button> */}
-       {/* <button className="button purplebutton" onClick ={handleShow}> 
-         <img src={Pencil} className="button-icon" />
-         Edit Profile
-       </button>  */}
-      <Modal show={show} 
-          dialogClassName="modal-90w" 
-          onHide={handleClose}>
-       <div className = "edit-modal">
-         <Modal.Header className = "title-box">
-          <header className = "title"> REACH Community-Edit Donor Information</header>
-        </Modal.Header>
+function DonorDetails(props) {
+  const id = useParams()
+  const [donorInfo, setDonorInfo] = useState(null)
 
-        <Modal.Body className="">
-        <div className = "body-wrapper">
-          <div className= "remarks-container">
-            <p> Remarks</p>
-            <input form = "text"></input>
-          </div>
-          <div className= "preference-container">
-            <header className = "title">  </header>
-            <input type="radio" value = "phone"></input>
-            <label for = "phone">Phone Number</label>
-            <input type="radio" value = "email"></input>
-            <label for = "email">Email Address</label>
-            <input type="radio" value = "mail"></input>
-            <label for = "mail">Mailing Address</label>
-            <input type="radio" value = "phone"></input>
-            <label for ="dnc">Do Not Contact</label>          
-          </div>
-        </div>
-       </Modal.Body>
+  useEffect(() => {
+    onLoadPage(id).then(data => setDonorInfo(data))
+  }, [id])
 
-        <Modal.Footer className="popup-btn"> 
-            <div>
-              <button className="button cancel-btn" onClick={handleClose}>
-                <span>Cancel</span>
-              </button>
-              <div>
-                <button className= "button orangebutton" onClick={handleClose}>Save the changes </button>
-              </div>
-              <br/>
-            </div> 
-          {/* <Button className="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
-        </Modal.Footer>
-     </div>
-      </Modal>
-     
-   );
-       
-    <div className= "donordetails">
+  return donorInfo ? (
+    <div className="donordetails">
       <Header>
         <Header.Top>
           <Header.Content>
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton" onClick ={handleShow} > 
-              <img src={Pencil} className="button-icon" />
+            <button className="button purplebutton">
+              <img src={Pencil} className="button-icon" alt="editprofile" />
               Edit Profile
             </button>
           </Header.Buttons>
         </Header.Top>
       </Header>
       <div className="cards-container">
-        <Particulars />
-        <Contact />
+        <Particulars donorDetails={donorInfo} />
+        <Contact donorDetails={donorInfo} />
       </div>
-      <DonorTable />
+      <DonorTable donorDetails={donorInfo} />
     </div>
-  </> 
-   )
+  ) : (
+    <Spin />
+  )
 }
 
-const Particulars = () => {
+const Particulars = props => {
+  const donorDetails = props.donorDetails.details
   return (
     <div className="particulars-wrapper">
-      <div>{/* <p className="label"> Donor Details </p> */}</div>
       <Box className="particulars-box">
         <div className="double-field">
           <div className="id-style">
             <p className="label"> ID Number </p>
-            <p className="text">S0980213A</p>
+            <p className="text">{handleNull(donorDetails.idNo)}</p>
           </div>
           <div className="id-style">
             <p className="label"> ID Type</p>
-            <p className="text"> NRIC</p>
+            <p className="text">{handleNull(donorDetails.idType)}</p>
           </div>
         </div>
         <div className="single-field">
           <p className="label">Donor Name</p>
-          <p className="text">Mr Keith Wee Liang</p>
+          <p className="text">{handleNull(donorDetails.name)}</p>
         </div>
         <div className="single-field">
           <p className="label"> Date of Birth</p>
-          <p className="text">28 Nov 2019</p>
+          <p className="text">{handleNull(donorDetails.dateOfBirth)}</p>
         </div>
         <div className="double-field">
           <div className="id-style">
             <p className="label">Total Donations</p>
-            <p className="text"> 57 </p>
+            <p className="text"> {handleNull(donorDetails.donationCount)} </p>
           </div>
           <div className="id-style">
             <p className="label">Total Donation Amount</p>
-            <p className="text">$5412432</p>
+            <p className="text">$ {handleNull(donorDetails.donationSum)}</p>
           </div>
         </div>
         <div className="single-field">
           <p className="label">Remarks</p>
-          <p className="text">
-            Mr Lee and family members are major donors of church
-          </p>
+          <p className="text">{handleNull(donorDetails.remarks)}</p>
         </div>
       </Box>
     </div>
   )
 }
 
-const Contact = () => {
+const Contact = props => {
+  const donorContact = props.donorDetails.contact
+  console.log(donorContact)
+  const donorDetails = props.donorDetails.details
+  const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
     <div className="contact-wrapper">
-    
-      <Box className="contact-box">
-        <div className="contact-row">
-          <img src={Person} alt="phone" className="contact-icon" />
-          <div className="single-field">
-            <p className="label">Contact Person</p>
-            <p className="text">Mr. Keith Lee Wei Yong</p>
+      <Box className={donorContact.dnc ? 'dnc-contact-box' : 'contact-box'}>
+        {donorContact.dnc && <DNCIndicator />}
+        {lowerCaseIdType.includes('uen') ? (
+          <div className="contact-row">
+            <img src={Person} alt="contact person" className="contact-icon" />
+            <div className="single-field">
+              <p className="label">Contact Person</p>
+              <p className="text">{handleNull(donorContact.contactPerson)}</p>
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="contact-row">
           <img src={Phone} alt="phone" className="contact-icon" />
           <div className="single-field">
-            <div className= "header-indicator-box"><p className="label">Phone Number</p> <PreferenceIndicator/></div>
-            <p className="text">09876234</p>
+            <div className="header-indicator-box">
+              <p className="label">Phone Number</p>{' '}
+              {donorContact.preferredContact && <PreferenceIndicator />}
+            </div>
+            <p className="text">{handleNull(donorContact.phone)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
           <div className="single-field">
             <p className="label">Email Address</p>
-            <p className="text">keith@gmail.com</p>
+            <p className="text">{handleNull(donorContact.email)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Location} alt="address" className="contact-icon" />
           <div className="single-field">
             <p className="label">Mailing Address</p>
-            <p className="text"> Blk 123 Havery Road Singapore 798724832</p>
+            <p className="text"> {handleNull(donorContact.mail)}</p>
           </div>
         </div>
       </Box>
@@ -190,4 +153,19 @@ const PreferenceIndicator = () => {
   )
 
 }
+
+const DNCIndicator = () => {
+  return (
+    <div className="dnc-indicator">
+      <div className="dnc-indicator-text">Do Not Contact</div>
+    </div>
+  )
+}
+
+const handleNull = data => {
+  if (!data) {
+    return '-'
+  } else return data
+}
+
 export default DonorDetails

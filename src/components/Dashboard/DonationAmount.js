@@ -4,45 +4,38 @@ import Box from './Box'
 import theme from './VictoryTheme'
 
 const DonationAmount = props => {
- /*  if (!DonationAmount) return null */
   const donationsArr = props.data.donationAmt
+  if(!donationsArr) return null
   const transformDonation = donationsArr => {
-    return { x: new Date(donationsArr.date), y: Number(donationsArr.amount) }
+    return {
+      x: new Date(donationsArr.donationDate),
+      y: Number(donationsArr.donationAmount)
+    }
   }
   const newDonationsArr = donationsArr.map(e => transformDonation(e))
-
   const yValues = newDonationsArr.map(e => e.y)
   const xValues = newDonationsArr.map(e => e.x)
   const maxY = Math.ceil(Math.max(...yValues) / 1000) * 1000
   const minY = Math.floor(Math.min(...yValues) / 1000) * 1000
- /* const diff = Math.floor((maxY - minY) / 3 / 1000) * 1000
-  const yAxisTicks = [minY, minY + diff, maxY - diff, maxY] */
-
   return (
     <div>
       <h1 className="dashboard-headertxt">Donation Amount</h1>
       <Box>
         <div className="line-chart">
           <VictoryChart
-            data={newDonationsArr}
+            data={newDonationsArr.length === 0 ? null : newDonationsArr}
             theme={theme}
             scale={{ x: 'time' }}
-            height = {265}
+            height={265}
           >
             <VictoryAxis
               crossAxis={false}
               dependentAxis
               domain={[minY, maxY]}
-              //tickValues={yAxisTicks}
-               tickFormat={y => {
-                if (y >= 1000) {
-                   return y / 1000 + 'k'
-                 }
-                 return y
-               }}
-               tickLabelComponent={<VictoryLabel dy= {-14} dx={15}/>}
+              tickFormat={yAxisTickFormat}
+              tickLabelComponent={<VictoryLabel dy={-14} dx={15} />}
               label={'Amount $'}
-              axisLabelComponent={<VictoryLabel angle={0} y={30} dx= {40}/>}
+              axisLabelComponent={<VictoryLabel angle={0} y={30} dx={35} />}
               style={{
                 grid: { stroke: ({ tick }) => '#EBEDF0' },
                 axis: { stroke: 'none' },
@@ -54,7 +47,7 @@ const DonationAmount = props => {
                   verticalAnchor: 'start'
                 },
                 axisLabel: {
-                  fontSize:10,
+                  fontSize: 10,
                   fill: '#929295'
                 }
               }}
@@ -89,7 +82,7 @@ const DonationAmount = props => {
   )
 }
 
-function xAxisTickFormat(x, i) {
+function xAxisTickFormat(current, i, arr) {
   const months = [
     'Jan',
     'Feb',
@@ -104,17 +97,35 @@ function xAxisTickFormat(x, i) {
     'Nov',
     'Dec'
   ]
-  const month = months[x.getMonth()]
-  const tickDate = x.getDate()
+  const month = months[current.getMonth()]
+  const tickDate = current.getDate()
+  const tickYear = ((current.getFullYear()).toString()).substring(2)
   const dateMonthFormat = tickDate + '\n' + month
+  const dateMonthYearFormat = tickDate + '\n' + month + " " + tickYear
+  // at origin, always return date and month
 
   if (i === 0) {
     return dateMonthFormat
-  } else if (tickDate === 1) {
-    return dateMonthFormat
-  } else {
-    return tickDate
   }
+  const previous = arr[i - 1]
+  if (!(previous.getFullYear() === current.getFullYear())){
+    return dateMonthYearFormat
+  }
+  if (previous.getMonth() === current.getMonth()) {
+    return tickDate
+  } else {
+    return dateMonthFormat
+  }
+ 
+  
+}
+
+function yAxisTickFormat(y) {
+  if (y >= 1000 && y <= 100000) {
+    return y / 1000 + 'k'
+  } else if (y >= 1000000) {
+    return y / 1000000 + 'M'
+  } else return y
 }
 
 export default DonationAmount

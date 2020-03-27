@@ -55,7 +55,6 @@ const UpdateDb = () => {
     })
 
     const validateUpSert = res => {
-      console.log(res)
       if (res.ok) {
         res
           .json()

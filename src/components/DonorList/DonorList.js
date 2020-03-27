@@ -9,12 +9,16 @@ import "react-datepicker/dist/react-datepicker.css";
 import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
+import history from "../../lib/history";
 /* import * as FileSaver from "file-saver"; */
 import * as XLSX from "xlsx";
-import Pagination from "../../Pagination";
+import Pagination from "../../lib/pagination";
+import Spin from "../../lib/spinner";
 
 const getDonorData = async page => {
-  return fetch(`http://localhost:3001/donors${page ? `?page=${page}` : ""}`)
+  return fetch(
+    `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
+  )
     .then(resp => resp.json())
     .catch(err => {
       console.log("err: ", JSON.stringify(err));
@@ -22,7 +26,7 @@ const getDonorData = async page => {
 };
 
 const getDonorCount = async () => {
-  return fetch(`http://localhost:3001/donors/count`)
+  return fetch(`${process.env.REACT_APP_API}/donors/count`)
     .then(resp => resp.json())
     .catch(err => {
       console.log("err: ", JSON.stringify(err));
@@ -69,7 +73,11 @@ function DonorList(props) {
     let listElements = props.data;
     let listComponents = listElements.map((item, i) => {
       return (
-        <tr key={i}>
+        <tr
+          key={i}
+          className={item.idNo ? "donorlink" : ""}
+          onClick={item.idNo && (() => history.push(`/details/${item.idNo}`))}
+        >
           <td scope="row"> {item.idNo} </td>
           <td>{item.name}</td>
           <td>{item.totalAmountDonated}</td>
@@ -83,7 +91,7 @@ function DonorList(props) {
     return <React.Fragment>{listComponents}</React.Fragment>;
   }
 
-  return (
+  return  (
     <div class="Donor Table">
       <Header>
         <Header.Top>
@@ -151,6 +159,7 @@ function DonorList(props) {
                     selectsStart
                     startDate={startDate}
                     endDate={endDate}
+                    dateFormat = "dd-MM-yyyy"
                   />
                 </div>
                 <div>
@@ -165,6 +174,7 @@ function DonorList(props) {
                     selectsEnd
                     endDate={endDate}
                     minDate={startDate}
+                    dateFormat = "dd-MM-yyyy"
                   />
                 </div>
               </div>
@@ -259,7 +269,7 @@ function DonorList(props) {
           </Header.Buttons>
         </Modal.Footer>
       </Modal>
-
+      {donationList.length > 0 ? (        
       <table class="table donortable">
         <thead>
           <tr>
@@ -274,7 +284,7 @@ function DonorList(props) {
         <tbody>
           <ListItem data={donationList} />
         </tbody>
-      </table>
+      </table> ) : <Spin/>}
 
       <div className="pagination-center mt-5">
         <Pagination
