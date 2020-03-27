@@ -30,10 +30,7 @@ function DonorDetails() {
           dialogClassName="modal-90w" 
           onHide={handleClose}>
        <div className = "edit-modal">
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Edit Donor Profile</Modal.Title>
-        </Modal.Header> */}
-        <Modal.Header className = "title-box">
+         <Modal.Header className = "title-box">
           <header className = "title"> REACH Community-Edit Donor Information</header>
         </Modal.Header>
 

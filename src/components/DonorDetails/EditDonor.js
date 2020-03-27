@@ -2,7 +2,6 @@
 import React ,{Component, useState , useEffect} from "react";
 import "./index.css";
 import Modal from '../Modal'
-import { Button } from "react-bootstrap";
 
 function EditDonor() {
   const [show,setShow] = useState(false);
@@ -10,18 +9,21 @@ function EditDonor() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  titleHandler(e) {
-    this.setState({ title: e.target.value });
-}
+//   titleHandler(e)
+//   {
+//     this.setState({ title: e.target.value });
+// }
 
-msgHandler(e) {
-    this.setState({ msg: e.target.value });
-}
+// msgHandler(e) 
+// {
+//     this.setState({ msg: e.target.value });
+// }
 
-handleSave() {
-    const item = this.state;
-    this.props.saveModalDetails(item);
-}
+// handleSave() 
+// {
+//     const item = this.state;
+//     this.props.saveModalDetails(item);
+// }
   return ( 
     <>
     <div>
@@ -89,3 +91,11 @@ handleSave() {
 }
 
 export default EditDonor;
+
+
+{/* <div class="form-group">
+                            <span class="col-md-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="message" name="message" placeholder="Enter your massage for us here. We will get back to you within 2 business days." rows="7"></textarea>
+                            </div>
+                        </div> */}
