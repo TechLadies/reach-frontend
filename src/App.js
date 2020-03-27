@@ -8,11 +8,9 @@ import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
 import Donordetails from "./components/DonorDetails";
 import Dummyedit from "./components/DonorDetails/Dummyedit";
-import EditDonor from "./components/DonorDetails/EditDonor";
+// import EditDonor from "./components/DonorDetails/EditDonor";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
-// import Modal from "./components/DonoeDetails/ModaleditDonor";
-import List from "./components/DonorDetails/List";
 
 function App() {
   
@@ -50,18 +48,11 @@ function App() {
             <Navbar />
             <Dummyedit />
           </Route>
-          <Route path="/editdonor">
+          {/* <Route path="/editdonor">
             <Navbar />
             <EditDonor />
-          </Route>
-          <Route path="/list">
-            <Navbar />
-            <List />
-          </Route>
-          {/* <Route path="/modaleditdonor">
-            <Navbar />
-            <ModalEditDonor />
           </Route> */}
+          
         </Switch>
       </BrowserRouter>
     </div>
