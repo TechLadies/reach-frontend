@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
-import DummyEdit from './Dummyedit'
+import DummyEdit from './Edit'
 import Pencil from '../../images/pencil.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
@@ -11,6 +11,7 @@ import  Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
 import Spin from '../../lib/spinner'
+import Modal from '../Modal'
 
 const onLoadPage = async id => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
@@ -23,6 +24,11 @@ const onLoadPage = async id => {
 }
 
 function DonorDetails(props) {
+  const [show,setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true)
+
   const id = useParams()
   const [donorInfo, setDonorInfo] = useState(null)
 
@@ -45,6 +51,10 @@ function DonorDetails(props) {
           </Header.Buttons>
         </Header.Top>
       </Header>
+      <Modal isOpen ={true} > </Modal>
+      {/* /* suppoed code to show modal */ }
+      {/* <Modal show={show} onHide={handleClose}></Modal> */}
+
       <div className="cards-container">
         <Particulars donorDetails={donorInfo} />
         <Contact donorDetails={donorInfo} />

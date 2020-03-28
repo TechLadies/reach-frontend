@@ -2,7 +2,7 @@ import React ,{Component, useState, useEffect} from "react";
 import "./index.css";
 import Modal from '../Modal'
 
-function DummyEdit(props) { 
+function Edit(props) { 
   const [show,setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -54,12 +54,7 @@ function DummyEdit(props) {
               </div>
               <br/>
             </div> 
-          {/* <Button className="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button> */}
+          
         </Modal.Footer>
      </div>
       </Modal>
@@ -68,4 +63,4 @@ function DummyEdit(props) {
     }
 
 
-  export default DummyEdit
+  export default Edit
