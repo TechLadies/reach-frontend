@@ -1,5 +1,5 @@
  .title {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 .header-container {
@@ -121,3 +121,39 @@
   border-top: 1px solid  #ECDFDC;
 }
 
+
+.edit-body{
+
+}
+
+.edit-modal{
+  border: 1px solid red;
+  padding: 48px 64px;
+}
+
+.edit-body-wrapper{
+  display: flex;
+  margin-top: 48px;
+  
+}
+
+.edit-subheader{
+  font-weight: bold;
+font-size: 14px;
+}
+
+.remarks-input{
+  width: 464px;
+  height: 110px;
+  border: 1px solid #EBEDF0;
+  border-radius: 4px;
+}
+
+.preference-container{
+  margin-left: 48px;
+}
+
+.radio-container{
+  display: flex;
+  flex-direction: column;
+}

@@ -1,66 +1,76 @@
-import React ,{Component, useState, useEffect} from "react";
-import "./index.css";
+import React, {useState, useEffect } from 'react'
+import './index.css'
 import Modal from '../Modal'
 
-function Edit(props) { 
-  const [show,setShow] = useState(false);
+//fetch example , fine tuning required
+/*const fetchPreferredContacts = async => {
+  const res = await fetch(`${process.env.REACT_APP_API}/donors/edit`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  const data = await res.json()
+  return data
+}  */
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  return (
-      <>
-    {/* <Button variant="primary" onClick={handleShow}>
-        Launch edit  modal
-      </Button> */}
-       {/* <button className="button purplebutton" onClick ={handleShow}> 
-         <img src={Pencil} className="button-icon" />
-         Edit Profile
-       </button>  */}
-      <Modal show={show} 
-          dialogClassName="modal-90w" 
-          onHide={handleClose}>
-       <div className = "edit-modal">
-         <Modal.Header className = "title-box">
-          <header className = "title"> REACH Community-Edit Donor Information</header>
-        </Modal.Header>
+function Edit(props) {
+  //you can do fetch here 
+  //useState method to create state to hold the fetched data
+   return (
+    <>
+      <Modal
+        show={props.showModal}
+        dialogClassName="modal-90w"
+        onHide= {props.close}
+        
+      >
+        <div className= 'edit-modal'>
+          <Modal.Header>
+            <header className="title">
+              Edit Donor Information
+            </header>
+            <Modal.Close onClick = {props.close}/>
+          </Modal.Header>
 
-        <Modal.Body className="">
-        <div className = "body-wrapper">
-          <div className= "remarks-container">
-            <p> Remarks</p>
-            <input form = "text"></input>
-          </div>
-          <div className= "preference-container">
-            <header className = "title">  </header>
-            <input type="radio" value = "phone"></input>
-            <label for = "phone">Phone Number</label>
-            <input type="radio" value = "email"></input>
-            <label for = "email">Email Address</label>
-            <input type="radio" value = "mail"></input>
-            <label for = "mail">Mailing Address</label>
-            <input type="radio" value = "phone"></input>
-            <label for ="dnc">Do Not Contact</label>          
-          </div>
+          <Modal.Body className="edit-body">
+            <div className="edit-body-wrapper">
+              <div className="remarks-container">
+                <h1 className ="edit-subheader"> Remarks</h1>
+                <input form="text" className= "remarks-input"></input>
+              </div>
+              <div className="preference-container">
+                <h2 className="edit-subheader"> Preferred Contact </h2>
+                <div className= "radio-container">
+                <input type="radio" value="phone"></input>
+                <label for="phone">{/* pass down phone number description here */}</label>
+                <input type="radio" value="email"></input>
+                <label for="email">{/* pass down email address description data here */}</label>
+                <input type="radio" value="mail"></input>
+                <label for="mail">{/* pass down mail description here */}</label>
+                <input type="radio" value="phone"></input>
+                <label for="dnc">Do Not Contact</label>
+                </div>
+              </div>
+            </div>
+          </Modal.Body>
+      
         </div>
-       </Modal.Body>
-
-        <Modal.Footer className="popup-btn"> 
-            <div>
-              <button className="button cancel-btn" onClick={handleClose}>
+          <Modal.Footer className="">
+        
+              <button className="button cancel-btn" onClick={props.close}>
                 <span>Cancel</span>
               </button>
               <div>
-                <button className= "button orangebutton" onClick={handleClose}>Save the changes </button>
-              </div>
-              <br/>
-            </div> 
+                <button className="button orangebutton" >
+                  Save the changes{' '}
+                </button>
           
-        </Modal.Footer>
-     </div>
+              <br />
+            </div>
+          </Modal.Footer>
+          
       </Modal>
-      </>
-      )
-    }
-
+    </>
+  )
+}
 
   export default Edit

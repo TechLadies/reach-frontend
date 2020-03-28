@@ -11,7 +11,6 @@ import  Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
 import Spin from '../../lib/spinner'
-import Modal from '../Modal'
 
 const onLoadPage = async id => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors/details`, {
@@ -21,20 +20,19 @@ const onLoadPage = async id => {
   })
   const data = await res.json()
   return data
+ 
 }
 
 function DonorDetails(props) {
-  const [show,setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true)
-
+ 
   const id = useParams()
   const [donorInfo, setDonorInfo] = useState(null)
 
   useEffect(() => {
     onLoadPage(id).then(data => setDonorInfo(data))
   }, [id])
+
+  const [editPopUp, setEditPopUp] = useState(false)
 
   return donorInfo ? (
     <div className="donordetails">
@@ -44,17 +42,14 @@ function DonorDetails(props) {
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton">
+            <button className="button purplebutton" onClick ={()=>setEditPopUp(true)}>
               <img src={Pencil} className="button-icon" alt="editprofile" />
               Edit Profile
             </button>
           </Header.Buttons>
         </Header.Top>
       </Header>
-      <Modal isOpen ={true} > </Modal>
-      {/* /* suppoed code to show modal */ }
-      {/* <Modal show={show} onHide={handleClose}></Modal> */}
-
+      <DummyEdit showModal={editPopUp} close={() => setEditPopUp(false)}/>
       <div className="cards-container">
         <Particulars donorDetails={donorInfo} />
         <Contact donorDetails={donorInfo} />
@@ -110,7 +105,6 @@ const Particulars = props => {
 
 const Contact = props => {
   const donorContact = props.donorDetails.contact
-  console.log(donorContact)
   const donorDetails = props.donorDetails.details
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
   return (
