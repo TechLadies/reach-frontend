@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
-import DummyEdit from './Edit'
+import Edit from './Edit'
 import Pencil from '../../images/pencil.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
@@ -49,7 +49,7 @@ function DonorDetails(props) {
           </Header.Buttons>
         </Header.Top>
       </Header>
-      <DummyEdit showModal={editPopUp} close={() => setEditPopUp(false)}/>
+      <Edit showModal={editPopUp} close={() => setEditPopUp(false)}/>
       <div className="cards-container">
         <Particulars donorDetails={donorInfo} />
         <Contact donorDetails={donorInfo} />
