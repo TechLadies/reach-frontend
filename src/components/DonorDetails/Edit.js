@@ -5,15 +5,18 @@ import Modal from '../Modal'
 //you can do fetch here 
   //useState method to create state to hold the fetched data
   
-  const fetchPreferredContacts = async id => {
-
-    const res = await fetch(`${process.env.REACT_APP_API}/donors/edit`, {
+  const fetchPreferredContacts = async => {
+    const res =  fetch(`${process.env.REACT_APP_API}/donors/edit`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
   })
-  const data = await res.json()
-  return data
+  const data =  res.json
+   console.log(data)
+  // return data
 }
+// return (
+//   <div><h1> fetch GET API </h1> </div>
+// )
 
 function Edit (props) {
 const [contact,setContact ] = useState(null); /* to store the fetched data
@@ -23,9 +26,9 @@ const [contact,setContact ] = useState(null); /* to store the fetched data
       fetchPreferredContacts().then(data => setContact(data)) 
     },[])
 
-    const Contact =props => {
-      const donorContact =props.donorDetails.contact
-   return (
+console.log(contact)
+
+       return (
    
     <>
       <Modal
@@ -52,7 +55,7 @@ const [contact,setContact ] = useState(null); /* to store the fetched data
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className= "radio-container">
                 <input type="radio" value="phone"></input>
-                <label for="phone">{(donorContact.phone)}</label>
+                <label for="phone">{/*contact.phone*/}</label>
                 <input type="radio" value="email"></input>
                 <label for="email">{/* pass down email address description data here */}</label>
                 <input type="radio" value="mail"></input>
@@ -83,5 +86,5 @@ const [contact,setContact ] = useState(null); /* to store the fetched data
     </>
   )
 }
-}
+
   export default Edit
