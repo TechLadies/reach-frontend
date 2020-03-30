@@ -4,29 +4,24 @@ import Modal from '../Modal'
 
 //you can do fetch here 
   //useState method to create state to hold the fetched data
-  
-  const fetchPreferredContacts = async => {
-    const res =  fetch(`${process.env.REACT_APP_API}/donors/edit`, {
+  // const [contact,setContact ] = useState(null);
+  const fetchPreferredContacts = async () => {
+    const res =  await fetch(`${process.env.REACT_APP_API}/donors/edit`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
   })
-  const data =  res.json
-   console.log(data)
-  // return data
+  const data =  res.json()
+  return data
 }
-// return (
-//   <div><h1> fetch GET API </h1> </div>
-// )
 
 function Edit (props) {
-const [contact,setContact ] = useState(null); /* to store the fetched data
+const [contacts,setContacts ] = useState({Id:'',description:''}); /* to store the fetched data
  */
-
     useEffect(() => {
-      fetchPreferredContacts().then(data => setContact(data)) 
+      fetchPreferredContacts().then(data => setContacts(data)) 
     },[])
 
-console.log(contact)
+console.log(contacts)
 
        return (
    
@@ -55,11 +50,11 @@ console.log(contact)
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className= "radio-container">
                 <input type="radio" value="phone"></input>
-                <label for="phone">{/*contact.phone*/}</label>
+                <label for="phone">Phone Number-{/*contacts[i].description}*/</label>
                 <input type="radio" value="email"></input>
-                <label for="email">{/* pass down email address description data here */}</label>
+                <label for="email">Email Address{/* pass down email address description data here */}</label>
                 <input type="radio" value="mail"></input>
-                <label for="mail">{/* pass down mail description here */}</label>
+                <label for="mail">Mailing Address{/* pass down mail description here */}</label>
                 <input type="radio" value="phone"></input>
                 <label for="dnc">Do Not Contact</label>
                 </div>
