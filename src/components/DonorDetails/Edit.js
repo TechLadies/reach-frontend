@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from 'react'
+import Box from '../Dashboard/Box'
 import { useParams } from 'react-router-dom'
 import './index.css'
 import Modal from '../Modal'
@@ -46,18 +47,12 @@ function Edit (props) {
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className= "radio-container">
-                 {contacts.length &&contacts.map(contacts => <span>{contacts.description}</span>)}
-                
-                   <label> 
-                    <input name= "phone" type ="radio" value={contacts.description}/>{contacts.description}
-                   </label>
-                   <label> 
-                     <input name= "email" type ="radio" value={contacts.description}/>{contacts.description}
-                   </label>
-                   <label> 
-                     <input name= "mailng address" type ="radio" value={contacts.description}/>{contacts.description}
-                    </label>
-                
+                 {contacts.length && contacts.map(contact =><div> 
+                   <label> <input name ="contact" type ="radio" selected value = {contact.description} /> {contact.description}</label> 
+                {contact.description}</div>)}
+                {/* <div className="contact-wrapper">
+                     <Box className={contacts.dnc ? 'dnc-contact-box' : 'contact-box'}>
+                    {contacts.dnc && <DNCIndicator />} </Box> </div> */}
                 </div> 
               </div>
             </div>
@@ -84,6 +79,22 @@ function Edit (props) {
   )
 }
 
+// const PreferenceIndicator = () => {
+//   return (
+//     <div className="indicator">
+//       <div className="indicator-text">Preferred </div>
+//     </div>
+//   )
+
+// }
+
+// const DNCIndicator = () => {
+//   return (
+//     <div className="dnc-indicator">
+//       <div className="dnc-indicator-text">Do Not Contact</div>
+//     </div>
+//   )
+// }
   export default Edit
 
 
