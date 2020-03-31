@@ -1,11 +1,9 @@
 import React, {useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import './index.css'
 import Modal from '../Modal'
 
-//you can do fetch here 
-  //useState method to create state to hold the fetched data
-  // const [contact,setContact ] = useState(null);
-  const fetchPreferredContacts = async () => {
+const fetchPreferredContacts = async () => {
     const res =  await fetch(`${process.env.REACT_APP_API}/donors/edit`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
@@ -15,23 +13,22 @@ import Modal from '../Modal'
 }
 
 function Edit (props) {
-const [contacts,setContacts ] = useState({Id:'',description:''}); /* to store the fetched data
- */
+  const id =useParams()
+  const [contacts,setContacts ] = useState([]);
+
     useEffect(() => {
       fetchPreferredContacts().then(data => setContacts(data)) 
     },[])
 
-console.log(contacts)
+ console.log(contacts)  /*console.log(data.contacts[0]);*/
 
        return (
-   
-    <>
+       <>
       <Modal
         show={props.showModal}
         dialogClassName="modal-90w"
-        onHide= {props.close}
-        
-      >
+        onHide= {props.close}>
+  
         <div className= 'edit-modal'>
           <Modal.Header>
             <header className="title">
@@ -49,17 +46,22 @@ console.log(contacts)
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className= "radio-container">
-                <input type="radio" value="phone"></input>
-                <label for="phone">Phone Number-{/*contacts[i].description}*/</label>
-                <input type="radio" value="email"></input>
-                <label for="email">Email Address{/* pass down email address description data here */}</label>
-                <input type="radio" value="mail"></input>
-                <label for="mail">Mailing Address{/* pass down mail description here */}</label>
-                <input type="radio" value="phone"></input>
-                <label for="dnc">Do Not Contact</label>
-                </div>
+                 {contacts.length &&contacts.map(contacts => <span>{contacts.description}</span>)}
+                
+                   <label> 
+                    <input name= "phone" type ="radio" value={contacts.description}/>{contacts.description}
+                   </label>
+                   <label> 
+                     <input name= "email" type ="radio" value={contacts.description}/>{contacts.description}
+                   </label>
+                   <label> 
+                     <input name= "mailng address" type ="radio" value={contacts.description}/>{contacts.description}
+                    </label>
+                
+                </div> 
               </div>
             </div>
+         
           </Modal.Body>
       
         </div>
@@ -83,3 +85,5 @@ console.log(contacts)
 }
 
   export default Edit
+
+
