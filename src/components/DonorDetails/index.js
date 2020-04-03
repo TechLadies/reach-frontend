@@ -97,6 +97,8 @@ const Particulars = props => {
         <div className="single-field">
           <p className="label">Remarks</p>
           <p className="text">{handleNull(donorDetails.remarks)}</p>
+          {/* <p className="text" value ="{handleNull(this.props.remarks)}"> </p> */}
+
         </div>
       </Box>
     </div>
@@ -128,6 +130,7 @@ const Contact = props => {
               {donorContact.preferredContact && <PreferenceIndicator />}
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
+           
           </div>
         </div>
         <div className="contact-row">

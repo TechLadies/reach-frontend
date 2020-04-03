@@ -21,7 +21,7 @@ function Edit (props) {
       fetchPreferredContacts().then(data => setContacts(data)) 
     },[])
 
- console.log(contacts)  /*console.log(data.contacts[0]);*/
+ console.log(contacts) 
 
        return (
        <>
@@ -29,8 +29,8 @@ function Edit (props) {
         show={props.showModal}
         dialogClassName="modal-90w"
         onHide= {props.close}>
-  
         <div className= 'edit-modal'>
+
           <Modal.Header>
             <header className="title">
               Edit Donor Information
@@ -41,18 +41,19 @@ function Edit (props) {
           <Modal.Body className="edit-body">
             <div className="edit-body-wrapper">
               <div className="remarks-container">
-                <h1 className ="edit-subheader"> Remarks</h1>
-                <input form="text" className= "remarks-input"></input>
+              <input form="text" className= "remarks-input" {contacts.remarks}></input>
               </div>
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className= "radio-container">
+                {/* <p className="label">Phone Number</p>{' '}
+              {Contact.preferredContact && <PreferenceIndicator />} */}
                  {contacts.length && contacts.map(contact =><div> 
-                   <label> <input name ="contact" type ="radio" selected value = {contact.description} /> {contact.description}</label> 
+                   <label> <input name ="contact" type ="radio" value = {contact.description} defaultChecked /> {contact.description}</label> 
                 {contact.description}</div>)}
-                {/* <div className="contact-wrapper">
+                 <div className="contact-wrapper">
                      <Box className={contacts.dnc ? 'dnc-contact-box' : 'contact-box'}>
-                    {contacts.dnc && <DNCIndicator />} </Box> </div> */}
+                     dnc status {contacts.dnc && <DNCIndicator />} </Box> </div> 
                 </div> 
               </div>
             </div>
@@ -75,26 +76,40 @@ function Edit (props) {
           </Modal.Footer>
           
       </Modal>
+      <header className=""></header>
+
     </>
   )
 }
 
-// const PreferenceIndicator = () => {
-//   return (
-//     <div className="indicator">
-//       <div className="indicator-text">Preferred </div>
-//     </div>
-//   )
+const PreferenceIndicator = () => {
+  return (
+    <div className="indicator">
+      <div className="indicator-text">Preferred </div>
+    </div>
+  )
 
-// }
+}
 
-// const DNCIndicator = () => {
-//   return (
-//     <div className="dnc-indicator">
-//       <div className="dnc-indicator-text">Do Not Contact</div>
-//     </div>
-//   )
-// }
+const DNCIndicator = () => {
+  return (
+    <div className="dnc-indicator">
+      <div className="dnc-indicator-text">Do Not Contact</div>
+    </div>
+  )
+}
   export default Edit
 
+// const Remarks = () => {
 
+  //     return (
+  //       <div className="remarks-container">
+  //          <p>
+  //           Remark:this.
+  //         </p>
+  //         
+  //       </div>
+  //     );
+  //   }
+  // }
+      
