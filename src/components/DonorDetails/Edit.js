@@ -25,6 +25,9 @@ function Edit (props) {
 
        return (
        <>
+           
+       <h1 className="Remarks">{contacts.description}</h1>
+         
       <Modal
         show={props.showModal}
         dialogClassName="modal-90w"
@@ -41,7 +44,8 @@ function Edit (props) {
           <Modal.Body className="edit-body">
             <div className="edit-body-wrapper">
               <div className="remarks-container">
-              <input form="text" className= "remarks-input" {contacts.remarks}></input>
+              <input form="text" className= "remarks-input" > remarks</input>
+              {contacts.remark}
               </div>
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
@@ -102,14 +106,14 @@ const DNCIndicator = () => {
 
 // const Remarks = () => {
 
-  //     return (
-  //       <div className="remarks-container">
-  //          <p>
-  //           Remark:this.
-  //         </p>
-  //         
-  //       </div>
-  //     );
-  //   }
-  // }
+//       return (
+//         <div className="remarks">
+//            <p>
+//             {this.props.description}
+//                       </p>
+          
+//         </div>
+//       );
+//     }
+  
       
