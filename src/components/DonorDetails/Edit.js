@@ -26,8 +26,9 @@ function Edit(props) {
   console.log(props.existingData)
   const currentRemarks = props.existingData.details.donorRemarks
   const currentPreferredContact = props.existingData.contact.preferredContactId
-  const currentDNC =  props.existingData.contact.dnc  /*i am back*/
+  const currentDNC = props.existingData.contact.dnc
 
+  const [remarks, setRemarks] = useState(currentRemarks)
 
   return (
     <>
@@ -45,8 +46,13 @@ function Edit(props) {
           <Modal.Body className="edit-body">
             <div className="edit-body-wrapper">
               <div className="remarks-container">
-                <h1 className= "edit-subheader">Remarks</h1>
-                <input form="text" className="remarks-input"></input>
+                <h1 className="edit-subheader">Remarks</h1>
+                <input
+                  form="text"
+                  className="remarks-input"
+                  value={remarks}
+                  onChange={() => setRemarks()}
+                ></input>
               </div>
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
@@ -59,10 +65,10 @@ function Edit(props) {
                             <input
                               name="contact"
                               type="radio"
-                              value={contact.description}
-                              defaultChecked
+                              value={contact.id}
+                              defaultChecked = {currentPreferredContact === contact.id}
                             />
-                            {contact.description}
+                            {displayContactType(contact.id)}
                           </label>
                         </div>
                       ))}
@@ -70,10 +76,11 @@ function Edit(props) {
                       <input
                         name="contact"
                         type="radio"
-                        value="dnc"
-                        defaultChecked
+                        value= {true}
+                         defaultValue= {currentDNC}         
+                         defaultChecked ={(currentDNC)}      
                       />
-                     Do Not Contact 
+                      Do Not Contact
                     </label>
                   </form>
                 </div>
@@ -97,32 +104,16 @@ function Edit(props) {
   )
 }
 
-const PreferenceIndicator = () => {
-  return (
-    <div className="indicator">
-      <div className="indicator-text">Preferred </div>
-    </div>
-  )
-}
 
-const DNCIndicator = () => {
-  return (
-    <div className="dnc-indicator">
-      <div className="dnc-indicator-text">Do Not Contact</div>
-    </div>
-  )
+const displayContactType = (id) => {
+  if (id === 1) {
+    return 'Phone Number'
+  }
+  if (id === 2) {
+    return 'Email Address'
+  }
+  if (id === 3) {
+    return 'Mailing Address'
+  }
 }
 export default Edit
-
-// const Remarks = () => {
-
-//     return (
-//       <div className="remarks-container">
-//          <p>
-//           Remark:this.
-//         </p>
-//
-//       </div>
-//     );
-//   }
-// }
