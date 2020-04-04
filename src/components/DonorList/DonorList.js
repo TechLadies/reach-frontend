@@ -16,7 +16,7 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 
 const getDonorData = async page => {
-  return fetch(
+  return fetch( 
     `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
   )
     .then(resp => resp.json())

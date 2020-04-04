@@ -49,7 +49,7 @@ function DonorDetails(props) {
           </Header.Buttons>
         </Header.Top>
       </Header>
-      <Edit showModal={editPopUp} close={() => setEditPopUp(false)}/>
+      <Edit showModal={editPopUp} existingData={donorInfo} close={() => setEditPopUp(false)}/>
       <div className="cards-container">
         <Particulars donorDetails={donorInfo} />
         <Contact donorDetails={donorInfo} />
@@ -96,9 +96,7 @@ const Particulars = props => {
         </div>
         <div className="single-field">
           <p className="label">Remarks</p>
-          <p className="text">{handleNull(donorDetails.remarks)}</p>
-          {/* <p className="text" value ="{handleNull(this.props.remarks)}"> </p> */}
-
+          <p className="text">{handleNull(donorDetails.donorRemarks)}</p>
         </div>
       </Box>
     </div>
@@ -109,6 +107,7 @@ const Contact = props => {
   const donorContact = props.donorDetails.contact
   const donorDetails = props.donorDetails.details
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
+  const preference = donorContact.preferredContactId
   return (
     <div className="contact-wrapper">
       <Box className={donorContact.dnc ? 'dnc-contact-box' : 'contact-box'}>
@@ -127,7 +126,7 @@ const Contact = props => {
           <div className="single-field">
             <div className="header-indicator-box">
               <p className="label">Phone Number</p>{' '}
-              {donorContact.preferredContact && <PreferenceIndicator />}
+              {!donorContact.dnc && (preference ===1) && <PreferenceIndicator />}
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
            
@@ -136,14 +135,20 @@ const Contact = props => {
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
           <div className="single-field">
-            <p className="label">Email Address</p>
+          <div className="header-indicator-box">
+              <p className="label">Email Address</p>{' '}
+              {!donorContact.dnc && (preference === 2) && <PreferenceIndicator />}
+            </div>
             <p className="text">{handleNull(donorContact.email)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Location} alt="address" className="contact-icon" />
           <div className="single-field">
-            <p className="label">Mailing Address</p>
+          <div className="header-indicator-box">
+              <p className="label">Mailing Address</p>{' '}
+              {!donorContact.dnc && (preference ===3) && <PreferenceIndicator />}
+            </div>
             <p className="text"> {handleNull(donorContact.mail)}</p>
           </div>
         </div>
