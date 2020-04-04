@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Box from '../Dashboard/Box'
-import { useParams } from 'react-router-dom'
+import {useParams } from 'react-router-dom'
 import './index.css'
 import Modal from '../Modal'
 
@@ -14,7 +13,7 @@ const fetchPreferredContacts = async () => {
 }
 
 function Edit(props) {
-  const id = useParams()
+   const id =useParams()
   const [contacts, setContacts] = useState([])
 
   useEffect(() => {
@@ -23,12 +22,17 @@ function Edit(props) {
 
   console.log(contacts)
 
+  console.log(props.existingData)
+
+  const currentRemarks = props.existingData.details.donorRemarks
+  const currentPreferredContact = props.existingData.contact.PreferredContactId
+  const currentDNC =props.existingData.contact.dnc
+
+  const [remarks, setRemarks] = useState(currentRemarks)
+
        return (
        <>
-           
-       <h1 className="Remarks"></h1>
-         
-      <Modal
+       <Modal
         show={props.showModal}
         dialogClassName="modal-90w"
         onHide={props.close}
@@ -95,7 +99,7 @@ function Edit(props) {
           </div>
         </Modal.Footer>
       </Modal>
-      <header className=""></header>
+     
     </>
   )
 }
@@ -112,30 +116,4 @@ const displayContactType = (id) => {
     return 'Mailing Address'
   }
 }
-<<<<<<< HEAD
-
-const DNCIndicator = () => {
-  return (
-    <div className="dnc-indicator">
-      <div className="dnc-indicator-text">Do Not Contact</div>
-    </div>
-  )
-}
-  export default Edit
-
-// const Remarks = () => {
-
-//       return (
-//         <div className="remarks">
-//            <p>
-//             {this.props.description}
-//                       </p>
-          
-//         </div>
-//       );
-//     }
-  
-      
-=======
 export default Edit
->>>>>>> 7d0b5cf085885a5d234b96bca0dd7fda26d0858d
