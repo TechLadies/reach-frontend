@@ -8,10 +8,15 @@ import { Tabs, Tab } from 'react-bootstrap'
 import Pagination from '../../lib/pagination'
 import { Link } from 'react-router-dom'
 import Spin from '../../lib/spinner'
+import { dateVariation, periodFormatter} from '../../lib/date'
 
 const SuccessUpload = props => {
   const uploadDonorData = props.donorData.data
   const uploadSummary = props.donorData.summary
+  const minDate = dateVariation(new Date(uploadSummary.minDate))
+  const maxDate = dateVariation(new Date(uploadSummary.maxDate))
+
+  //pagination
   const entriesPerPage = 15
   const [currentPage, setCurrentPage] = useState(1)
   const paginate = pageNumber => setCurrentPage(pageNumber)
@@ -53,7 +58,7 @@ const SuccessUpload = props => {
               <img src={Calendar} className="success-img" alt="twohands" />
               <div>
                 <h1 className="grey-header">For the period of</h1>
-                <p className="black-description">{uploadSummary.period}</p>
+                <p className="black-description">{periodFormatter(minDate, maxDate)}</p>
               </div>
             </div>
           </Box>
@@ -211,3 +216,4 @@ const newDonor = allDonor => {
 const existingDonor = allDonor => {
   return allDonor.filter(d => !d.__isNew).map(d => d)
 }
+

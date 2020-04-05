@@ -2,6 +2,7 @@ import React from 'react'
 import Reportplus from '../../images/reportplus.svg'
 import './index.css'
 import * as Papa from 'papaparse'
+import {reformatDate} from '../../lib/date'
 
 function FileHandlers(props) {
   const onCancel = () => {
@@ -10,11 +11,13 @@ function FileHandlers(props) {
   const handleSelectedFile = e => {
     console.log(e.target.files[0])
 
+
     Papa.parse(e.target.files[0], {
       header: true,
       download: false,
       delimiter: ',',
       skipEmptyLines: true,
+      transform: reformatDate,
       dynamicTyping: true,
       complete: function(results) {
         const processedArray = results.data.map(function(e) {
@@ -27,6 +30,10 @@ function FileHandlers(props) {
               'Receipt Serial No' : e['Receipt Serial No'].toString()
             }
           }
+
+          
+          
+          
         })
         console.log(processedArray)      
         return props.loadIpcEntries(processedArray)

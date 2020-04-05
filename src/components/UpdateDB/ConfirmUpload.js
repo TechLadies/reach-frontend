@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css'
-import dateStringOf from '../../lib/dateStringGenerator'
+import {dateStringOf} from '../../lib/date'
 import Modal from '../Modal'
 
 function ConfirmUpload(props) {
