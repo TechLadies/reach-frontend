@@ -71,7 +71,7 @@ const Dashboard = () => {
                   selected={startDate}
                   onChange={date => setStartDate(date)}
                   selectsStart
-                  dateFormat='dd-MM-yyyy' 
+                  dateFormat='dd/MM/yyyy' 
                   /* startDate={startDate}
                   endDate={endDate} */
                 />
@@ -86,7 +86,7 @@ const Dashboard = () => {
                   selected={endDate}
                   onChange={date => setEndDate(date)}
                   selectsEnd
-                  dateFormat= "dd-MM-yyyy"
+                  dateFormat= "dd/MM/yyyy"
                   /* endDate={endDate}
                   minDate={startDate} */
                 />

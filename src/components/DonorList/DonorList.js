@@ -159,7 +159,7 @@ function DonorList(props) {
                     selectsStart
                     startDate={startDate}
                     endDate={endDate}
-                    dateFormat = "dd-MM-yyyy"
+                    dateFormat = "dd/MM/yyyy"
                   />
                 </div>
                 <div>
@@ -174,7 +174,7 @@ function DonorList(props) {
                     selectsEnd
                     endDate={endDate}
                     minDate={startDate}
-                    dateFormat = "dd-MM-yyyy"
+                    dateFormat = "dd/MM/yyyy"
                   />
                 </div>
               </div>

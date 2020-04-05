@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Pagination from '../../lib/pagination'
-import dateStringOf from '../../lib/dateStringGenerator'
+import {dateStringOf} from '../../lib/date'
 
 
 function DonorTable(props) {
