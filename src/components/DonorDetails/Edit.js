@@ -30,6 +30,38 @@ function Edit(props) {
 
   const [remarks, setRemarks] = useState(currentRemarks)
 
+ 
+  // const fetchdonorid = async () => {
+//   const res = await fetch(`${process.env.REACT_APP_API}/donors/edit/:idNo`, {
+//     method: 'PUT',
+//     headers: { 'Accept':'application/json',
+// Content-Type': 'application/json' },
+//   },
+// body:JSON.stringify({
+  // DonorId:,
+  // Remarks: event.target.Remarks.value
+  // PreferredContactId:
+  // DNC:
+// })
+// })
+// .then(res=> res.json())
+// .then ((result) =>
+// {this.setState()},
+// (error)=>{}
+
+// )
+// )
+
+
+// funcion handleSave (props){
+//  const [state, SetState] =useState([])
+// }
+
+// useEffect(() => {
+//   fetchdonorid().then((data) => setState(data))
+// }, [])
+
+
        return (
        <>
        <Modal
@@ -93,8 +125,9 @@ function Edit(props) {
             <span>Cancel</span>
           </button>
           <div>
-            <button className="button orangebutton">Save the changes </button>
-
+            <button className="button orangebutton" >Save the changes </button>
+            {/* onClick={ onClick={() => {
+                this.handleSave()} */}
             <br />
           </div>
         </Modal.Footer>
