@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import './index.css'
 import Modal from '../Modal'
 
@@ -13,62 +13,62 @@ const fetchPreferredContacts = async () => {
 }
 
 function Edit(props) {
-   const id =useParams()
+  const id = useParams()
   const [contacts, setContacts] = useState([])
 
   useEffect(() => {
     fetchPreferredContacts().then((data) => setContacts(data))
   }, [])
 
-  console.log(contacts)
-
-  console.log(props.existingData)
-
   const currentRemarks = props.existingData.details.donorRemarks
-  const currentPreferredContact = props.existingData.contact.PreferredContactId
-  const currentDNC =props.existingData.contact.dnc
+  const currentPreferredContact = props.existingData.contact.preferredContactId
+  const currentDNC = props.existingData.contact.dnc
 
+  const initialPreference = {
+    contact: currentPreferredContact || currentDNC,
+  }
   const [remarks, setRemarks] = useState(currentRemarks)
+  const [preferenceState, setPreferenceState] = useState(initialPreference)
+  const [errorMsg, setErrorMsg] = useState(null)
 
- 
-  // const fetchdonorid = async () => {
-//   const res = await fetch(`${process.env.REACT_APP_API}/donors/edit/:idNo`, {
-//     method: 'PUT',
-//     headers: { 'Accept':'application/json',
-// Content-Type': 'application/json' },
-//   },
-// body:JSON.stringify({
-  // DonorId:,
-  // Remarks: event.target.Remarks.value
-  // PreferredContactId:
-  // DNC:
-// })
-// })
-// .then(res=> res.json())
-// .then ((result) =>
-// {this.setState()},
-// (error)=>{}
+  const handleChangedPreference = (e) => {
+    setPreferenceState({
+      [e.target.name]: e.target.value,
+    })
+  }
 
-// )
-// )
-
-
-// funcion handleSave (props){
-//  const [state, SetState] =useState([])
-// }
-
-// useEffect(() => {
-//   fetchdonorid().then((data) => setState(data))
-// }, [])
-
-
-       return (
-       <>
-       <Modal
+  const submitEdits = (e) => {
+    e.preventDefault()
+    fetch(`${process.env.REACT_APP_API}/donors/edit/${id.idNo}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        remarks: remarks,
+        preferredContact: reqBodyPreferredContact(preferenceState.contact),
+        dnc: reqBodyDNC(preferenceState.contact),
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.reload(true)
+        } else if (res.status === 500) {
+          return setErrorMsg(
+            <div className="edit-errormsg">
+              Internal Server Error. Please try again later
+            </div>
+          )
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+  return (
+    <>
+      <Modal
         show={props.showModal}
         dialogClassName="modal-90w"
         onHide={props.close}
       >
+        
         <div className="edit-modal">
           <Modal.Header>
             <header className="title">Edit Donor Information</header>
@@ -79,17 +79,18 @@ function Edit(props) {
             <div className="edit-body-wrapper">
               <div className="remarks-container">
                 <h1 className="edit-subheader">Remarks</h1>
-                <input
-                  form="text"
-                  className="remarks-input"
+                <textarea
+                  name="Text1"
+                  id="remarks"
                   value={remarks}
-                  onChange={() => setRemarks()}
-                ></input>
+                  className="remarks-input"
+                  onChange={(e) => setRemarks(e.target.value)}
+                ></textarea>
               </div>
               <div className="preference-container">
                 <h2 className="edit-subheader"> Preferred Contact </h2>
                 <div className="radio-container">
-                  <form>
+                  <form onChange={handleChangedPreference}>
                     {contacts.length &&
                       contacts.map((contact) => (
                         <div>
@@ -98,9 +99,12 @@ function Edit(props) {
                               name="contact"
                               type="radio"
                               value={contact.id}
-                              defaultChecked = {currentPreferredContact === contact.id}
+                              defaultChecked={
+                                currentPreferredContact === contact.id
+                              }
                             />
-                            {displayContactType(contact.id)}
+                            
+                            <span className= "radio-label">{displayContactType(contact.id)}</span>
                           </label>
                         </div>
                       ))}
@@ -108,11 +112,11 @@ function Edit(props) {
                       <input
                         name="contact"
                         type="radio"
-                        value= {true}
-                         defaultValue= {currentDNC}         
-                         defaultChecked ={(currentDNC)}      
+                        value={true}
+                        defaultValue={currentDNC}
+                        defaultChecked={currentDNC}
                       />
-                      Do Not Contact
+                      <span className= "radio-label">Do Not Contact</span>
                     </label>
                   </form>
                 </div>
@@ -120,23 +124,22 @@ function Edit(props) {
             </div>
           </Modal.Body>
         </div>
-        <Modal.Footer className="">
-          <button className="button cancel-btn" onClick={props.close}>
-            <span>Cancel</span>
+        <Modal.Footer>
+          <div className="edit-errormsg">{errorMsg}</div>
+          <button className="button transparentbutton" onClick={props.close}>
+            Cancel
           </button>
           <div>
-            <button className="button orangebutton" >Save the changes </button>
-            {/* onClick={ onClick={() => {
-                this.handleSave()} */}
+            <button className="button orangebutton" onClick={submitEdits}>
+              Save Donor Details
+            </button>
             <br />
           </div>
         </Modal.Footer>
       </Modal>
-     
     </>
   )
 }
-
 
 const displayContactType = (id) => {
   if (id === 1) {
@@ -148,5 +151,17 @@ const displayContactType = (id) => {
   if (id === 3) {
     return 'Mailing Address'
   }
+}
+
+const reqBodyDNC = (preference) => {
+  if (preference === true) {
+    return true
+  } else return false
+}
+
+const reqBodyPreferredContact = (preference) => {
+  if (isNaN(preference)) {
+    return null
+  } else return preference
 }
 export default Edit

@@ -127,7 +127,6 @@
 }
 
 .edit-modal{
-  border: 1px solid red;
   padding: 48px 64px;
 }
 
@@ -156,4 +155,33 @@ font-size: 14px;
 .radio-container{
   display: flex;
   flex-direction: column;
+}
+
+.edit-errormsg{
+  color: red;
+  margin-right: 10px;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background:#EAE1D5;
+  
+}
+
+input[type='radio']:checked {
+  border: 6px solid #FFA001;
+  background: white;
+}
+
+form > label{
+  display: flex;
+}
+
+.radio-label{
+  margin-left: 16px;
 }

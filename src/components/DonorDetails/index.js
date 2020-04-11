@@ -3,7 +3,8 @@ import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
 import Edit from './Edit'
-import Pencil from '../../images/pencil.svg'
+import Pencil2 from '../../images/pencil.svg'
+import Pencil1 from '../../images/pencil1.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
@@ -42,8 +43,8 @@ function DonorDetails(props) {
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton" onClick ={()=>setEditPopUp(true)}>
-              <img src={Pencil} className="button-icon" alt="editprofile" />
+            <button className= {`button ${editPopUp ? "purplebutton" : "beforepurplebutton"}`} onClick ={()=>setEditPopUp(true)}>
+              <img src={editPopUp? Pencil1 : Pencil2 } className="button-icon" alt="editprofile"/>
               Edit Profile
             </button>
           </Header.Buttons>
