@@ -23,7 +23,7 @@ function Edit(props) {
   const currentRemarks = props.existingData.details.donorRemarks
   const currentPreferredContact = props.existingData.contact.preferredContactId
   const currentDNC = props.existingData.contact.dnc
-
+console.log(props.existingData)
   const initialPreference = {
     contact: currentPreferredContact || currentDNC,
   }
@@ -67,6 +67,7 @@ function Edit(props) {
         show={props.showModal}
         dialogClassName="modal-90w"
         onHide={props.close}
+        className= "edit-modal-container"
       >
         
         <div className="edit-modal">
@@ -154,7 +155,7 @@ const displayContactType = (id) => {
 }
 
 const reqBodyDNC = (preference) => {
-  if (preference === true) {
+  if (preference === "true") {
     return true
   } else return false
 }

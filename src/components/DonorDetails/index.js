@@ -25,7 +25,6 @@ const onLoadPage = async id => {
 }
 
 function DonorDetails(props) {
- 
   const id = useParams()
   const [donorInfo, setDonorInfo] = useState(null)
 

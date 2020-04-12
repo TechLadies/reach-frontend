@@ -121,7 +121,7 @@ function xAxisTickFormat(current, i, arr) {
 }
 
 function yAxisTickFormat(y) {
-  if (y >= 1000 && y <= 100000) {
+  if (y >= 1000 && y <= 999999) {
     return y / 1000 + 'k'
   } else if (y >= 1000000) {
     return y / 1000000 + 'M'
