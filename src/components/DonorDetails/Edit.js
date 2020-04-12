@@ -23,18 +23,27 @@ function Edit(props) {
   const currentRemarks = props.existingData.details.donorRemarks
   const currentPreferredContact = props.existingData.contact.preferredContactId
   const currentDNC = props.existingData.contact.dnc
-console.log(props.existingData)
+
+  // let's keep the state intact to match the API request
   const initialPreference = {
-    contact: currentPreferredContact || currentDNC,
+    dnc: currentDNC,
+    preferredContact: currentPreferredContact
   }
   const [remarks, setRemarks] = useState(currentRemarks)
   const [preferenceState, setPreferenceState] = useState(initialPreference)
   const [errorMsg, setErrorMsg] = useState(null)
 
   const handleChangedPreference = (e) => {
-    setPreferenceState({
-      [e.target.name]: e.target.value,
-    })
+
+    // determine if DNC is selected or not first (true or false)
+    const dncValue = e.target.value === "true"
+
+    let newPreferences = {
+      dnc: dncValue,
+      preferredContact: dncValue ? null : e.target.value // if DNC was true, return null, otherwise return the target value
+    }
+
+    setPreferenceState(newPreferences)
   }
 
   const submitEdits = (e) => {
@@ -44,8 +53,7 @@ console.log(props.existingData)
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         remarks: remarks,
-        preferredContact: reqBodyPreferredContact(preferenceState.contact),
-        dnc: reqBodyDNC(preferenceState.contact),
+        ...preferenceState // destructure the state here since we earlier made sure it matches the request shape
       }),
     })
       .then((res) => {
@@ -113,8 +121,7 @@ console.log(props.existingData)
                       <input
                         name="contact"
                         type="radio"
-                        value={true}
-                        defaultValue={currentDNC}
+                        value="true"
                         defaultChecked={currentDNC}
                       />
                       <span className= "radio-label">Do Not Contact</span>
@@ -154,15 +161,4 @@ const displayContactType = (id) => {
   }
 }
 
-const reqBodyDNC = (preference) => {
-  if (preference === "true") {
-    return true
-  } else return false
-}
-
-const reqBodyPreferredContact = (preference) => {
-  if (isNaN(preference)) {
-    return null
-  } else return preference
-}
 export default Edit
