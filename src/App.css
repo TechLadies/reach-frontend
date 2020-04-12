@@ -42,6 +42,15 @@
   font-size: 16px;
 }
 
+.forgot-ps{
+  background: none;
+  color: #80485b;
+  font-size: 16px;
+  border: 1px solid transparent;
+  margin-left: 0;
+  font-weight: bold;
+}
+
 .logo_navbar {
   position: relative;
   left: 15px;
