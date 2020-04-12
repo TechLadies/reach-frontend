@@ -7,13 +7,26 @@ import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
-
-
+// import{dateStringOf , dateVariation, periodFormatter, reformatDate} from '../src/lib/date.js'
+// router.get('/latest',from backend 
+// fetch update api here show work on  line 150 and 156
+// fetch(`${process.env.REACT_APP_API}/donations/upload`, {
+//   method: 'GET',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+// lastUpdate: ,
+//   period: 
+// }), []
+// })
+// const data = res.json()
+// return data
+//   .then(validateUpSert)
+//   .catch(err => console.log(err))
+// }
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
   period: '1 Sep 2019 - 31 Oct 2019'
 }
-
 const priorUploadState = {
   showPopUp: false,
   ipcData: [],
