@@ -11,20 +11,18 @@ import FailedImg from '../../images/uploadfail.svg'
 // we need to fetch ./routes/uploads'  from backend 
 // fetch update api here show work on  line 150 and 156
 
-// const getLatestUpload = async ()) => {
-//   return fetch(
-//     `${process.env.REACT_APP_API}/}`,
-//     {
-//       method: 'GET',
-//       headers: { 'Content-Type': 'application/json' }
-//     }
-//   )
-//   const data = await res.json()
-//   return data
-// }
-//  .then(resp=> resp.json())
-//  .catch(err => console.log(err))
-// }
+const getLatestUpload = async () => {
+  return await fetch(
+    `${process.env.REACT_APP_API}/uploads`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+  )
+ .then(resp=> resp.json())
+ .catch(err => console.log(err))
+}
+
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
   period: '1 Sep 2019 - 31 Oct 2019'
