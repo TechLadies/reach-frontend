@@ -21,6 +21,9 @@ function App() {
           <Route path="/login">
             <Login />
           </Route>
+          <Route path="/reset-password">
+            <Login resetPasswordStatus= {true}/>
+          </Route>
           <Route path="/dummy">
             <Dummy />
           </Route>

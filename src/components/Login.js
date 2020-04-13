@@ -1,21 +1,21 @@
 import React, { useState } from 'react'
 import Loginimage from '../images/Group 5.svg'
 import Logo from '../images/Logo.svg'
-import { Link, Redirect, Route, useHistory } from 'react-router-dom'
+import {useHistory } from 'react-router-dom'
 
 const initialState = {
   email: '',
   password: '',
 }
 
-function Login() {
+function Login(props) {
   const history = useHistory()
   if (localStorage.getItem('token')) {
     history.push('/')
   }
 
   const [state, setState] = useState(initialState)
-  const [resetPasswordStatus, setResetPasswordStatus] = useState(false)
+  const resetPasswordMode = props.resetPasswordStatus
   const handleChange = (e) => {
     setState({
       ...state,
@@ -64,7 +64,7 @@ function Login() {
         <img src={Logo} className="logo" alt="Logo" />
         <form onSubmit={handleSubmit}>
           <div className="login-form-list">
-             <label htmlFor="email">{resetPasswordStatus ? "Please enter your email address": "Email Address"}</label>
+             <label htmlFor="email">{resetPasswordMode? "Please enter your email address": "Email Address"}</label>
 
             <input
               type="text"
@@ -75,7 +75,7 @@ function Login() {
               className="textbox"
             />
           </div>
-          {resetPasswordStatus ? null : (
+          {resetPasswordMode ? null : (
             <div className="login-form-list">
               <label htmlFor="password">Password</label>
 
@@ -89,24 +89,25 @@ function Login() {
               />
             </div>
           )}
-          <div className="login-form-list">
+          {resetPasswordMode ? null: <div className="login-form-list">
             <button
-              onClick={() => setResetPasswordStatus(true)}
+              onClick={() => history.push('/reset-password')}
               className = "forgot-ps"
-              id ="forgot-pas"
+              type ="button"
             >
               Forgot password?
             </button>
-          </div>
+          </div>}
 
           {state.error && <p className="error-msg">{state.error}</p>}
-          <button onClick={handleSubmit} className="login-button" id = "login"> 
-            <span className="login-button-text">Login</span>
+          <button onClick={handleSubmit} className="login-button" type= "button"> 
+            <span className="login-button-text">{resetPasswordMode ? 'Send reset password email': 'Login'}</span>
           </button>
         </form>
       </div>
     </div>
   )
 }
+
 
 export default Login
