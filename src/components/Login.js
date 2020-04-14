@@ -6,6 +6,7 @@ import {useHistory } from 'react-router-dom'
 const initialState = {
   email: '',
   password: '',
+  notify: ''
 }
 
 function Login(props) {
@@ -16,11 +17,13 @@ function Login(props) {
 
   const [state, setState] = useState(initialState)
   const resetPasswordMode = props.resetPasswordStatus
+  const [resultMessage, setResultMessage] = useState({})
+
   const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      error: '',
+      notify: '',
     })
   }
 
@@ -36,12 +39,12 @@ function Login(props) {
       setState({
         ...state,
         password: '',
-        error: 'Your email and password do not match. Please try again',
+        notify: 'Your email and password do not match. Please try again',
       })
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault()
     fetch(`${process.env.REACT_APP_API}/login`, {
       method: 'POST',
@@ -53,8 +56,29 @@ function Login(props) {
     })
       .then(validateLogin)
       .catch((err) => {
-        setState({ ...state, error: 'Connection error, unable to login.' })
+        setState({ ...state, notify: 'Connection error, unable to login.' })
       })
+  }
+
+  const handleResetPwSubmit = (e) => {
+    e.preventDefault()
+    fetch(`http://localhost:3001/users/reset_password_email`,{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: state.email
+      })
+    }).then(res=>{
+      if (res.status === 200){
+        res.json().then(msg=> setState({email: '', notify: msg.message}))
+      }
+      if (res.status === 404){
+        res.json().then(msg=> setState({email: '', notify: msg.message}))
+      }
+      if (res.status === 500){
+        return setState({email: '', notify: 'Server Error, please try again or contact your admin if problem persist'})
+      }
+    }).catch(err=> console.log(err))
   }
 
   return (
@@ -62,7 +86,7 @@ function Login(props) {
       <img src={Loginimage} className="login-img" alt="Login" />
       <div className="login-form">
         <img src={Logo} className="logo" alt="Logo" />
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleLoginSubmit}>
           <div className="login-form-list">
              <label htmlFor="email">{resetPasswordMode? "Please enter your email address": "Email Address"}</label>
 
@@ -99,8 +123,8 @@ function Login(props) {
             </button>
           </div>}
 
-          {state.error && <p className="error-msg">{state.error}</p>}
-          <button onClick={handleSubmit} className="login-button" type= "button"> 
+          {state.notify && <p className="error-msg">{state.notify}</p>}
+          <button onClick={resetPasswordMode? handleResetPwSubmit : handleLoginSubmit} className="login-button" type= "button"> 
             <span className="login-button-text">{resetPasswordMode ? 'Send reset password email': 'Login'}</span>
           </button>
         </form>
