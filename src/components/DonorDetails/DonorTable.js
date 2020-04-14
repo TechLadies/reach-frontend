@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Pagination from '../../lib/pagination'
 import {dateStringOf} from '../../lib/date'
 
+
 function DonorTable(props) {
   const totalDonations = props.donorDetails.donations.length
   const entriesPerPage = 15

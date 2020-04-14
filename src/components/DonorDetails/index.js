@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import Box from '../Dashboard/Box'
 import './index.css'
 import DonorTable from './DonorTable'
-import Pencil from '../../images/pencil.svg'
+import Edit from './Edit'
+import Pencil2 from '../../images/pencil.svg'
+import Pencil1 from '../../images/pencil1.svg'
 import Email from '../../images/email.svg'
 import Location from '../../images/location.svg'
 import Phone from '../../images/phone.svg'
-import Person from '../../images/contact-person.svg'
+import  Person from '../../images/contact-person.svg'
 import Header from '../Header'
 import { useParams } from 'react-router-dom'
 import Spin from '../../lib/spinner'
@@ -19,6 +21,7 @@ const onLoadPage = async id => {
   })
   const data = await res.json()
   return data
+ 
 }
 
 function DonorDetails(props) {
@@ -29,6 +32,8 @@ function DonorDetails(props) {
     onLoadPage(id).then(data => setDonorInfo(data))
   }, [id])
 
+  const [editPopUp, setEditPopUp] = useState(false)
+
   return donorInfo ? (
     <div className="donordetails">
       <Header>
@@ -37,13 +42,14 @@ function DonorDetails(props) {
             <h1 className="title">Donors Details</h1>
           </Header.Content>
           <Header.Buttons>
-            <button className="button purplebutton">
-              <img src={Pencil} className="button-icon" alt="editprofile" />
+            <button className= {`button ${editPopUp ? "purplebutton" : "beforepurplebutton"}`} onClick ={()=>setEditPopUp(true)}>
+              <img src={editPopUp? Pencil1 : Pencil2 } className="button-icon" alt="editprofile"/>
               Edit Profile
             </button>
           </Header.Buttons>
         </Header.Top>
       </Header>
+      <Edit showModal={editPopUp} existingData={donorInfo} close={() => setEditPopUp(false)}/>
       <div className="cards-container">
         <Particulars donorDetails={donorInfo} />
         <Contact donorDetails={donorInfo} />
@@ -90,7 +96,7 @@ const Particulars = props => {
         </div>
         <div className="single-field">
           <p className="label">Remarks</p>
-          <p className="text">{handleNull(donorDetails.remarks)}</p>
+          <p className="text">{handleNull(donorDetails.donorRemarks)}</p>
         </div>
       </Box>
     </div>
@@ -99,9 +105,9 @@ const Particulars = props => {
 
 const Contact = props => {
   const donorContact = props.donorDetails.contact
-  console.log(donorContact)
   const donorDetails = props.donorDetails.details
   const lowerCaseIdType = donorDetails.idType.toLowerCase()
+  const preference = donorContact.preferredContactId
   return (
     <div className="contact-wrapper">
       <Box className={donorContact.dnc ? 'dnc-contact-box' : 'contact-box'}>
@@ -120,22 +126,29 @@ const Contact = props => {
           <div className="single-field">
             <div className="header-indicator-box">
               <p className="label">Phone Number</p>{' '}
-              {donorContact.preferredContact && <PreferenceIndicator />}
+              {!donorContact.dnc && (preference ===1) && <PreferenceIndicator />}
             </div>
             <p className="text">{handleNull(donorContact.phone)}</p>
+           
           </div>
         </div>
         <div className="contact-row">
           <img src={Email} alt="email" className="contact-icon" />
           <div className="single-field">
-            <p className="label">Email Address</p>
+          <div className="header-indicator-box">
+              <p className="label">Email Address</p>{' '}
+              {!donorContact.dnc && (preference === 2) && <PreferenceIndicator />}
+            </div>
             <p className="text">{handleNull(donorContact.email)}</p>
           </div>
         </div>
         <div className="contact-row">
           <img src={Location} alt="address" className="contact-icon" />
           <div className="single-field">
-            <p className="label">Mailing Address</p>
+          <div className="header-indicator-box">
+              <p className="label">Mailing Address</p>{' '}
+              {!donorContact.dnc && (preference ===3) && <PreferenceIndicator />}
+            </div>
             <p className="text"> {handleNull(donorContact.mail)}</p>
           </div>
         </div>
@@ -150,6 +163,7 @@ const PreferenceIndicator = () => {
       <div className="indicator-text">Preferred </div>
     </div>
   )
+
 }
 
 const DNCIndicator = () => {

@@ -7,6 +7,7 @@
 }
 
 .modal-content {
+  
   border: 1px solid #cc7503;
   box-shadow: 0px 4px 16px rgba(128, 72, 91, 0.1);
   
@@ -15,6 +16,7 @@
 .modal-footer {
   background: #fff3e2;
   border-top: 0;
+  padding: 1rem 5.73%;
 }
 
 .modal-close {
@@ -26,3 +28,8 @@
   padding: 0;
 }
 
+.modal-header{
+  border:none;
+  padding: 0;
+
+}

@@ -7,11 +7,11 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import history from "./lib/history"
 import Dashboard from "./components/Dashboard";
 import DonorList from "./components/DonorList/DonorList";
+import Edit from "./components/DonorDetails/Edit";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
 import SearchResults from "./components/SearchResults";
-
-
+ 
 function App() {
   
   return (
@@ -43,6 +43,10 @@ function App() {
           <Route path="/donorlist">
             <Navbar />
             <DonorList />
+          </Route>
+          <Route path="/edit">
+            <Navbar />
+            <Edit />
           </Route>
         </Switch>
       </Router>

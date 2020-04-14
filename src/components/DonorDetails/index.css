@@ -1,6 +1,7 @@
-.title {
-  font-size: 32px;
+ .title {
+  font-size: 28px;
 }
+
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -42,7 +43,6 @@
 }
 .id-style {
   line-height: 10px;
-
 }
 .contact-icon {
   padding-right: 24px;
@@ -119,4 +119,73 @@
 .details-table {
   padding: 40px 80px;
   border-top: 1px solid  #ECDFDC;
+}
+
+
+.edit-body{
+
+}
+
+.edit-modal{
+  padding: 48px 64px;
+}
+
+.edit-body-wrapper{
+  display: flex;
+  margin-top: 48px;
+  
+}
+
+.edit-subheader{
+  font-weight: bold;
+font-size: 14px;
+}
+
+.remarks-input{
+  width: 464px;
+  height: 110px;
+  border: 1px solid #EBEDF0;
+  border-radius: 4px;
+}
+
+.preference-container{
+  margin-left: 48px;
+}
+
+.radio-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-errormsg{
+  color: red;
+  margin-right: 10px;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background:#EAE1D5;
+  
+}
+
+input[type='radio']:checked {
+  border: 6px solid #FFA001;
+  background: white;
+}
+
+form > label{
+  display: flex;
+}
+
+.radio-label{
+  margin-left: 16px;
+}
+
+.edit-modal-container > .modal-dialog {
+  margin-top: 166px;
 }

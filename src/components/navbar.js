@@ -46,7 +46,6 @@ const Dropdown = () => {
 function Navbar(props) {
   const [search, setSearch] = useState("")
   const history = useHistory()
-
   const handleSearch = (e) => {
     if (search.length > 0) {
     history.push({
