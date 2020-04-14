@@ -8,27 +8,32 @@ import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
 
-// const getLatestUpload = async ()) => {
-//   return fetch(
-//     `${process.env.REACT_APP_API}/uploads/latest}`,
-//     {
-//       method: 'GET',
-//       headers: { 'Content-Type': 'application/json' }
-//     }
-//   )
-//   const data = await res.json()
-//   return data
-// }
+const getLatestUpload = async () => {
+  return fetch(
+    `${process.env.REACT_APP_API}/uploads/latest}`,
+    {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+  )
+  const data = await Response.json()
+  return data
+}
 //  .then(resp=> resp.json())
 //  .catch(err => console.log(err))
 // }
-// function (props) {
+// function getlatestupload(props) {
 //   const id = useParams()
 //   const [set, setState] = useState(null)
 
 //   useEffect(() => {
-//     getLatestUpload(id).then(data => setState(data))
+//     getLatestUpload().then(data => setState(data))
 //   }, [id])
+
+// const id =data.id
+// const firstDate
+// const lastDate
+// const updateddAt
 const fakeUpdates = {
   lastUpdate: '16 Sep 2019, 13:94',
   period: '1 Sep 2019 - 31 Oct 2019'
