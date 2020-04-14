@@ -7,37 +7,42 @@ import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
+import {dateStringOf , dateVariation, periodFormatter, reformatDate} from '../../lib/date.js'
 
-const getLatestUpload = async () => {
+const getLatestUpload =  () => {
   return fetch(
-    `${process.env.REACT_APP_API}/uploads/latest}`,
+    `${process.env.REACT_APP_API}/uploads/latest,
     {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     }
   )
-  const data = await Response.json()
-  return data
-}
-//  .then(resp=> resp.json())
-//  .catch(err => console.log(err))
-// }
-// function getlatestupload(props) {
-//   const id = useParams()
-//   const [set, setState] = useState(null)
+ .then(resp => resp.json())
+ .catch(err => {
+   console.log("err:  ",JSON.stringify(err)));
+ });  
+};
 
-//   useEffect(() => {
-//     getLatestUpload().then(data => setState(data))
-//   }, [id])
-
-// const id =data.id
-// const firstDate
-// const lastDate
-// const updateddAt
-const fakeUpdates = {
-  lastUpdate: '16 Sep 2019, 13:94',
-  period: '1 Sep 2019 - 31 Oct 2019'
+function LatestUpdates(props) {
+  const [id,setId] = useState();
+  const [firstUpdate,setFirstUpdate] =useState() /*:period: '1 Sep 2019 - 31 Oct 2019'*/
+  const [lastUpdate, setLastUpdate] =useState() /*: '16 Sep 2019, 13:94',*/
+  const [updatedAt,setUpdatedAt]=useState();
 }
+useEffect(()=> {
+  getLatestUpload().then(result=> {
+    console.log(result);
+    setId(result.data);
+    setFirstUpdate(result.data);
+  });
+  []);
+})
+
+// const fakeUpdates = {
+//   lastUpdate: '16 Sep 2019, 13:94',
+//   period: '1 Sep 2019 - 31 Oct 2019'
+// } 
+
 const priorUploadState = {
   showPopUp: false,
   ipcData: [],
@@ -87,7 +92,7 @@ const UpdateDb = () => {
         return failed()
       }
     }
-
+    
     fetch(`${process.env.REACT_APP_API}/donations/upload`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
