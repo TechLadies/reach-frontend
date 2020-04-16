@@ -149,12 +149,6 @@ const getLatestUpload = async () => {
     })
 }
 
-
-// const fakeUpdates = {
-//   lastUpdate: 'latestUpload.createdAt,
-//   period: 'latestUpload.firstUpdate -latestUpload.LastUpdate 1 Sep 2019 - 31 Oct 2019'
-// }
-
 const UploadMsg = () => {
   const [latestUpload, setLatestUpload] = useState({})
 
@@ -164,38 +158,33 @@ const UploadMsg = () => {
     })
   }, [])
 
-   const latestdate =latestUpload.createdAt
-   console.log(typeof date)
-  //  console.log(latestdate)
-  // date = latestdate.split('T')
-  //  console.log(latestdate.split('-'))
-
-  // const splitDate = value['latest.createdAt'].split('T')
-  // const Date =latestUpload.createdAt
-  // const uploadDate = Date.slice(0,10) 
-  // console.log(uploadDate)
-     // 2) use dateStringOf(date) to get date format - dateStringOf(createdAt) 
-
-   // 3) create a function to format the time (if required)
-  //  4) apply the time formatting function to the time  */
-
-  //   const gettime  = 
+  const dateString = latestUpload.createdAt
+  console.log(typeof dateString) /*string datatype*/
+  console.log(dateString) /*show on cosole date*/ 
+  //  const latestDate = new Date(dateString) /*convert into date object*/
+  //  console.log(latestDate)
+  //  console.log(typeof latestDate)
   
-
-
+  // convert above datestring string  in to a date. pass in the latestes date as the arg to a function
+  // u will get back a dateobject that you can pass into datestringOf
+  // 2) use dateStringOf(date) to get date format - dateStringOf(createdAt) 
+  // 3) create a function to format the time (if required) -
+     // console.log(latestdate.toLocaleTimeString('en-US'));
+  // console.log
+ //  4) apply the time formatting function to the time  */
   return (
     <div>
       <div className=" update-top">
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            <p className=" update-data">{latestUpload.createdAt}</p>
+            <p className=" update-data">{formatDate(latestUpload.createdAt)}</p>
           </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
-            <p className="update-data"> {latestUpload.firstDate} - {latestUpload.lastDate}</p>
+            <p className="update-data"> {formatDate(latestUpload.firstDate)} - {formatDate(latestUpload.lastDate)}</p>
           </div>
         </div>
       </div>
@@ -220,6 +209,21 @@ const FailMsg = () => {
     </div>
   )
 }
+
+// here we should pass on latestUplod(result)
+function formatDate() {
+  // this function need more generic way to handle 3 different dates 
+  const dateString = latestUpload.createdAt
+  console.log(typeof dateString) /*string datatype*/
+  console.log(dateString)
+  const latestDate = new Date(dateString) /*convert into date object*/
+  //  console.log(latestDate)
+  console.log(typeof latestDate)
+  const formatlatestDate = dateStringOf(latestDate)
+  console.log(formatlatestDate)
+  
+// work is not completed yet -
+  }
 
 
 
