@@ -157,17 +157,32 @@ const getLatestUpload = async () => {
 
 const UploadMsg = () => {
   const [latestUpload, setLatestUpload] = useState({})
+
   useEffect(() => {
     getLatestUpload().then((result) => {
       setLatestUpload(result)
     })
   }, [])
 
- /* 1) try to split 2018-01-21 T00:00:00.000Z to get date and time 
-    2) use dateStringOf(date) to get date format
-    3) create a function to format the time (if required)
-    4) apply the time formatting function to the time  */
- 
+   const latestdate =latestUpload.createdAt
+   console.log(typeof date)
+  //  console.log(latestdate)
+  // date = latestdate.split('T')
+  //  console.log(latestdate.split('-'))
+
+  // const splitDate = value['latest.createdAt'].split('T')
+  // const Date =latestUpload.createdAt
+  // const uploadDate = Date.slice(0,10) 
+  // console.log(uploadDate)
+     // 2) use dateStringOf(date) to get date format - dateStringOf(createdAt) 
+
+   // 3) create a function to format the time (if required)
+  //  4) apply the time formatting function to the time  */
+
+  //   const gettime  = 
+  
+
+
   return (
     <div>
       <div className=" update-top">
@@ -205,5 +220,8 @@ const FailMsg = () => {
     </div>
   )
 }
+
+
+
 
 export default UpdateDb
