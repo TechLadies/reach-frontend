@@ -158,6 +158,7 @@ const UploadMsg = () => {
     })
   }, [])
 
+  // for createdAt 
   const dateString = latestUpload.createdAt
   // console.log(typeof dateString) /*string datatype*/
   // console.log(dateString) 
@@ -172,30 +173,30 @@ const UploadMsg = () => {
    // display date and time stamp together ---
   const latestEvent = formatlatestDate + " " + event
   console.log(latestEvent)
+
+  const fds = latestUpload.firstDate
+  const firstDate = new Date(fds)
+  const lds = latestUpload.lastDate
+  const lastDate = new Date(lds)
  
-  // convert above datestring string  in to a date. pass in the latestes date as the arg to a function
-  // u will get back a dateobject that you can pass into datestringOf
-  // 2) use dateStringOf(date) to get date format - dateStringOf(createdAt) 
-  // 3) create a function to format the time (if required) -
-     // console.log(latestdate.toLocaleTimeString('en-US'));
-  // console.log
- //  4) apply the time formatting function to the time  */
   return (
     <div>
       <div className=" update-top">
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            <p className=" update-data">{formatDate(latestUpload.createdAt)}</p>
+            {/* <p className=" update-data">{formatDate(latestUpload.createdAt)}</p> */}
+            <p className=" update-data">{formatlatestDate}</p>
           </div>
+        </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
-            <p className="update-data"> {formatDate(latestUpload.firstDate)} - {formatDate(latestUpload.lastDate)}</p>
+            {/* the original line <p className="update-data"> {formatDate(latestUpload.firstDate)} - {formatDate(latestUpload.lastDate)}</p> */}
+            {/* the code if using function <p className=" update-data">{formatFirstDate} - {formatLastDate}</p> */}
+            <p className=" update-data">{dateStringOf(firstDate)} - {dateStringOf(lastDate)}</p>
           </div>
-        </div>
-      </div>
       <div className="update-bottom">
         <div className="container3">
           <p className="black-description">
@@ -204,11 +205,13 @@ const UploadMsg = () => {
         </div>
       </div>
     </div>
+    </div>
   )
 }
 
 const FailMsg = () => {
   return (
+
     <div className="fail-container">
       <p className="fail-title">Upload Failed</p>
       <p className="fail-msg">
@@ -218,11 +221,8 @@ const FailMsg = () => {
   )
 }
 
-// function to convert datestring object into date object, split in to req format and return to display 
 function formatDate(dateString) {
 
- // 
-//return  date formated in the form 21 Jan 2020 03:04 format
-// return {latestEvent}
   }
+
 export default UpdateDb
