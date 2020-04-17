@@ -159,12 +159,20 @@ const UploadMsg = () => {
   }, [])
 
   const dateString = latestUpload.createdAt
-  console.log(typeof dateString) /*string datatype*/
-  console.log(dateString) /*show on cosole date*/ 
-  //  const latestDate = new Date(dateString) /*convert into date object*/
-  //  console.log(latestDate)
-  //  console.log(typeof latestDate)
-  
+  // console.log(typeof dateString) /*string datatype*/
+  // console.log(dateString) 
+  const latestDate = new Date(dateString) /*convert into date object*/
+  console.log(latestDate)
+  // console.log(typeof latestDate)
+  const formatlatestDate = dateStringOf(latestDate) /* ot get a desired date format*/
+  console.log(formatlatestDate) /* this also works */
+  // console.log(latestDate.toLocaleTimeString('en-US')) /* this works*/
+  const event = latestDate.toLocaleTimeString('en-US')
+  console.log(event)
+   // display date and time stamp together ---
+  const latestEvent = formatlatestDate + " " + event
+  console.log(latestEvent)
+ 
   // convert above datestring string  in to a date. pass in the latestes date as the arg to a function
   // u will get back a dateobject that you can pass into datestringOf
   // 2) use dateStringOf(date) to get date format - dateStringOf(createdAt) 
@@ -210,22 +218,11 @@ const FailMsg = () => {
   )
 }
 
-// here we should pass on latestUplod(result)
-function formatDate() {
-  // this function need more generic way to handle 3 different dates 
-  const dateString = latestUpload.createdAt
-  console.log(typeof dateString) /*string datatype*/
-  console.log(dateString)
-  const latestDate = new Date(dateString) /*convert into date object*/
-  //  console.log(latestDate)
-  console.log(typeof latestDate)
-  const formatlatestDate = dateStringOf(latestDate)
-  console.log(formatlatestDate)
-  
-// work is not completed yet -
+// function to convert datestring object into date object, split in to req format and return to display 
+function formatDate(dateString) {
+
+ // 
+//return  date formated in the form 21 Jan 2020 03:04 format
+// return {latestEvent}
   }
-
-
-
-
 export default UpdateDb
