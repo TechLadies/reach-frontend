@@ -7,7 +7,7 @@ import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
-import {dateStringOf } from '../../lib/date.js'
+import { dateStringOf } from '../../lib/date.js'
 
 const priorUploadState = {
   showPopUp: false,
@@ -146,6 +146,7 @@ const getLatestUpload = async () => {
 
 const UploadMsg = () => {
   const [latestUpload, setLatestUpload] = useState({})
+  console.log(latestUpload)
 
   useEffect(() => {
     getLatestUpload().then((result) => {
@@ -153,44 +154,29 @@ const UploadMsg = () => {
     })
   }, [])
 
-  // date formatting for createdAt 
-  function date01() {
-    let dateString = latestUpload.createdAt
-    let createdDate = new Date(dateString) /*convert into date object*/
-    console.log(createdDate)  // console.log(typeof latestDate)
-    let formatLatestDate = dateStringOf(createdDate) /* ot get a desired date format*/
-    console.log(formatLatestDate) /* this also works */
-    let event = createdDate.toLocaleTimeString('en-US')
-    console.log(event)
-    // display date and time stamp together ---
-    let latestEvent = formatLatestDate + " " + event
-    console.log(latestEvent)
-    return(latestEvent); 
-  }
-  const latestEvent = date01();
-  const fds = latestUpload.firstDate
-  const firstDate = new Date(fds)
-  const lds = latestUpload.lastDate
-  const lastDate = new Date(lds)
  
+  const lastUpdate = latestUpload.createdAt
+  const firstDate = new Date(latestUpload.firstDate)
+  const lastDate = new Date(latestUpload.lastDate)
+
   return (
     <div>
       <div className=" update-top">
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            {/*the original line <p className=" update-data">{latestUpload.createdAt}</p> */}
-            {/* alternate code for using dateStringof function <p className=" update-data">{dateStringOf(formatLatestDate)}</p> */}
-            <p className=" update-data">{latestEvent}</p>
+            <p className=" update-data">{lastUpdate && lastDbUpdateFormat(lastUpdate)}</p>
           </div>
-        </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
-            {/* the original line <p className="update-data"> {latestUpload.firstDate} - {latestUpload.lastDate}</p> */}
-            <p className=" update-data">{dateStringOf(firstDate)} - {dateStringOf(lastDate)}</p>
+            <p className="update-data">
+              {lastUpdate && dateStringOf(firstDate) + "-" +  dateStringOf(lastDate)}
+            </p>
           </div>
+        </div>
+      </div>
       <div className="update-bottom">
         <div className="container3">
           <p className="black-description">
@@ -199,13 +185,11 @@ const UploadMsg = () => {
         </div>
       </div>
     </div>
-    </div>
   )
 }
 
 const FailMsg = () => {
   return (
-
     <div className="fail-container">
       <p className="fail-title">Upload Failed</p>
       <p className="fail-msg">
@@ -215,20 +199,14 @@ const FailMsg = () => {
   )
 }
 
-// function formatDate()
-//  {
-//     let dateString = latestUpload.createdAt
-//     let createdDate = new Date(dateString) /*convert into date object*/
-//     console.log(createdDate)  // console.log(typeof latestDate)
-//     let formatLatestDate = dateStringOf(createdDate) /* ot get a desired date format*/
-//     console.log(formatLatestDate) /* this also works */
-//     // console.log(latestDate.toLocaleTimeString('en-US')) /* this works*/
-//     let event = createdDate.toLocaleTimeString('en-US')
-//     console.log(event)
-//     // display date and time stamp together ---
-//     let latestEvent = formatLatestDate + " " + event
-//     console.log(latestEvent)
-//     return(latestEvent); 
-//   }
-//   const latestEvent = formatDate();
+  function lastDbUpdateFormat(date) {
+    const lastUpdateDate = new Date(date)
+    const formatLatestDate = dateStringOf(
+      lastUpdateDate
+    ) 
+    const lastUpdateTime = lastUpdateDate.toLocaleTimeString('en-US')
+    const latestUpdate = formatLatestDate + ' ' + lastUpdateTime
+    return latestUpdate
+  }
+
 export default UpdateDb
