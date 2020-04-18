@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Loginimage from '../images/Group 5.svg'
 import Logo from '../images/Logo.svg'
-import {useHistory } from 'react-router-dom'
+import { useHistory, useParams, useLocation } from 'react-router-dom'
 
 const initialState = {
   email: '',
   password: '',
-  notify: ''
+  notify: '',
 }
 
 function Login(props) {
@@ -15,9 +15,13 @@ function Login(props) {
     history.push('/')
   }
 
+  const keyValue = useLocation().search
+  const tokenParams = new URLSearchParams(keyValue)
+  const resetPasswordToken = tokenParams.get('token')
+  console.log(resetPasswordToken)
+
   const [state, setState] = useState(initialState)
   const resetPasswordMode = props.resetPasswordStatus
-  const [resultMessage, setResultMessage] = useState({})
 
   const handleChange = (e) => {
     setState({
@@ -60,25 +64,31 @@ function Login(props) {
       })
   }
 
-  const handleResetPwSubmit = (e) => {
+  const handleResetPwEmailSubmit = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3001/users/reset_password_email`,{
+    fetch(`http://localhost:3001/users/reset_password_email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: state.email
+        email: state.email,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          res.json().then((msg) => setState({ email: '', notify: msg.message }))
+        }
+        if (res.status === 404) {
+          res.json().then((msg) => setState({ email: '', notify: msg.message }))
+        }
+        if (res.status === 500) {
+          return setState({
+            email: '',
+            notify:
+              'Server Error, please try again or contact your admin if problem persist',
+          })
+        }
       })
-    }).then(res=>{
-      if (res.status === 200){
-        res.json().then(msg=> setState({email: '', notify: msg.message}))
-      }
-      if (res.status === 404){
-        res.json().then(msg=> setState({email: '', notify: msg.message}))
-      }
-      if (res.status === 500){
-        return setState({email: '', notify: 'Server Error, please try again or contact your admin if problem persist'})
-      }
-    }).catch(err=> console.log(err))
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -88,50 +98,67 @@ function Login(props) {
         <img src={Logo} className="logo" alt="Logo" />
         <form onSubmit={handleLoginSubmit}>
           <div className="login-form-list">
-             <label htmlFor="email">{resetPasswordMode? "Please enter your email address": "Email Address"}</label>
+            <label htmlFor="email">
+              {resetPasswordToken
+                ? 'New Password'
+                : null} 
+                {!resetPasswordToken && resetPasswordMode ? 'Please enter your email address': null}
+                {!resetPasswordMode ? 'Email Address' : null}
+            </label>
 
             <input
               type="text"
               name="email"
-              placeholder=" Enter your email address"
+              placeholder= {resetPasswordToken ? "Enter new password": " Enter your email address"}
               value={state.email}
               onChange={handleChange}
               className="textbox"
             />
           </div>
-          {resetPasswordMode ? null : (
+          {resetPasswordMode && !resetPasswordToken ? null: (
             <div className="login-form-list">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password"> {resetPasswordToken ? "Re-enter new password": "Password"}</label>
 
               <input
                 type="password"
                 name="password"
-                placeholder=" Enter your password"
+                placeholder= {resetPasswordToken? "Re-enter new password" : "Enter your password"}
                 value={state.password}
                 onChange={handleChange}
                 className="textbox"
               />
             </div>
           )}
-          {resetPasswordMode ? null: <div className="login-form-list">
-            <button
-              onClick={() => history.push('/reset-password')}
-              className = "forgot-ps"
-              type ="button"
-            >
-              Forgot password?
-            </button>
-          </div>}
+          {resetPasswordMode ? null : (
+            <div className="login-form-list">
+              <button
+                onClick={() => history.push('/reset-password')}
+                className="forgot-ps"
+                type="button"
+              >
+                Forgot password?
+              </button>
+            </div>
+          )}
 
           {state.notify && <p className="error-msg">{state.notify}</p>}
-          <button onClick={resetPasswordMode? handleResetPwSubmit : handleLoginSubmit} className="login-button" type= "button"> 
-            <span className="login-button-text">{resetPasswordMode ? 'Send reset password email': 'Login'}</span>
+          <button
+            onClick={
+              resetPasswordMode ? handleResetPwEmailSubmit : handleLoginSubmit
+            }
+            className="login-button"
+            type="button"
+          >
+            <span className="login-button-text">
+              {resetPasswordToken ? 'Reset password':null}
+              {!resetPasswordToken && resetPasswordMode ? 'Send reset password email':null}
+              {!resetPasswordMode ? 'Login': null}
+            </span>
           </button>
         </form>
       </div>
     </div>
   )
 }
-
 
 export default Login

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
@@ -13,7 +13,6 @@ import DonorDetails from "./components/DonorDetails";
 import SearchResults from "./components/SearchResults";
  
 function App() {
-  
   return (
     <div className="App">
       <Router history={history}>
@@ -22,7 +21,7 @@ function App() {
             <Login />
           </Route>
           <Route path="/reset-password">
-            <Login resetPasswordStatus= {true}/>
+            <Login resetPasswordStatus= {true} />
           </Route>
           <Route path="/dummy">
             <Dummy />
