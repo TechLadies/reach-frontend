@@ -7,12 +7,7 @@ import ConfirmUpload from './ConfirmUpload'
 import ProgressBar from './ProgressBar'
 import SuccessUpload from './Success'
 import FailedImg from '../../images/uploadfail.svg'
-import {
-  dateStringOf,
-  dateVariation,
-  periodFormatter,
-  reformatDate,
-} from '../../lib/date.js'
+import {dateStringOf } from '../../lib/date.js'
 
 const priorUploadState = {
   showPopUp: false,
@@ -158,22 +153,21 @@ const UploadMsg = () => {
     })
   }, [])
 
-  // for createdAt 
-  const dateString = latestUpload.createdAt
-  // console.log(typeof dateString) /*string datatype*/
-  // console.log(dateString) 
-  const latestDate = new Date(dateString) /*convert into date object*/
-  console.log(latestDate)
-  // console.log(typeof latestDate)
-  const formatlatestDate = dateStringOf(latestDate) /* ot get a desired date format*/
-  console.log(formatlatestDate) /* this also works */
-  // console.log(latestDate.toLocaleTimeString('en-US')) /* this works*/
-  const event = latestDate.toLocaleTimeString('en-US')
-  console.log(event)
-   // display date and time stamp together ---
-  const latestEvent = formatlatestDate + " " + event
-  console.log(latestEvent)
-
+  // date formatting for createdAt 
+  function date01() {
+    let dateString = latestUpload.createdAt
+    let createdDate = new Date(dateString) /*convert into date object*/
+    console.log(createdDate)  // console.log(typeof latestDate)
+    let formatLatestDate = dateStringOf(createdDate) /* ot get a desired date format*/
+    console.log(formatLatestDate) /* this also works */
+    let event = createdDate.toLocaleTimeString('en-US')
+    console.log(event)
+    // display date and time stamp together ---
+    let latestEvent = formatLatestDate + " " + event
+    console.log(latestEvent)
+    return(latestEvent); 
+  }
+  const latestEvent = date01();
   const fds = latestUpload.firstDate
   const firstDate = new Date(fds)
   const lds = latestUpload.lastDate
@@ -185,16 +179,16 @@ const UploadMsg = () => {
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            {/* <p className=" update-data">{formatDate(latestUpload.createdAt)}</p> */}
-            <p className=" update-data">{formatlatestDate}</p>
+            {/*the original line <p className=" update-data">{latestUpload.createdAt}</p> */}
+            {/* alternate code for using dateStringof function <p className=" update-data">{dateStringOf(formatLatestDate)}</p> */}
+            <p className=" update-data">{latestEvent}</p>
           </div>
         </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
-            {/* the original line <p className="update-data"> {formatDate(latestUpload.firstDate)} - {formatDate(latestUpload.lastDate)}</p> */}
-            {/* the code if using function <p className=" update-data">{formatFirstDate} - {formatLastDate}</p> */}
+            {/* the original line <p className="update-data"> {latestUpload.firstDate} - {latestUpload.lastDate}</p> */}
             <p className=" update-data">{dateStringOf(firstDate)} - {dateStringOf(lastDate)}</p>
           </div>
       <div className="update-bottom">
@@ -221,8 +215,20 @@ const FailMsg = () => {
   )
 }
 
-function formatDate(dateString) {
-
-  }
-
+// function formatDate()
+//  {
+//     let dateString = latestUpload.createdAt
+//     let createdDate = new Date(dateString) /*convert into date object*/
+//     console.log(createdDate)  // console.log(typeof latestDate)
+//     let formatLatestDate = dateStringOf(createdDate) /* ot get a desired date format*/
+//     console.log(formatLatestDate) /* this also works */
+//     // console.log(latestDate.toLocaleTimeString('en-US')) /* this works*/
+//     let event = createdDate.toLocaleTimeString('en-US')
+//     console.log(event)
+//     // display date and time stamp together ---
+//     let latestEvent = formatLatestDate + " " + event
+//     console.log(latestEvent)
+//     return(latestEvent); 
+//   }
+//   const latestEvent = formatDate();
 export default UpdateDb
