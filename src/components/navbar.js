@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { NavLink, useHistory} from 'react-router-dom'
+import logout from "../lib/logout"
+// import Login from "./components/Login";
+import { Redirect } from "react-router";
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -14,6 +17,7 @@ const Dropdown = () => {
     setIsVisible(false)
   })
 
+  const history = useHistory();
   return (
     <>
       <a
@@ -35,8 +39,11 @@ const Dropdown = () => {
         aria-labelledby="navbarDropdown"
       >
         <i className="fas fa-chevron-down"></i>
-        <a className="dropdown-item" href="/">
-          Log Out
+        <a className="dropdown-item" href="/" 
+           onClick= {() =>{ history.push("/"); console.log(history); }}>
+           {/* onClick={() => handleLogoutClick(() => (<Redirect to="/login" />))}> */}
+      
+          Log Out 
         </a>
       </div>
     </>
@@ -127,4 +134,37 @@ function Navbar(props) {
     </nav>
   )
 }
+
+// function logOut() {
+//   const initialState  = isLoggedIn
+//   const [state ,setState] = setState(initialState);
+
+
+//   function handleLogoutClick(e) {
+//     e.preventDefault()
+//       handlelogout((error) =>{
+//         sessionStorage.clear();
+//         this.setState({loggedIn: false});
+//         history.push("/login");
+//         console.log("Logout successful");
+         
+//      });
+  
+//      return (
+//       {
+//         // this.setState.LoggedIn &&
+//         <Redirect to="/login" />
+//        }
+//     );
+//     }
+  
+//   // async function handleLogout() {
+//   //   // sessionStorage.clear();
+//   //   this.setState({loggedIn: false};
+//   //   history.push("/login");
+//   // }
+  
+// }
+
+
 export default Navbar
