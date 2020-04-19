@@ -75,10 +75,10 @@ function Login(props) {
     })
       .then((res) => {
         if (res.status === 200) {
-          res.json().then((msg) => setState({ email: '', notify: msg.message }))
+          showMsg(res,setState)
         }
         if (res.status === 404) {
-          res.json().then((msg) => setState({ email: '', notify: msg.message }))
+          showMsg(res,setState)
         }
         if (res.status === 500) {
           return setState({
@@ -91,6 +91,37 @@ function Login(props) {
       .catch((err) => console.log(err))
   }
 
+  const resetPassword = (e) => {
+    e.preventDefault()
+    fetch(`http://localhost:3001/users/reset_password`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        token: resetPasswordToken,
+        password1: state.password1,
+        password2: state.password2,
+      }),
+    }).then((res) => {
+      if (!res.ok){
+        showMsg(res,setState)
+      }
+      if(res.ok){
+        showMsg(res,setState)
+      }
+    })
+  }
+  const activatedHandler = () => {
+    if (resetPasswordToken) {
+      return resetPassword
+    }
+    if (!resetPasswordToken && resetPasswordMode) {
+      return handleResetPwEmailSubmit
+    }
+    if (!resetPasswordMode) {
+      return handleLoginSubmit
+    }
+  }
+
   return (
     <div className="login-container">
       <img src={Loginimage} className="login-img" alt="Login" />
@@ -99,31 +130,42 @@ function Login(props) {
         <form onSubmit={handleLoginSubmit}>
           <div className="login-form-list">
             <label htmlFor="email">
-              {resetPasswordToken
-                ? 'New Password'
-                : null} 
-                {!resetPasswordToken && resetPasswordMode ? 'Please enter your email address': null}
-                {!resetPasswordMode ? 'Email Address' : null}
+              {resetPasswordToken ? 'New Password' : null}
+              {!resetPasswordToken && resetPasswordMode
+                ? 'Please enter your email address'
+                : null}
+              {!resetPasswordMode ? 'Email Address' : null}
             </label>
 
             <input
-              type="text"
-              name="email"
-              placeholder= {resetPasswordToken ? "Enter new password": " Enter your email address"}
-              value={state.email}
+              type={resetPasswordToken ? 'password' : 'text'}
+              name={resetPasswordToken ? 'password1' : 'email'}
+              placeholder={
+                resetPasswordToken
+                  ? 'Enter new password'
+                  : ' Enter your email address'
+              }
+              value={resetPasswordToken ? state.password1 : state.email}
               onChange={handleChange}
               className="textbox"
             />
           </div>
-          {resetPasswordMode && !resetPasswordToken ? null: (
+          {resetPasswordMode && !resetPasswordToken ? null : (
             <div className="login-form-list">
-              <label htmlFor="password"> {resetPasswordToken ? "Re-enter new password": "Password"}</label>
+              <label htmlFor="password">
+                {' '}
+                {resetPasswordToken ? 'Re-enter new password' : 'Password'}
+              </label>
 
               <input
                 type="password"
-                name="password"
-                placeholder= {resetPasswordToken? "Re-enter new password" : "Enter your password"}
-                value={state.password}
+                name={resetPasswordToken ? 'password2' : 'password'}
+                placeholder={
+                  resetPasswordToken
+                    ? 'Re-enter new password'
+                    : 'Enter your password'
+                }
+                value={resetPasswordToken ? state.password2 : state.password}
                 onChange={handleChange}
                 className="textbox"
               />
@@ -141,18 +183,18 @@ function Login(props) {
             </div>
           )}
 
-          {state.notify && <p className="error-msg">{state.notify}</p>}
+          {state.notify ? <p className="error-msg">{state.notify}</p> : null}
           <button
-            onClick={
-              resetPasswordMode ? handleResetPwEmailSubmit : handleLoginSubmit
-            }
+            onClick={activatedHandler()}
             className="login-button"
             type="button"
           >
             <span className="login-button-text">
-              {resetPasswordToken ? 'Reset password':null}
-              {!resetPasswordToken && resetPasswordMode ? 'Send reset password email':null}
-              {!resetPasswordMode ? 'Login': null}
+              {resetPasswordToken ? 'Reset password' : null}
+              {!resetPasswordToken && resetPasswordMode
+                ? 'Send reset password email'
+                : null}
+              {!resetPasswordMode ? 'Login' : null}
             </span>
           </button>
         </form>
@@ -160,5 +202,7 @@ function Login(props) {
     </div>
   )
 }
+
+const showMsg = (res, setState) => res.json().then(msg => setState({notify: msg.message}))
 
 export default Login
