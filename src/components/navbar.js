@@ -11,11 +11,9 @@ const Dropdown = () => {
     e.nativeEvent.stopImmediatePropagation()
   }
   document.addEventListener('click', () => {
-    console.log('click')
     setIsVisible(false)
   })
 
-  const history = useHistory();
   return (
     <>
       <a
