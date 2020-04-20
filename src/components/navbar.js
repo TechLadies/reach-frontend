@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink, useHistory} from 'react-router-dom'
+import logout from "../lib/logout" 
 
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -10,7 +11,6 @@ const Dropdown = () => {
     e.nativeEvent.stopImmediatePropagation()
   }
   document.addEventListener('click', () => {
-    console.log('click')
     setIsVisible(false)
   })
 
@@ -35,8 +35,9 @@ const Dropdown = () => {
         aria-labelledby="navbarDropdown"
       >
         <i className="fas fa-chevron-down"></i>
-        <a className="dropdown-item" href="/">
-          Log Out
+        <a className="dropdown-item" href="/" 
+           onClick={logout}> 
+           Log Out 
         </a>
       </div>
     </>
@@ -100,7 +101,6 @@ function Navbar(props) {
        
       </form>
     
-
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
@@ -127,4 +127,5 @@ function Navbar(props) {
     </nav>
   )
 }
+
 export default Navbar
