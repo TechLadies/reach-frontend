@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { NavLink, useHistory} from 'react-router-dom'
 import logout from "../lib/logout" 
 
-import { Redirect } from "react-router";
-
 const Dropdown = () => {
   const [isVisible, setIsVisible] = useState(false)
   const toggleOpen = e => {
@@ -40,7 +38,7 @@ const Dropdown = () => {
       >
         <i className="fas fa-chevron-down"></i>
         <a className="dropdown-item" href="/" 
-           onClick={() => logout()}> 
+           onClick={logout}> 
            Log Out 
         </a>
       </div>
