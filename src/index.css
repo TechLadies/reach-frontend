@@ -108,6 +108,10 @@ color: white;
   border-color: #80485B;
 }
 
+.pw-reset-msg{
+  font-size: 28px;
+}
+
 /* .page-number :active {
   background: #80485B;
   font-weight: bold;
