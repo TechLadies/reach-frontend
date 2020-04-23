@@ -1,24 +1,38 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
+// import * as FileSaver from 'file-saver';
+// import * as XLSX from 'xlsx';
+import * as Papa from 'papaparse';
+// import { Row } from 'react-bootstrap';
 
-const ExportCSV = ({csvData, fileName}) => {
+// step1 . fetch the  API - donorlist
+// const donorlist =async () => {
+    // const res = await fetch(
+    // '`${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`', 
+    // {
+//   method: 'GET'
+// })
+// const data =res.json()
+// return data 
+// }
+// donorList()
+    // getdonorData().then((result) =>{()}); 
 
-    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    const fileExtension = '.xlsx';
+//  step 2 convert donorlist data from json to csv
 
-    const exportToCSV = (csvData, fileName) => {
-        const ws = XLSX.utils.json_to_sheet(csvData);
-        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
-        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const data = new Blob([excelBuffer], {type: fileType});
-        FileSaver.saveAs(data, fileName + fileExtension);
-    }
+// function convertJSONToCSV(objArray /*or JSONData,ReportTitle,ShowLabel*/) {
+    // var csv = Papa.unparse({
+    //     "fields": ["Column 1", "Column 2"],
+    //     "data": [
+    //         ["", ""],
+    //         ["", ""]
+    //     ]
+    // });
+//     }
 
-    return (
-        <Button variant="warning" onClick={(e) => exportToCSV(csvData,fileName)}>Export</Button>
-    )
-}
+//     return csv;
+// }
 
-export default ExportCSV;
+//  step 3 export csv // function exportCsvFile
+
+//  export default convertJSONToCSV;
+// export default exportCSVFile;

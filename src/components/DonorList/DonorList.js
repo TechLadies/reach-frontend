@@ -15,15 +15,20 @@ import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 
-const getDonorData = async page => {
-  return fetch( 
+import * as Papa from 'papaparse'
+
+const getDonorData = async page => { 
+ return  fetch( 
     `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
-  )
-    .then(resp => resp.json())
-    .catch(err => {
-      console.log("err: ", JSON.stringify(err));
-    });
-};
+      )
+     .then(resp => resp.json())
+     .catch(err => {
+         console.log("err: ", JSON.stringify(err));
+    })
+    // .then(data=>data.json())
+    };
+
+
 
 const getDonorCount = async () => {
   return fetch(`${process.env.REACT_APP_API}/donors/count`)
@@ -56,7 +61,7 @@ function DonorList(props) {
       setDonationList(result.data);
     });
   }
-
+    
   useEffect(() => {});
 
   // Change page
@@ -115,7 +120,7 @@ function DonorList(props) {
             </button>
             <button
               onClick={() => {
-                setFilterOpen(true);
+                exportCsvFile();
               }}
               className="button orangebutton"
             >
@@ -298,5 +303,20 @@ function DonorList(props) {
     </div>
   );
 }
+
+function convertToCsv(objectArray)
+{
+
+}
+
+function exportCsvFile(headers,items,fileTitle)
+ {
+
+// //  console.log(Data);
+//   // const csvData = Papa.unparse(Data)
+ console.log("we are in export csv function");
+ }
+
+
 
 export default DonorList;

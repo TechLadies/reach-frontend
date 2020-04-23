@@ -1,0 +1,16 @@
+// var csv = Papa.unparse(donorlist);
+//  we get data in form of array object
+// {data: Array(10), perPage: 10, offset: 0}
+// data: Array(10)
+// 0: {idNo: "S409382F", name: "Keyboard Warrior", contactNo: null, email: "", dnc: true, …}
+// 1: {idNo: "S9209230H", name: "Sylvica Chan", contactNo: null, email: "", dnc: null, …}
+// 2: {idNo: "S23231232A", name: "TowKay Neo", contactNo: "829212412", email: "tkneo@gmail.com", dnc: true, …}
+// 3: {idNo: "8293270", name: "MediaWks", contactNo: "82938101", email: "mediaworks@gmail.com", dnc: null, …}
+// 4: {idNo: "S4200980238R", name: "ChaeBol5", contactNo: "82938101", email: "rayrin1990@gmail.com", dnc: false, …}
+// 5: {idNo: "19802487G", name: "Duckle", contactNo: "63789011", email: "tang@duckle.com", dnc: null, …}
+// 6: {idNo: "5282342387A", name: "Good Pte Ltd", contactNo: "97837383", email: "cy@goodland.com.sg", dnc: null, …}
+// 7: {idNo: "S78023479P", name: "Grace Assembly", contactNo: null, email: "", dnc: null, …}
+// 8: {idNo: "G0923452K", name: "S Anr", contactNo: null, email: "anwarshami@gmail.com", dnc: null, …}
+// 9: {idNo: "S69024238765D", name: "Teo Wei", contactNo: "98373650", email: "tzewei.teo@reach.org.sg", dnc: null, …}
+// length: 10
+// __proto__: Array(0)
