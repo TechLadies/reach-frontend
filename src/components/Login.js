@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
 import Loginimage from '../images/Group 5.svg'
 import Logo from '../images/Logo.svg'
-import { useHistory, useParams, useLocation } from 'react-router-dom'
-
-const initialState = {
-  email: '',
-  password: '',
-  notify: '',
-  passwordResetSuccess: false,
-}
+import { useHistory, useLocation } from 'react-router-dom'
 
 function Login(props) {
   const history = useHistory()
   if (localStorage.getItem('token')) {
     history.push('/')
   }
-  const [state, setState] = useState(initialState)
-  const resetPasswordMode =  props.resetPasswordStatus
+
+  const resetPasswordMode = props.resetPasswordStatus
   const keyValue = useLocation().search
   const tokenParams = new URLSearchParams(keyValue)
   const resetPasswordToken = tokenParams.get('token')
-
+  const initialState = {
+    email: '',
+    password: '',
+    notify: '',
+    passwordResetSuccess: false,
+    password1: '',
+    password2: '',
+  }
+  const [state, setState] = useState(initialState)
   const handleChange = (e) => {
     setState({
       ...state,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
   const validateLogin = (response) => {
     if (response.ok) {
       response.json().then((data) => {
-        console.log(data.token)
         localStorage.setItem('token', data.token)
         history.push('/')
       })
@@ -72,7 +72,11 @@ function Login(props) {
     })
       .then((res) => {
         if (res.status === 200) {
-          showMsg(res, setState)
+          res
+            .json()
+            .then((msg) =>
+              setState({ notify: msg.message, passwordResetSuccess: true })
+            )
         }
         if (res.status === 404) {
           showMsg(res, setState)
@@ -99,35 +103,35 @@ function Login(props) {
         password2: state.password2,
       }),
     }).then((res) => {
-      console.log(res)
       if (!res.ok) {
         showMsg(res, setState)
       }
       if (res.ok) {
-        const pwResetComplete = () => {
-          setState({ passwordResetSuccess: true })
-         
-        }
-      return pwResetComplete()
+        setState({ ...state, passwordResetSuccess: true })
       }
     })
   }
-  const activatedHandler = () => {
-    if (resetPasswordToken && !state.passwordResetSuccess) {
-      return resetPassword
-    }
-    if (!resetPasswordToken && resetPasswordMode) {
-      return handleResetPwEmailSubmit
-    }
-    if (!resetPasswordMode) {
+
+  const backToLogin = () => {
+    setState(initialState)
+    history.push('/login')
+  }
+
+  const activatedButtonHandler = () => {
+    if (!resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess) {
       return handleLoginSubmit
     }
-    if(state.passwordResetSuccess){
-      const backToLogin = () => {
-        setState(initialState)
-        history.push('/login')
-      }
-     return backToLogin
+    if (resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess) {
+      return handleResetPwEmailSubmit
+    }
+    if (
+      (resetPasswordMode && !resetPasswordToken && state.passwordResetSuccess) ||
+      (resetPasswordMode && resetPasswordToken && state.passwordResetSuccess)
+    ) {
+      return backToLogin
+    }
+    if (resetPasswordMode && resetPasswordToken && !state.passwordResetSuccess) {
+      return resetPassword
     }
   }
 
@@ -137,7 +141,9 @@ function Login(props) {
       <div className="login-form">
         <img src={Logo} className="logo" alt="Logo" />
         <form onSubmit={handleLoginSubmit}>
-          {!state.passwordResetSuccess ? (
+          {resetPasswordMode && resetPasswordToken && state.passwordResetSuccess ? (
+            <ActionCompleteMsg msg="Your password has been reset!" />
+          ) : (
             <div>
               <div className="login-form-list">
                 <label htmlFor="email">
@@ -176,9 +182,7 @@ function Login(props) {
                         ? 'Re-enter new password'
                         : 'Enter your password'
                     }
-                    value={
-                      resetPasswordToken ? state.password2 : state.password
-                    }
+                    value={resetPasswordToken ? state.password2 : state.password}
                     onChange={handleChange}
                     className="textbox"
                   />
@@ -196,27 +200,30 @@ function Login(props) {
                 </div>
               )}
             </div>
-          ) : (
-            <div>
-              <h1 className="pw-reset-msg">Your password has been reset!</h1>
-            </div>
           )}
           {state.notify ? <p className="error-msg">{state.notify}</p> : null}
           <button
-            onClick={activatedHandler()}
+            onClick={activatedButtonHandler()}
             className="login-button"
             type="button"
           >
             <span className="login-button-text">
-              {resetPasswordToken && !state.passwordResetSuccess? 'Reset password' : null}
-              {!resetPasswordToken && resetPasswordMode
+              {!resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess
+                ? 'Login'
+                : null}
+              {resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess
                 ? 'Send reset password email'
                 : null}
-              {!resetPasswordMode  ? 'Login' : null}
-              {state.passwordResetSuccess ? 'Back to Login': null}
+              {state.passwordResetSuccess 
+                ? ' Back to Login'
+                : null}
+             
+              {!state.passwordResetSuccess && resetPasswordMode && resetPasswordToken
+                ? 'Reset password'
+                : null}
             </span>
           </button>
-        </form> 
+        </form>
       </div>
     </div>
   )
@@ -225,4 +232,11 @@ function Login(props) {
 const showMsg = (res, setState) =>
   res.json().then((msg) => setState({ notify: msg.message }))
 
+const ActionCompleteMsg = ({ msg = '' }) => {
+  return (
+    <div>
+      <h1 className="pw-reset-msg"> {msg}</h1>
+    </div>
+  )
+}
 export default Login

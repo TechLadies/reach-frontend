@@ -18,7 +18,7 @@ function App() {
       <Router history={history}>
         <Switch>
           <Route path="/login">
-            <Login />
+            <Login/>
           </Route>
           <Route path="/reset-password">
             <Login resetPasswordStatus= {true} />
