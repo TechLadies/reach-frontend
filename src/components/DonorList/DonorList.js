@@ -22,7 +22,6 @@ const getDonorData = async page => {
      .catch(err => {
          console.log("err: ", JSON.stringify(err));
     })
-    // .then(data=>data.json())
     };
 
 
@@ -116,11 +115,9 @@ function DonorList(props) {
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
             <button
-              // onClick={() => {
-              //   exportCSVFile();
-              // }}
-              onClick ={() => {convertJSONToCSV()}
-            }
+              // pass in API data in to convertJSONToCSV function
+              onClick ={() => convertJSONToCSV(donationList)}
+            
               className="button orangebutton"
             >
               <img src={Reportplus} className="button-icon" alt="person" />
