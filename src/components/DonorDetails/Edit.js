@@ -23,8 +23,7 @@ function Edit(props) {
   const currentRemarks = props.existingData.details.donorRemarks
   const currentPreferredContact = props.existingData.contact.preferredContactId
   const currentDNC = props.existingData.contact.dnc
-
-  // let's keep the state intact to match the API request
+ 
   const initialPreference = {
     dnc: currentDNC,
     preferredContact: currentPreferredContact
@@ -35,7 +34,6 @@ function Edit(props) {
 
   const handleChangedPreference = (e) => {
 
-    // determine if DNC is selected or not first (true or false)
     const dncValue = e.target.value === "true"
 
     let newPreferences = {
