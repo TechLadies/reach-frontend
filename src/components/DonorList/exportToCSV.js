@@ -1,24 +1,38 @@
-// import React from 'react'
-// // import * as FileSaver from 'file-saver';
-// // import * as XLSX from 'xlsx';
-// import * as Papa from 'papaparse';
-
+import React from 'react';
+import * as Papa from 'papaparse';
 // // step1 . fetch the  API - donorlist
-// const getDonorData = async page => { 
-//     return  fetch( 
-//        `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
-//          )
-//         .then(resp => resp.json())
-//         .catch(err => {
-//             console.log("err: ", JSON.stringify(err));
-//        })
-//        // .then(data=>data.json())
-//        };
+//  step 2 -convert data into csv
+//  step 3 -download csv
+function downloadCSV(data)
+{
+    console.log(data)
 
-// //   fetch(
-// //     '`${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
-// //     .then(resp => res.json())
-// // console.log(json) ;
+    //unparse donationList
+    //  step 2 -convert data into csv
+    const csv = Papa.unparse(data)
+  
+    // check dev console to see unparsed donationList 
+    console.log(csv)
+  
+//  step 3 -download csv
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob)
+    {
+        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+    }
+    else
+    {
+        csvURL = window.URL.createObjectURL(csvData);
+    }
+
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'download.csv');
+    tempLink.click();
+}
+export default downloadCSV;
+
 
 // function objectToCsv(data) {
 //     const csv =   

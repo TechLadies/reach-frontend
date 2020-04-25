@@ -13,6 +13,7 @@ import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import convertJSONToCSV from "./dummyExport";
+import downloadCSV from "./exportToCSV";
 
 const getDonorData = async page => { 
  return  fetch( 
@@ -116,8 +117,8 @@ function DonorList(props) {
             </button>
             <button
               // pass in API data in to convertJSONToCSV function
-              onClick ={() => convertJSONToCSV(donationList)}
-            
+              // onClick ={() => convertJSONToCSV(donationList)}
+              onClick ={() => downloadCSV(donationList)}
               className="button orangebutton"
             >
               <img src={Reportplus} className="button-icon" alt="person" />
