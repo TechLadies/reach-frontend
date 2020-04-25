@@ -1,38 +1,45 @@
-import React from 'react'
-// import * as FileSaver from 'file-saver';
-// import * as XLSX from 'xlsx';
-import * as Papa from 'papaparse';
-// import { Row } from 'react-bootstrap';
+// import React from 'react'
+// // import * as FileSaver from 'file-saver';
+// // import * as XLSX from 'xlsx';
+// import * as Papa from 'papaparse';
 
-// step1 . fetch the  API - donorlist
-// const donorlist =async () => {
-    // const res = await fetch(
-    // '`${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`', 
-    // {
-//   method: 'GET'
-// })
-// const data =res.json()
-// return data 
-// }
-// donorList()
-    // getdonorData().then((result) =>{()}); 
+// // step1 . fetch the  API - donorlist
+// const getDonorData = async page => { 
+//     return  fetch( 
+//        `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
+//          )
+//         .then(resp => resp.json())
+//         .catch(err => {
+//             console.log("err: ", JSON.stringify(err));
+//        })
+//        // .then(data=>data.json())
+//        };
 
-//  step 2 convert donorlist data from json to csv
+// //   fetch(
+// //     '`${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
+// //     .then(resp => res.json())
+// // console.log(json) ;
 
-// function convertJSONToCSV(objArray /*or JSONData,ReportTitle,ShowLabel*/) {
-    // var csv = Papa.unparse({
-    //     "fields": ["Column 1", "Column 2"],
-    //     "data": [
-    //         ["", ""],
-    //         ["", ""]
-    //     ]
-    // });
-//     }
+// function objectToCsv(data) {
+//     const csv =   
+//      Papa.unparse(data,
+         
+//              {
+//                  quotes: false, //or array of booleans
+//                  quoteChar: '"',
+//                  escapeChar: '"',
+//                  delimiter: ",",
+//                  header: true,
+//                  newline: "\r\n",
+//                  skipEmptyLines: false, //or 'greedy',
+//                  columns: null //or array of strings
+//              }
+//      )
+//     //  return csv ;
+//  };
+//   console.log(csv);
 
-//     return csv;
-// }
+// //  step 3 export csv // function exportCsvFile
 
-//  step 3 export csv // function exportCsvFile
-
-//  export default convertJSONToCSV;
-// export default exportCSVFile;
+//  export default objectToCsv;
+// // export default exportCSVFile;

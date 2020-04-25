@@ -3,10 +3,8 @@ import Header from "../Header";
 import Filterw from "../../images/filter_whitebtn.svg";
 import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
-import Box from "../Dashboard/Box.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
 import history from "../../lib/history";
@@ -14,8 +12,7 @@ import history from "../../lib/history";
 import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
-
-import * as Papa from 'papaparse'
+import convertJSONToCSV from "./dummyExport";
 
 const getDonorData = async page => { 
  return  fetch( 
@@ -119,9 +116,11 @@ function DonorList(props) {
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
             <button
-              onClick={() => {
-                exportCsvFile();
-              }}
+              // onClick={() => {
+              //   exportCSVFile();
+              // }}
+              onClick ={() => {convertJSONToCSV()}
+            }
               className="button orangebutton"
             >
               <img src={Reportplus} className="button-icon" alt="person" />
