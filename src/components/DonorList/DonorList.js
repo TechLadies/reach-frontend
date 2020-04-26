@@ -7,20 +7,19 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./DonorList.css";
 import Modal from "../Modal";
 import history from "../../lib/history";
-import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 
-const getDonorData = async page => { 
- return  fetch( 
+const getDonorData = async page => {
+  return fetch( 
     `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
-      )
-     .then(resp => resp.json())
-     .catch(err => {
-         console.log("err: ", JSON.stringify(err));
-    })
-    };
+  )
+    .then(resp => resp.json())
+    .catch(err => {
+      console.log("err: ", JSON.stringify(err));
+    });
+};
 
 const getDonorCount = async () => {
   return fetch(`${process.env.REACT_APP_API}/donors/count`)
@@ -53,13 +52,12 @@ function DonorList(props) {
       setDonationList(result.data);
     });
   }
-    
+
   useEffect(() => {});
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const today = new Date();
-
   const [startDate, setStartDate] = useState(
     today.setMonth(today.getMonth() - 3)
   );

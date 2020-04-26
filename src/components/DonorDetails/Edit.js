@@ -23,7 +23,7 @@ function Edit(props) {
   const currentRemarks = props.existingData.details.donorRemarks
   const currentPreferredContact = props.existingData.contact.preferredContactId
   const currentDNC = props.existingData.contact.dnc
- 
+
   const initialPreference = {
     dnc: currentDNC,
     preferredContact: currentPreferredContact
