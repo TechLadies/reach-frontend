@@ -114,9 +114,9 @@ function DonorList(props) {
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
             <button
-              onClick={() => {
-                setFilterOpen(true);
-              }}
+              // onClick={() => {
+              //   setFilterOpen(true);
+              // }}
               className="button orangebutton"
             >
               <img src={Reportplus} className="button-icon" alt="person" />
@@ -222,11 +222,12 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
+              <p className="keystatslabel">Type in each source separated by a comma.</p>
               <form className="form-inline my-2 my-lg-0" id="sourceSearchForm">
                 <input
                   class="form-control mr-sm-2 w-75"
                   type="search"
-                  placeholder="eg: Charity Dinner"
+                  placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
                 />
               </form>
@@ -234,18 +235,18 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Total Donated Amount</b>
-              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm">
+              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm d-flex"> 
                 <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="Search"
+                  placeholder="From"
                   aria-label="Search"
                 />
                 to&nbsp; {"      "}
                 <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="Search"
+                  placeholder="To"
                   aria-label="Search"
                 />
               </form>
