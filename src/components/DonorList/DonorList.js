@@ -10,6 +10,7 @@ import history from "../../lib/history";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
+import Chevronright from "../../images/Chevron-right.svg";
 
 const getDonorData = async page => {
   return fetch( 
@@ -214,43 +215,56 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
+              <p className="keystatslabel">Type in each source separated by a comma.</p>
               <form className="form-inline my-2 my-lg-0" id="sourceSearchForm">
                 <input
                   class="form-control mr-sm-2 w-75"
                   type="search"
-                  placeholder="eg: Charity Dinner"
+                  placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
                 />
               </form>
             </div>
 
             <div className="modalfilter">
-              <b class="filterlabel">Total Donated Amount</b>
-              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm">
+              <b class="filterlabel d-flex">Total Donated Amount</b>
+             <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm "> 
                 <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="Search"
+                  placeholder="$.0.00"
                   aria-label="Search"
-                />
+                /> 
+                
                 to&nbsp; {"      "}
-                <input
+                
+               <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="Search"
+                  placeholder="$0.00"
                   aria-label="Search"
-                />
-              </form>
+                /> 
+             </form> 
             </div>
           </div>
+          <div className="advanced-filters"> 
+            <button
+                onClick={() => {}}
+                className="button transparentbutton advanced-filters-toggle"
+                >
+               <img src={Chevronright} className="button-icon" alt="right arrow" />  View Advanced Filters
+            </button>
+            </div> 
         </Modal.Body>
         <Modal.Footer>
           <Header.Buttons>
+            
             <div style={{ display: "flex" }}>
+           
               <button
                 style={{ marginLeft: "auto" }}
                 onClick={() => {}}
-                className={"button "}
+                className="button transparentbutton"
               >
                 Reset Filters
               </button>
