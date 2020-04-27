@@ -239,7 +239,7 @@ function DonorList(props) {
                 <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="From"
+                  placeholder="$.0.00"
                   aria-label="Search"
                 /> 
                 
@@ -248,7 +248,7 @@ function DonorList(props) {
                <input
                   class="form-control mr-sm-2"
                   type="search"
-                  placeholder="To"
+                  placeholder="$0.00"
                   aria-label="Search"
                 /> 
              </form> 
