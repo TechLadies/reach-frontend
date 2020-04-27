@@ -235,21 +235,23 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel d-flex">Total Donated Amount</b>
-              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm "> 
+             <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm "> 
                 <input
                   class="form-control mr-sm-2"
                   type="search"
                   placeholder="From"
                   aria-label="Search"
-                />
+                /> 
+                
                 to&nbsp; {"      "}
-                <input
+                
+               <input
                   class="form-control mr-sm-2"
                   type="search"
                   placeholder="To"
                   aria-label="Search"
-                />
-              </form>
+                /> 
+             </form> 
             </div>
           </div>
           <div > 
@@ -257,10 +259,8 @@ function DonorList(props) {
                 style={{ marginLeft: "auto" }}
                 onClick={() => {}}
                 className={"button orangebutton "}>
-               <img src={Chevronright} className="button-icon" alt="right arrow" /> Advanced Filters
-              
-                {/* Advanced Filters */}
-              </button>
+               <img src={Chevronright} className="button-icon" alt="right arrow" />  View Advanced Filters
+            </button>
             </div> 
         </Modal.Body>
         <Modal.Footer>
@@ -271,7 +271,7 @@ function DonorList(props) {
               <button
                 style={{ marginLeft: "auto" }}
                 onClick={() => {}}
-                className={"button "}
+                className={"button orangebutton"}
               >
                 Reset Filters
               </button>
