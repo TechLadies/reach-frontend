@@ -264,7 +264,7 @@ function DonorList(props) {
               <button
                 style={{ marginLeft: "auto" }}
                 onClick={() => {}}
-                className={"button orangebutton"}
+                className="button transparentbutton"
               >
                 Reset Filters
               </button>
