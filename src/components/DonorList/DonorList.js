@@ -14,7 +14,7 @@ import history from "../../lib/history";
 import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
-
+import Chevronright from "../../images/Chevron-right.svg";
 const getDonorData = async page => {
   return fetch( 
     `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
@@ -234,8 +234,8 @@ function DonorList(props) {
             </div>
 
             <div className="modalfilter">
-              <b class="filterlabel">Total Donated Amount</b>
-              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm d-flex"> 
+              <b class="filterlabel d-flex">Total Donated Amount</b>
+              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm "> 
                 <input
                   class="form-control mr-sm-2"
                   type="search"
@@ -252,10 +252,22 @@ function DonorList(props) {
               </form>
             </div>
           </div>
+          <div > 
+            <button
+                style={{ marginLeft: "auto" }}
+                onClick={() => {}}
+                className={"button orangebutton "}>
+               <img src={Chevronright} className="button-icon" alt="right arrow" /> Advanced Filters
+              
+                {/* Advanced Filters */}
+              </button>
+            </div> 
         </Modal.Body>
         <Modal.Footer>
           <Header.Buttons>
+            
             <div style={{ display: "flex" }}>
+           
               <button
                 style={{ marginLeft: "auto" }}
                 onClick={() => {}}
