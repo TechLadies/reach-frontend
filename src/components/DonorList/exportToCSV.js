@@ -1,24 +1,24 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import * as FileSaver from 'file-saver';
-import * as XLSX from 'xlsx';
+import React from 'react';
+import * as Papa from 'papaparse';
 
-const ExportCSV = ({csvData, fileName}) => {
+function downloadCSV(data)
+{
+    const csv = Papa.unparse(data)
 
-    const fileType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    const fileExtension = '.xlsx';
-
-    const exportToCSV = (csvData, fileName) => {
-        const ws = XLSX.utils.json_to_sheet(csvData);
-        const wb = { Sheets: { 'data': ws }, SheetNames: ['data'] };
-        const excelBuffer = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-        const data = new Blob([excelBuffer], {type: fileType});
-        FileSaver.saveAs(data, fileName + fileExtension);
+    var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+    var csvURL =  null;
+    if (navigator.msSaveBlob)
+    {
+        csvURL = navigator.msSaveBlob(csvData, 'download.csv');
+    }
+    else
+    {
+        csvURL = window.URL.createObjectURL(csvData);
     }
 
-    return (
-        <Button variant="warning" onClick={(e) => exportToCSV(csvData,fileName)}>Export</Button>
-    )
+    var tempLink = document.createElement('a');
+    tempLink.href = csvURL;
+    tempLink.setAttribute('download', 'download.csv');
+    tempLink.click();
 }
-
-export default ExportCSV;
+export default downloadCSV;

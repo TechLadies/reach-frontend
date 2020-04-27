@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import Filterw from "../../images/filter_whitebtn.svg";
-import Filterp from "../../images/filter_purplebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
-import Box from "../Dashboard/Box.js";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Dummy from "../Dummy";
 import "./DonorList.css";
 import Modal from "../Modal";
 import history from "../../lib/history";
-/* import * as FileSaver from "file-saver"; */
-import * as XLSX from "xlsx";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
+import downloadCSV from "./exportToCSV";
 import Chevronright from "../../images/Chevron-right.svg";
+
 const getDonorData = async page => {
   return fetch( 
     `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
@@ -59,11 +56,9 @@ function DonorList(props) {
 
   useEffect(() => {});
 
-  // Change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const today = new Date();
-  // use state start and end
   const [startDate, setStartDate] = useState(
     today.setMonth(today.getMonth() - 3)
   );
@@ -114,9 +109,7 @@ function DonorList(props) {
               <img src={Filterw} className="button-icon" alt="person" /> Filters
             </button>
             <button
-              // onClick={() => {
-              //   setFilterOpen(true);
-              // }}
+              onClick ={() => downloadCSV(donationList)}
               className="button orangebutton"
             >
               <img src={Reportplus} className="button-icon" alt="person" />
