@@ -104,3 +104,16 @@ button {
   display: flex;
   padding: 10px;
 }
+
+/* Advanced filters */
+.advanced-filters {
+  border-top: 1px solid #dee2e6;
+}
+
+.advanced-filters-toggle {
+  font-size: 14px;
+}
+
+.advanced-filters-toggle img {
+  width: 16px;
+}

@@ -247,11 +247,11 @@ function DonorList(props) {
              </form> 
             </div>
           </div>
-          <div > 
+          <div className="advanced-filters"> 
             <button
-                style={{ marginLeft: "auto" }}
                 onClick={() => {}}
-                className={"button orangebutton "}>
+                className="button transparentbutton advanced-filters-toggle"
+                >
                <img src={Chevronright} className="button-icon" alt="right arrow" />  View Advanced Filters
             </button>
             </div> 
