@@ -17,9 +17,9 @@ body {
 }
 
 .login-img{
-margin-right: 84px;
-flex: 1;
-display: none;
+  margin-right: 64px;
+  flex: 1;
+  display: none;
 }
 
 input:focus{
@@ -51,6 +51,13 @@ margin: 5rem;
   font-style: none;
 }
 
+.form-hint {
+  font-size: 0.75rem;
+  color: #929295;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
 .textbox{
  width: 100%;
  height: 52px;
@@ -80,7 +87,8 @@ margin: 5rem;
 
 @media only screen and (min-width:650px){
   .login-img {
-   display: block;
+    max-width: 370px;
+    display: block;
   }
 
   .login-form{

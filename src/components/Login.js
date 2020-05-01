@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import Loginimage from '../images/Group 5.svg'
-import Logo from '../images/Logo.svg'
 import {Link, useHistory } from 'react-router-dom'
+import LoginLayout from "./LoginLayout"
 
 function Login(props) {
   const history = useHistory()
@@ -10,15 +9,10 @@ function Login(props) {
   }
 
   const { resetPasswordMode } = props
-  // const keyValue = useLocation().search
-  // const tokenParams = new URLSearchParams(keyValue)
-  // const resetPasswordToken = tokenParams.get('token')
+  
   const initialState = {
     email: '',
     password: '',
-    // passwordResetSuccess: false,
-    // password1: '',
-    // password2: '',
   }
   const [state, setState] = useState(initialState)
   const [notify, setNotify] = useState(null)
@@ -88,49 +82,6 @@ function Login(props) {
       .catch((err) => console.log(err))
   }
 
-  const resetPassword = (e) => {
-    // e.preventDefault()
-    // fetch(`${process.env.REACT_APP_API}/users/reset_password`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({
-    //     token: resetPasswordToken,
-    //     password1: state.password1,
-    //     password2: state.password2,
-    //   }),
-    // }).then((res) => {
-    //   if (!res.ok) {
-    //     showMsg(res, setState)
-    //   }
-    //   if (res.ok) {
-    //     setState({ ...state, passwordResetSuccess: true })
-    //   }
-    // })
-  }
-
-  // const backToLogin = () => {
-    // setState(initialState)
-  //   history.push('/login')
-  // }
-
-  const activatedButtonHandler = () => {
-    // if (!resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess) {
-    //   return handleLoginSubmit
-    // }
-    // if (resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess) {
-    //   return handleResetPwEmailSubmit
-    // }
-    // if (
-    //   (resetPasswordMode && !resetPasswordToken && state.passwordResetSuccess) ||
-    //   (resetPasswordMode && resetPasswordToken && state.passwordResetSuccess)
-    // ) {
-    //   return backToLogin
-    // }
-    // if (resetPasswordMode && resetPasswordToken && !state.passwordResetSuccess) {
-    //   return resetPassword
-    // }
-  }
-
   const handleFormSubmit = (e) => {
     e.preventDefault()
     resetPasswordMode ?  doResetPassword() : doLogin()
@@ -138,172 +89,67 @@ function Login(props) {
 
   if (resetPasswordMode && resetEmailSent) {
     return (
-      <div className="login-container">
-        <img src={Loginimage} className="login-img" alt="Login" />
-        <div className="login-form">
-          <img src={Logo} className="logo" alt="Logo" />
-          <div className="form-success-text">
-            Email sent! Please check your inbox to reset your password.
-          </div>
-          <br />
-          <Link to="/login">
-            <button className="login-button" type="button">
-              Back to Login
-            </button>
-          </Link>
+      <LoginLayout>
+        <div className="form-success-text">
+          Email sent! Please check your inbox to reset your password.
         </div>
-      </div>
+        <br />
+        <Link to="/login">
+          <button className="login-button" type="button">
+            Back to Login
+          </button>
+        </Link>
+      </LoginLayout>
     )
   }
 
   return (
-    <div className="login-container">
-      <img src={Loginimage} className="login-img" alt="Login" />
-      <div className="login-form">
-        <img src={Logo} className="logo" alt="Logo" />
-        <form onSubmit={handleFormSubmit}>
-          <div className="login-form-list">
-            <label htmlFor="email">Email Address</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="Enter your email address"
-              value={state.email}
-              onChange={handleChange}
-              className="textbox"
-            />
-          </div>
-          {
-            !resetPasswordMode && (
-              <div className="login-form-list">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  value={state.password}
-                  onChange={handleChange}
-                  className="textbox"
-                />
-              </div>
-            )
-          }
-          
-          {notify && <p className="error-msg">{notify}</p>}
+    <LoginLayout>
+      <form onSubmit={handleFormSubmit}>
+        <div className="login-form-list">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter your email address"
+            value={state.email}
+            onChange={handleChange}
+            className="textbox"
+          />
+        </div>
+        {
+          !resetPasswordMode && (
+            <div className="login-form-list">
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={state.password}
+                onChange={handleChange}
+                className="textbox"
+              />
+            </div>
+          )
+        }
+        
+        {notify && <p className="error-msg">{notify}</p>}
 
-          {!resetPasswordMode && (
-            <Link to="/forgot-password"
-              className="forgot-ps"
-              type="button"
-            >
-              Forgot password?
-            </Link>
-          )}
+        {!resetPasswordMode && (
+          <Link to="/forgot-password"
+            className="forgot-ps"
+            type="button"
+          >
+            Forgot password?
+          </Link>
+        )}
 
-          <button className="login-button" type="submit">
-            { resetPasswordMode ? "Send reset password email": "Login"}
-          </button>
-        </form>
-      </div>
-    </div>
-  //   <div className="login-container">
-  //     <img src={Loginimage} className="login-img" alt="Login" />
-  //     <div className="login-form">
-  //       <img src={Logo} className="logo" alt="Logo" />
-  //       <form onSubmit={handleLoginSubmit}>
-  //         {resetPasswordMode && resetPasswordToken && state.passwordResetSuccess ? (
-  //           <ActionCompleteMsg msg="Your password has been reset!" />
-  //         ) : (
-  //           <div>
-  //             <div className="login-form-list">
-  //               <label htmlFor="email">
-  //                 {resetPasswordToken ? 'New Password' : null}
-  //                 {!resetPasswordToken && resetPasswordMode
-  //                   ? 'Please enter your email address'
-  //                   : null}
-  //                 {!resetPasswordMode ? 'Email Address' : null}
-  //               </label>
-
-  //               <input
-  //                 type={resetPasswordToken ? 'password' : 'text'}
-  //                 name={resetPasswordToken ? 'password1' : 'email'}
-  //                 placeholder={
-  //                   resetPasswordToken
-  //                     ? 'Enter new password'
-  //                     : ' Enter your email address'
-  //                 }
-  //                 value={resetPasswordToken ? state.password1 : state.email}
-  //                 onChange={handleChange}
-  //                 className="textbox"
-  //               />
-  //             </div>
-  //             {resetPasswordMode && !resetPasswordToken ? null : (
-  //               <div className="login-form-list">
-  //                 <label htmlFor="password">
-  //                   {' '}
-  //                   {resetPasswordToken ? 'Re-enter new password' : 'Password'}
-  //                 </label>
-
-  //                 <input
-  //                   type="password"
-  //                   name={resetPasswordToken ? 'password2' : 'password'}
-  //                   placeholder={
-  //                     resetPasswordToken
-  //                       ? 'Re-enter new password'
-  //                       : 'Enter your password'
-  //                   }
-  //                   value={resetPasswordToken ? state.password2 : state.password}
-  //                   onChange={handleChange}
-  //                   className="textbox"
-  //                 />
-  //               </div>
-  //             )}
-  //             {resetPasswordMode ? null : (
-  //               <div className="login-form-list">
-  //                 <button
-  //                   onClick={() => history.push('/reset-password')}
-  //                   className="forgot-ps"
-  //                   type="button"
-  //                 >
-  //                   Forgot password?
-  //                 </button>
-  //               </div>
-  //             )}
-  //           </div>
-  //         )}
-  //         {state.notify ? <p className="error-msg">{state.notify}</p> : null}
-  //         <button
-  //           onClick={activatedButtonHandler()}
-  //           className="login-button"
-  //           type="button"
-  //         >
-  //           <span className="login-button-text">
-  //             {!resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess
-  //               ? 'Login'
-  //               : null}
-  //             {resetPasswordMode && !resetPasswordToken && !state.passwordResetSuccess
-  //               ? 'Send reset password email'
-  //               : null}
-  //             {state.passwordResetSuccess 
-  //               ? ' Back to Login'
-  //               : null}
-             
-  //             {!state.passwordResetSuccess && resetPasswordMode && resetPasswordToken
-  //               ? 'Reset password'
-  //               : null}
-  //           </span>
-  //         </button>
-  //       </form>
-  //     </div>
-  //   </div>
+        <button className="login-button" type="submit">
+          { resetPasswordMode ? "Send reset password email": "Login"}
+        </button>
+      </form>
+    </LoginLayout>
   )
 }
 
-const ActionCompleteMsg = ({ msg = '' }) => {
-  return (
-    <div>
-      <h1 className="pw-reset-msg"> {msg}</h1>
-    </div>
-  )
-}
 export default Login
