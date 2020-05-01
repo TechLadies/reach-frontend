@@ -11,6 +11,7 @@ import Edit from "./components/DonorDetails/Edit";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
 import SearchResults from "./components/SearchResults";
+import ResetPassword from "./components/ResetPassword";
  
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Login resetPasswordMode />
           </Route>
           <Route path="/reset-password">
-            {/* <ResetPassword /> */}
+            <ResetPassword />
           </Route>
           <Route path="/dummy">
             <Dummy />

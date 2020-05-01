@@ -142,7 +142,9 @@ function Login(props) {
         <img src={Loginimage} className="login-img" alt="Login" />
         <div className="login-form">
           <img src={Logo} className="logo" alt="Logo" />
-          <h5>Email sent! Please check your inbox to reset your password.</h5>
+          <div className="form-success-text">
+            Email sent! Please check your inbox to reset your password.
+          </div>
           <br />
           <Link to="/login">
             <button className="login-button" type="button">
