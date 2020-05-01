@@ -45,10 +45,11 @@
 .forgot-ps{
   background: none;
   color: #80485b;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid transparent;
   margin-left: 0;
-  font-weight: bold;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .logo_navbar {

@@ -20,8 +20,11 @@ function App() {
           <Route path="/login">
             <Login/>
           </Route>
+          <Route path="/forgot-password">
+            <Login resetPasswordMode />
+          </Route>
           <Route path="/reset-password">
-            <Login resetPasswordStatus= {true} />
+            {/* <ResetPassword /> */}
           </Route>
           <Route path="/dummy">
             <Dummy />
