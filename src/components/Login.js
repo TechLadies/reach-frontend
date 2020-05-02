@@ -1,101 +1,155 @@
-import React, { useState } from "react";
-import Loginimage from "../images/Group 5.svg";
-import Logo from "../images/Logo.svg";
-import { Link, Redirect, Route, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import {Link, useHistory } from 'react-router-dom'
+import LoginLayout from "./LoginLayout"
 
-const initialState = {
-  email: "",
-  password: ""
-};
+function Login(props) {
+  const history = useHistory()
+  if (localStorage.getItem('token')) {
+    history.push('/')
+  }
 
-function Login() {
-  const history = useHistory();
-  if (localStorage.getItem("token")) {history.push("/")}
+  const { resetPasswordMode } = props
   
-  const [state, setState] = useState(initialState);
-  const handleChange = e => {
+  const initialState = {
+    email: '',
+    password: '',
+  }
+  const [state, setState] = useState(initialState)
+  const [notify, setNotify] = useState(null)
+  const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
-      error: ""
-    });
-  };
-  
-  const validateLogin = response => {
-    if (response.ok) {
-      response.json().then(data => {
-        console.log(data.token);
-        localStorage.setItem('token', data.token)
-        history.push("/");
-      });
-    } else {
-      response.json().then(data => console.log(data));
-      setState({
-        ...state,
-        password: "",
-        error: "Your email and password do not match. Please try again"
-      });
-    }
-  };
+    })
+  }
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const [resetEmailSent, setResetEmailSent] = useState(false)
+
+  useEffect(()=> {
+    setNotify(null)
+  }, [resetPasswordMode])
+
+  const validateLogin = (response) => {
+    if (response.ok) {
+      response.json().then((data) => {
+        localStorage.setItem('token', data.token)
+        history.push('/')
+      })
+    } else {
+      response.json().then((data) => console.log(data))
+      setState( state => ({
+        ...state,
+        password: ''
+      }))
+      setNotify('Your email and password do not match. Please try again')
+    }
+  }
+
+  const doLogin = (e) => {
     fetch(`${process.env.REACT_APP_API}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: state.email,
-        password: state.password
-      })
+        password: state.password,
+      }),
     })
       .then(validateLogin)
-      .catch(err => {
-        setState({ ...state, error: "Connection error, unable to login." });
-      });
-  };
+      .catch((err) => {
+        setNotify('Connection error, unable to login.')
+      })
+  }
+
+  const doResetPassword = (e) => {
+    fetch(`${process.env.REACT_APP_API}/users/reset_password_email`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: state.email,
+      }),
+    })
+      .then((res) => {
+        if (res.status === 200) {
+          setResetEmailSent(true)
+        }
+        if (res.status === 404) {
+          res.json().then((msg) => setNotify(msg.message))
+        }
+        if (res.status === 500) {
+          setNotify('Server Error, please try again or contact your admin if problem persist')
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault()
+    resetPasswordMode ?  doResetPassword() : doLogin()
+  }
+
+  if (resetPasswordMode && resetEmailSent) {
+    return (
+      <LoginLayout>
+        <div className="form-success-text">
+          Email sent! Please check your inbox to reset your password.
+        </div>
+        <br />
+        <Link to="/login">
+          <button className="login-button" type="button">
+            Back to Login
+          </button>
+        </Link>
+      </LoginLayout>
+    )
+  }
 
   return (
-    <div className="login-container">
-      <img src={Loginimage} className="login-img" alt="Login" />
-      <div className="login-form">
-        <img src={Logo} className="logo" alt="Logo" />
-        <form onSubmit={handleSubmit}>
-          <div className="login-form-list">
-            <label htmlFor="email">Email Address</label>
-
-            <input
-              type="text"
-              name="email"
-              placeholder=" Enter your email address"
-              value={state.email}
-              onChange={handleChange}
-              className="textbox"
-            />
-          </div>
-          <div className="login-form-list">
-            <label htmlFor="password">Password</label>
-
-            <input
-              type="password"
-              name="password"
-              placeholder=" Enter your password"
-              value={state.password}
-              onChange={handleChange}
-              className="textbox"
-            />
-
+    <LoginLayout>
+      <form onSubmit={handleFormSubmit}>
+        <div className="login-form-list">
+          <label htmlFor="email">Email Address</label>
+          <input
+            type="text"
+            name="email"
+            placeholder="Enter your email address"
+            value={state.email}
+            onChange={handleChange}
+            className="textbox"
+          />
+        </div>
+        {
+          !resetPasswordMode && (
             <div className="login-form-list">
-              <Link to="#">Forgot password?</Link>{" "}
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter your password"
+                value={state.password}
+                onChange={handleChange}
+                className="textbox"
+              />
             </div>
-          </div>
-          {state.error && <p className="error-msg">{state.error}</p>}
-          <button onClick={handleSubmit} className="login-button">
-            <span className="login-button-text">Login</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+          )
+        }
+        
+        {notify && <p className="error-msg">{notify}</p>}
+
+        {!resetPasswordMode && (
+          <Link to="/forgot-password"
+            className="forgot-ps"
+            type="button"
+          >
+            Forgot password?
+          </Link>
+        )}
+
+        <button className="login-button" type="submit">
+          { resetPasswordMode ? "Send reset password email": "Login"}
+        </button>
+      </form>
+    </LoginLayout>
+  )
 }
 
-export default Login;
+export default Login

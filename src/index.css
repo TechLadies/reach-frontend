@@ -17,9 +17,9 @@ body {
 }
 
 .login-img{
-margin-right: 84px;
-flex: 1;
-display: none;
+  margin-right: 64px;
+  flex: 1;
+  display: none;
 }
 
 input:focus{
@@ -51,6 +51,13 @@ margin: 5rem;
   font-style: none;
 }
 
+.form-hint {
+  font-size: 0.75rem;
+  color: #929295;
+  line-height: 1.4;
+  margin-bottom: 2rem;
+}
+
 .textbox{
  width: 100%;
  height: 52px;
@@ -65,10 +72,13 @@ margin: 5rem;
   display: block;
   width: 100%;
   height: 52px;
+  margin-left: 0;
+  color: white;
 }
 
-.login-button-text{
-color: white;
+.form-success-text {
+  font-size: 1.75rem;
+  margin-bottom:  1rem;
 }
 
 .error-msg{
@@ -77,7 +87,8 @@ color: white;
 
 @media only screen and (min-width:650px){
   .login-img {
-   display: block;
+    max-width: 370px;
+    display: block;
   }
 
   .login-form{
@@ -105,6 +116,10 @@ color: white;
   background-color: #80485B;
   border-radius: 4px;
   border-color: #80485B;
+}
+
+.pw-reset-msg{
+  font-size: 28px;
 }
 
 /* .page-number :active {

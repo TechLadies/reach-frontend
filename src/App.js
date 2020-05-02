@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
@@ -11,15 +11,21 @@ import Edit from "./components/DonorDetails/Edit";
 import UpdateDb from "./components/UpdateDB";
 import DonorDetails from "./components/DonorDetails";
 import SearchResults from "./components/SearchResults";
+import ResetPassword from "./components/ResetPassword";
  
 function App() {
-  
   return (
     <div className="App">
       <Router history={history}>
         <Switch>
           <Route path="/login">
-            <Login />
+            <Login/>
+          </Route>
+          <Route path="/forgot-password">
+            <Login resetPasswordMode />
+          </Route>
+          <Route path="/reset-password">
+            <ResetPassword />
           </Route>
           <Route path="/dummy">
             <Dummy />
