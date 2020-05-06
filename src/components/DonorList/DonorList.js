@@ -12,9 +12,9 @@ import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import Chevronright from "../../images/Chevron-right.svg";
 
-const getDonorData = async page => {
+const getDonorData = (start,end) => {
   return fetch( 
-    `${process.env.REACT_APP_API}/donors${page ? `?page=${page}` : ""}`
+    `${process.env.REACT_APP_API}/donors`
   )
     .then(resp => resp.json())
     .catch(err => {
@@ -22,15 +22,9 @@ const getDonorData = async page => {
     });
 };
 
-const getDonorCount = async () => {
-  return fetch(`${process.env.REACT_APP_API}/donors/count`)
-    .then(resp => resp.json())
-    .catch(err => {
-      console.log("err: ", JSON.stringify(err));
-    });
-};
-
 function DonorList(props) {
+
+  const [donorList, setDonorList] = useState({}) 
   const [filterOpen, setFilterOpen] = useState(false);
   const [donationList, setDonationList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,8 +32,8 @@ function DonorList(props) {
   const [donorCount, setDonorCount] = useState(0);
 
   useEffect(() => {
-    getDonorCount().then(result => {
-      setDonorCount(result);
+    getDonorData().then(result => {
+      setDonorList(result);
     });
     getDonorData().then(result => {
       console.log(result);
@@ -53,8 +47,6 @@ function DonorList(props) {
       setDonationList(result.data);
     });
   }
-
-  useEffect(() => {});
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -263,12 +255,14 @@ function DonorList(props) {
            
               <button
                 style={{ marginLeft: "auto" }}
-                onClick={() => {}}
+                // onClick={() => {}}
                 className="button transparentbutton"
               >
                 Reset Filters
               </button>
-              <button onClick={() => {}} className={"button orangebutton "}>
+              <button 
+              // onClick={() => {}}
+              className={"button orangebutton "}>
                 Apply Filters
               </button>
             </div>
