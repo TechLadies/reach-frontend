@@ -11,13 +11,14 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import Chevronright from "../../images/Chevron-right.svg";
-import {dateStringOf , dateVariation, periodFormatter, reformatDate} from "../../lib/date";
-import { useParams } from 'react-router-dom';
+import Source from "./Sources.js";
+// import {dateStringOf , dateVariation, periodFormatter, reformatDate} from "../../lib/date";
+// import { useParams } from 'react-router-dom';
 
 const getDonorData = (start,end) => {
   
   return fetch( 
-    (start == undefined || end == undefined) ?
+    (start === undefined || end === undefined) ?
     `${process.env.REACT_APP_API}/donors`
        :
     // `${process.env.REACT_APP_API}/donors?from=${reformatDate(start)}&to=${reformatDate(end)}}`
@@ -31,7 +32,7 @@ const getDonorData = (start,end) => {
 
 function DonorList(props) {
   
-  const id = useParams()
+  // const id = useParams()
   const [donorList, setDonorList] = useState({}) 
   const [filterOpen, setFilterOpen] = useState(false);
   const [donationList, setDonationList] = useState([]);
@@ -40,27 +41,25 @@ function DonorList(props) {
   const [donorCount, setDonorCount] = useState(0);
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  const today = new Date();
-  
-  const [startDate, setStartDate] = useState('2019-1-1');
-  console.log("start date");
-  console.log(startDate);
+  // const today = new Date();
+  // const startDate = new Date()
+  // const endDate = new Date()
 
-  const [endDate, setEndDate] = useState(new Date());
-  console.log("end date");
-  console.log(endDate);
+  const [startDate, setStartDate] = useState(new Date('2019-1-1'));
 
-  useEffect(() => {
+  const [endDate, setEndDate] = useState(new Date('2020-4-26'));
+
+   useEffect(() => {
     getDonorData(startDate, endDate).then(result => {
       setDonorList(result);
     });
     getDonorData(startDate, endDate).then(result => {
-      console.log("donation list result");
       console.log(result);
       if( Array.isArray(result)) {
         setDonationList(result);
       } else {
-        setDonationList(result);
+        setDonationList(result); 
+        // setDonationList(result.data); 
       }
       
     });
@@ -70,8 +69,11 @@ function DonorList(props) {
     setCurrentPage(number);
     getDonorData(number).then(result => {
       setDonationList(result);
+      // setDonationList(result.data); 
     });
   }
+  // useEffect(() => {});
+  // const paginate = pageNumber => setCurrentPage(pageNumber);
 
   function ListItem(props) {
     let listElements = props.data;
@@ -159,8 +161,8 @@ function DonorList(props) {
                     selected={startDate}
                     onChange={date => setStartDate(date)}
                     selectsStart
-                    startDate={startDate}
-                    endDate={endDate}
+                    startDate = {startDate}
+                    endDate = {endDate}
                     dateFormat = "dd/MM/yyyy"
                   />
                 </div>
@@ -224,15 +226,26 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
-              <p className="keystatslabel">Type in each source separated by a comma.</p>
+              <p className="keystatslabel">Select source/s from below list ..</p>
+              <p className="keystatslabel">Type in each source separated by a comma.</p> */}
               <form className="form-inline my-2 my-lg-0" id="sourceSearchForm">
                 <input
                   class="form-control mr-sm-2 w-75"
                   type="search"
                   placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
-                />
-              </form>
+                /> 
+                
+              </form> 
+              <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
+              <option value="" disabled selected>Select all</option>
+              <option value="1">charity Dinner </option>
+              <option value="2">Reach Website </option>
+              <option value="3">charity3 charity 3</option>
+              <option value="3">charity4</option>
+             <option value="3">charity5</option>
+             </select>
+              {/* <Source /> */}
             </div>
 
             <div className="modalfilter">
