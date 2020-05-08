@@ -75,6 +75,11 @@ function DonorList(props) {
   // useEffect(() => {});
   // const paginate = pageNumber => setCurrentPage(pageNumber);
 
+  function applyFilters(props)
+  {
+    
+  }
+
   function ListItem(props) {
     let listElements = props.data;
     let listComponents = listElements.map((item, i) => {
@@ -227,24 +232,33 @@ function DonorList(props) {
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
               <p className="keystatslabel">Select source/s from below list ..</p>
-              <p className="keystatslabel">Type in each source separated by a comma.</p> */}
-              <form className="form-inline my-2 my-lg-0" id="sourceSearchForm">
-                <input
+              <p className="keystatslabel">Type in each source separated by a comma.</p> 
+              <form  action = "" 
+                     className="form-inline my-2 my-lg-0" 
+                     id="sourceSearchForm">
+                <input  
+                  list ="sources-list" 
                   class="form-control mr-sm-2 w-75"
                   type="search"
                   placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
                 /> 
-                
+                <datalist id="sources-list"> 
+                         <option value="Charity Dinner"/> 
+                         <option value="Reach website"/> 
+                         <option value="Random"/> 
+                         <option value="Walk In "/> 
+                         <option value="through sales of tickets"/> 
+                </datalist> 
               </form> 
-              <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
+              {/* <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
               <option value="" disabled selected>Select all</option>
               <option value="1">charity Dinner </option>
               <option value="2">Reach Website </option>
               <option value="3">charity3 charity 3</option>
               <option value="3">charity4</option>
              <option value="3">charity5</option>
-             </select>
+             </select> */}
               {/* <Source /> */}
             </div>
 
