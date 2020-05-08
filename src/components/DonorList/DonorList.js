@@ -11,18 +11,18 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import Chevronright from "../../images/Chevron-right.svg";
-import Source from "./Sources.js";
+import Source from "./Sources";
 // import {dateStringOf , dateVariation, periodFormatter, reformatDate} from "../../lib/date";
 // import { useParams } from 'react-router-dom';
 
 const getDonorData = (start,end) => {
   
   return fetch( 
-    (start === undefined || end === undefined) ?
+    // (start === undefined || end === undefined) ?
     `${process.env.REACT_APP_API}/donors`
-       :
+      //  :
     // `${process.env.REACT_APP_API}/donors?from=${reformatDate(start)}&to=${reformatDate(end)}}`
-    `${process.env.REACT_APP_API}/donors?from=$'2019-1-1'&to=$'2020-4-26'`
+    // `${process.env.REACT_APP_API}/donors?from=$'2019-1-1'&to=$'2020-4-26'`
   )
     .then(resp => resp.json())
     .catch(err => {
@@ -45,9 +45,9 @@ function DonorList(props) {
   // const startDate = new Date()
   // const endDate = new Date()
 
-  const [startDate, setStartDate] = useState(new Date('2019-1-1'));
+  const [startDate, setStartDate] = useState(new Date());
 
-  const [endDate, setEndDate] = useState(new Date('2020-4-26'));
+  const [endDate, setEndDate] = useState(new Date());
 
    useEffect(() => {
     getDonorData(startDate, endDate).then(result => {
@@ -75,10 +75,10 @@ function DonorList(props) {
   // useEffect(() => {});
   // const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  function applyFilters(props)
-  {
-    
-  }
+  // function applyFilters(props)
+  // {
+
+  // }
 
   function ListItem(props) {
     let listElements = props.data;
@@ -233,7 +233,7 @@ function DonorList(props) {
               <b class="filterlabel">Source contains any of these phrase(s)</b>
               <p className="keystatslabel">Select source/s from below list ..</p>
               <p className="keystatslabel">Type in each source separated by a comma.</p> 
-              <form  action = "" 
+              {/* <form  action = "" 
                      className="form-inline my-2 my-lg-0" 
                      id="sourceSearchForm">
                 <input  
@@ -242,15 +242,15 @@ function DonorList(props) {
                   type="search"
                   placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
-                /> 
-                <datalist id="sources-list"> 
+                />  */}
+                {/* <datalist id="sources-list"> 
                          <option value="Charity Dinner"/> 
                          <option value="Reach website"/> 
                          <option value="Random"/> 
                          <option value="Walk In "/> 
                          <option value="through sales of tickets"/> 
-                </datalist> 
-              </form> 
+                </datalist>  */}
+              {/* </form>  */}
               {/* <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
               <option value="" disabled selected>Select all</option>
               <option value="1">charity Dinner </option>
@@ -259,7 +259,7 @@ function DonorList(props) {
               <option value="3">charity4</option>
              <option value="3">charity5</option>
              </select> */}
-              {/* <Source /> */}
+               <Source /> 
             </div>
 
             <div className="modalfilter">

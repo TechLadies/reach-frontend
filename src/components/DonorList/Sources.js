@@ -1,55 +1,50 @@
-import React from 'react';
-// hard coded for source filter 
-function Source (props) {
+import React, { Control,Fragment,useState,useEffect } from 'react';
+import {Typeahead} from 'react-bootstrap-typeahead';
+import {FormGroup} from 'react-bootstrap';
 
- return (
-<div> 
-<form  action = ""  
-                     className="form-inline my-2 my-lg-0" 
-                     id="sourceSearchForm">
-                <input  
-                  list ="sources-list" 
-                  class="form-control mr-sm-2 w-75"
-                  type="search"
-                  placeholder="eg: Charity Dinner, Reach Website"
-                  aria-label="Search"
-                /> 
-    <datalist id="sources-list"> 
-        <option value="1"/> 
-        <option value="2y"/> 
-        <option value="3"/> 
-        <option value="4"/> 
-        <option value="5"/> 
-    </datalist> 
-    {/* <button onclick="datalistcall()" type="button"> 
-        Click Here</button>  */}
-    </form> 
-    </div>
 
- )
-
+const fetchSourceList = async () => {
+const res = await fetch(
+`${process.env.REACT_APP_API}/sources` , {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  })
+  console.log(data);
+  const data = res.json()
+  return data
 }
+
+ function Source (props) {
+     const [source, setSource] = useState([]);
+     const [multiple, setMultiple] = useState(false);
+     const [selected, setSelected] = useState([]);
+
+     useEffect(() => {
+        fetchSourceList().then((data) => setSource(data))
+      }, [])
+  
+     return (
+       <Fragment>
+         <Typeahead
+           id="sources-list"
+           labelKey="sources"
+           multiple={multiple}
+           onChange={setSelected}
+           options={source}
+           placeholder="Choose  source/s..."
+           selected={selected}
+        />
+        <FormGroup>
+           <Control
+             checked={multiple}
+             onChange={(e) => setMultiple(e.target.checked)}
+             type="checkbox">
+            Multi-Select
+           </Control>
+         </FormGroup>
+      </Fragment>
+    );
+}; 
 
 export default Source ;
 
-// var dcl = document.getElementById( "dynamic-email" );
-
-// dcl.addEventListener( "focus", function () {
-
-//     var dynamicContacts = document.getElementById( "dynamic-contacts" );
-
-//     // Loop over the JSON array.
-//     data.emails.forEach( function ( item ) {
-
-//         // Create a new <option> element.
-//         var option = document.createElement( 'option' );
-
-//         // Set the value using the item in the JSON array.
-//         option.value = item;
-
-//         // Add the <option> element to the <datalist>.
-
-//         dynamicContacts.appendChild( option );
-//     } );
-
-// } );
