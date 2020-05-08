@@ -22,7 +22,7 @@ const getDonorData = (start,end) => {
     `${process.env.REACT_APP_API}/donors`
        :
     // `${process.env.REACT_APP_API}/donors?from=${reformatDate(start)}&to=${reformatDate(end)}}`
-    `${process.env.REACT_APP_API}/donors?from=${2019-1-1}&to=${2020-4-26}}`
+    `${process.env.REACT_APP_API}/donors?from=$'2019-1-1'&to=$'2020-4-26'`
   )
     .then(resp => resp.json())
     .catch(err => {
@@ -62,7 +62,7 @@ function DonorList(props) {
       console.log("donation list result");
       console.log(result);
       if( Array.isArray(result)) {
-        setDonationList(result.data);
+        setDonationList(result);
       } else {
         setDonationList(result);
       }
@@ -73,7 +73,7 @@ function DonorList(props) {
   function handlePageChange(number) {
     setCurrentPage(number);
     getDonorData(number).then(result => {
-      setDonationList(result.data);
+      setDonationList(result);
     });
   }
 
@@ -306,17 +306,18 @@ function DonorList(props) {
         <tbody>
           <ListItem data={donationList} />
         </tbody>
-      </table> ) : (Array.isArray(donationList) ? <Spin/> : <h4> {donationList.message} </h4>)}
+      </table> ) : (Array.isArray(donationList) ? <Spin/> ,
+      // : <h4> {donationList.message} </h4>)}
 
-      <div className="pagination-center mt-5">
+      // <div className="pagination-center mt-5">
         <Pagination
           donorsPerPage={donorsPerPage}
-          totalDonors={donorCount}
+          // totalDonors={donorCount}
           paginate={paginate}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
-      </div>
+      // </div>
     </div>
   );
 }
