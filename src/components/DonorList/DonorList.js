@@ -11,10 +11,18 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import Chevronright from "../../images/Chevron-right.svg";
+import {dateStringOf , dateVariation, periodFormatter, reformatDate} from "../../lib/date";
+import { useParams } from 'react-router-dom';
 
 const getDonorData = (start,end) => {
+  // console.log("start/end");
+  // console.log(start);
   return fetch( 
+    (start == undefined || end == undefined) ?
     `${process.env.REACT_APP_API}/donors`
+       :
+    // `${process.env.REACT_APP_API}/donors?from=${reformatDate(start)}&to=${reformatDate(end)}}`
+    `${process.env.REACT_APP_API}/donors?from=${2019-1-1}&to=${2020-4-26}}`
   )
     .then(resp => resp.json())
     .catch(err => {
@@ -23,21 +31,42 @@ const getDonorData = (start,end) => {
 };
 
 function DonorList(props) {
-
+  // console.log(getDonorData);
+  // console.log("fetch" );
+  // const startDate = start;
+  // const endDate = end;
+  const id = useParams()
   const [donorList, setDonorList] = useState({}) 
   const [filterOpen, setFilterOpen] = useState(false);
   const [donationList, setDonationList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  const today = new Date();
+  // console.log(today);
+  const [startDate, setStartDate] = useState('2019-1-1');
+  console.log("start date");
+  console.log(startDate);
+
+  const [endDate, setEndDate] = useState(new Date());
+  console.log("end date");
+  console.log(endDate);
 
   useEffect(() => {
-    getDonorData().then(result => {
+    getDonorData(startDate, endDate).then(result => {
       setDonorList(result);
     });
-    getDonorData().then(result => {
+    getDonorData(startDate, endDate).then(result => {
+      console.log("donation list result");
       console.log(result);
-      setDonationList(result.data);
+      if( Array.isArray(result)) {
+        setDonationList(result.data);
+      } else {
+        setDonationList(result);
+      }
+      
     });
   }, []);
 
@@ -48,13 +77,6 @@ function DonorList(props) {
     });
   }
 
-  const paginate = pageNumber => setCurrentPage(pageNumber);
-
-  const today = new Date();
-  const [startDate, setStartDate] = useState(
-    today.setMonth(today.getMonth() - 3)
-  );
-  const [endDate, setEndDate] = useState(new Date());
 
   function ListItem(props) {
     let listElements = props.data;
@@ -269,7 +291,7 @@ function DonorList(props) {
           </Header.Buttons>
         </Modal.Footer>
       </Modal>
-      {donationList.length > 0 ? (        
+      {(Array.isArray(donationList) && donationList.length > 0) ? (        
       <table class="table donortable">
         <thead>
           <tr>
@@ -284,7 +306,7 @@ function DonorList(props) {
         <tbody>
           <ListItem data={donationList} />
         </tbody>
-      </table> ) : <Spin/>}
+      </table> ) : (Array.isArray(donationList) ? <Spin/> : <h4> {donationList.message} </h4>)}
 
       <div className="pagination-center mt-5">
         <Pagination
