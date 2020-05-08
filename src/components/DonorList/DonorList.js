@@ -15,8 +15,7 @@ import {dateStringOf , dateVariation, periodFormatter, reformatDate} from "../..
 import { useParams } from 'react-router-dom';
 
 const getDonorData = (start,end) => {
-  // console.log("start/end");
-  // console.log(start);
+  
   return fetch( 
     (start == undefined || end == undefined) ?
     `${process.env.REACT_APP_API}/donors`
@@ -31,10 +30,7 @@ const getDonorData = (start,end) => {
 };
 
 function DonorList(props) {
-  // console.log(getDonorData);
-  // console.log("fetch" );
-  // const startDate = start;
-  // const endDate = end;
+  
   const id = useParams()
   const [donorList, setDonorList] = useState({}) 
   const [filterOpen, setFilterOpen] = useState(false);
@@ -45,7 +41,7 @@ function DonorList(props) {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const today = new Date();
-  // console.log(today);
+  
   const [startDate, setStartDate] = useState('2019-1-1');
   console.log("start date");
   console.log(startDate);
@@ -76,7 +72,6 @@ function DonorList(props) {
       setDonationList(result);
     });
   }
-
 
   function ListItem(props) {
     let listElements = props.data;
@@ -291,7 +286,8 @@ function DonorList(props) {
           </Header.Buttons>
         </Modal.Footer>
       </Modal>
-      {(Array.isArray(donationList) && donationList.length > 0) ? (        
+      {Array.isArray(donationList) && donationList.length > 0 ? (
+      // { donationList.length > 0 ? (
       <table class="table donortable">
         <thead>
           <tr>
@@ -306,13 +302,14 @@ function DonorList(props) {
         <tbody>
           <ListItem data={donationList} />
         </tbody>
-      </table> ) : (Array.isArray(donationList) ? <Spin/> ,
-      // : <h4> {donationList.message} </h4>)}
+       </table> ) : <Spin/> } 
+   {/* </table> Array.isArray(donationList) ? > 0 : <h1> {donationList.message} </h1>) : <Spin/> }  */}
+      
 
-      // <div className="pagination-center mt-5">
+      <div className="pagination-center mt-5">
         <Pagination
           donorsPerPage={donorsPerPage}
-          // totalDonors={donorCount}
+          totalDonors={donorCount}
           paginate={paginate}
           currentPage={currentPage}
           onPageChange={handlePageChange}
