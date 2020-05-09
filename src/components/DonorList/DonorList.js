@@ -30,8 +30,6 @@ const getDonorData = (start,end) => {
     });
 };
 
-
-
 function DonorList(props) {
   
   // const id = useParams()
@@ -44,11 +42,7 @@ function DonorList(props) {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   // const today = new Date();
-  // const startDate = new Date()
-  // const endDate = new Date()
-
   const [startDate, setStartDate] = useState(new Date());
-
   const [endDate, setEndDate] = useState(new Date());
 
    useEffect(() => {
@@ -79,7 +73,8 @@ function DonorList(props) {
 
   // function applyFilters(props)
   // {
-
+  // let sourcesList = props.data;
+  // let 
   // }
 
   function ListItem(props) {
@@ -235,7 +230,7 @@ function DonorList(props) {
               <b class="filterlabel">Source contains any of these phrase(s)</b>
               <p className="keystatslabel">Select source/s from below list ..</p>
               <p className="keystatslabel">Type in each source separated by a comma.</p> 
-              {/* <form  action = "" 
+              <form  action = "" 
                      className="form-inline my-2 my-lg-0" 
                      id="sourceSearchForm">
                 <input  
@@ -244,7 +239,7 @@ function DonorList(props) {
                   type="search"
                   placeholder="eg: Charity Dinner, Reach Website"
                   aria-label="Search"
-                />  */}
+                /> 
                 {/* <datalist id="sources-list"> 
                          <option value="Charity Dinner"/> 
                          <option value="Reach website"/> 
@@ -252,7 +247,7 @@ function DonorList(props) {
                          <option value="Walk In "/> 
                          <option value="through sales of tickets"/> 
                 </datalist>  */}
-              {/* </form>  */}
+              </form> 
               {/* <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
               <option value="" disabled selected>Select all</option>
               <option value="1">charity Dinner </option>
@@ -261,7 +256,7 @@ function DonorList(props) {
               <option value="3">charity4</option>
              <option value="3">charity5</option>
              </select> */}
-               <Source /> 
+               {/* <Source />  */}
             </div>
 
             <div className="modalfilter">
