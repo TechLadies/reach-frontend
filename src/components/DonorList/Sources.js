@@ -2,8 +2,6 @@ import React, { Control,Fragment,useState,useEffect } from 'react';
 import {Typeahead} from 'react-bootstrap-typeahead';
 import {FormGroup} from 'react-bootstrap';
 
-import 'react-bootstrap-typeahead/css/Typeahead.css';
-
 const fetchSourceList = async () => {
 const res = await fetch(
 `${process.env.REACT_APP_API}/sources`
