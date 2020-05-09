@@ -18,11 +18,8 @@ import Source from "./Sources";
 const getDonorData = (start,end) => {
   
   return fetch( 
-    // (start === undefined || end === undefined) ?
     `${process.env.REACT_APP_API}/donors`
-      //  :
-    // `${process.env.REACT_APP_API}/donors?from=${reformatDate(start)}&to=${reformatDate(end)}}`
-    // `${process.env.REACT_APP_API}/donors?from=$'2019-1-1'&to=$'2020-4-26'`
+
   )
     .then(resp => resp.json())
     .catch(err => {
@@ -137,13 +134,14 @@ function DonorList(props) {
         onHide={() => setFilterOpen(false)}
         dialogClassName="modal-90w"
       >
+        <div class = "donorlist-modal">
         <Modal.Header>
           <div>
-            <h3 className="totaldonationamt">Donor Filters</h3>
-            <p className="keystatslabel">
+            <h3 className="donorfilters-head">Donor Filters</h3>
+            <span className="donorfilters-subhead">
               Donor has made at least 1 donation that satisfies the following
               criteria
-            </p>
+            </span>
           </div>
 
           <Modal.Close onClick={() => setFilterOpen(false)} />
@@ -228,42 +226,19 @@ function DonorList(props) {
 
             <div className="modalfilter">
               <b class="filterlabel">Source contains any of these phrase(s)</b>
-              <p className="keystatslabel">Select source/s from below list ..</p>
-              <p className="keystatslabel">Type in each source separated by a comma.</p> 
+              <span className="donorfilter-subhead">Type in each source separated by a comma.</span> 
               <form  action = "" 
                      className="form-inline my-2 my-lg-0" 
                      id="sourceSearchForm">
-                <input  
-                  list ="sources-list" 
-                  class="form-control mr-sm-2 w-75"
-                  type="search"
-                  placeholder="eg: Charity Dinner, Reach Website"
-                  aria-label="Search"
-                /> 
-                {/* <datalist id="sources-list"> 
-                         <option value="Charity Dinner"/> 
-                         <option value="Reach website"/> 
-                         <option value="Random"/> 
-                         <option value="Walk In "/> 
-                         <option value="through sales of tickets"/> 
-                </datalist>  */}
+                <Source /> 
               </form> 
-              {/* <select id="sel-bs" class="mdb-select md-form" multiple searchable="Search for Sources...">
-              <option value="" disabled selected>Select all</option>
-              <option value="1">charity Dinner </option>
-              <option value="2">Reach Website </option>
-              <option value="3">charity3 charity 3</option>
-              <option value="3">charity4</option>
-             <option value="3">charity5</option>
-             </select> */}
-               {/* <Source />  */}
             </div>
 
             <div className="modalfilter">
               <b class="filterlabel d-flex">Total Donated Amount</b>
              <form class="form-inline my-2 my-lg-0" id="donationAmtSearchForm "> 
                 <input
-                  class="form-control mr-sm-2"
+                  className="form-control mr-sm-2 form-amt"
                   type="search"
                   placeholder="$.0.00"
                   aria-label="Search"
@@ -272,7 +247,7 @@ function DonorList(props) {
                 to&nbsp; {"      "}
                 
                <input
-                  class="form-control mr-sm-2"
+                  className="form-control mr-sm-2 form-amt"
                   type="search"
                   placeholder="$0.00"
                   aria-label="Search"
@@ -280,7 +255,9 @@ function DonorList(props) {
              </form> 
             </div>
           </div>
-          <div className="advanced-filters"> 
+        </Modal.Body>
+        </div>
+        <div className="advanced-filters"> 
             <button
                 onClick={() => {}}
                 className="button transparentbutton advanced-filters-toggle"
@@ -288,7 +265,6 @@ function DonorList(props) {
                <img src={Chevronright} className="button-icon" alt="right arrow" />  View Advanced Filters
             </button>
             </div> 
-        </Modal.Body>
         <Modal.Footer>
           <Header.Buttons>
             

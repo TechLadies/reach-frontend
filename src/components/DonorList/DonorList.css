@@ -76,24 +76,38 @@ button {
 .modal-90w {
   max-width: 1200px;
 }
+.donorlist-modal{
+  padding: 48px 64px 0px;
+}
 
 .modalbody {
   display: flex;
-  flex: 50%;
   flex-wrap: wrap;
+  padding-top: 48px;
 }
 
 .modalfilter {
   flex: 50%;
   padding-bottom: 50px;
-  padding: 10px;
 }
 
 .filterlabel {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 12px;
   display: block;
 }
+
+.donorfilters-head{
+  font-size: 28px;
+  line-height: 1.25;
+
+}
+.donorfilter-subhead{
+  font-size: 14px;
+  line-height: 1.2;
+  color: #929295;
+
+}
+
 
 .taxstatus {
   display: flex;
@@ -117,3 +131,21 @@ button {
 .advanced-filters-toggle img {
   width: 16px;
 }
+
+/* sources input */
+.rbt-input{
+  margin-top:10px;
+  min-width: 470px;
+  max-width: 470px;
+  min-height: 52px;
+}
+
+
+
+.form-amt{
+  height: 52px;
+}
+
+
+
+
