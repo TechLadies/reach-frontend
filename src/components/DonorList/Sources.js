@@ -9,7 +9,6 @@ const fetchSourceList = async () => {
 
 function Source (props) {
      const [sources, setSources] = useState([]);
-/*      const [multiple, setMultiple] = useState(false); */ // we wont need this anymore since default is always multiple selection 
      const [selected, setSelected] = useState([]);
 
      useEffect(() => {
@@ -29,19 +28,7 @@ function Source (props) {
           className= "sources"
           />
         </>
-       //Since we always use multiple selection, no need to give user the option to choose multiselect. 
-       //So remove FormGroup, Control and multiple states 
-
-      /*  
-        <FormGroup
-           <Control
-             checked={multiple}
-             onChange={(e) => setMultiple(e.target.checked)}
-             type="checkbox">
-            Multi-Select
-           </Control>
-         </FormGroup>
-       */
+       
     );
 }; 
       

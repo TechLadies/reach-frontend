@@ -52,7 +52,7 @@ function DonorList(props) {
         setDonationList(result);
       } else {
         setDonationList(result); 
-        // setDonationList(result.data); 
+        
       }
       
     });
@@ -62,7 +62,7 @@ function DonorList(props) {
     setCurrentPage(number);
     getDonorData(number).then(result => {
       setDonationList(result);
-      // setDonationList(result.data); 
+  
     });
   }
   // useEffect(() => {});
