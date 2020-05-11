@@ -36,13 +36,21 @@ function DonorList(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
+  // const taxdeduc = [taxDeductible, setTaxDeductible] = useState(true)
+  const [query, setQuery] = useState('')
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  // const today = new Date();
+  const [sourcesList,SetSourcesList] = useState([])
+  const [minAmount, setMinAmount] =useState()
+  const [maxAmount, setMaxAmount] =useState()
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+  const [dateRange, setDateRange] = useState({startDate} - {endDate})  
 
    useEffect(() => {
+     // we need to put these four in useEffect - const filterbysources, const filterbyamtRange, 
+  // const filterbydateRange, const filterbytaxdeductstatus,
+    
     getDonorData(startDate, endDate).then(result => {
       setDonorList(result);
     });
@@ -67,12 +75,6 @@ function DonorList(props) {
   }
   // useEffect(() => {});
   // const paginate = pageNumber => setCurrentPage(pageNumber);
-
-  // function applyFilters(props)
-  // {
-  // let sourcesList = props.data;
-  // let 
-  // }
 
   function ListItem(props) {
     let listElements = props.data;
@@ -193,10 +195,15 @@ function DonorList(props) {
                   class="custom-control-input"
                   id="defaultInline1"
                   name="inlineDefaultRadiosExample"
+                  // Onchange = {setTaxDeductible}
+                  
                 />
                 <label class="custom-control-label" for="defaultInline1">
-                  Any
+                
+                  Any 
                 </label>
+                
+                
               </div>
 
               <div class="custom-control custom-radio custom-control-inline">
@@ -205,10 +212,12 @@ function DonorList(props) {
                   class="custom-control-input"
                   id="defaultInline2"
                   name="inlineDefaultRadiosExample"
+                  // Onchange = {setTaxDeductible}
                 />
                 <label class="custom-control-label" for="defaultInline2">
                   Tax Deductible
                 </label>
+                
               </div>
 
               <div class="custom-control custom-radio custom-control-inline">
@@ -217,10 +226,13 @@ function DonorList(props) {
                   class="custom-control-input"
                   id="defaultInline3"
                   name="inlineDefaultRadiosExample"
+                  // Onchange = {setTaxDeductible}
+
                 />
                 <label class="custom-control-label" for="defaultInline3">
                   Non Tax Deductible
                 </label>
+               
               </div>
             </div>
 
