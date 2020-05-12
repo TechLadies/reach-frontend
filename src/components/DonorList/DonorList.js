@@ -37,13 +37,14 @@ function DonorList(props) {
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
   const [taxDeduc, setTaxDeduc] = useState(true)
+  const [donationRange, setDonationRange] =useState({minAmount} - {maxAmount})
   const [query, setQuery] = useState('')
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   const [sourcesList,SetSourcesList] = useState([]);
-  const [minAmount, setMinAmount] =useState()
+  const [minAmount, setMinAmount] =useState(6.00)
   
-  const [maxAmount, setMaxAmount] =useState()
+  const [maxAmount, setMaxAmount] =useState(1000)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [dateRange, setDateRange] = useState({startDate} - {endDate})  
@@ -76,6 +77,21 @@ function DonorList(props) {
   
     });
   }
+
+  function handleChange() {
+
+  }
+
+  function applyFilters (props) {
+
+  }
+   function resetFilters (props) {
+
+   }
+   function totalDonationRange(props) {
+
+   }
+
   // useEffect(() => {});
   // const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -199,12 +215,13 @@ function DonorList(props) {
                   id="defaultInline1"
                   name ="taxDeduc"
                   onchange = {()=> 
-                    setTaxDeduc(true)
+                    setTaxDeduc(false)
                   }
                   value={taxDeduc}
                 />
                 <label class="custom-control-label" for="defaultInline1">
                   Any 
+                  {console.log({taxDeduc})}
                 </label>
               </div>
 
@@ -221,7 +238,7 @@ function DonorList(props) {
                 />              
                 <label class="custom-control-label" for="defaultInline2">
                   Tax Deductible
-                  {/* console.log({taxDeduc}) */}
+                  {console.log({taxDeduc})}
                 </label>
               </div>
 
@@ -232,12 +249,13 @@ function DonorList(props) {
                   id="defaultInline3"
                   name ="taxDeduc"
                   onChange ={()=> 
-                    setTaxDeduc(true)
+                    setTaxDeduc(false)
                   }
                   value={taxDeduc}
                   />
                 <label class="custom-control-label" for="defaultInline3">
                   Non Tax Deductible
+                  {console.log({taxDeduc})}
                 </label>
               </div>
             </div>
