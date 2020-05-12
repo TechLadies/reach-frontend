@@ -8,11 +8,11 @@ import history from "../../lib/history";
 import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
-import FilterPopUp from "./FilterPopUp";
+import FilterPopUp from "./filterPopup";
 import "./DonorList.css";
 
 const getDonorData = async (query) => {
-  const res = await fetch(`${process.env.REACT_APP_API}/${query}`, {
+  const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
@@ -27,7 +27,7 @@ function DonorList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
-  const [query, setQuery] = useState(`donors`);
+  const [query, setQuery] = useState(``);
 
 
 

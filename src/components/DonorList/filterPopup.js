@@ -13,30 +13,35 @@ const fetchSourceList = async () => {
 
 function FilterPopUp(props) {
   const query = props.query;
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({source:[]});
   console.log(filter);
-
-  const [taxDeduc, setTaxDeduc] = useState(true);
-  const [sourcesList, SetSourcesList] = useState([]);
-  const [minAmount, setMinAmount] = useState(6.0);
-
-  const [maxAmount, setMaxAmount] = useState(1000);
-  const [donationRange, setDonationRange] = useState(
-    { minAmount } - { maxAmount }
-  );
-
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [dateRange, setDateRange] = useState({ startDate } - { endDate });
 
   const [sources, setSources] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
 
   useEffect(() => {
     fetchSourceList().then((data) => setSources(data));
   }, []);
-  console.log(sources);
 
+  const buildQuery = () => {
+    var urlParams = []
+    for (let src of filter.source){
+      urlParams.push('source=' + src);
+    } 
+
+    for (var key in filter) {
+      if(key === 'source'){
+        continue
+      }
+      urlParams.push(key + "=" + filter[key]);
+    }
+    console.log(urlParams.join('&'));
+    props.setQuery(`?${urlParams.join('&')}`);
+  }
+
+ 
   return (
     <Modal show={true} onHide={props.close} dialogClassName="modal-90w">
       <div class="donorlist-modal">
@@ -106,12 +111,11 @@ function FilterPopUp(props) {
                   class="custom-control-input"
                   id="defaultInline1"
                   name="taxDeduc"
-                  value={null}
                   onChange={() =>
                     "taxDeduc" in filter ? delete filter.taxDeduc : null
                   }
                 />
-                <label class="custom-control-label" for="defaultInline1">
+                <label class="custom-control-label" htmlFor="defaultInline1">
                   Any
                 </label>
               </div>
@@ -127,7 +131,7 @@ function FilterPopUp(props) {
                   }
                   value={true}
                 />
-                <label class="custom-control-label" for="defaultInline2">
+                <label class="custom-control-label" htmlFor="defaultInline2">
                   Tax Deductible
                 </label>
               </div>
@@ -143,7 +147,7 @@ function FilterPopUp(props) {
                   }
                   value={false}
                 />
-                <label class="custom-control-label" for="defaultInline3">
+                <label class="custom-control-label" htmlFor="defaultInline3">
                   Non Tax Deductible
                 </label>
               </div>
@@ -164,17 +168,18 @@ function FilterPopUp(props) {
                   labelKey="description"
                   multiple={true}
                   options={sources}
+                  name = "source[]"
                   onChange={(selected) => {
-                    setSelected(selected);
+                    setSelectedTypeAhead(selected);
                     setFilter({
                       ...filter,
                       source: selected.map((e) => {
-                        return { "source[]": e.description };
-                      }),
+                        return e.description;
+                      }) 
                     });
                   }}
                   placeholder="e.g. Charity Dinner, Reach website"
-                  selected={selected}
+                  selected={selectTypeAhead}
                   className="sources"
                 />
               </form>
@@ -189,21 +194,21 @@ function FilterPopUp(props) {
                 <input
                   className="form-control mr-sm-2 form-amt"
                   name="minAmt"
-                  type="search"
+                  type="number"
+                  step="0.01"
                   placeholder="$.0.00"
                   aria-label="Search"
                   onChange={(e) => {
                     setFilter({ ...filter, [e.target.name]: e.target.value });
-/*                    if(e.target.value = null ||'minAmt' in filter){
-                     return delete filter.minAmt
-                   } */
+                    /* if (!filter.minAmt) delete filter.minAmt */
                   }}
                 />
                 to&nbsp; {"      "}
                 <input
                   className="form-control mr-sm-2 form-amt"
                   name="maxAmt"
-                  type="search"
+                  type="number"
+                  step= "0.01"
                   placeholder="$0.00"
                   aria-label="Search"
                   onChange={(e) =>
@@ -235,7 +240,7 @@ function FilterPopUp(props) {
               Reset Filters
             </button>
             <button
-              // onClick={() => {}}
+              onClick={()=>buildQuery()}
               className={"button orangebutton "}
             >
               Apply Filters
