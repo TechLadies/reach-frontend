@@ -146,6 +146,14 @@ button {
   height: 52px;
 }
 
+.no-donor{
+  text-align: center;
+  font-size: 26px;
+  margin: 48px;
+
+}
 
 
-
+.react-datepicker-popper {
+  z-index: 100;
+}
