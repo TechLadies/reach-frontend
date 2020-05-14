@@ -23,6 +23,12 @@ function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
 
+  const clearState = () => {
+    props.setQuery('')
+    setFilter('')
+    ref.current.clear()
+}
+
   useEffect(() => {
     fetchSourceList().then((data) => setSources(data));
   }, []);
@@ -239,7 +245,8 @@ function FilterPopUp(props) {
             <div style={{ display: "flex" }}>
               <button
                 style={{ marginLeft: "auto" }}
-                onClick={() => ref.current.clear()}
+                // onClick={() => ref.current.clear()} /* this clears on sources filter*/
+                onClick={clearState}  /* this clears 3 filters */
                 className="button transparentbutton"
                 type = "reset"
               >
@@ -258,5 +265,6 @@ function FilterPopUp(props) {
       </form>
     </Modal>
   );
-}
+}             
+    
 export default FilterPopUp;
