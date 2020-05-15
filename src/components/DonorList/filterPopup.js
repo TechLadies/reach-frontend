@@ -3,7 +3,9 @@ import Header from "../Header";
 import Modal from "../Modal";
 import Chevronright from "../../images/Chevron-right.svg";
 import DatePicker from "react-datepicker";
-import { Typeahead } from "react-bootstrap-typeahead";
+ import {Typeahead} from "react-bootstrap-typeahead";
+
+
 
 const fetchSourceList = async () => {
   const res = await fetch(`${process.env.REACT_APP_API}/sources`);
@@ -11,6 +13,8 @@ const fetchSourceList = async () => {
   return data;
 };
 const ref = React.createRef();
+
+//  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
   console.log(props.resStatus)
@@ -22,7 +26,30 @@ function FilterPopUp(props) {
 
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
+  // const [showModal, setModal] =useState(false)
+  const showModal = useState(true);
+  const setModal = useState(true);
 
+  //  write a handle to clear form inputs while closing Modal
+
+  // const initialState = { startDate: null, 
+  //                        endDate: null ,
+  //                        sources: null, 
+  //                        minAmount: null, 
+  //                        maxAmount:null, 
+  //                        taxDeduc:null
+  //                       };
+
+//   const[filterState, setFilterState]= useState(initialState);
+//   const[state,setState]=useState();
+//   let  closeModal = () => {
+//             props.setState({ 
+//              modalIsOpen: false 
+//             }), () => {
+// props.resetDonorData();
+//             }
+//         }
+//  the following clearstate clears input of 3 fileds of filterpopup  
   const clearState = () => {
     props.setQuery('')
     setFilter('')
@@ -54,7 +81,9 @@ function FilterPopUp(props) {
   };
 
   return (
-    <Modal show={true} onHide={props.close} dialogClassName="modal-90w">
+    // <Modal show={true} onHide={props.closeModal} dialogClassName="modal-90w"> 
+    <Modal show ={showModal} onHide ={()=> setModal(false)} dialogClassName="modal-90w">
+    {/* onHide={props.close} */}
       <form onSubmit={buildAndSubmitQuery}>
         <div class="donorlist-modal">
           <Modal.Header>
@@ -66,7 +95,8 @@ function FilterPopUp(props) {
               </span>
             </div>
 
-            <Modal.Close onClick={props.close} />
+            <Modal.Close onHide ={()=> setModal(false)} />
+            {/* onClick={props.close} */}
           </Modal.Header>
           <Modal.Body>
             <div className="modalbody">
@@ -245,8 +275,7 @@ function FilterPopUp(props) {
             <div style={{ display: "flex" }}>
               <button
                 style={{ marginLeft: "auto" }}
-                // onClick={() => ref.current.clear()} /* this clears on sources filter*/
-                onClick={clearState}  /* this clears 3 filters */
+                onClick={clearState}  /* this clears all 3 filters */
                 className="button transparentbutton"
                 type = "reset"
               >
