@@ -26,29 +26,15 @@ function FilterPopUp(props) {
 
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
-  // const [showModal, setModal] =useState(false)
-  const showModal = useState(true);
-  const setModal = useState(true);
-
-  //  write a handle to clear form inputs while closing Modal
-
-  // const initialState = { startDate: null, 
-  //                        endDate: null ,
-  //                        sources: null, 
-  //                        minAmount: null, 
-  //                        maxAmount:null, 
-  //                        taxDeduc:null
-  //                       };
-
-//   const[filterState, setFilterState]= useState(initialState);
-//   const[state,setState]=useState();
-//   let  closeModal = () => {
-//             props.setState({ 
-//              modalIsOpen: false 
-//             }), () => {
-// props.resetDonorData();
-//             }
-//         }
+  
+const  closeModal = () => {
+  // props.setQuery('')
+  //   setFilter('')
+  //   ref.current.clear()
+  this.setState({
+    show: false
+  })
+} 
 //  the following clearstate clears input of 3 fileds of filterpopup  
   const clearState = () => {
     props.setQuery('')
@@ -81,8 +67,9 @@ function FilterPopUp(props) {
   };
 
   return (
-    // <Modal show={true} onHide={props.closeModal} dialogClassName="modal-90w"> 
-    <Modal show ={showModal} onHide ={()=> setModal(false)} dialogClassName="modal-90w">
+    // <Modal show={true} onHide={props.close} dialogClassName="modal-90w"> 
+    <Modal show={true} onHide={closeModal} dialogClassName="modal-90w"> 
+     {/* <Modal show ={showModal} onHide ={()=> setModal(false)} dialogClassName="modal-90w">  */}
     {/* onHide={props.close} */}
       <form onSubmit={buildAndSubmitQuery}>
         <div class="donorlist-modal">
@@ -95,7 +82,7 @@ function FilterPopUp(props) {
               </span>
             </div>
 
-            <Modal.Close onHide ={()=> setModal(false)} />
+            <Modal.Close onClick ={closeModal} />
             {/* onClick={props.close} */}
           </Modal.Header>
           <Modal.Body>
