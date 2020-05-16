@@ -3,9 +3,7 @@ import Header from "../Header";
 import Modal from "../Modal";
 import Chevronright from "../../images/Chevron-right.svg";
 import DatePicker from "react-datepicker";
- import {Typeahead} from "react-bootstrap-typeahead";
-
-
+import { Typeahead } from "react-bootstrap-typeahead";
 
 const fetchSourceList = async () => {
   const res = await fetch(`${process.env.REACT_APP_API}/sources`);
@@ -17,8 +15,8 @@ const ref = React.createRef();
 //  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
-  console.log(props.resStatus)
- 
+  console.log(props.resStatus);
+
   const query = props.query;
   const [filter, setFilter] = useState({ source: [] });
   const [startDate, setStartDate] = useState("");
@@ -27,10 +25,10 @@ function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
   const clearState = () => {
-    props.setQuery('')
-    setFilter('')
-    ref.current.clear()
-}
+    props.setQuery("");
+    setFilter("");
+    ref.current.clear();
+  };
 
   useEffect(() => {
     fetchSourceList().then((data) => setSources(data));
@@ -46,14 +44,13 @@ function FilterPopUp(props) {
       if (key === "source") {
         continue;
       }
-      if(filter[key]){
+      if (filter[key]) {
         urlParams.push(key + "=" + filter[key]);
-      } 
+      }
     }
     console.log(urlParams.join("&"));
     props.setQuery(`?${urlParams.join("&")}`);
-    props.close()
-    
+    props.close();
   };
 
   return (
@@ -93,7 +90,6 @@ function FilterPopUp(props) {
                       startDate={startDate}
                       endDate={endDate}
                       dateFormat="dd/MM/yyyy"
-
                     />
                   </div>
                   <div>
@@ -113,7 +109,7 @@ function FilterPopUp(props) {
                       endDate={endDate}
                       minDate={startDate}
                       dateFormat="dd/MM/yyyy"
-                      ref= {ref}
+                      ref={ref}
                     />
                   </div>
                 </div>
@@ -177,26 +173,26 @@ function FilterPopUp(props) {
                 <span className="donorfilter-subhead">
                   Type in each source and press "Enter"
                 </span>
-                  <Typeahead
-                    id="sources-list"
-                    labelKey="description"
-                    multiple={true}
-                    options={sources}
-                    name="source"
-                    onChange={(selected) => {
-                      setSelectedTypeAhead(selected);
-                      setFilter({
-                        ...filter,
-                        source: selected.map((e) => {
-                          return e.description;
-                        }),
-                      });
-                    }}
-                    placeholder="e.g. Charity Dinner, Reach website"
-                    selected={selectTypeAhead}
-                    className="sources"
-                    ref= {ref}
-                  />
+                <Typeahead
+                  id="sources-list"
+                  labelKey="description"
+                  multiple={true}
+                  options={sources}
+                  name="source"
+                  onChange={(selected) => {
+                    setSelectedTypeAhead(selected);
+                    setFilter({
+                      ...filter,
+                      source: selected.map((e) => {
+                        return e.description;
+                      }),
+                    });
+                  }}
+                  placeholder="e.g. Charity Dinner, Reach website"
+                  selected={selectTypeAhead}
+                  className="sources"
+                  ref={ref}
+                />
               </div>
 
               <div className="modalfilter">
@@ -236,6 +232,7 @@ function FilterPopUp(props) {
         </div>
         <div className="advanced-filters">
           <button
+            type="button"
             onClick={() => {}}
             className="button transparentbutton advanced-filters-toggle"
           >
@@ -248,9 +245,9 @@ function FilterPopUp(props) {
             <div style={{ display: "flex" }}>
               <button
                 style={{ marginLeft: "auto" }}
-                onClick={clearState}  /* this clears all 3 filters */
+                onClick={clearState} /* this clears all 3 filters */
                 className="button transparentbutton"
-                type = "reset"
+                type="reset"
               >
                 Reset Filters
               </button>
@@ -267,6 +264,6 @@ function FilterPopUp(props) {
       </form>
     </Modal>
   );
-}             
-    
+}
+
 export default FilterPopUp;
