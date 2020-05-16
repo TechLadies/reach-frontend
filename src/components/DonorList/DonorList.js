@@ -71,13 +71,12 @@ function DonorList() {
           </Header.Buttons>
         </Header.Top>
       </Header>
-      {filterOpen && (
-        <FilterPopUp
-          close={() => setFilterOpen(false)}
-          query={query}
-          setQuery={setQuery}
-        />
-      )}
+      <FilterPopUp
+        show={filterOpen}
+        close={() => setFilterOpen(false)}
+        query={query}
+        setQuery={setQuery}
+      />
 
       {
         /* Array.isArray(donationList) && */ donorList.length >= 0 ? (

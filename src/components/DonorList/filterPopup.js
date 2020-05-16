@@ -26,16 +26,6 @@ function FilterPopUp(props) {
 
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
-  
-const  closeModal = () => {
-  // props.setQuery('')
-  //   setFilter('')
-  //   ref.current.clear()
-  this.setState({
-    show: false
-  })
-} 
-//  the following clearstate clears input of 3 fileds of filterpopup  
   const clearState = () => {
     props.setQuery('')
     setFilter('')
@@ -67,10 +57,7 @@ const  closeModal = () => {
   };
 
   return (
-    // <Modal show={true} onHide={props.close} dialogClassName="modal-90w"> 
-    <Modal show={true} onHide={closeModal} dialogClassName="modal-90w"> 
-     {/* <Modal show ={showModal} onHide ={()=> setModal(false)} dialogClassName="modal-90w">  */}
-    {/* onHide={props.close} */}
+    <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
       <form onSubmit={buildAndSubmitQuery}>
         <div class="donorlist-modal">
           <Modal.Header>
@@ -82,8 +69,7 @@ const  closeModal = () => {
               </span>
             </div>
 
-            <Modal.Close onClick ={closeModal} />
-            {/* onClick={props.close} */}
+            <Modal.Close onClick={props.close} />
           </Modal.Header>
           <Modal.Body>
             <div className="modalbody">
