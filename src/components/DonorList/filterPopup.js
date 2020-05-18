@@ -222,6 +222,7 @@ function FilterPopUp(props) {
                       setFilter({ ...filter, [e.target.name]: e.target.value });
                       /* if (filter.minAmt === "") delete filter.minAmt */
                     }}
+                    // min = "6"
                     value ={filter.minAmt}
                   />
                   to&nbsp; {"      "}
@@ -235,6 +236,8 @@ function FilterPopUp(props) {
                     onChange={(e) =>
                       setFilter({ ...filter, [e.target.name]: e.target.value })
                     }
+                    // min ="6"
+                    // max =
                     value ={filter.maxAmt}
                   />
                 </div>
