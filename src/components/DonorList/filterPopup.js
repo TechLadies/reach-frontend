@@ -23,9 +23,13 @@ function FilterPopUp(props) {
   const [filter, setFilter] = useState({ source: [] });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-
+  const [taxdeduc, setTaxDeduc] = useState(true);
+  const [minAmount, setMinAmount] =useState()
+    const [maxAmount, setMaxAmount] =useState()
+  const [totalAmountDonated, setTotalAmountDonated] =useState();  
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
+
   const clearState = () => {
     props.setQuery('')
     setFilter('')
@@ -50,12 +54,18 @@ function FilterPopUp(props) {
         urlParams.push(key + "=" + filter[key]);
       } 
     }
+    
     console.log(urlParams.join("&"));
     props.setQuery(`?${urlParams.join("&")}`);
     props.close()
     
   };
 
+  // handleOptionChange = event => {
+  //   this.setState({
+  //     taxDeduc: event.target.value
+  //   });
+  // };
   return (
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
       <form onSubmit={buildAndSubmitQuery}>
@@ -128,9 +138,14 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline1"
                     name="taxDeduc"
+                    // defaultChecked ={true}
+                    checked={ true}
                     onChange={() =>
                       "taxDeduc" in filter ? delete filter.taxDeduc : null
                     }
+                    // onChange={(taxDeduc) =>setTaxDeduc(true);
+                    //   "taxDeduc" in filter ? delete filter.taxDeduc : null
+                    // }
                   />
                   <label class="custom-control-label" htmlFor="defaultInline1">
                     Any
@@ -143,10 +158,14 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
+                    // checked={taxDeduc === true}
+                    // onChange={this.handleOptionChange}
                     onChange={(e) =>
                       setFilter({ ...filter, [e.target.name]: e.target.value })
                     }
                     value={true}
+                    // Onchange = {(taxDeduc)=>setTaxDeduc(true);
+                    // setFilter({ ...filter, [e.target.name]: e.target.value })}
                   />
                   <label class="custom-control-label" htmlFor="defaultInline2">
                     Tax Deductible
