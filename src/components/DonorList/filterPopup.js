@@ -22,9 +22,9 @@ function FilterPopUp(props) {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [taxdeduc, setTaxDeduc] = useState(true);
-  const [minAmount, setMinAmount] =useState()
-    const [maxAmount, setMaxAmount] =useState()
-  const [totalAmountDonated, setTotalAmountDonated] =useState();  
+  const [minAmt, setMinAmt] =useState()
+  const [maxAmt, setMaxAmt] =useState()
+  const [totalAmtDonated, setTotalAmtDonated] =useState();  
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
 
@@ -58,11 +58,6 @@ function FilterPopUp(props) {
     props.close();
   };
 
-  // handleOptionChange = event => {
-  //   this.setState({
-  //     taxDeduc: event.target.value
-  //   });
-  // };
   return (
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
       <form onSubmit={buildAndSubmitQuery}>
@@ -139,9 +134,6 @@ function FilterPopUp(props) {
                     onChange={() =>
                       "taxDeduc" in filter ? delete filter.taxDeduc : null
                     }
-                    // onChange={(taxDeduc) =>setTaxDeduc(true);
-                    //   "taxDeduc" in filter ? delete filter.taxDeduc : null
-                    // }
                   />
                   <label class="custom-control-label" htmlFor="defaultInline1">
                     Any
@@ -155,14 +147,11 @@ function FilterPopUp(props) {
                     id="defaultInline2"
                     name="taxDeduc"
                     defaultChecked={filter.taxDeduc}
-                    // checked={taxDeduc === true}
-                    // onChange={this.handleOptionChange}
                     onChange={(e) =>
                       setFilter({ ...filter, [e.target.name]: e.target.value })
                     }
                     value={true}
-                    // Onchange = {(taxDeduc)=>setTaxDeduc(true);
-                    // setFilter({ ...filter, [e.target.name]: e.target.value })}
+                    
                   />
                   <label class="custom-control-label" htmlFor="defaultInline2">
                     Tax Deductible
@@ -233,6 +222,7 @@ function FilterPopUp(props) {
                       setFilter({ ...filter, [e.target.name]: e.target.value });
                       /* if (filter.minAmt === "") delete filter.minAmt */
                     }}
+                    value ={filter.minAmt}
                   />
                   to&nbsp; {"      "}
                   <input
@@ -245,6 +235,7 @@ function FilterPopUp(props) {
                     onChange={(e) =>
                       setFilter({ ...filter, [e.target.name]: e.target.value })
                     }
+                    value ={filter.maxAmt}
                   />
                 </div>
               </div>
