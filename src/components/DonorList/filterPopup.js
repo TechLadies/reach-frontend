@@ -135,7 +135,7 @@ function FilterPopUp(props) {
                     id="defaultInline1"
                     name="taxDeduc"
                     // defaultChecked ={true}
-                    checked={ true}
+                    // checked={ true}
                     onChange={() =>
                       "taxDeduc" in filter ? delete filter.taxDeduc : null
                     }
@@ -154,6 +154,7 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
+                    defaultChecked={filter.taxDeduc}
                     // checked={taxDeduc === true}
                     // onChange={this.handleOptionChange}
                     onChange={(e) =>
@@ -174,6 +175,7 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
+                    defaultChecked={!filter.taxDeduc}
                     onChange={(e) =>
                       setFilter({ ...filter, [e.target.name]: e.target.value })
                     }
