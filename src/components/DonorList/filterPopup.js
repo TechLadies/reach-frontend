@@ -15,16 +15,10 @@ const ref = React.createRef();
 //  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
-  console.log(props.resStatus);
 
-  const query = props.query;
   const [filter, setFilter] = useState({ source: [] });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [taxdeduc, setTaxDeduc] = useState(true);
-  const [minAmt, setMinAmt] =useState()
-  const [maxAmt, setMaxAmt] =useState()
-  const [totalAmtDonated, setTotalAmtDonated] =useState();  
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
 
@@ -52,8 +46,7 @@ function FilterPopUp(props) {
         urlParams.push(key + "=" + filter[key]);
       }
     }
-    
-    console.log(urlParams.join("&"));
+
     props.setQuery(`?${urlParams.join("&")}`);
     props.close();
   };
@@ -129,11 +122,8 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline1"
                     name="taxDeduc"
-                    // defaultChecked ={true}
-                    // checked={ true}
-                    onChange={() =>
-                      "taxDeduc" in filter ? delete filter.taxDeduc : null
-                    }
+                    defaultChecked={!filter.taxDeduc}
+                    onChange={() => setFilter({ ...filter, taxDeduc: false })} // if taxDeduc is a boolean false, it will be omitted from the query.
                   />
                   <label class="custom-control-label" htmlFor="defaultInline1">
                     Any
@@ -146,12 +136,9 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
-                    defaultChecked={filter.taxDeduc}
-                    onChange={(e) =>
-                      setFilter({ ...filter, [e.target.name]: e.target.value })
-                    }
-                    value={true}
-                    
+                    defaultChecked={filter.taxDeduc === "true"}
+                    onChange={() => setFilter({ ...filter, taxDeduc: "true" })}
+                    value="true"
                   />
                   <label class="custom-control-label" htmlFor="defaultInline2">
                     Tax Deductible
@@ -164,11 +151,9 @@ function FilterPopUp(props) {
                     class="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
-                    defaultChecked={!filter.taxDeduc}
-                    onChange={(e) =>
-                      setFilter({ ...filter, [e.target.name]: e.target.value })
-                    }
-                    value={false}
+                    defaultChecked={!filter.taxDeduc === "false"}
+                    onChange={() => setFilter({ ...filter, taxDeduc: "false" })}
+                    value="false"
                   />
                   <label class="custom-control-label" htmlFor="defaultInline3">
                     Non Tax Deductible
@@ -223,7 +208,7 @@ function FilterPopUp(props) {
                       /* if (filter.minAmt === "") delete filter.minAmt */
                     }}
                     // min = "6"
-                    value ={filter.minAmt}
+                    value={filter.minAmt}
                   />
                   to&nbsp; {"      "}
                   <input
@@ -238,7 +223,7 @@ function FilterPopUp(props) {
                     }
                     // min ="6"
                     // max =
-                    value ={filter.maxAmt}
+                    value={filter.maxAmt}
                   />
                 </div>
               </div>
