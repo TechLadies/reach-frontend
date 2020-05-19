@@ -16,7 +16,6 @@ const getDonorData = async (query) => {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-  console.log(res);
   const data = await res.json();
   return data;
 };
