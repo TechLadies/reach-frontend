@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
+import Badge from "../Header";
 import Filterw from "../../images/filter_whitebtn.svg";
 import Reportplus from "../../images/reportplus.svg";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,6 +30,7 @@ function DonorList() {
   const [query, setQuery] = useState(``);
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const Badge = ({children}) => <span>{children}</span>
 
   useEffect(() => {
     getDonorData(query).then((result) => {
@@ -48,11 +50,14 @@ function DonorList() {
               {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
               listed
             </div>
+            <FilterResult/>
           </Header.Content>
+          {/* <div> <FilterResult/> </div>  */}
           <Header.Buttons>
             <button
               onClick={() => {
                 setFilterOpen(true);
+               
               }}
               className={
                 "button whitebutton " + (filterOpen ? "purplebutton" : null)
@@ -144,6 +149,21 @@ function ListItem(props) {
   });
 
   return <React.Fragment>{listComponents}</React.Fragment>;
+}
+
+const FilterResult =() =>
+{
+    return (
+     <div classname ="activeFilters"> Active Filters 
+    <div className="active-filter-container">
+       <Badge > Date Range </Badge>{'x'}
+       <Badge> sources </Badge >{'x'}
+       <Badge> tax-deductible-status </Badge >{'x'}
+       <Badge> total-amount-donated-range </Badge>{'x'}
+    </div>
+    </div> 
+    )
+
 }
 
 export default DonorList;

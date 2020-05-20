@@ -4,6 +4,7 @@ import Modal from "../Modal";
 import Chevronright from "../../images/Chevron-right.svg";
 import DatePicker from "react-datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
+// import filterResult from "./filterResults";
 
 const fetchSourceList = async () => {
   const res = await fetch(`${process.env.REACT_APP_API}/sources`);
@@ -21,6 +22,7 @@ function FilterPopUp(props) {
   const [endDate, setEndDate] = useState("");
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
+  const activeFilter = true;
 
   const clearState = () => {
     props.setQuery("");
@@ -33,6 +35,7 @@ function FilterPopUp(props) {
   }, []);
 
   const buildAndSubmitQuery = () => {
+
     var urlParams = [];
     for (let src of filter.source) {
       urlParams.push("source=" + src);
@@ -51,11 +54,15 @@ function FilterPopUp(props) {
     props.close();
   };
 
+
   return (
+    
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
+    
       <form onSubmit={buildAndSubmitQuery}>
         <div class="donorlist-modal">
           <Modal.Header>
+        
             <div>
               <h3 className="donorfilters-head">Donor Filters</h3>
               <span className="donorfilters-subhead">
@@ -63,7 +70,6 @@ function FilterPopUp(props) {
                 criteria
               </span>
             </div>
-
             <Modal.Close onClick={props.close} />
           </Modal.Header>
           <Modal.Body>
@@ -264,6 +270,9 @@ function FilterPopUp(props) {
       </form>
     </Modal>
   );
+   
 }
+//   following component is req when filters are active
+
 
 export default FilterPopUp;

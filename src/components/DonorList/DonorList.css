@@ -157,3 +157,23 @@ button {
 .react-datepicker-popper {
   z-index: 100;
 }
+
+/* active filter */
+.active-filter-container{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #CC7503;
+  position: relative;
+  text-align: left;
+}
+.active-filter-wrapper{
+  display: flex;
+}
+
+.badge {
+  /* padding: 2.8% 6.25% 2.8% 6.25%; */
+  width: 100%;
+  border-bottom: solid 2px #c92c70dc;
+  colour: #861b44d1;
+  
+}
