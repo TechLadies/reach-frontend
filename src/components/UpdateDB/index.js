@@ -145,8 +145,7 @@ const getLatestUpload = async () => {
 }
 
 const UploadMsg = () => {
-  const [latestUpload, setLatestUpload] = useState({})
-  console.log(latestUpload)
+  const [latestUpload, setLatestUpload] = useState()
 
   useEffect(() => {
     getLatestUpload().then((result) => {
@@ -154,29 +153,26 @@ const UploadMsg = () => {
     })
   }, [])
 
- 
-  const lastUpdate = latestUpload.createdAt
-  const firstDate = new Date(latestUpload.firstDate)
-  const lastDate = new Date(latestUpload.lastDate)
-
   return (
     <div>
+    { latestUpload && (
       <div className=" update-top">
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            <p className=" update-data">{lastUpdate && lastDbUpdateFormat(lastUpdate)}</p>
+            <p className=" update-data">{lastDbUpdateFormat(latestUpload.createdAt)}</p>
           </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
             <p className="update-data">
-              {lastUpdate && dateStringOf(firstDate) + "-" +  dateStringOf(lastDate)}
+              {dateStringOf(new Date(latestUpload.firstDate)) + "-" +  dateStringOf(new Date(latestUpload.lastDate))}
             </p>
           </div>
         </div>
       </div>
+    )}
       <div className="update-bottom">
         <div className="container3">
           <p className="black-description">
