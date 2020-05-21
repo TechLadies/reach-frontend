@@ -23,9 +23,9 @@ function FilterPopUp(props) {
   const activeFilter = true;
   const {filter, setFilter} = props
   const [localFilter, setLocalFilter] = useState({...filter})
-  const [selectTypeAhead, setSelectedTypeAhead] = useState(localFilter.source);
-  const [startDate, setStartDate] = useState(new Date(localFilter.from));
-  const [endDate, setEndDate] = useState(new Date(localFilter.to));
+  const [selectTypeAhead, setSelectedTypeAhead] = useState(localFilter.source || []);
+  const [startDate, setStartDate] = useState(localFilter.from && new Date(localFilter.from));
+  const [endDate, setEndDate] = useState(localFilter.to && new Date(localFilter.to));
 
   const clearState = () => {
     fromDateRef.current.clear();
