@@ -12,7 +12,9 @@ const fetchSourceList = async () => {
   const data = res.json();
   return data;
 };
-const ref = React.createRef();
+const fromDateRef = React.createRef();
+const toDateRef = React.createRef();
+const typeaheadRef = React.createRef();
 
 //  write a handle to clear form inputs while closing Modal
 
@@ -26,7 +28,11 @@ function FilterPopUp(props) {
   const [localFilter, setLocalFilter] = useState({...filter})
 
   const clearState = () => {
-    ref.current.clear();
+    fromDateRef.current.clear();
+    toDateRef.current.clear();
+    typeaheadRef.current.clear();
+    setSelectedTypeAhead([])
+    setLocalFilter({source: []})
   };
 
   useEffect(() => {
@@ -71,7 +77,7 @@ function FilterPopUp(props) {
                       name="from"
                       onChange={(date) => {
                         setStartDate(date);
-                        setLocalFilter({ ...localFilter, from: date.toISOString() });
+                        setLocalFilter({ ...localFilter, from: date ? date.toISOString() : false });
                         // <FilterResult/>
                        
                       }}
@@ -79,6 +85,7 @@ function FilterPopUp(props) {
                       startDate={startDate}
                       endDate={endDate}
                       dateFormat="dd/MM/yyyy"
+                      ref={fromDateRef}
                     />
                   </div>
                   <div>
@@ -92,13 +99,13 @@ function FilterPopUp(props) {
                       name="to"
                       onChange={(date) => {
                         setEndDate(date);
-                        setLocalFilter({ ...localFilter, to: date.toISOString() });
+                        setLocalFilter({ ...localFilter, to: date ? date.toISOString() : false });
                       }}
                       selectsEnd
                       endDate={endDate}
                       minDate={startDate}
                       dateFormat="dd/MM/yyyy"
-                      ref={ref}
+                      ref={toDateRef}
                     />
                   </div>
                 </div>
@@ -177,7 +184,7 @@ function FilterPopUp(props) {
                   placeholder="e.g. Charity Dinner, Reach website"
                   selected={selectTypeAhead}
                   className="sources"
-                  ref={ref}
+                  ref={typeaheadRef}
                 />
               </div>
 
