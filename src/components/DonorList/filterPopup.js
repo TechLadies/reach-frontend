@@ -4,7 +4,9 @@ import Modal from "../Modal";
 import Chevronright from "../../images/Chevron-right.svg";
 import DatePicker from "react-datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
+
 // import filterResult from "./filterResults";
+// const Badge = ({children}) => <span>{children}</span>; 
 
 const fetchSourceList = async () => {
   const res = await fetch(`${process.env.REACT_APP_API}/sources`);
@@ -89,6 +91,8 @@ function FilterPopUp(props) {
                       onChange={(date) => {
                         setStartDate(date);
                         setFilter({ ...filter, from: date.toISOString() });
+                        // <FilterResult/>
+                       
                       }}
                       selectsStart
                       startDate={startDate}
@@ -273,6 +277,21 @@ function FilterPopUp(props) {
    
 }
 //   following component is req when filters are active
-
+// const FilterResult =(filter) =>
+// {
+//   if (filter ===true)  {
+//    return (
+//     <div classname ="activeFilters"> Active Filters 
+//     <div className="active-filter-container">
+//         <Badge >Date Range </Badge>{'x'}
+//         <Badge> sources </Badge >{'x'}
+//         <Badge> tax-deductible-status </Badge >{'x'}
+//         <Badge> total-amount-donated-range </Badge>{'x'}
+//     </div>
+//     </div> 
+//   )
+//   }
+// return (null)
+// }
 
 export default FilterPopUp;
