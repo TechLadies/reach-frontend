@@ -55,9 +55,9 @@ function DonorTable(props) {
 
 function DonationList(props) {
   const listElements = props.data
-  const listComponents = listElements.map(item => {
+  const listComponents = listElements.map((item, index) => {
     return (
-      <tr className="d-flex">
+      <tr className="d-flex" key={index}>
         <td className="col-2">{dateStringOf(new Date(item.date))}</td>
         <td className="col-2">$ {item.amount}</td>
         <td className="col-2">Charity Dinner</td>
