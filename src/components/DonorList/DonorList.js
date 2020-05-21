@@ -39,6 +39,8 @@ function buildQuery(filterObj) {
 }
 
 function DonorList() {
+  const filterFromLocalStorage = window.localStorage.getItem("filter")
+
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,8 +48,8 @@ function DonorList() {
   const [donorCount, setDonorCount] = useState(0);
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const [filter, setFilter] = useState({source: []})
-  // const Badge = ({children}) => <span>{children}</span>; 
+  const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage) || {source: []})
+  // const Badge = ({children}) => <span>{children}</span>; )
 
   useEffect(()=>{
     const query = buildQuery(filter)
@@ -55,6 +57,8 @@ function DonorList() {
       setDonorList(result);
       setDonorCount(result.length);
     });
+
+    window.localStorage.setItem('filter', JSON.stringify(filter))
   }, [filter])
 
   return (
@@ -67,7 +71,10 @@ function DonorList() {
               {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
               listed
             </div>
-           {/* <FilterResult/>  */}
+            <div>
+              <pre>{JSON.stringify(filter)}</pre>
+              {/* <FilterResult/>  */}
+           </div>
           </Header.Content>
           <Header.Buttons>
             <button
