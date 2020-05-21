@@ -19,13 +19,13 @@ const typeaheadRef = React.createRef();
 //  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
   const [sources, setSources] = useState([]);
-  const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
   const activeFilter = true;
   const {filter, setFilter} = props
   const [localFilter, setLocalFilter] = useState({...filter})
+  const [selectTypeAhead, setSelectedTypeAhead] = useState(localFilter.source);
+  const [startDate, setStartDate] = useState(new Date(localFilter.from));
+  const [endDate, setEndDate] = useState(new Date(localFilter.to));
 
   const clearState = () => {
     fromDateRef.current.clear();
