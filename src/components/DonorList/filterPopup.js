@@ -23,6 +23,7 @@ function FilterPopUp(props) {
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
   const activeFilter = true;
   const {filter, setFilter} = props
+  const [localFilter, setLocalFilter] = useState({...filter})
 
   const clearState = () => {
     ref.current.clear();
@@ -32,7 +33,8 @@ function FilterPopUp(props) {
     fetchSourceList().then((data) => setSources(data));
   }, []);
 
-  const buildAndSubmitQuery = () => {
+  const confirmFilters = () => {
+    setFilter(localFilter)
     props.close();
   };
 
@@ -40,8 +42,7 @@ function FilterPopUp(props) {
   return (
     
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
-    
-      <form onSubmit={buildAndSubmitQuery}>
+      <form onSubmit={confirmFilters}>
         <div className="donorlist-modal">
           <Modal.Header>
         
@@ -70,7 +71,7 @@ function FilterPopUp(props) {
                       name="from"
                       onChange={(date) => {
                         setStartDate(date);
-                        setFilter({ ...filter, from: date.toISOString() });
+                        setLocalFilter({ ...localFilter, from: date.toISOString() });
                         // <FilterResult/>
                        
                       }}
@@ -91,7 +92,7 @@ function FilterPopUp(props) {
                       name="to"
                       onChange={(date) => {
                         setEndDate(date);
-                        setFilter({ ...filter, to: date.toISOString() });
+                        setLocalFilter({ ...localFilter, to: date.toISOString() });
                       }}
                       selectsEnd
                       endDate={endDate}
@@ -112,8 +113,8 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline1"
                     name="taxDeduc"
-                    defaultChecked={!filter.taxDeduc}
-                    onChange={() => setFilter({ ...filter, taxDeduc: false })} // if taxDeduc is a boolean false, it will be omitted from the query.
+                    defaultChecked={!localFilter.taxDeduc}
+                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: false })} // if taxDeduc is a boolean false, it will be omitted from the query.
                   />
                   <label className="custom-control-label" htmlFor="defaultInline1">
                     Any
@@ -126,8 +127,8 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
-                    defaultChecked={filter.taxDeduc === "true"}
-                    onChange={() => setFilter({ ...filter, taxDeduc: "true" })}
+                    defaultChecked={localFilter.taxDeduc === "true"}
+                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: "true" })}
                     value="true"
                   />
                   <label className="custom-control-label" htmlFor="defaultInline2">
@@ -141,8 +142,8 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
-                    defaultChecked={!filter.taxDeduc === "false"}
-                    onChange={() => setFilter({ ...filter, taxDeduc: "false" })}
+                    defaultChecked={localFilter.taxDeduc === "false"}
+                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: "false" })}
                     value="false"
                   />
                   <label className="custom-control-label" htmlFor="defaultInline3">
@@ -166,8 +167,8 @@ function FilterPopUp(props) {
                   name="source"
                   onChange={(selected) => {
                     setSelectedTypeAhead(selected);
-                    setFilter({
-                      ...filter,
+                    setLocalFilter({
+                      ...localFilter,
                       source: selected.map((e) => {
                         return e.description;
                       }),
@@ -194,11 +195,9 @@ function FilterPopUp(props) {
                     placeholder="$.0.00"
                     aria-label="Search"
                     onChange={(e) => {
-                      setFilter({ ...filter, [e.target.name]: e.target.value });
-                      /* if (filter.minAmt === "") delete filter.minAmt */
+                      setLocalFilter({ ...localFilter, [e.target.name]: e.target.value });
                     }}
-                    // min = "6"
-                    value={filter.minAmt}
+                    value={localFilter.minAmt}
                   />
                   to&nbsp; {"      "}
                   <input
@@ -209,11 +208,9 @@ function FilterPopUp(props) {
                     placeholder="$0.00"
                     aria-label="Search"
                     onChange={(e) =>
-                      setFilter({ ...filter, [e.target.name]: e.target.value })
+                      setLocalFilter({ ...localFilter, [e.target.name]: e.target.value })
                     }
-                    // min ="6"
-                    // max =
-                    value={filter.maxAmt}
+                    value={localFilter.maxAmt}
                   />
                 </div>
               </div>
@@ -232,7 +229,7 @@ function FilterPopUp(props) {
                 Reset Filters
               </button>
               <button
-                onClick={buildAndSubmitQuery}
+                onClick={confirmFilters}
                 className={"button orangebutton "}
                 type="button"
               >
