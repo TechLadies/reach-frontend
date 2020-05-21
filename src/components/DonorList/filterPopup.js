@@ -17,16 +17,14 @@ const ref = React.createRef();
 //  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
-  const [filter, setFilter] = useState({ source: [] });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [sources, setSources] = useState([]);
   const [selectTypeAhead, setSelectedTypeAhead] = useState([]);
   const activeFilter = true;
+  const {filter, setFilter} = props
 
   const clearState = () => {
-    props.setQuery("");
-    setFilter("");
     ref.current.clear();
   };
 
@@ -35,22 +33,6 @@ function FilterPopUp(props) {
   }, []);
 
   const buildAndSubmitQuery = () => {
-
-    var urlParams = [];
-    for (let src of filter.source) {
-      urlParams.push("source=" + src);
-    }
-
-    for (var key in filter) {
-      if (key === "source") {
-        continue;
-      }
-      if (filter[key]) {
-        urlParams.push(key + "=" + filter[key]);
-      }
-    }
-
-    props.setQuery(`?${urlParams.join("&")}`);
     props.close();
   };
 

@@ -21,24 +21,41 @@ const getDonorData = async (query) => {
   return data;
 };
 
+function buildQuery(filterObj) {
+  const urlParams = [];
+  for (let src of filterObj.source) {
+    urlParams.push("source=" + src);
+  }
+
+  for (var key in filterObj) {
+    if (key === "source") {
+      continue;
+    }
+    if (filterObj[key]) {
+      urlParams.push(key + "=" + filterObj[key]);
+    }
+  }
+  return `?${urlParams.join("&")}`
+}
+
 function DonorList() {
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
-  const [query, setQuery] = useState(``);
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [filter, setFilter] = useState({source: []})
   // const Badge = ({children}) => <span>{children}</span>; 
 
-  useEffect(() => {
+  useEffect(()=>{
+    const query = buildQuery(filter)
     getDonorData(query).then((result) => {
       setDonorList(result);
       setDonorCount(result.length);
     });
-  }, [query]);
-  console.log(donorList);
+  }, [filter])
 
   return (
     <div className="Donor Table">
@@ -77,8 +94,8 @@ function DonorList() {
       <FilterPopUp
         show={filterOpen}
         close={() => setFilterOpen(false)}
-        query={query}
-        setQuery={setQuery}
+        filter={filter}
+        setFilter={setFilter}
       />
 
       {
