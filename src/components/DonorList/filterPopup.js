@@ -4,9 +4,6 @@ import Modal from "../Modal";
 import DatePicker from "react-datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
 
-// import filterResult from "./filterResults";
-// const Badge = ({children}) => <span>{children}</span>; 
-
 const fetchSourceList = async () => {
   const res = await fetch(`${process.env.REACT_APP_API}/sources`);
   const data = res.json();
@@ -15,8 +12,6 @@ const fetchSourceList = async () => {
 const fromDateRef = React.createRef();
 const toDateRef = React.createRef();
 const typeaheadRef = React.createRef();
-
-//  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
@@ -78,7 +73,7 @@ function FilterPopUp(props) {
                       onChange={(date) => {
                         setStartDate(date);
                         setLocalFilter({ ...localFilter, from: date ? date.toISOString() : false });
-                        // <FilterResult/>
+                        
                        
                       }}
                       selectsStart
@@ -250,22 +245,5 @@ function FilterPopUp(props) {
   );
    
 }
-//   following component is req when filters are active
-// const FilterResult =(filter) =>
-// {
-//   if (filter ===true)  {
-//    return (
-//     <div classname ="activeFilters"> Active Filters 
-//     <div className="active-filter-container">
-//         <Badge >Date Range </Badge>{'x'}
-//         <Badge> sources </Badge >{'x'}
-//         <Badge> tax-deductible-status </Badge >{'x'}
-//         <Badge> total-amount-donated-range </Badge>{'x'}
-//     </div>
-//     </div> 
-//   )
-//   }
-// return (null)
-// }
 
 export default FilterPopUp;
