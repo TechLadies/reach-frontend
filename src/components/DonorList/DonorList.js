@@ -41,7 +41,7 @@ function DonorList() {
   console.log(donorList);
 
   return (
-    <div class="Donor Table">
+    <div className="Donor Table">
       <Header>
         <Header.Top>
           <Header.Content>
@@ -108,7 +108,7 @@ const DonorListTable = (props) => {
   const donorList = props.data;
 
   return donorList.length > 0 ? (
-    <table class="table donortable">
+    <table className="table donortable">
       <thead>
         <tr>
           <th scope="col">ID Number</th>

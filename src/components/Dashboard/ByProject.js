@@ -50,7 +50,7 @@ const ByProject = props => {
             ) : (
               <div className="bysource-row1 bysourceborder">
                 <div className="flex">
-                  <img src={Crown} />
+                  <img alt="" src={Crown} />
                   <h1 className="bysource-crownvalue">{sourceData[0].y}</h1>
                 </div>
                 <div className="flex">

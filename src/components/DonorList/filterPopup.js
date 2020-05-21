@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import Modal from "../Modal";
-import Chevronright from "../../images/Chevron-right.svg";
 import DatePicker from "react-datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
 
@@ -18,7 +17,6 @@ const ref = React.createRef();
 //  write a handle to clear form inputs while closing Modal
 
 function FilterPopUp(props) {
-
   const [filter, setFilter] = useState({ source: [] });
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -62,7 +60,7 @@ function FilterPopUp(props) {
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
     
       <form onSubmit={buildAndSubmitQuery}>
-        <div class="donorlist-modal">
+        <div className="donorlist-modal">
           <Modal.Header>
         
             <div>
@@ -77,7 +75,7 @@ function FilterPopUp(props) {
           <Modal.Body>
             <div className="modalbody">
               <div className="modalfilter">
-                <b class="filterlabel">Date Range</b>
+                <b className="filterlabel">Date Range</b>
                 <div className="filterdatepicker d-flex">
                   <div>
                     <label className="datelabel-from" htmlFor="startDate">
@@ -124,55 +122,55 @@ function FilterPopUp(props) {
               </div>
 
               <div className="modalfilter">
-                <strong class="filterlabel">Tax Deductable Status</strong>
+                <strong className="filterlabel">Tax Deductable Status</strong>
 
-                <div class="custom-control custom-radio custom-control-inline">
+                <div className="custom-control custom-radio custom-control-inline">
                   <input
                     type="radio"
-                    class="custom-control-input"
+                    className="custom-control-input"
                     id="defaultInline1"
                     name="taxDeduc"
                     defaultChecked={!filter.taxDeduc}
                     onChange={() => setFilter({ ...filter, taxDeduc: false })} // if taxDeduc is a boolean false, it will be omitted from the query.
                   />
-                  <label class="custom-control-label" htmlFor="defaultInline1">
+                  <label className="custom-control-label" htmlFor="defaultInline1">
                     Any
                   </label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
+                <div className="custom-control custom-radio custom-control-inline">
                   <input
                     type="radio"
-                    class="custom-control-input"
+                    className="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
                     defaultChecked={filter.taxDeduc === "true"}
                     onChange={() => setFilter({ ...filter, taxDeduc: "true" })}
                     value="true"
                   />
-                  <label class="custom-control-label" htmlFor="defaultInline2">
+                  <label className="custom-control-label" htmlFor="defaultInline2">
                     Tax Deductible
                   </label>
                 </div>
 
-                <div class="custom-control custom-radio custom-control-inline">
+                <div className="custom-control custom-radio custom-control-inline">
                   <input
                     type="radio"
-                    class="custom-control-input"
+                    className="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
                     defaultChecked={!filter.taxDeduc === "false"}
                     onChange={() => setFilter({ ...filter, taxDeduc: "false" })}
                     value="false"
                   />
-                  <label class="custom-control-label" htmlFor="defaultInline3">
+                  <label className="custom-control-label" htmlFor="defaultInline3">
                     Non Tax Deductible
                   </label>
                 </div>
               </div>
 
               <div className="modalfilter">
-                <b class="filterlabel">
+                <b className="filterlabel">
                   Source contains any of these phrase(s)
                 </b>
                 <span className="donorfilter-subhead">
@@ -201,9 +199,9 @@ function FilterPopUp(props) {
               </div>
 
               <div className="modalfilter">
-                <b class="filterlabel d-flex">Total Donated Amount</b>
+                <b className="filterlabel d-flex">Total Donated Amount</b>
                 <div
-                  class="form-inline my-2 my-lg-0"
+                  className="form-inline my-2 my-lg-0"
                   id="donationAmtSearchForm "
                 >
                   <input
@@ -239,16 +237,6 @@ function FilterPopUp(props) {
               </div>
             </div>
           </Modal.Body>
-        </div>
-        <div className="advanced-filters">
-          <button
-            type="button"
-            onClick={() => {}}
-            className="button transparentbutton advanced-filters-toggle"
-          >
-            <img src={Chevronright} className="button-icon" alt="right arrow" />{" "}
-            View Advanced Filters
-          </button>
         </div>
         <Modal.Footer>
           <Header.Buttons>
