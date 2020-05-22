@@ -40,28 +40,6 @@ function ActiveFilter(props) {
     },
   };
 
-  const sourceFilter = {
-    sources: null,
-    get value() {
-        const {sources} = this;
-        let str ;
-        if (sources) str = `${sources}`;
-        return `Source: ${str}`;
-    }
-  }
-
-//   Tax Deductable Status: true ----> Tax Deductable status: Tax Deductable
-// Tax Deductable Status: false ----> Tax Deductable status: Non Tax Deductable
-  const taxDeducFilter = {
-    taxDeduc: null,
-    get value() {
-        const {taxDeduc} = this;
-        let str ;
-        if (taxDeduc)str = `${taxDeduc}`;
-        return `Tax Deductible Status: ${str}`;
-    }
-  }
-
   for (const item in filterElements) {
     let theBadge;
     if (item === "taxDeduc" && filterElements[item]) {
