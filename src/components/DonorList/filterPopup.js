@@ -199,7 +199,7 @@ function FilterPopUp(props) {
                     onChange={(e) => {
                       setLocalFilter({ ...localFilter, [e.target.name]: e.target.value });
                     }}
-                    value={localFilter.minAmt}
+                    value={localFilter.minAmt || ""}
                   />
                   to&nbsp; {"      "}
                   <input
@@ -212,7 +212,7 @@ function FilterPopUp(props) {
                     onChange={(e) =>
                       setLocalFilter({ ...localFilter, [e.target.name]: e.target.value })
                     }
-                    value={localFilter.maxAmt}
+                    value={localFilter.maxAmt || ""}
                   />
                 </div>
               </div>
