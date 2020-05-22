@@ -64,19 +64,18 @@ function ActiveFilter(props) {
 
   for (const item in filterElements) {
     let theBadge;
-    let status = filterElements[item]
-    let newStatus ;
-    if (item === "taxDeduc" && status) {
+    if (item === "taxDeduc" && filterElements[item]) {
+        let status = filterElements[item]
+        let newStatus ;
         if (status === "true") { 
             newStatus = "Tax Deductable"
-            theBadge = <Badge>Tax Deductable Status: {newStatus}</Badge>;
-            allBadges.push(theBadge);
          }    
       if (status === "false") { 
            newStatus = "Non Tax Deductable"
-           theBadge = <Badge>Tax Deductable Status: {newStatus}</Badge>;
-          allBadges.push(theBadge);
      }
+
+    theBadge = <Badge>Tax Deductable Status: {newStatus}</Badge>;
+    allBadges.push(theBadge);
     
     }
 
