@@ -161,17 +161,20 @@ button {
 /* active filter */
 .active-filter-container{
   display: flex;
-  justify-content: space-between;
   border: 1px solid #CC7503;
   position: relative;
   text-align: left;
+  
+  padding: 10px;
 }
 .active-filter-wrapper{
   display: flex;
 }
 
 .badge {
-   padding: 2.8% 6.25% 2.8% 6.25%; 
-  
-  
+  /*padding: 2.8% 6.25% 2.8% 6.25%; */
+  outline: 1px solid red;
+}
+.badge + .badge {
+  margin-left: 1rem;
 }

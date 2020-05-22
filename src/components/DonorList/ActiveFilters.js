@@ -7,7 +7,7 @@
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
 
-const Badge = ({ children }) => <span>{children}</span>;
+const Badge = ({ children }) => <span className="badge">{children}</span>;
 
 function ActiveFilter(props) {
   const filterElements = props.filter;
@@ -64,10 +64,10 @@ function ActiveFilter(props) {
     // const theBadge = <Badge> Date</Badge>;
   }
   if (dateFilter.from || dateFilter.to) {
-    allBadges.push(dateFilter.value);
+    allBadges.push(<Badge>{dateFilter.value}</Badge>);
   }
   if (amountFilter.minAmt || amountFilter.maxAmt) {
-    allBadges.push(amountFilter.value);
+    allBadges.push(<Badge>{amountFilter.value}</Badge>);
   }
 
   return <div className="active-filter-container">{allBadges}</div>;
