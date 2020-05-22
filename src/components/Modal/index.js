@@ -5,7 +5,7 @@ import CloseIcon from "../../images/close.svg";
 
 Modal.Close = ({ onClick }) => (
   <button className="modal-close" type="button" onClick={onClick}>
-    <img ariaHidden="true" src={CloseIcon} />
+    <img alt="" aria-hidden="true" src={CloseIcon} />
     <span className="sr-only">Close</span>
   </button>
 );

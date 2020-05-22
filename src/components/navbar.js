@@ -82,7 +82,7 @@ function Navbar(props) {
       </button>
 
       <span className="search_icon">
-        <img src="/search.svg" />
+        <img alt="" src="/search.svg" />
       </span>
 
       <form

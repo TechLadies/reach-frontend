@@ -2,7 +2,6 @@ import React from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import Login from "./components/Login";
-import Dummy from "./components/Dummy";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import history from "./lib/history"
 import Dashboard from "./components/Dashboard";
@@ -26,9 +25,6 @@ function App() {
           </Route>
           <Route path="/reset-password">
             <ResetPassword />
-          </Route>
-          <Route path="/dummy">
-            <Dummy />
           </Route>
           <Route path="/update">
             <Navbar />

@@ -100,7 +100,7 @@ function Edit(props) {
                   <form onChange={handleChangedPreference}>
                     {contacts.length &&
                       contacts.map((contact) => (
-                        <div>
+                        <div key={contact.id}>
                           <label>
                             <input
                               name="contact"

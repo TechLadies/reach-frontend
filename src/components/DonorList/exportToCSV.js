@@ -1,9 +1,10 @@
-import React from 'react';
 import * as Papa from 'papaparse';
 
 function downloadCSV(data)
 {
-    const csv = Papa.unparse(data)
+const csv = Papa.unparse(data, {
+        "columns": ["idNo", "name", "contactNo","email","dnc","totalAmountDonated"],
+})
 
     var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
     var csvURL =  null;
