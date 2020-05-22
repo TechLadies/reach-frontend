@@ -2,7 +2,7 @@
 //  2) inside the loop, you check what filter is active,
 //  make the <Badge> for it, and put the badge into the allBadges array
 // data = [...data, {"label" : "2", "value" : 14}]
-// console.log(data)
+// console.log(data) - done by sheldon
 // 3) once everything done, you return the
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
@@ -40,6 +40,26 @@ function ActiveFilter(props) {
     },
   };
 
+  const sourceFilter = {
+    sources: null,
+    get value() {
+        const {sources} = this;
+        let str ;
+        if (sources)str = `${sources}`;
+        return `Source: ${str}`;
+    }
+  }
+
+  const taxDeducFilter = {
+    taxDeduc: null,
+    get value() {
+        const {taxDeduc} = this;
+        let str ;
+        if (taxDeduc)str = `${taxDeduc}`;
+        return `Tax Deductible Status: ${str}`;
+    }
+  }
+  
   for (const item in filterElements) {
     let theBadge;
     if (item === "taxDeduc" && filterElements[item]) {
@@ -59,9 +79,7 @@ function ActiveFilter(props) {
     if (item === "minAmt" || item === "maxAmt") {
       amountFilter[item] = filterElements[item];
     }
-    //  console.log(`filterElements.${prop} = ${filterElements[prop]}`);
-    // {"source":["Hackathon 2018","President's Challenge 2018"],"minAmt":"10","maxAmt":"5000","taxDeduc":"true"}
-    // const theBadge = <Badge> Date</Badge>;
+   
   }
   if (dateFilter.from || dateFilter.to) {
     allBadges.push(<Badge>{dateFilter.value}</Badge>);
