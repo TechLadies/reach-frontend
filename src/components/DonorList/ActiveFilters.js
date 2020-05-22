@@ -79,8 +79,14 @@ function ActiveFilter(props) {
     
     }
 
-    if (item === "source") {
-      theBadge = <Badge>Source</Badge>;
+    if (item === "source" && filterElements.length>0)  {
+      let array = filterElements[item]
+      let newArray ;
+      if (array === "true") { 
+        newArray.push(filterElements[item])
+     }    
+
+      theBadge = <Badge>Source : {newArray}</Badge>;
       allBadges.push(theBadge);
     }
 
