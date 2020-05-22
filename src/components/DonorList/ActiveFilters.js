@@ -6,30 +6,71 @@
 // 3) once everything done, you return the
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
-import "./DonorList.css";
 
 const Badge = ({ children }) => <span>{children}</span>;
-const allBadges = [];
+
 function ActiveFilter(props) {
   const filterElements = props.filter;
+  const allBadges = [];
 
-  for (const prop in filterElements) {
-    if (filterElements.taxDeduc === true) {
-      <Badge> taxDeduc </Badge>;
+  const dateFilter = {
+    from: null,
+    to: null,
+    active: false,
+    get value() {
+      const { from, to } = this;
+      let str;
+      if (from && !to) str = `${from} and after`;
+      if (!from && to) str = `${to} and earlier`;
+      if (from && to) str = `${from} - ${to}`;
+      return `Date: ${str}`;
+    },
+  };
+  const amountFilter = {
+    minAmt: null,
+    maxAmt: null,
+    active: false,
+    get value() {
+      const { minAmt, maxAmt } = this;
+      let str;
+      if (minAmt && !maxAmt) str = `${minAmt} and above`;
+      if (!minAmt && maxAmt) str = `${maxAmt} and below`;
+      if (minAmt && maxAmt) str = `${minAmt} - ${maxAmt}`;
+      return `Total Amount Donated: ${str}`;
+    },
+  };
+
+  for (const item in filterElements) {
+    let theBadge;
+    if (item === "taxDeduc" && filterElements[item]) {
+      theBadge = <Badge>Tax Deductable Status: {filterElements[item]}</Badge>;
+      allBadges.push(theBadge);
     }
 
+    if (item === "source") {
+      theBadge = <Badge>Source</Badge>;
+      allBadges.push(theBadge);
+    }
+
+    if (item === "from" || item === "to") {
+      dateFilter[item] = filterElements[item];
+    }
+
+    if (item === "minAmt" || item === "maxAmt") {
+      amountFilter[item] = filterElements[item];
+    }
     //  console.log(`filterElements.${prop} = ${filterElements[prop]}`);
     // {"source":["Hackathon 2018","President's Challenge 2018"],"minAmt":"10","maxAmt":"5000","taxDeduc":"true"}
     // const theBadge = <Badge> Date</Badge>;
-
-    allBadges.push(theBadge);
   }
-  return (
-    <div className="active-filter-container">
-      {allBadges}
-      <Badge> {TheBadge} </Badge>
-    </div>
-  );
+  if (dateFilter.from || dateFilter.to) {
+    allBadges.push(dateFilter.value);
+  }
+  if (amountFilter.minAmt || amountFilter.maxAmt) {
+    allBadges.push(amountFilter.value);
+  }
+
+  return <div className="active-filter-container">{allBadges}</div>;
 }
 
 export default ActiveFilter;
