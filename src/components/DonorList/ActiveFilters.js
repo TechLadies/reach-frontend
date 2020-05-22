@@ -1,63 +1,63 @@
-// //  this code -> show which filter are selected
-// var obj = {a: 1, b: 2, c: 3};
-              // for (const prop in obj) {
-             //   console.log(`obj.${prop} = ${obj[prop]}`);
-              // }
+//  1) so you create allBadges array as to store the active badges  - done
+//  2) inside the loop, you check what filter is active,
+//  make the <Badge> for it, and put the badge into the allBadges array
+// data = [...data, {"label" : "2", "value" : 14}] 
+// console.log(data)
+// 3) once everything done, you return the 
+// allBadges array, then React will know to show the contents to the screen
 import React from "react";
 import "./DonorList.css"; 
 
   const Badge = ({children}) => <span>{children}</span>; 
+  const allBadges = [];
+  const theBadge = {
+         dateRange = <Badge> dateRange </Badge>,
+         sources = <Badge> sources </Badge>,
+         taxDeduc = <Badge> taxDeduc </Badge>,
+        totalAmountDonated = <Badge> totalAmountDonated </Badge>
+  };
 
         function ActiveFilter(props) {
             const filterElements = props.filter
         
         for (const prop in filterElements)
-        {
-            console.log(`filterElements.${prop} = ${filterElements[prop]}`);
+        {    
+            if (filterElements.taxDeduc === true) 
+            {
+             <Badge> taxDeduc </Badge>;
+            }
+
+            //  console.log(`filterElements.${prop} = ${filterElements[prop]}`);
+            // {"source":["Hackathon 2018","President's Challenge 2018"],"minAmt":"10","maxAmt":"5000","taxDeduc":"true"}
+            // const theBadge = <Badge> Date</Badge>;
+          
+                  allBadges.push(theBadge)
+
         }
              return (
-             <Badge > {item.taxDeduc} </Badge> 
+                <div className ="active-filter-container"> 
+                    { allBadges } 
+                    <Badge> {TheBadge} </Badge>
+                </div>
+                
+
+                
              )
         
-    }
-
+             }
         
   export default ActiveFilter
 
-  
-//   function ActiveFilter(props) {     
-  
-//      return (        
-//       <div classname ="activeFilters"> Active Filters 
-//       <div className="active-filter-container">
-//           <Badge >date range </Badge>{'x'} 
-//           <Badge> sources </Badge >{'x'}
-//           <Badge> tax-deductible-status </Badge >{'x'}
-//           <Badge> total-amount-donated-range </Badge>{'x'}
+//   for date, you need to check if there is "from", or "to", or both
+// source is an array,
+// date is two values, from and to
+// donation range is also two values: minAmt and maxAmt
+
+
+//   <div className ="active-filter-container">
+//       <Badge> date </Badge>;
+//       <Badge> sources </Badge>;
+//       <Badge> taxDeduc </Badge>;
+//       <Badge> totalAmountDonated </Badge>;
+
 //       </div>
-//       </div> 
-//      )
-//    }
-
-   
-    // const filterComponents = FilterElements.map((item, index) => {
-        // return <React.Fragment>{FilterComponents}</React.Fragment>
-    
-    //   return (
-    //     <Badge className="d-flex" key={index}> 
-
-    //       <Badge>{(item.date)}</Badge>
-
-    //        <Badge> {item.sources}</Badge>
-       
-    //       <Badge>{item.taxDeduc}</Badge>
-          
-    //       <Badge>{item.totalAmoutDonated}</Badge>
-    //       </Badge>
-       
-    //   )
-    // })
-    // return <React.Fragment>{FilterComponents}</React.Fragment>
-//   }
-
-  
