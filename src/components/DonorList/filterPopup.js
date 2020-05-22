@@ -15,7 +15,7 @@ const typeaheadRef = React.createRef();
 
 function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
-  const activeFilter = true;
+  // const activeFilter = true;
   const {filter, setFilter} = props
   const [localFilter, setLocalFilter] = useState({...filter})
   const [selectTypeAhead, setSelectedTypeAhead] = useState(localFilter.source || []);

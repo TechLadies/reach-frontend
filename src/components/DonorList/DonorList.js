@@ -9,8 +9,9 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import FilterPopUp from "./filterPopup";
+import ActiveFilter from "./ActiveFilters"
 import "./DonorList.css";
-// import FilterResult from "./filterResults"
+ 
 
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
@@ -72,9 +73,9 @@ function DonorList() {
               listed
             </div>
             <div>
-              <pre>{JSON.stringify(filter)}</pre>
-              {/* <FilterResult/>  */}
-           </div>
+              <pre>{JSON.stringify(filter)}</pre> 
+              <ActiveFilter filter={filter}/> 
+            </div>
           </Header.Content>
           <Header.Buttons>
             <button
@@ -173,22 +174,5 @@ function ListItem(props) {
 
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
-
-// const FilterResult =(filterOpen) =>
-// {
-//   if (filterOpen ===true)  {
-//    return (
-//     <div classname ="activeFilters"> Active Filters 
-//     <div className="active-filter-container">
-//         <Badge >Date Range </Badge>{'x'}
-//         <Badge> sources </Badge >{'x'}
-//         <Badge> tax-deductible-status </Badge >{'x'}
-//         <Badge> total-amount-donated-range </Badge>{'x'}
-//     </div>
-//     </div> 
-//   )
-//   }
-// return (null)
-// }
 
 export default DonorList;
