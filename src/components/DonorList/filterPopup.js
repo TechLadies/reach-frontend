@@ -35,8 +35,11 @@ function FilterPopUp(props) {
   }, []);
 
   useEffect(() => {
-    setLocalFilter({...filter})
-  }, [filter])
+    setLocalFilter({ ...filter });
+    setStartDate(filter.from);
+    setEndDate(filter.to);
+    setSelectedTypeAhead(filter.source);
+  }, [props.show, filter]);
 
   const confirmFilters = () => {
     setFilter(localFilter)
