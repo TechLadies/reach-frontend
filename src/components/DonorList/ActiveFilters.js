@@ -8,13 +8,24 @@
 import React from "react";
 import Delete from "../../images/Delete.svg";                             
 
-const Badge = ({ children }) => <span className="badge">{children}
-                                  <img src={Delete} className ="icon" alt ="delete" /> 
-                               </span>;
-
 function ActiveFilter(props) {
   const filterElements = props.filter;
   const allBadges = [];
+
+  function removeFilter(types) {
+    props.setFilter((currentFilter) => {
+      const newFilter = { ...currentFilter };
+      types.forEach((type) => delete newFilter[type]);
+      return newFilter;
+    });
+  }
+
+  const Badge = ({ children, types }) => (
+    <span className="badge">
+      {children}
+      <img onClick={ () => removeFilter(types)}src={Delete} className ="icon" alt ="delete" />
+    </span>
+  );
 
   const dateFilter = {
     from: null,
@@ -46,23 +57,23 @@ function ActiveFilter(props) {
   for (const item in filterElements) {
     let theBadge;
     if (item === "taxDeduc" && filterElements[item]) {
-        let status = filterElements[item]
-        let newStatus ;
-        if (status === "true") { 
-            newStatus = "Tax Deductable"
-         }    
-      if (status === "false") { 
-           newStatus = "Non Tax Deductable"
-     }
+      let status = filterElements[item];
+      let newStatus;
+      if (status === "true") {
+        newStatus = "Tax Deductable";
+      }
+      if (status === "false") {
+        newStatus = "Non Tax Deductable";
+      }
 
-    theBadge = <Badge>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
+    theBadge = <Badge types={["taxDeduc"]}>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
     allBadges.push(theBadge);
     
     }
 
     if (item === "source" && filterElements[item].length>0) 
      {
-      theBadge = <Badge>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
+      theBadge = <Badge types={["source"]}>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
       allBadges.push(theBadge);
     }
 
@@ -73,13 +84,14 @@ function ActiveFilter(props) {
     if (item === "minAmt" || item === "maxAmt") {
       amountFilter[item] = filterElements[item];
     }
-   
   }
   if (dateFilter.from || dateFilter.to) {
-    allBadges.push(<Badge>{dateFilter.value}</Badge>);
+    allBadges.push(<Badge types={["from", "to"]}>{dateFilter.value}</Badge>);
   }
   if (amountFilter.minAmt || amountFilter.maxAmt) {
-    allBadges.push(<Badge>{amountFilter.value}</Badge>);
+    allBadges.push(
+      <Badge types={["minAmt", "maxAmt"]}>{amountFilter.value}</Badge>
+    );
   }
 
   return <div className="active-filter-container">{allBadges}</div>;

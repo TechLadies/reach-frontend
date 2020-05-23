@@ -34,6 +34,10 @@ function FilterPopUp(props) {
     fetchSourceList().then((data) => setSources(data));
   }, []);
 
+  useEffect(() => {
+    setLocalFilter({...filter})
+  }, [filter])
+
   const confirmFilters = () => {
     setFilter(localFilter)
     props.close();

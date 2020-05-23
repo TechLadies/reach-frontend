@@ -74,7 +74,7 @@ function DonorList() {
             </div>
             <div>
               <pre>{JSON.stringify(filter)}</pre> 
-              <ActiveFilter filter={filter}/> 
+              <ActiveFilter filter={filter} setFilter={setFilter}/> 
             </div>
           </Header.Content>
           <Header.Buttons>
