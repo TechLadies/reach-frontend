@@ -51,7 +51,7 @@ const ByProject = props => {
               <div className="bysource-row1 bysourceborder">
                 <div className="flex">
                   <img alt="" src={Crown} />
-                  <h1 className="bysource-crownvalue">{sourceData[0].y}</h1>
+                  <h1 className="bysource-crownvalue">${sourceData[0].y}</h1>
                 </div>
                 <div className="flex">
                   <div className="legend brightorange"></div>
@@ -65,7 +65,7 @@ const ByProject = props => {
                 <div className="bysource-row bysourceborder"></div>
               ) : (
                 <div className="bysource-row bysourceborder">
-                  <h1 className="bysource-value">{sourceData[1].y}</h1>
+                  <h1 className="bysource-value">${sourceData[1].y}</h1>
                   <div className="flex">
                     <div className="legend pink"></div>
                     <div className="bysource-name">{sourceData[1].x}</div>
@@ -76,7 +76,7 @@ const ByProject = props => {
                 <div className="bysource-row bysourceborder"></div>
               ) : (
                 <div className="bysource-row bysourceborder">
-                  <h1 className="bysource-value">{sourceData[2].y}</h1>
+                  <h1 className="bysource-value">${sourceData[2].y}</h1>
                   <div className="flex">
                     <div className="legend lightpink"></div>
                     <div className="bysource-name">{sourceData[2].x}</div>
@@ -89,7 +89,7 @@ const ByProject = props => {
                 <div className="bysource-row bs-bottom"></div>
               ) : (
                 <div className="bysource-row bs-bottom">
-                  <h1 className="bysource-value">{sourceData[3].y}</h1>
+                  <h1 className="bysource-value">${sourceData[3].y}</h1>
                   <div className="flex">
                     <div className="legend darkpurple"></div>
                     <div className="bysource-name">{sourceData[3].x}</div>
@@ -100,7 +100,7 @@ const ByProject = props => {
                 <div className="bysource-row"></div>
               ) : (
                 <div className="bysource-row">
-                  <h1 className="bysource-value">{sourceData[4].y}</h1>
+                  <h1 className="bysource-value">${sourceData[4].y}</h1>
                   <div className="flex">
                     <div className="legend lilac"></div>
                     <div className="bysource-name">{sourceData[4].x}</div>

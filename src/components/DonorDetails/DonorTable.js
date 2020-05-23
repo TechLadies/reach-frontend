@@ -60,7 +60,7 @@ function DonationList(props) {
       <tr className="d-flex" key={index}>
         <td className="col-2">{dateStringOf(new Date(item.date))}</td>
         <td className="col-2">$ {item.amount}</td>
-        <td className="col-2">Charity Dinner</td>
+        <td className="col-2">{item.source}</td>
         <td className="col-2">{item.mode}</td>
         <td className="col-2">{handleTaxStatus(item.tax)}</td>
         <td className="col-2">{item.remarks}</td>
