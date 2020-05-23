@@ -164,7 +164,6 @@ button {
   border: 1px solid #CC7503;
   position: relative;
   text-align: left;
-  
   padding: 10px;
 }
 .active-filter-wrapper{
@@ -172,8 +171,12 @@ button {
 }
 
 .badge {
-  /*padding: 2.8% 6.25% 2.8% 6.25%; */
   outline: 1px solid red;
+  background-color: #80485b;
+  color:white;
+  font-size: 14px;
+  font-weight :thin; 
+  /* font-style:thin; */
 }
 .badge + .badge {
   margin-left: 1rem;

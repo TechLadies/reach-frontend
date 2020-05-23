@@ -7,7 +7,7 @@
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
 
-const Badge = ({ children }) => <span className="badge">{children}</span>;
+const Badge = ({ children }) => <span className="badge">{children} X</span>;
 
 function ActiveFilter(props) {
   const filterElements = props.filter;
@@ -52,7 +52,7 @@ function ActiveFilter(props) {
            newStatus = "Non Tax Deductable"
      }
 
-    theBadge = <Badge>Tax Deductable Status: {newStatus}</Badge>;
+    theBadge = <Badge>Tax Deductable Status: {newStatus} </Badge>;
     allBadges.push(theBadge);
     
     }
@@ -90,7 +90,7 @@ export default ActiveFilter;
 // donation range is also two values: minAmt and maxAmt
 
 //   <div className ="active-filter-container">
-//       <Badge> date </Badge>;
+//       <Badge> date </Badge>{'X'};
 //       <Badge> sources </Badge>;
 //       <Badge> taxDeduc </Badge>;
 //       <Badge> totalAmountDonated </Badge>;
