@@ -66,14 +66,14 @@ function ActiveFilter(props) {
         newStatus = "Non Tax Deductable";
       }
 
-    theBadge = <Badge types={["taxDeduc"]}>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
+    theBadge = <Badge key="taxDeduc" types={["taxDeduc"]}>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
     allBadges.push(theBadge);
     
     }
 
     if (item === "source" && filterElements[item].length>0) 
      {
-      theBadge = <Badge types={["source"]}>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
+      theBadge = <Badge key="source" types={["source"]}>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
       allBadges.push(theBadge);
     }
 
@@ -86,11 +86,17 @@ function ActiveFilter(props) {
     }
   }
   if (dateFilter.from || dateFilter.to) {
-    allBadges.push(<Badge types={["from", "to"]}>{dateFilter.value}</Badge>);
+    allBadges.push(
+      <Badge key="date" types={["from", "to"]}>
+        {dateFilter.value}
+      </Badge>
+    );
   }
   if (amountFilter.minAmt || amountFilter.maxAmt) {
     allBadges.push(
-      <Badge types={["minAmt", "maxAmt"]}>{amountFilter.value}</Badge>
+      <Badge key="totalAmount" types={["minAmt", "maxAmt"]}>
+        {amountFilter.value}
+      </Badge>
     );
   }
 
