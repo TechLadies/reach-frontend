@@ -24,8 +24,10 @@ const getDonorData = async (query) => {
 
 function buildQuery(filterObj) {
   const urlParams = [];
-  for (let src of filterObj.source) {
-    urlParams.push("source=" + src);
+  if (filterObj.source){
+    for (let src of filterObj.source) {
+      urlParams.push("source=" + src);
+    }
   }
 
   for (var key in filterObj) {
