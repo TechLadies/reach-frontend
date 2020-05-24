@@ -103,7 +103,12 @@ function ActiveFilter(props) {
     );
   }
 
-  return <div className="active-filter-container">{allBadges}</div>;
+  return <div className="active-filters">
+    Active Filters
+    <div className="active-filters-list">
+      {allBadges}
+    </div>
+  </div>;
 }
 
 export default ActiveFilter;

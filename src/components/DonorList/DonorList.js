@@ -74,10 +74,7 @@ function DonorList() {
               {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
               listed
             </div>
-            <div>
-              <pre>{JSON.stringify(filter)}</pre> 
-              <ActiveFilter filter={filter} setFilter={setFilter}/> 
-            </div>
+            <ActiveFilter filter={filter} setFilter={setFilter}/> 
           </Header.Content>
           <Header.Buttons>
             <button
