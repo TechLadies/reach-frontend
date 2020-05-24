@@ -74,7 +74,6 @@ function DonorList() {
               {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
               listed
             </div>
-            <ActiveFilter filter={filter} setFilter={setFilter}/> 
           </Header.Content>
           <Header.Buttons>
             <button
@@ -97,6 +96,9 @@ function DonorList() {
             </button>
           </Header.Buttons>
         </Header.Top>
+        <Header.Filters>
+          <ActiveFilter filter={filter} setFilter={setFilter}/> 
+        </Header.Filters>
       </Header>
       <FilterPopUp
         show={filterOpen}
