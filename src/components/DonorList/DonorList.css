@@ -171,13 +171,12 @@ button {
 }
 
 .badge {
-  /* outline: 1px solid red; */
   background-color: #80485b;
   color:white;
   font-size: 14px;
-  font-weight :thin; 
-  /* font-style:thin; */
+  font-weight :normal; 
 }
+
 .badge + .badge {
   margin-left: 1rem;
 }
