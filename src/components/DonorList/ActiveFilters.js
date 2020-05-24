@@ -7,7 +7,9 @@
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
 
-const Badge = ({ children }) => <span className="badge">{children} X</span>;
+const Badge = ({ children }) => <span className="badge">{children}
+                                  <i class ="fa-fa-close"> X </i> 
+                               </span>;
 
 function ActiveFilter(props) {
   const filterElements = props.filter;
