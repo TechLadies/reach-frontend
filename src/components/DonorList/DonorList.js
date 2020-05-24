@@ -95,9 +95,11 @@ function DonorList() {
             </button>
           </Header.Buttons>
         </Header.Top>
-        <Header.Filters>
-          <ActiveFilter filter={filter} setFilter={setFilter}/> 
-        </Header.Filters>
+        {
+          Object.keys(filter).length > 0 && <Header.Filters>
+            <ActiveFilter filter={filter} setFilter={setFilter}/>
+          </Header.Filters>
+        }
       </Header>
       <FilterPopUp
         show={filterOpen}
