@@ -24,8 +24,10 @@ const getDonorData = async (query) => {
 
 function buildQuery(filterObj) {
   const urlParams = [];
-  for (let src of filterObj.source) {
-    urlParams.push("source=" + src);
+  if (filterObj.source){
+    for (let src of filterObj.source) {
+      urlParams.push("source=" + src);
+    }
   }
 
   for (var key in filterObj) {
@@ -50,7 +52,6 @@ function DonorList() {
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {source: []})
-  // const Badge = ({children}) => <span>{children}</span>; )
 
   useEffect(()=>{
     const query = buildQuery(filter)
@@ -71,10 +72,6 @@ function DonorList() {
             <div className="keystatslabel">
               {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
               listed
-            </div>
-            <div>
-              <pre>{JSON.stringify(filter)}</pre> 
-              <ActiveFilter filter={filter}/> 
             </div>
           </Header.Content>
           <Header.Buttons>
@@ -98,6 +95,11 @@ function DonorList() {
             </button>
           </Header.Buttons>
         </Header.Top>
+        {
+          Object.keys(filter).length > 0 && <Header.Filters>
+            <ActiveFilter filter={filter} setFilter={setFilter}/>
+          </Header.Filters>
+        }
       </Header>
       <FilterPopUp
         show={filterOpen}

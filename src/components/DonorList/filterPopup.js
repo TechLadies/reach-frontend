@@ -18,21 +18,29 @@ function FilterPopUp(props) {
   // const activeFilter = true;
   const {filter, setFilter} = props
   const [localFilter, setLocalFilter] = useState({...filter})
-  const [selectTypeAhead, setSelectedTypeAhead] = useState(localFilter.source || []);
-  const [startDate, setStartDate] = useState(localFilter.from && new Date(localFilter.from));
-  const [endDate, setEndDate] = useState(localFilter.to && new Date(localFilter.to));
+  const [selectTypeAhead, setSelectedTypeAhead] = useState(filter.source || []);
+  const [startDate, setStartDate] = useState(filter.from ? new Date(filter.from) : '');
+  const [endDate, setEndDate] = useState(filter.to ? new Date(filter.to): '');
+
 
   const clearState = () => {
     fromDateRef.current.clear();
     toDateRef.current.clear();
     typeaheadRef.current.clear();
     setSelectedTypeAhead([])
-    setLocalFilter({source: []})
+    setLocalFilter({})
   };
 
   useEffect(() => {
     fetchSourceList().then((data) => setSources(data));
   }, []);
+
+  useEffect(() => {
+    setLocalFilter({ ...filter });
+    setStartDate(filter.from ? new Date(filter.from) : '');
+    setEndDate(filter.to ? new Date(filter.to) : '');
+    setSelectedTypeAhead(filter.source);
+  }, [props.show, filter]);
 
   const confirmFilters = () => {
     setFilter(localFilter)

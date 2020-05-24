@@ -159,22 +159,29 @@ button {
 }
 
 /* active filter */
-.active-filter-container{
-  display: flex;
-  border: 1px solid #CC7503;
-  position: relative;
-  text-align: left;
-  
-  padding: 10px;
+.active-filters {
+  margin-top: 24px;
 }
-.active-filter-wrapper{
+.active-filters-list{
   display: flex;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .badge {
-  /*padding: 2.8% 6.25% 2.8% 6.25%; */
-  outline: 1px solid red;
+  background-color: #80485b;
+  color:white;
+  font-size: 14px;
+  font-weight :normal; 
+  padding: 10px 10px 10px 16px;
+  margin: 0.5rem 0.5rem 0 0;
 }
-.badge + .badge {
-  margin-left: 1rem;
+.badge strong {
+  font-weight: 600;
+}
+
+.badge img {
+  cursor: pointer;
+  margin-left: 3px;
+  vertical-align: -3px;
 }
