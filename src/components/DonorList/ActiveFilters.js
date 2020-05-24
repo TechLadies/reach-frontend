@@ -6,9 +6,10 @@
 // 3) once everything done, you return the
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
+import Delete from "../../images/Delete.svg";                             
 
 const Badge = ({ children }) => <span className="badge">{children}
-                                  <i class ="fa-fa-close"> X </i> 
+                                  <img src={Delete} className ="icon" alt ="delete" /> 
                                </span>;
 
 function ActiveFilter(props) {
