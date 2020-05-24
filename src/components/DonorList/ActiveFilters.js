@@ -6,6 +6,7 @@
 // 3) once everything done, you return the
 // allBadges array, then React will know to show the contents to the screen
 import React from "react";
+import {format} from 'date-fns'
 import Delete from "../../images/Delete.svg";                             
 
 function ActiveFilter(props) {
@@ -33,10 +34,12 @@ function ActiveFilter(props) {
     active: false,
     get value() {
       const { from, to } = this;
+      const fromDate = from && format(new Date(from), 'dd MMM yyyy') 
+      const toDate = to && format(new Date(to), 'dd MMM yyyy') 
       let str;
-      if (from && !to) str = `${from} and after`;
-      if (!from && to) str = `${to} and earlier`;
-      if (from && to) str = `${from} - ${to}`;
+      if (fromDate && !toDate) str = `${fromDate} and after`;
+      if (!fromDate && toDate) str = `${toDate} and earlier`;
+      if (fromDate && toDate) str = `${fromDate} - ${toDate}`;
       return <>Date: <strong>{str}</strong></>;
     },
   };
