@@ -52,7 +52,6 @@ function DonorList() {
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {source: []})
-  // const Badge = ({children}) => <span>{children}</span>; )
 
   useEffect(()=>{
     const query = buildQuery(filter)
