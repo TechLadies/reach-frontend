@@ -26,7 +26,7 @@ function ActiveFilter(props) {
       if (from && !to) str = `${from} and after`;
       if (!from && to) str = `${to} and earlier`;
       if (from && to) str = `${from} - ${to}`;
-      return `Date: ${str}`;
+      return <>Date: <strong>{str}</strong></>;
     },
   };
   const amountFilter = {
@@ -39,7 +39,7 @@ function ActiveFilter(props) {
       if (minAmt && !maxAmt) str = `${minAmt} and above`;
       if (!minAmt && maxAmt) str = `${maxAmt} and below`;
       if (minAmt && maxAmt) str = `${minAmt} - ${maxAmt}`;
-      return `Total Amount Donated: ${str}`;
+      return <>Total Amount Donated: <strong>{str}</strong></>;
     },
   };
 
@@ -55,14 +55,14 @@ function ActiveFilter(props) {
            newStatus = "Non Tax Deductable"
      }
 
-    theBadge = <Badge>Tax Deductable Status: {newStatus} </Badge>;
+    theBadge = <Badge>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
     allBadges.push(theBadge);
     
     }
 
     if (item === "source" && filterElements[item].length>0) 
      {
-      theBadge = <Badge>Source : {filterElements[item].join (", ")}</Badge>;
+      theBadge = <Badge>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
       allBadges.push(theBadge);
     }
 

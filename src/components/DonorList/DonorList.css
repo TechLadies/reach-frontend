@@ -180,3 +180,7 @@ button {
 .badge + .badge {
   margin-left: 1rem;
 }
+
+.badge img {
+  cursor: pointer;
+}
