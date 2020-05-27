@@ -9,9 +9,8 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import FilterPopUp from "./filterPopup";
-import ActiveFilter from "./ActiveFilters"
+import ActiveFilter from "./ActiveFilters";
 import "./DonorList.css";
- 
 
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
@@ -24,7 +23,7 @@ const getDonorData = async (query) => {
 
 function buildQuery(filterObj) {
   const urlParams = [];
-  if (filterObj.source){
+  if (filterObj.source) {
     for (let src of filterObj.source) {
       urlParams.push("source=" + src);
     }
@@ -38,30 +37,36 @@ function buildQuery(filterObj) {
       urlParams.push(key + "=" + filterObj[key]);
     }
   }
-  return `?${urlParams.join("&")}`
+  return `?${urlParams.join("&")}`;
 }
 
 function DonorList() {
-  const filterFromLocalStorage = window.localStorage.getItem("filter")
-
+  const filterFromLocalStorage = window.localStorage.getItem("filter");
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
-  const [res, setRes] = useState(false);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {source: []})
+  const [filter, setFilter] = useState(
+    (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {
+      source: [],
+    }
+  );
 
-  useEffect(()=>{
-    const query = buildQuery(filter)
+  useEffect(() => {
+    const query = buildQuery(filter);
     getDonorData(query).then((result) => {
       setDonorList(result);
       setDonorCount(result.length);
     });
 
-    window.localStorage.setItem('filter', JSON.stringify(filter))
-  }, [filter])
+    window.localStorage.setItem("filter", JSON.stringify(filter));
+  }, [filter]);
+
+  const entriesPerPage = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const begin = (currentPage - 1) * entriesPerPage;
+  const end = begin + entriesPerPage;
+  const paginateDonors = donorList.slice(begin, end);
 
   return (
     <div className="Donor Table">
@@ -70,15 +75,13 @@ function DonorList() {
           <Header.Content>
             <div className="totaldonationamt">Donors</div>
             <div className="keystatslabel">
-              {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
-              listed
+              {paginateDonors.length} of {donorCount} donors listed
             </div>
           </Header.Content>
           <Header.Buttons>
             <button
               onClick={() => {
                 setFilterOpen(true);
-               
               }}
               className={
                 "button whitebutton " + (filterOpen ? "purplebutton" : null)
@@ -95,11 +98,11 @@ function DonorList() {
             </button>
           </Header.Buttons>
         </Header.Top>
-        {
-          Object.keys(filter).length > 0 && <Header.Filters>
-            <ActiveFilter filter={filter} setFilter={setFilter}/>
+        {Object.keys(filter).length > 0 && (
+          <Header.Filters>
+            <ActiveFilter filter={filter} setFilter={setFilter} />
           </Header.Filters>
-        }
+        )}
       </Header>
       <FilterPopUp
         show={filterOpen}
@@ -107,25 +110,18 @@ function DonorList() {
         filter={filter}
         setFilter={setFilter}
       />
-
-      {
-        /* Array.isArray(donationList) && */ donorList.length >= 0 ? (
-          // { donationList.length > 0 ? (
-          <DonorListTable data={donorList} />
-        ) : (
-          <Spin />
-        )
-      }
-      {/* </table> Array.isArray(donationList) ? > 0 : <h1> {donationList.message} </h1>) : <Spin/> }  */}
-
+      {donorList.length >= 0 ? (
+        <DonorListTable data={paginateDonors} />
+      ) : (
+        <Spin />
+      )}
       <div className="pagination-center mt-5">
-        {/*  <Pagination
-          donorsPerPage={donorsPerPage}
-          totalDonors={donorCount}
+        <Pagination
+          totalEntries={donorCount}
+          entriesPerPage={entriesPerPage}
           paginate={paginate}
           currentPage={currentPage}
-          onPageChange={handlePageChange}
-        /> */}
+        />
       </div>
     </div>
   );
@@ -150,10 +146,7 @@ const DonorListTable = (props) => {
         <ListItem data={donorList} />
       </tbody>
     </table>
-  ) : (
-    null
-    /* <div className= "no-donor">No donors found</div> */
-  );
+  ) : null;
 };
 function ListItem(props) {
   let listElements = props.data;
