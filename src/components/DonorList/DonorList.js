@@ -53,6 +53,7 @@ function DonorList() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {source: []})
 
+    console.log(grouped(filter))
   useEffect(()=>{
     const query = buildQuery(filter)
     getDonorData(query).then((result) => {
@@ -60,7 +61,7 @@ function DonorList() {
       setDonorCount(result.length);
     });
 
-    window.localStorage.setItem('filter', JSON.stringify(filter))
+    window.localStorage.setItem('filter', JSON.stringify(grouped(filter)))
   }, [filter])
 
   return (
@@ -177,4 +178,17 @@ function ListItem(props) {
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
+const grouped = (storageFilter) => {
+    const groupedFilter = {}
+    if (storageFilter.to || storageFilter.from ) groupedFilter.date = {}
+    if (storageFilter.to) groupedFilter.date.to = storageFilter.to
+    if (storageFilter.from) groupedFilter.date.from = storageFilter.from
+    if (storageFilter.minAmt || storageFilter.maxAmt) groupedFilter.amt = {}
+    if (storageFilter.minAmt) groupedFilter.amt.minAmt = storageFilter.minAmt
+    if (storageFilter.taxDeduc) groupedFilter.taxDeduc = storageFilter.taxDeduc
+    if (storageFilter.source && storageFilter.source.length > 0) groupedFilter.source = storageFilter.source
+ 
+    return groupedFilter
+    
+}
 export default DonorList;
