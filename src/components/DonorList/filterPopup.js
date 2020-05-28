@@ -16,19 +16,16 @@ const typeaheadRef = React.createRef();
 function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
   // const activeFilter = true;
-  const {filter, setFilter} = props
-  const [localFilter, setLocalFilter] = useState({...filter})
+  const { filter, setFilter } = props;
+  const [localFilter, setLocalFilter] = useState({...filter});
   const [selectTypeAhead, setSelectedTypeAhead] = useState(filter.source || []);
-  const [startDate, setStartDate] = useState(filter.from ? new Date(filter.from) : '');
-  const [endDate, setEndDate] = useState(filter.to ? new Date(filter.to): '');
-
 
   const clearState = () => {
     fromDateRef.current.clear();
     toDateRef.current.clear();
     typeaheadRef.current.clear();
-    setSelectedTypeAhead([])
-    setLocalFilter({})
+    setSelectedTypeAhead([]);
+    setLocalFilter({...filter});
   };
 
   useEffect(() => {
@@ -36,25 +33,20 @@ function FilterPopUp(props) {
   }, []);
 
   useEffect(() => {
-    setLocalFilter({ ...filter });
-    setStartDate(filter.from ? new Date(filter.from) : '');
-    setEndDate(filter.to ? new Date(filter.to) : '');
+    setLocalFilter({...filter});
     setSelectedTypeAhead(filter.source);
   }, [props.show, filter]);
 
   const confirmFilters = () => {
-    setFilter(localFilter)
+    setFilter(localFilter);
     props.close();
   };
-
-
+  console.log(localFilter)
   return (
-    
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
       <form onSubmit={confirmFilters}>
         <div className="donorlist-modal">
           <Modal.Header>
-        
             <div>
               <h3 className="donorfilters-head">Donor Filters</h3>
               <span className="donorfilters-subhead">
@@ -76,17 +68,12 @@ function FilterPopUp(props) {
                     </label>
                     <DatePicker
                       className="dateform"
-                      selected={startDate}
+                      selected={localFilter.date.from}
                       name="from"
                       onChange={(date) => {
-                        setStartDate(date);
-                        setLocalFilter({ ...localFilter, from: date ? date.toISOString() : false });
-                        
-                       
+                        setLocalFilter({ ...localFilter, date: {...localFilter.date, from: date}});
                       }}
                       selectsStart
-                      startDate={startDate}
-                      endDate={endDate}
                       dateFormat="dd/MM/yyyy"
                       ref={fromDateRef}
                     />
@@ -98,15 +85,12 @@ function FilterPopUp(props) {
                     </label>
                     <DatePicker
                       className="dateform"
-                      selected={endDate}
+                      selected={localFilter.date.to}
                       name="to"
                       onChange={(date) => {
-                        setEndDate(date);
-                        setLocalFilter({ ...localFilter, to: date ? date.toISOString() : false });
+                        setLocalFilter({ ...localFilter, date: {...localFilter.date, to: date}});
                       }}
                       selectsEnd
-                      endDate={endDate}
-                      minDate={startDate}
                       dateFormat="dd/MM/yyyy"
                       ref={toDateRef}
                     />
@@ -123,10 +107,16 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline1"
                     name="taxDeduc"
-                    defaultChecked={!localFilter.taxDeduc}
-                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: false })} // if taxDeduc is a boolean false, it will be omitted from the query.
+                    defaultChecked={localFilter.taxDeduc === "any"}
+                    value = "any"
+                    onChange={(e) =>
+                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
+                    } 
                   />
-                  <label className="custom-control-label" htmlFor="defaultInline1">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="defaultInline1"
+                  >
                     Any
                   </label>
                 </div>
@@ -137,11 +127,17 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
+                    value= "true"
                     defaultChecked={localFilter.taxDeduc === "true"}
-                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: "true" })}
-                    value="true"
+                    onChange={(e) =>
+                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
+                    }
+                    
                   />
-                  <label className="custom-control-label" htmlFor="defaultInline2">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="defaultInline2"
+                  >
                     Tax Deductible
                   </label>
                 </div>
@@ -152,11 +148,17 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
+                    value = "false"
                     defaultChecked={localFilter.taxDeduc === "false"}
-                    onChange={() => setLocalFilter({ ...localFilter, taxDeduc: "false" })}
+                    onChange={(e) =>
+                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
+                    }
                     value="false"
                   />
-                  <label className="custom-control-label" htmlFor="defaultInline3">
+                  <label
+                    className="custom-control-label"
+                    htmlFor="defaultInline3"
+                  >
                     Non Tax Deductible
                   </label>
                 </div>
@@ -199,28 +201,31 @@ function FilterPopUp(props) {
                 >
                   <input
                     className="form-control mr-sm-1 form-amt "
-                    name="minAmt"
+                    name="min"
                     type="number"
                     step="0.01"
                     placeholder="$.0.00"
                     aria-label="Search"
                     onChange={(e) => {
-                      setLocalFilter({ ...localFilter, [e.target.name]: e.target.value });
+                      setLocalFilter({ ...localFilter,  amt: { ...localFilter.amt, min: e.target.value} });
                     }}
-                    value={localFilter.minAmt || ""}
+                    value={localFilter.amt.min}
                   />
                   to&nbsp; {"      "}
                   <input
                     className="form-control mr-sm-2 form-amt"
-                    name="maxAmt"
+                    name="max"
                     type="number"
                     step="0.01"
                     placeholder="$0.00"
                     aria-label="Search"
                     onChange={(e) =>
-                      setLocalFilter({ ...localFilter, [e.target.name]: e.target.value })
+                      setLocalFilter({
+                        ...localFilter,
+                        amt: {...localFilter.amt, max: e.target.value}
+                      })
                     }
-                    value={localFilter.maxAmt || ""}
+                    value={localFilter.amt.max}
                   />
                 </div>
               </div>
@@ -251,7 +256,19 @@ function FilterPopUp(props) {
       </form>
     </Modal>
   );
-   
 }
 
+const grouped = (filter) => {
+  const groupedFilter = {};
+  if (filter.to || filter.from) groupedFilter.date = {};
+  if (filter.to) groupedFilter.date.to = filter.to;
+  if (filter.from) groupedFilter.date.from = filter.from;
+  if (filter.minAmt || filter.maxAmt) groupedFilter.amt = {};
+  if (filter.minAmt) groupedFilter.amt.minAmt = filter.minAmt;
+  if (filter.taxDeduc) groupedFilter.taxDeduc = filter.taxDeduc;
+  if (filter.source && filter.source.length > 0)
+    groupedFilter.source = filter.source;
+
+  return groupedFilter;
+};
 export default FilterPopUp;

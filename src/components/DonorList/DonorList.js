@@ -51,9 +51,14 @@ function DonorList() {
   const [donorCount, setDonorCount] = useState(0);
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {source: []})
+  const initialFilter = {
+    source : [],
+    amt : {min: "", max: ""},
+    date: {to: new Date(new Date().getFullYear(), 0, 1), from: new Date()},
+    taxDeduc: "any"
+  }
+  const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || initialFilter)
 
-    console.log(grouped(filter))
   useEffect(()=>{
     const query = buildQuery(filter)
     getDonorData(query).then((result) => {
@@ -61,7 +66,7 @@ function DonorList() {
       setDonorCount(result.length);
     });
 
-    window.localStorage.setItem('filter', JSON.stringify(grouped(filter)))
+    window.localStorage.setItem('filter', JSON.stringify(filter))
   }, [filter])
 
   return (
@@ -178,17 +183,5 @@ function ListItem(props) {
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
-const grouped = (storageFilter) => {
-    const groupedFilter = {}
-    if (storageFilter.to || storageFilter.from ) groupedFilter.date = {}
-    if (storageFilter.to) groupedFilter.date.to = storageFilter.to
-    if (storageFilter.from) groupedFilter.date.from = storageFilter.from
-    if (storageFilter.minAmt || storageFilter.maxAmt) groupedFilter.amt = {}
-    if (storageFilter.minAmt) groupedFilter.amt.minAmt = storageFilter.minAmt
-    if (storageFilter.taxDeduc) groupedFilter.taxDeduc = storageFilter.taxDeduc
-    if (storageFilter.source && storageFilter.source.length > 0) groupedFilter.source = storageFilter.source
- 
-    return groupedFilter
-    
-}
+
 export default DonorList;
