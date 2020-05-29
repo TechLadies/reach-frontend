@@ -62,11 +62,7 @@ function localStorageFilter() {
 function DonorList() {
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [donorsPerPage] = useState(10);
   const [donorCount, setDonorCount] = useState(0);
-  const [res, setRes] = useState(false);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const initialFilter = {
     source: [],
     amt: { min: "", max: "" },
@@ -82,10 +78,15 @@ function DonorList() {
       setDonorCount(result.length);
     });
 
-      window.localStorage.setItem('filter', JSON.stringify(filter))
+    window.localStorage.setItem("filter", JSON.stringify(filter));
   }, [filter]);
 
-  console.log(Object.keys(filter))
+  const entriesPerPage = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const begin = (currentPage - 1) * entriesPerPage;
+  const end = begin + entriesPerPage;
+  const paginateDonors = donorList.slice(begin, end);
 
   return (
     <div className="Donor Table">
@@ -94,8 +95,7 @@ function DonorList() {
           <Header.Content>
             <div className="totaldonationamt">Donors</div>
             <div className="keystatslabel">
-              {donorCount > 15 ? "15" : donorCount} of {donorCount} donors
-              listed
+              {paginateDonors.length} of {donorCount} donors listed
             </div>
           </Header.Content>
           <Header.Buttons>
@@ -131,25 +131,18 @@ function DonorList() {
         setFilter={setFilter}
         initialFilter ={initialFilter}
       />
-
-      {
-        /* Array.isArray(donationList) && */ donorList.length >= 0 ? (
-          // { donationList.length > 0 ? (
-          <DonorListTable data={donorList} />
-        ) : (
-          <Spin />
-        )
-      }
-      {/* </table> Array.isArray(donationList) ? > 0 : <h1> {donationList.message} </h1>) : <Spin/> }  */}
-
+      {donorList.length >= 0 ? (
+        <DonorListTable data={paginateDonors} />
+      ) : (
+        <Spin />
+      )}
       <div className="pagination-center mt-5">
-        {/*  <Pagination
-          donorsPerPage={donorsPerPage}
-          totalDonors={donorCount}
+        <Pagination
+          totalEntries={donorCount}
+          entriesPerPage={entriesPerPage}
           paginate={paginate}
           currentPage={currentPage}
-          onPageChange={handlePageChange}
-        /> */}
+        />
       </div>
     </div>
   );
@@ -175,7 +168,6 @@ const DonorListTable = (props) => {
       </tbody>
     </table>
   ) : null;
-  /* <div className= "no-donor">No donors found</div> */
 };
 function ListItem(props) {
   let listElements = props.data;
