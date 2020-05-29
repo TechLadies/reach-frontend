@@ -6,18 +6,16 @@ function ActiveFilter(props) {
   const filterElements = props.filter;
   const allBadges = [];
 
-  function removeFilter(types) {
+  function reset(param, initialValue) {
     props.setFilter((currentFilter) => {
-      const newFilter = { ...currentFilter };
-      types.forEach((type) => delete newFilter[type]);
-      return newFilter;
+      return { ...currentFilter, [param]: initialValue};
     });
   }
 
-  const Badge = ({ children, types }) => (
+  const Badge = ({ children, param, initialValue }) => (
     <span className="badge">
       {children}
-      <img onClick={ () => removeFilter(types)}src={Delete} className ="icon" alt ="delete" />
+      <img onClick={ () => reset(param, initialValue)} src={Delete} className ="icon" alt ="delete" />
     </span>
   );
 
@@ -27,8 +25,8 @@ function ActiveFilter(props) {
     active: false,
     get value() {
       const { from, to } = this;
-      const fromDate = from && format(new Date(from), 'dd MMM yyyy') 
-      const toDate = to && format(new Date(to), 'dd MMM yyyy') 
+      const fromDate = from && format(from, 'DD MMM YYYY') 
+      const toDate = to && format(to, 'DD MMM YYYY') 
       let str;
       if (fromDate && !toDate) str = `${fromDate} and after`;
       if (!fromDate && toDate) str = `${toDate} and earlier`;
@@ -50,51 +48,35 @@ function ActiveFilter(props) {
     },
   };
 
-  for (const item in filterElements) {
-    let theBadge;
-    if (item === "taxDeduc" && filterElements[item]) {
-      let status = filterElements[item];
-      let newStatus;
-      if (status === "true") {
-        newStatus = "Tax Deductable";
-      }
-      if (status === "false") {
-        newStatus = "Non Tax Deductable";
-      }
 
-    theBadge = <Badge key="taxDeduc" types={["taxDeduc"]}>Tax Deductable Status: <strong>{newStatus}</strong> </Badge>;
-    allBadges.push(theBadge);
-    
-    }
-
-    if (item === "source" && filterElements[item].length>0) 
-     {
-      theBadge = <Badge key="source" types={["source"]}>Source: <strong>{filterElements[item].join (", ")}</strong></Badge>;
-      allBadges.push(theBadge);
-    }
-
-    if (item === "from" || item === "to") {
-      dateFilter[item] = filterElements[item];
-    }
-
-    if (item === "minAmt" || item === "maxAmt") {
-      amountFilter[item] = filterElements[item];
-    }
+  if (filterElements.taxDeduc !== "any") {
+    const status = filterElements.taxDeduc === "true" ? "Tax Deductable" : "Non Tax Deductable";
+    allBadges.push(<Badge key="taxDeduc" param="taxDeduc" initialValue="any">Tax Deductable Status: <strong>{status}</strong> </Badge>);
   }
-  if (dateFilter.from || dateFilter.to) {
+  
+  if (filterElements.source.length > 0) {
+    allBadges.push(<Badge key="source" param="source" initialValue={[]}>Source: <strong>{filterElements.source.join (", ")}</strong></Badge>);
+  }
+
+  if (filterElements.date.from || filterElements.date.to) {
+    dateFilter.from = filterElements.date.from;
+    dateFilter.to = filterElements.date.to;
     allBadges.push(
-      <Badge key="date" types={["from", "to"]}>
+      <Badge key="date" param="date" initialValue={{from: null, to: null}}>
         {dateFilter.value}
       </Badge>
     );
   }
-  if (amountFilter.minAmt || amountFilter.maxAmt) {
+  if (filterElements.amt.min || filterElements.amt.max){
+    amountFilter.minAmt = filterElements.amt.min
+    amountFilter.maxAmt = filterElements.amt.max
     allBadges.push(
-      <Badge key="totalAmount" types={["minAmt", "maxAmt"]}>
+      <Badge key="amt" param="amt" initialValue={{min: "", max: ""}}>
         {amountFilter.value}
       </Badge>
     );
   }
+  
 
   return <div className="active-filters">
     Active Filters

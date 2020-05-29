@@ -16,7 +16,7 @@ const typeaheadRef = React.createRef();
 function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
   // const activeFilter = true;
-  const { filter, setFilter } = props;
+  const { filter, setFilter, initialFilter } = props;
   const [localFilter, setLocalFilter] = useState({...filter});
   const [selectTypeAhead, setSelectedTypeAhead] = useState(filter.source || []);
 
@@ -25,7 +25,7 @@ function FilterPopUp(props) {
     toDateRef.current.clear();
     typeaheadRef.current.clear();
     setSelectedTypeAhead([]);
-    setLocalFilter({...filter});
+    setLocalFilter({ ...initialFilter, date: {to: null, from: null} });
   };
 
   useEffect(() => {
@@ -41,7 +41,6 @@ function FilterPopUp(props) {
     setFilter(localFilter);
     props.close();
   };
-  console.log(localFilter)
   return (
     <Modal show={props.show} onHide={props.close} dialogClassName="modal-90w">
       <form onSubmit={confirmFilters}>

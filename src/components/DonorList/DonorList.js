@@ -9,9 +9,8 @@ import Pagination from "../../lib/pagination";
 import Spin from "../../lib/spinner";
 import downloadCSV from "./exportToCSV";
 import FilterPopUp from "./filterPopup";
-import ActiveFilter from "./ActiveFilters"
+import ActiveFilter from "./ActiveFilters";
 import "./DonorList.css";
- 
 
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
@@ -23,27 +22,44 @@ const getDonorData = async (query) => {
 };
 
 function buildQuery(filterObj) {
-  const urlParams = [];
-  if (filterObj.source){
-    for (let src of filterObj.source) {
-      urlParams.push("source=" + src);
-    }
-  }
+  const {
+    date: { from, to },
+    amt: { min: minAmt, max: maxAmt },
+    taxDeduc,
+    source
+  } = filterObj;
 
-  for (var key in filterObj) {
-    if (key === "source") {
-      continue;
-    }
-    if (filterObj[key]) {
-      urlParams.push(key + "=" + filterObj[key]);
-    }
+  const urlParams = [];
+  for (let src of source) {
+    urlParams.push("source=" + src);
   }
-  return `?${urlParams.join("&")}`
+  if (from) urlParams.push("from=" + from.toISOString().replace(/T.*/, ''));
+  if (to) urlParams.push("to=" + to.toISOString().replace(/T.*/, ''));
+  if (minAmt) urlParams.push("minAmt=" + minAmt);
+  if (maxAmt) urlParams.push("maxAmt=" + maxAmt);
+  if (taxDeduc !== "any")
+    urlParams.push("taxDeduc=" + taxDeduc);
+  return `?${urlParams.join("&")}`;
+
+}
+
+function localStorageFilter() {
+  const localStorageFilter = window.localStorage.getItem("filter");
+  if (localStorageFilter) {
+    const filter = JSON.parse(localStorageFilter);
+    return {
+      ...filter,
+      date: {
+        from: filter.date.from && new Date(filter.date.from),
+        to: filter.date.to && new Date(filter.date.to)
+      }
+    };
+  } else {
+    return null;
+  }
 }
 
 function DonorList() {
-  const filterFromLocalStorage = window.localStorage.getItem("filter")
-
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,22 +68,24 @@ function DonorList() {
   const [res, setRes] = useState(false);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const initialFilter = {
-    source : [],
-    amt : {min: "", max: ""},
-    date: {to: new Date(new Date().getFullYear(), 0, 1), from: new Date()},
-    taxDeduc: "any"
-  }
-  const [filter, setFilter] = useState( (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || initialFilter)
+    source: [],
+    amt: { min: "", max: "" },
+    date: { from: new Date(new Date().getFullYear(), 0, 1), to: new Date() },
+    taxDeduc: "any",
+  };
+  const [filter, setFilter] = useState(localStorageFilter() || initialFilter);
 
-  useEffect(()=>{
-    const query = buildQuery(filter)
+  useEffect(() => {
+    const query = buildQuery(filter);
     getDonorData(query).then((result) => {
       setDonorList(result);
       setDonorCount(result.length);
     });
 
-    window.localStorage.setItem('filter', JSON.stringify(filter))
-  }, [filter])
+      window.localStorage.setItem('filter', JSON.stringify(filter))
+  }, [filter]);
+
+  console.log(Object.keys(filter))
 
   return (
     <div className="Donor Table">
@@ -84,7 +102,6 @@ function DonorList() {
             <button
               onClick={() => {
                 setFilterOpen(true);
-               
               }}
               className={
                 "button whitebutton " + (filterOpen ? "purplebutton" : null)
@@ -101,17 +118,18 @@ function DonorList() {
             </button>
           </Header.Buttons>
         </Header.Top>
-        {
-          Object.keys(filter).length > 0 && <Header.Filters>
-            <ActiveFilter filter={filter} setFilter={setFilter}/>
+        {Object.keys(filter).length > 0 && (
+          <Header.Filters>
+            <ActiveFilter filter={filter} setFilter={setFilter} />
           </Header.Filters>
-        }
+        )}
       </Header>
       <FilterPopUp
         show={filterOpen}
         close={() => setFilterOpen(false)}
         filter={filter}
         setFilter={setFilter}
+        initialFilter ={initialFilter}
       />
 
       {
@@ -156,10 +174,8 @@ const DonorListTable = (props) => {
         <ListItem data={donorList} />
       </tbody>
     </table>
-  ) : (
-    null
-    /* <div className= "no-donor">No donors found</div> */
-  );
+  ) : null;
+  /* <div className= "no-donor">No donors found</div> */
 };
 function ListItem(props) {
   let listElements = props.data;
@@ -182,6 +198,5 @@ function ListItem(props) {
 
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
-
 
 export default DonorList;
