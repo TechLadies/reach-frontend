@@ -257,17 +257,5 @@ function FilterPopUp(props) {
   );
 }
 
-const grouped = (filter) => {
-  const groupedFilter = {};
-  if (filter.to || filter.from) groupedFilter.date = {};
-  if (filter.to) groupedFilter.date.to = filter.to;
-  if (filter.from) groupedFilter.date.from = filter.from;
-  if (filter.minAmt || filter.maxAmt) groupedFilter.amt = {};
-  if (filter.minAmt) groupedFilter.amt.minAmt = filter.minAmt;
-  if (filter.taxDeduc) groupedFilter.taxDeduc = filter.taxDeduc;
-  if (filter.source && filter.source.length > 0)
-    groupedFilter.source = filter.source;
 
-  return groupedFilter;
-};
 export default FilterPopUp;
