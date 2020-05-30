@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {Link} from "react-router-dom"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DonationAmount from "./DonationAmount";
@@ -94,13 +95,10 @@ const Dashboard = () => {
             </div>
           </Header.Content>
           <Header.Buttons>
-            <a
-              className="button orangebutton donor-list-link"
-              href="../DonorList/index"
-            >
+          <Link to="/donorList" className="button orangebutton donor-list-link">
               <img src={Person} className="button-icon" alt="person" />
               View Donor List
-            </a>
+            </Link>
           </Header.Buttons>
         </Header.Top>
       </Header>
