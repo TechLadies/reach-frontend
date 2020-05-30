@@ -22,44 +22,55 @@ const getDonorData = async (query) => {
 };
 
 function buildQuery(filterObj) {
-  const urlParams = [];
-  if (filterObj.source) {
-    for (let src of filterObj.source) {
-      urlParams.push("source=" + src);
-    }
-  }
+  const {
+    date: { from, to },
+    amt: { min: minAmt, max: maxAmt },
+    taxDeduc,
+    source
+  } = filterObj;
 
-  for (var key in filterObj) {
-    if (key === "source") {
-      continue;
-    }
-    if (filterObj[key]) {
-      urlParams.push(key + "=" + filterObj[key]);
-    }
+  const urlParams = [];
+  for (let src of source) {
+    urlParams.push("source=" + src);
   }
+  if (from) urlParams.push("from=" + from.toISOString().replace(/T.*/, ''));
+  if (to) urlParams.push("to=" + to.toISOString().replace(/T.*/, ''));
+  if (minAmt) urlParams.push("minAmt=" + minAmt);
+  if (maxAmt) urlParams.push("maxAmt=" + maxAmt);
+  if (taxDeduc !== "any")
+    urlParams.push("taxDeduc=" + taxDeduc);
   return `?${urlParams.join("&")}`;
+
+}
+
+function localStorageFilter() {
+  const localStorageFilter = window.localStorage.getItem("filter");
+  if (localStorageFilter) {
+    const filter = JSON.parse(localStorageFilter);
+    return {
+      ...filter,
+      date: {
+        from: filter.date.from && new Date(filter.date.from),
+        to: filter.date.to && new Date(filter.date.to)
+      }
+    };
+  } else {
+    return null;
+  }
 }
 
 function DonorList() {
-  const filterFromLocalStorage = window.localStorage.getItem("filter");
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [donorCount, setDonorCount] = useState(0);
-  const [filter, setFilter] = useState(
-    (filterFromLocalStorage && JSON.parse(filterFromLocalStorage)) || {
-      source: [],
-    }
-  );
-
-  useEffect(() => {
-    const query = buildQuery(filter);
-    getDonorData(query).then((result) => {
-      setDonorList(result);
-      setDonorCount(result.length);
-    });
-
-    window.localStorage.setItem("filter", JSON.stringify(filter));
-  }, [filter]);
+  const [loading, setLoading] = useState(true)
+  const initialFilter = {
+    source: [],
+    amt: { min: "", max: "" },
+    date: { from: new Date(new Date().getFullYear(), 0, 1), to: new Date() },
+    taxDeduc: "any",
+  };
+  const [filter, setFilter] = useState(localStorageFilter() || initialFilter);
 
   const entriesPerPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +78,20 @@ function DonorList() {
   const begin = (currentPage - 1) * entriesPerPage;
   const end = begin + entriesPerPage;
   const paginateDonors = donorList.slice(begin, end);
+
+  useEffect(() => {
+    const query = buildQuery(filter);
+    setLoading(true)
+    getDonorData(query).then((result) => {
+      setLoading(false)
+      setDonorList(result);
+      setDonorCount(result.length);
+      setCurrentPage(1)
+    });
+
+    window.localStorage.setItem("filter", JSON.stringify(filter));
+  }, [filter]);
+
 
   return (
     <div className="Donor Table">
@@ -109,13 +134,12 @@ function DonorList() {
         close={() => setFilterOpen(false)}
         filter={filter}
         setFilter={setFilter}
+        initialFilter ={initialFilter}
       />
-      {donorList.length >= 0 ? (
+      {donorList.length >= 0 && !loading ? (
+        <>
         <DonorListTable data={paginateDonors} />
-      ) : (
-        <Spin />
-      )}
-      <div className="pagination-center mt-5">
+        <div className="pagination-center mt-5">
         <Pagination
           totalEntries={donorCount}
           entriesPerPage={entriesPerPage}
@@ -123,6 +147,10 @@ function DonorList() {
           currentPage={currentPage}
         />
       </div>
+        </>
+      ) : (
+        <Spin />
+      )}
     </div>
   );
 }
@@ -146,7 +174,7 @@ const DonorListTable = (props) => {
         <ListItem data={donorList} />
       </tbody>
     </table>
-  ) : null;
+  ) : <NoResults/>;
 };
 function ListItem(props) {
   let listElements = props.data;
@@ -170,4 +198,12 @@ function ListItem(props) {
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
+
+const NoResults = () => {
+  return (
+    <div className = "no-results"> 
+      No results found. Please change your filters
+    </div>
+  )
+}
 export default DonorList;
