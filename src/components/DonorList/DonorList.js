@@ -72,6 +72,13 @@ function DonorList() {
   };
   const [filter, setFilter] = useState(localStorageFilter() || initialFilter);
 
+  const entriesPerPage = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const begin = (currentPage - 1) * entriesPerPage;
+  const end = begin + entriesPerPage;
+  const paginateDonors = donorList.slice(begin, end);
+
   useEffect(() => {
     const query = buildQuery(filter);
     setLoading(true)
@@ -79,18 +86,12 @@ function DonorList() {
       setLoading(false)
       setDonorList(result);
       setDonorCount(result.length);
-     
+      setCurrentPage(1)
     });
 
     window.localStorage.setItem("filter", JSON.stringify(filter));
   }, [filter]);
 
-  const entriesPerPage = 15;
-  const [currentPage, setCurrentPage] = useState(1);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const begin = (currentPage - 1) * entriesPerPage;
-  const end = begin + entriesPerPage;
-  const paginateDonors = donorList.slice(begin, end);
 
   return (
     <div className="Donor Table">
@@ -136,11 +137,9 @@ function DonorList() {
         initialFilter ={initialFilter}
       />
       {donorList.length >= 0 && !loading ? (
-        <DonorListTable data={paginateDonors} loading={loading} />
-      ) : (
-        <Spin />
-      )}
-      <div className="pagination-center mt-5">
+        <>
+        <DonorListTable data={paginateDonors} />
+        <div className="pagination-center mt-5">
         <Pagination
           totalEntries={donorCount}
           entriesPerPage={entriesPerPage}
@@ -148,6 +147,10 @@ function DonorList() {
           currentPage={currentPage}
         />
       </div>
+        </>
+      ) : (
+        <Spin />
+      )}
     </div>
   );
 }
