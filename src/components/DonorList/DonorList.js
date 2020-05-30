@@ -63,6 +63,7 @@ function DonorList() {
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [donorCount, setDonorCount] = useState(0);
+  const [loading, setLoading] = useState(true)
   const initialFilter = {
     source: [],
     amt: { min: "", max: "" },
@@ -73,9 +74,12 @@ function DonorList() {
 
   useEffect(() => {
     const query = buildQuery(filter);
+    setLoading(true)
     getDonorData(query).then((result) => {
+      setLoading(false)
       setDonorList(result);
       setDonorCount(result.length);
+     
     });
 
     window.localStorage.setItem("filter", JSON.stringify(filter));
@@ -131,8 +135,8 @@ function DonorList() {
         setFilter={setFilter}
         initialFilter ={initialFilter}
       />
-      {donorList.length >= 0 ? (
-        <DonorListTable data={paginateDonors} />
+      {donorList.length >= 0 && !loading ? (
+        <DonorListTable data={paginateDonors} loading={loading} />
       ) : (
         <Spin />
       )}
@@ -167,7 +171,7 @@ const DonorListTable = (props) => {
         <ListItem data={donorList} />
       </tbody>
     </table>
-  ) : null;
+  ) : <NoResults/>;
 };
 function ListItem(props) {
   let listElements = props.data;
@@ -191,4 +195,12 @@ function ListItem(props) {
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
+
+const NoResults = () => {
+  return (
+    <div className = "no-results"> 
+      No results found. Please change your filters
+    </div>
+  )
+}
 export default DonorList;

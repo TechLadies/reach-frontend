@@ -25,8 +25,8 @@ function ActiveFilter(props) {
     active: false,
     get value() {
       const { from, to } = this;
-      const fromDate = from && format(from, 'DD MMM YYYY') 
-      const toDate = to && format(to, 'DD MMM YYYY') 
+      const fromDate = from && format(from, 'dd MMM yyyy') 
+      const toDate = to && format(to, 'dd MMM yyyy') 
       let str;
       if (fromDate && !toDate) str = `${fromDate} and after`;
       if (!fromDate && toDate) str = `${toDate} and earlier`;
