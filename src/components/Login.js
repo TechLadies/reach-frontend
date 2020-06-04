@@ -69,7 +69,6 @@ function Login(props) {
       }),
     })
       .then((res) => {
-        console.log(res)
         if (res.status === 202) {
           setResetEmailSent(true)
         }

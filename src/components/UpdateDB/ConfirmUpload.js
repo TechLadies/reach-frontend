@@ -22,7 +22,6 @@ function ConfirmUpload(props) {
 
   const maxDate = new Date(Math.max.apply(null, getDateArray))
   const minDate = new Date(Math.min.apply(null, getDateArray))
-  console.log(minDate)
 
   return (
     <Modal show={true} className="popup-box">

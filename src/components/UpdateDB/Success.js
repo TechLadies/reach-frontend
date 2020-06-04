@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
-import HiFive from '../../images/hi-five.svg'
-import TwoHands from '../../images/two-hands-donation.svg'
-import DonationCircle from '../../images/donations-circle.svg'
-import Calendar from '../../images/calendar-circle.svg'
-import Box from '../../components/Dashboard/Box'
-import { Tabs, Tab } from 'react-bootstrap'
-import Pagination from '../../lib/pagination'
-import { Link } from 'react-router-dom'
-import Spin from '../../lib/spinner'
-import { dateVariation, periodFormatter} from '../../lib/date'
+import React, { useState } from "react";
+import HiFive from "../../images/hi-five.svg";
+import TwoHands from "../../images/two-hands-donation.svg";
+import DonationCircle from "../../images/donations-circle.svg";
+import Calendar from "../../images/calendar-circle.svg";
+import Box from "../../components/Dashboard/Box";
+import { Tabs, Tab } from "react-bootstrap";
+import Pagination from "../../lib/pagination";
+import { Link } from "react-router-dom";
+import Spin from "../../lib/spinner";
+import { dateVariation, periodFormatter } from "../../lib/date";
 
-const SuccessUpload = props => {
-  const uploadDonorData = props.donorData.data
-  const uploadSummary = props.donorData.summary
-  const minDate = dateVariation(new Date(uploadSummary.minDate))
-  const maxDate = dateVariation(new Date(uploadSummary.maxDate))
+const SuccessUpload = (props) => {
+  const uploadDonorData = props.donorData.data;
+  const uploadSummary = props.donorData.summary;
+  const minDate = dateVariation(new Date(uploadSummary.minDate));
+  const maxDate = dateVariation(new Date(uploadSummary.maxDate));
 
   //pagination
-  const entriesPerPage = 15
-  const [currentPage, setCurrentPage] = useState(1)
-  const paginate = pageNumber => setCurrentPage(pageNumber)
-  const begin = (currentPage - 1) * entriesPerPage
-  const end = begin + entriesPerPage
+  const entriesPerPage = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const begin = (currentPage - 1) * entriesPerPage;
+  const end = begin + entriesPerPage;
   //for all data
-  const allDonorsList = uploadDonorData.slice(begin, end)
+  const allDonorsList = uploadDonorData.slice(begin, end);
   //for new data
-  const newDonorsList = newDonor(uploadDonorData).slice(begin, end)
+  const newDonorsList = newDonor(uploadDonorData).slice(begin, end);
   //for old data
-  const existingDonorsList = existingDonor(uploadDonorData).slice(begin, end)
+  const existingDonorsList = existingDonor(uploadDonorData).slice(begin, end);
 
   if (props.donorData) {
     return (
@@ -58,7 +58,9 @@ const SuccessUpload = props => {
               <img src={Calendar} className="success-img" alt="twohands" />
               <div>
                 <h1 className="grey-header">For the period of</h1>
-                <p className="black-description">{periodFormatter(minDate, maxDate)}</p>
+                <p className="black-description">
+                  {periodFormatter(minDate, maxDate)}
+                </p>
               </div>
             </div>
           </Box>
@@ -145,13 +147,13 @@ const SuccessUpload = props => {
           </Tabs>
         </div>
       </div>
-    )
-  } else return <Spin />
-}
+    );
+  } else return <Spin />;
+};
 
-export default SuccessUpload
+export default SuccessUpload;
 
-const Table = props => {
+const Table = (props) => {
   return (
     <table className="table">
       <thead>
@@ -181,39 +183,40 @@ const Table = props => {
         />
       </tbody>
     </table>
-  )
-}
+  );
+};
 
 function SuccessUploadList(props) {
-  const listElements = props.data
-  const listComponents = listElements.map(item => {
+  const listElements = props.data;
+  const listComponents = listElements.map((item) => {
     return (
       <tr className="d-flex ">
         <td className="col-2 id-num">
-          {item.idNo ? <div>{item.idNo}</div> : <div>-</div>}
+          {item.idNo ? item.idNo :"-"}
         </td>
         <td className="col-2 text-left">{item.name}</td>
         <td className="col-2">{item.totalAmount}</td>
         <td className="col-2">{item.donationCount}</td>
         <td className="col-2">
-          {item.__isNew ? <div>New</div> : <div>Existing</div>}
+          {item.__isNew ? "New" : "Existing"}
         </td>
         <td className="col-2">
-          <Link to={'/details/' + item.idNo} className="profilelink">
-            View Profile >
-          </Link>
+          {item.idNo ? (
+            <Link to={"/details/" + item.idNo} className="profilelink">
+              View Profile >
+            </Link>
+          ) : null}
         </td>
       </tr>
-    )
-  })
-  return <React.Fragment>{listComponents}</React.Fragment>
+    );
+  });
+  return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
-const newDonor = allDonor => {
-  return allDonor.filter(d => d.__isNew).map(d => d)
-}
+const newDonor = (allDonor) => {
+  return allDonor.filter((d) => d.__isNew).map((d) => d);
+};
 
-const existingDonor = allDonor => {
-  return allDonor.filter(d => !d.__isNew).map(d => d)
-}
-
+const existingDonor = (allDonor) => {
+  return allDonor.filter((d) => !d.__isNew).map((d) => d);
+};

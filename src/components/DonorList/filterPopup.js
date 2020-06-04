@@ -5,7 +5,9 @@ import DatePicker from "react-datepicker";
 import { Typeahead } from "react-bootstrap-typeahead";
 
 const fetchSourceList = async () => {
-  const res = await fetch(`${process.env.REACT_APP_API}/sources`);
+  const res = await fetch(`${process.env.REACT_APP_API}/sources`, {
+    headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+  });
   const data = res.json();
   return data;
 };
@@ -17,7 +19,7 @@ function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
   // const activeFilter = true;
   const { filter, setFilter, initialFilter } = props;
-  const [localFilter, setLocalFilter] = useState({...filter});
+  const [localFilter, setLocalFilter] = useState({ ...filter });
   const [selectTypeAhead, setSelectedTypeAhead] = useState(filter.source || []);
 
   const clearState = () => {
@@ -25,7 +27,7 @@ function FilterPopUp(props) {
     toDateRef.current.clear();
     typeaheadRef.current.clear();
     setSelectedTypeAhead([]);
-    setLocalFilter({ ...initialFilter, date: {to: null, from: null} });
+    setLocalFilter({ ...initialFilter, date: { to: null, from: null } });
   };
 
   useEffect(() => {
@@ -33,7 +35,7 @@ function FilterPopUp(props) {
   }, []);
 
   useEffect(() => {
-    setLocalFilter({...filter});
+    setLocalFilter({ ...filter });
     setSelectedTypeAhead(filter.source);
   }, [props.show, filter]);
 
@@ -70,7 +72,10 @@ function FilterPopUp(props) {
                       selected={localFilter.date.from}
                       name="from"
                       onChange={(date) => {
-                        setLocalFilter({ ...localFilter, date: {...localFilter.date, from: date}});
+                        setLocalFilter({
+                          ...localFilter,
+                          date: { ...localFilter.date, from: date },
+                        });
                       }}
                       selectsStart
                       dateFormat="dd/MM/yyyy"
@@ -87,7 +92,10 @@ function FilterPopUp(props) {
                       selected={localFilter.date.to}
                       name="to"
                       onChange={(date) => {
-                        setLocalFilter({ ...localFilter, date: {...localFilter.date, to: date}});
+                        setLocalFilter({
+                          ...localFilter,
+                          date: { ...localFilter.date, to: date },
+                        });
                       }}
                       selectsEnd
                       dateFormat="dd/MM/yyyy"
@@ -107,10 +115,13 @@ function FilterPopUp(props) {
                     id="defaultInline1"
                     name="taxDeduc"
                     defaultChecked={localFilter.taxDeduc === "any"}
-                    value = "any"
+                    value="any"
                     onChange={(e) =>
-                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
-                    } 
+                      setLocalFilter({
+                        ...localFilter,
+                        taxDeduc: e.target.value,
+                      })
+                    }
                   />
                   <label
                     className="custom-control-label"
@@ -126,12 +137,14 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline2"
                     name="taxDeduc"
-                    value= "true"
+                    value="true"
                     defaultChecked={localFilter.taxDeduc === "true"}
                     onChange={(e) =>
-                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
+                      setLocalFilter({
+                        ...localFilter,
+                        taxDeduc: e.target.value,
+                      })
                     }
-                    
                   />
                   <label
                     className="custom-control-label"
@@ -147,10 +160,13 @@ function FilterPopUp(props) {
                     className="custom-control-input"
                     id="defaultInline3"
                     name="taxDeduc"
-                    value = "false"
+                    value="false"
                     defaultChecked={localFilter.taxDeduc === "false"}
                     onChange={(e) =>
-                      setLocalFilter({ ...localFilter, taxDeduc: e.target.value })
+                      setLocalFilter({
+                        ...localFilter,
+                        taxDeduc: e.target.value,
+                      })
                     }
                     value="false"
                   />
@@ -206,7 +222,10 @@ function FilterPopUp(props) {
                     placeholder="$.0.00"
                     aria-label="Search"
                     onChange={(e) => {
-                      setLocalFilter({ ...localFilter,  amt: { ...localFilter.amt, min: e.target.value} });
+                      setLocalFilter({
+                        ...localFilter,
+                        amt: { ...localFilter.amt, min: e.target.value },
+                      });
                     }}
                     value={localFilter.amt.min}
                   />
@@ -221,7 +240,7 @@ function FilterPopUp(props) {
                     onChange={(e) =>
                       setLocalFilter({
                         ...localFilter,
-                        amt: {...localFilter.amt, max: e.target.value}
+                        amt: { ...localFilter.amt, max: e.target.value },
                       })
                     }
                     value={localFilter.amt.max}
@@ -256,6 +275,5 @@ function FilterPopUp(props) {
     </Modal>
   );
 }
-
 
 export default FilterPopUp;
