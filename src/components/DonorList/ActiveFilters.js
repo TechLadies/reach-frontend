@@ -76,7 +76,10 @@ function ActiveFilter(props) {
       </Badge>
     );
   }
-  
+
+  if (allBadges.length <= 0) {
+    return null;
+  }
 
   return <div className="active-filters">
     Active Filters
