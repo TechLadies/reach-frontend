@@ -16,6 +16,7 @@ function Login(props) {
   }
   const [state, setState] = useState(initialState)
   const [notify, setNotify] = useState(null)
+  const [loading, setLoading] = useState(false)
   const handleChange = (e) => {
     setState({
       ...state,
@@ -34,6 +35,7 @@ function Login(props) {
       response.json().then((data) => {
         localStorage.setItem('token', data.token)
         history.push('/')
+        setLoading(false)
       })
     } else {
       response.json().then((data) => console.log(data))
@@ -41,6 +43,7 @@ function Login(props) {
         ...state,
         password: ''
       }))
+      setLoading(false)
       setNotify('Your email and password do not match. Please try again')
     }
   }
@@ -69,6 +72,7 @@ function Login(props) {
       }),
     })
       .then((res) => {
+        setLoading(false)
         if (res.status === 202) {
           setResetEmailSent(true)
         }
@@ -84,6 +88,7 @@ function Login(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
     resetPasswordMode ?  doResetPassword() : doLogin()
   }
 
@@ -139,13 +144,15 @@ function Login(props) {
           <Link to="/forgot-password"
             className="forgot-ps"
             type="button"
+            onClick = {()=> setResetEmailSent(false)}
           >
             Forgot password?
           </Link>
         )}
 
         <button className="login-button" type="submit">
-          { resetPasswordMode ? "Send reset password email": "Login"}
+          { resetPasswordMode ? "Send reset password email ": "Login "}
+         {loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
         </button>
       </form>
     </LoginLayout>
