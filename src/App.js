@@ -26,30 +26,30 @@ function App() {
           <Route path="/reset-password">
             <ResetPassword />
           </Route>
-          <Route path="/update">
+          <ProtectedRoute path="/update">
             <Navbar />
             <UpdateDb />
-          </Route>
-          <Route path="/details/:idNo">
+          </ProtectedRoute>
+          <ProtectedRoute path="/details/:idNo">
             <Navbar />
             <DonorDetails/>
-          </Route>
-          <Route path="/search/:name">
+          </ProtectedRoute>
+          <ProtectedRoute path="/search/:name">
             <Navbar />
             <SearchResults/>
-          </Route>
+          </ProtectedRoute>
           <ProtectedRoute path="/" exact>
             <Navbar />
             <Dashboard />
           </ProtectedRoute>
-          <Route path="/donorlist">
+          <ProtectedRoute path="/donorlist">
             <Navbar />
             <DonorList />
-          </Route>
-          <Route path="/edit">
+          </ProtectedRoute>
+          <ProtectedRoute path="/edit">
             <Navbar />
             <Edit />
-          </Route>
+          </ProtectedRoute>
         </Switch>
       </Router>
     </div>
