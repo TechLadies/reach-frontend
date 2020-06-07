@@ -1,4 +1,4 @@
- .title {
+.title {
   font-size: 28px;
 }
 
@@ -9,14 +9,12 @@
 }
 .cards-container {
   display: flex;
-  padding: 0 80px 48px;
+  padding: 0 6.25% 48px;
   justify-content: space-around;
 }
 .double-field {
   display: flex;
   justify-content: space-between;
-  width: 400px;
-
 }
 .label {
   font-size: 14px;
@@ -34,7 +32,6 @@
   border-bottom: none;
 }
 
-
 .single-field {
   width: inherit;
   justify-content: center;
@@ -42,6 +39,8 @@
   max-width: 314px;
 }
 .id-style {
+  width: 50%;
+  padding-right: 1rem;
   line-height: 10px;
 }
 .contact-icon {
@@ -49,48 +48,39 @@
   padding-bottom: 20px;
 }
 
-.particulars-wrapper {
-  display: flex;
-  height:auto;
-}
-.particulars-box {
-  padding: 32px 40px;
-  min-width: 540px;
-  height: auto;
-}
+.particulars-wrapper,
 .contact-wrapper {
-  display: flex;
-  height: auto;
+  flex: 1;
+}
+.particulars-wrapper {
+  margin-right: 40px;
+}
+.particulars-box,
+.contact-box {
+  padding: 32px 40px;
 }
 
 .contact-row {
   display: flex;
-  
 }
-.contact-box {
+
+.dnc-contact-box {
   padding: 35px 40px;
   min-width: 540px;
   height: auto;
+  border: solid 1px #eb5757;
 }
-.dnc-contact-box{
-  padding: 35px 40px;
-  min-width: 540px;
-  height: auto;
-  border: solid 1px #EB5757;
-}
-.dnc-indicator{
-  background-color:#fbdddd;
+.dnc-indicator {
+  background-color: #fbdddd;
   border-radius: 4px;
   padding: 3px 12px;
   margin-left: 70%;
   position: sticky;
-  
 }
-.dnc-indicator-text{
-  color: #EB5757;
+.dnc-indicator-text {
+  color: #eb5757;
   font-weight: bold;
   font-size: 14px;
-
 }
 
 .indicator {
@@ -106,7 +96,6 @@
 }
 .header-indicator-box {
   display: flex;
-  
 }
 .table-title {
   font-size: 32px;
@@ -118,46 +107,43 @@
 
 .details-table {
   padding: 40px 80px;
-  border-top: 1px solid  #ECDFDC;
+  border-top: 1px solid #ecdfdc;
 }
 
-
-.edit-body{
-
+.edit-body {
 }
 
-.edit-modal{
+.edit-modal {
   padding: 48px 64px;
 }
 
-.edit-body-wrapper{
+.edit-body-wrapper {
   display: flex;
   margin-top: 48px;
-  
 }
 
-.edit-subheader{
+.edit-subheader {
   font-weight: bold;
-font-size: 14px;
+  font-size: 14px;
 }
 
-.remarks-input{
+.remarks-input {
   width: 464px;
   height: 110px;
-  border: 1px solid #EBEDF0;
+  border: 1px solid #ebedf0;
   border-radius: 4px;
 }
 
-.preference-container{
+.preference-container {
   margin-left: 48px;
 }
 
-.radio-container{
+.radio-container {
   display: flex;
   flex-direction: column;
 }
 
-.edit-errormsg{
+.edit-errormsg {
   color: red;
   margin-right: 10px;
 }
@@ -169,20 +155,19 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background:#EAE1D5;
-  
+  background: #eae1d5;
 }
 
-input[type='radio']:checked {
-  border: 6px solid #FFA001;
+input[type="radio"]:checked {
+  border: 6px solid #ffa001;
   background: white;
 }
 
-form > label{
+form > label {
   display: flex;
 }
 
-.radio-label{
+.radio-label {
   margin-left: 16px;
 }
 

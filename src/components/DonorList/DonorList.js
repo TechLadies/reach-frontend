@@ -68,7 +68,7 @@ function DonorList() {
   const initialFilter = {
     source: [],
     amt: { min: "", max: "" },
-    date: { from: new Date(new Date().getFullYear(), 0, 1), to: new Date() },
+    date: { from: null, to: null },
     taxDeduc: "any",
   };
   const [filter, setFilter] = useState(localStorageFilter() || initialFilter);
