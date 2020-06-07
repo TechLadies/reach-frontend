@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import Box from '../../components/Dashboard/Box'
-import UpdateDbImg from '../../images/updatedonordb.svg'
-import './index.css'
-import FileHandlers from './FileHandlers'
-import ConfirmUpload from './ConfirmUpload'
-import ProgressBar from './ProgressBar'
-import SuccessUpload from './Success'
-import FailedImg from '../../images/uploadfail.svg'
-import { dateStringOf } from '../../lib/date.js'
+import React, { useState, useEffect } from "react";
+import Box from "../../components/Dashboard/Box";
+import UpdateDbImg from "../../images/updatedonordb.svg";
+import "./index.css";
+import FileHandlers from "./FileHandlers";
+import ConfirmUpload from "./ConfirmUpload";
+import ProgressBar from "./ProgressBar";
+import SuccessUpload from "./Success";
+import FailedImg from "../../images/uploadfail.svg";
+import { dateStringOf } from "../../lib/date.js";
 
 const priorUploadState = {
   showPopUp: false,
@@ -15,10 +15,10 @@ const priorUploadState = {
   uploading: false,
   failedUpload: false,
   successUpload: null,
-}
+};
 
 const UpdateDb = () => {
-  const [upload, setUpload] = useState(priorUploadState)
+  const [upload, setUpload] = useState(priorUploadState);
 
   const loadIpcEntries = (entries) => {
     setUpload({
@@ -27,8 +27,8 @@ const UpdateDb = () => {
       uploading: false,
       failedUpload: false,
       successUpload: null,
-    })
-  }
+    });
+  };
 
   const cancelPopUp = () => {
     setUpload({
@@ -37,8 +37,8 @@ const UpdateDb = () => {
       uploading: false,
       failedUpload: false,
       successUpload: null,
-    })
-  }
+    });
+  };
 
   const onYesContinue = () => {
     setUpload({
@@ -47,24 +47,28 @@ const UpdateDb = () => {
       uploading: true,
       failedUpload: false,
       successUpload: null,
-    })
+    });
 
     const validateUpSert = (res) => {
       if (res.ok) {
-        res.json().then((data) => success(data))
+        res.json().then((data) => success(data));
       } else {
-        return failed()
+        return failed();
       }
-    }
+    };
 
     fetch(`${process.env.REACT_APP_API}/donations/upload`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+
       body: JSON.stringify(upload.ipcData),
     })
       .then(validateUpSert)
-      .catch((err) => console.log(err))
-  }
+      .catch((err) => console.log(err));
+  };
 
   const failed = () => {
     setUpload({
@@ -73,8 +77,8 @@ const UpdateDb = () => {
       uploading: false,
       failedUpload: true,
       successUpload: null,
-    })
-  }
+    });
+  };
   const success = (data) => {
     setUpload({
       showPopUp: false,
@@ -82,8 +86,8 @@ const UpdateDb = () => {
       uploading: false,
       failedUpload: false,
       successUpload: data,
-    })
-  }
+    });
+  };
 
   return (
     <div>
@@ -130,34 +134,35 @@ const UpdateDb = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 const getLatestUpload = async () => {
   return await fetch(`${process.env.REACT_APP_API}/uploads/latest`, {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
   })
     .then((resp) => resp.json())
     .catch((err) => {
-      console.log(err)
-    })
-}
+      console.log(err);
+    });
+};
 
 const UploadMsg = () => {
-  const [latestUpload, setLatestUpload] = useState({})
-  console.log(latestUpload)
+  const [latestUpload, setLatestUpload] = useState({});
 
   useEffect(() => {
     getLatestUpload().then((result) => {
-      setLatestUpload(result)
-    })
-  }, [])
+      setLatestUpload(result);
+    });
+  }, []);
 
- 
-  const lastUpdate = latestUpload.createdAt
-  const firstDate = new Date(latestUpload.firstDate)
-  const lastDate = new Date(latestUpload.lastDate)
+  const lastUpdate = latestUpload.createdAt;
+  const firstDate = new Date(latestUpload.firstDate);
+  const lastDate = new Date(latestUpload.lastDate);
 
   return (
     <div>
@@ -165,14 +170,17 @@ const UploadMsg = () => {
         <div className="container1">
           <h1 className="grey-header">Last database update</h1>
           <div className="container2">
-            <p className=" update-data">{lastUpdate && lastDbUpdateFormat(lastUpdate)}</p>
+            <p className=" update-data">
+              {lastUpdate && lastDbUpdateFormat(lastUpdate)}
+            </p>
           </div>
         </div>
         <div className="container1">
           <h1 className="grey-header">For donations in the period of </h1>
           <div className="container2">
             <p className="update-data">
-              {lastUpdate && dateStringOf(firstDate) + "-" +  dateStringOf(lastDate)}
+              {lastUpdate &&
+                dateStringOf(firstDate) + "-" + dateStringOf(lastDate)}
             </p>
           </div>
         </div>
@@ -185,8 +193,8 @@ const UploadMsg = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const FailMsg = () => {
   return (
@@ -196,17 +204,15 @@ const FailMsg = () => {
         Oops! There was a technical issue. Please try uploading it again.
       </p>
     </div>
-  )
+  );
+};
+
+function lastDbUpdateFormat(date) {
+  const lastUpdateDate = new Date(date);
+  const formatLatestDate = dateStringOf(lastUpdateDate);
+  const lastUpdateTime = lastUpdateDate.toLocaleTimeString("en-US");
+  const latestUpdate = formatLatestDate + " " + lastUpdateTime;
+  return latestUpdate;
 }
 
-  function lastDbUpdateFormat(date) {
-    const lastUpdateDate = new Date(date)
-    const formatLatestDate = dateStringOf(
-      lastUpdateDate
-    ) 
-    const lastUpdateTime = lastUpdateDate.toLocaleTimeString('en-US')
-    const latestUpdate = formatLatestDate + ' ' + lastUpdateTime
-    return latestUpdate
-  }
-
-export default UpdateDb
+export default UpdateDb;

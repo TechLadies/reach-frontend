@@ -16,16 +16,19 @@ function ResetPassword() {
   const [password2, setPassword2] = useState("");
   const [resetSuccess, setResetSuccess] = useState(false);
   const [notify, setNotify] = useState(null);
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setNotify(null);
-
+    setLoading(true)
     // check passwords
     if (password1.length < 8 || password2.length < 8) {
+      setLoading(false)
       return setNotify("Your password must be at least 8 characters.");
     }
     if (password1 !== password2) {
+      setLoading(false)
       return setNotify("Passwords entered do not match.");
     }
 
@@ -39,6 +42,7 @@ function ResetPassword() {
         password2,
       }),
     }).then((res) => {
+      setLoading(false)
       if (!res.ok) {
         res.json().then((msg) => setNotify(msg.message));
       } else {
@@ -91,7 +95,8 @@ function ResetPassword() {
           </div>
 
           <button className="login-button" type="submit">
-            Reset Password
+            Reset Password 
+            {loading ? <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : null}
           </button>
         </form>
       )}

@@ -9,9 +9,6 @@ function FileHandlers(props) {
     props.CPU()
   }
   const handleSelectedFile = e => {
-    console.log(e.target.files[0])
-
-
     Papa.parse(e.target.files[0], {
       header: true,
       download: false,

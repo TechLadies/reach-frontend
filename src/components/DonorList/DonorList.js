@@ -15,7 +15,10 @@ import "./DonorList.css";
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
   });
   const data = await res.json();
   return data;
@@ -26,21 +29,19 @@ function buildQuery(filterObj) {
     date: { from, to },
     amt: { min: minAmt, max: maxAmt },
     taxDeduc,
-    source
+    source,
   } = filterObj;
 
   const urlParams = [];
   for (let src of source) {
     urlParams.push("source=" + src);
   }
-  if (from) urlParams.push("from=" + from.toISOString().replace(/T.*/, ''));
-  if (to) urlParams.push("to=" + to.toISOString().replace(/T.*/, ''));
+  if (from) urlParams.push("from=" + from.toISOString().replace(/T.*/, ""));
+  if (to) urlParams.push("to=" + to.toISOString().replace(/T.*/, ""));
   if (minAmt) urlParams.push("minAmt=" + minAmt);
   if (maxAmt) urlParams.push("maxAmt=" + maxAmt);
-  if (taxDeduc !== "any")
-    urlParams.push("taxDeduc=" + taxDeduc);
+  if (taxDeduc !== "any") urlParams.push("taxDeduc=" + taxDeduc);
   return `?${urlParams.join("&")}`;
-
 }
 
 function localStorageFilter() {
@@ -51,8 +52,8 @@ function localStorageFilter() {
       ...filter,
       date: {
         from: filter.date.from && new Date(filter.date.from),
-        to: filter.date.to && new Date(filter.date.to)
-      }
+        to: filter.date.to && new Date(filter.date.to),
+      },
     };
   } else {
     return null;
@@ -63,7 +64,7 @@ function DonorList() {
   const [donorList, setDonorList] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const [donorCount, setDonorCount] = useState(0);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const initialFilter = {
     source: [],
     amt: { min: "", max: "" },
@@ -81,17 +82,16 @@ function DonorList() {
 
   useEffect(() => {
     const query = buildQuery(filter);
-    setLoading(true)
+    setLoading(true);
     getDonorData(query).then((result) => {
-      setLoading(false)
+      setLoading(false);
       setDonorList(result);
       setDonorCount(result.length);
-      setCurrentPage(1)
+      setCurrentPage(1);
     });
 
     window.localStorage.setItem("filter", JSON.stringify(filter));
   }, [filter]);
-
 
   return (
     <div className="Donor Table">
@@ -134,19 +134,19 @@ function DonorList() {
         close={() => setFilterOpen(false)}
         filter={filter}
         setFilter={setFilter}
-        initialFilter ={initialFilter}
+        initialFilter={initialFilter}
       />
       {donorList.length >= 0 && !loading ? (
         <>
-        <DonorListTable data={paginateDonors} />
-        <div className="pagination-center mt-5">
-        <Pagination
-          totalEntries={donorCount}
-          entriesPerPage={entriesPerPage}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
-      </div>
+          <DonorListTable data={paginateDonors} />
+          <div className="pagination-center mt-5">
+            <Pagination
+              totalEntries={donorCount}
+              entriesPerPage={entriesPerPage}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
+          </div>
         </>
       ) : (
         <Spin />
@@ -174,7 +174,9 @@ const DonorListTable = (props) => {
         <ListItem data={donorList} />
       </tbody>
     </table>
-  ) : <NoResults/>;
+  ) : (
+    <NoResults />
+  );
 };
 function ListItem(props) {
   let listElements = props.data;
@@ -185,11 +187,11 @@ function ListItem(props) {
         className={item.idNo ? "donorlink" : ""}
         onClick={item.idNo && (() => history.push(`/details/${item.idNo}`))}
       >
-        <td scope="row"> {item.idNo} </td>
-        <td>{item.name}</td>
-        <td>{item.totalAmountDonated}</td>
-        <td>{item.contactNo}</td>
-        <td>{item.email}</td>
+        <td scope="row"> {item.idNo ? item.idNo : "-"} </td>
+        <td>{item.name ? item.name : "-"}</td>
+        <td>{item.totalAmountDonated ? item.totalAmountDonated : "-"}</td>
+        <td>{item.contactNo ? item.contactNo : "-"}</td>
+        <td>{item.email ? item.email : "-"}</td>
         <td>{item.dnc ? "Do Not Contact" : "Can Contact"}</td>
       </tr>
     );
@@ -198,12 +200,11 @@ function ListItem(props) {
   return <React.Fragment>{listComponents}</React.Fragment>;
 }
 
-
 const NoResults = () => {
   return (
-    <div className = "no-results"> 
+    <div className="no-results">
       No results found. Please change your filters
     </div>
-  )
-}
+  );
+};
 export default DonorList;

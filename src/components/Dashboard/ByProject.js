@@ -13,7 +13,7 @@ const ByProject = props => {
       fill: fillColours[i]
     }
   })
-  console.log(sourceData)
+
 
   return (
     <div>

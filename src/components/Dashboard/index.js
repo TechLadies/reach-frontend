@@ -15,8 +15,8 @@ import Spin from "../../lib/spinner";
      fetch(`${process.env.REACT_APP_API}/donations/dashboard`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
-       /*  Authorization: "Bearer " + localStorage.getItem("token"), */
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify({
         startDate: start,
