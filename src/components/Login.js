@@ -34,6 +34,7 @@ function Login(props) {
     if (response.ok) {
       response.json().then((data) => {
         localStorage.setItem('token', data.token)
+        localStorage.setItem('userName', data.userName)
         history.push('/')
         setLoading(false)
       })

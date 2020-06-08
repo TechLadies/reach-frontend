@@ -13,6 +13,7 @@ const Dropdown = () => {
   document.addEventListener('click', () => {
     setIsVisible(false)
   })
+  const userName = localStorage.getItem('userName')
 
   return (
     <>
@@ -25,7 +26,7 @@ const Dropdown = () => {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Alvin Teo
+        {userName}
       </a>
       <div
         className={
@@ -44,7 +45,7 @@ const Dropdown = () => {
   )
 }
 
-function Navbar(props) {
+function Navbar() {
   const [search, setSearch] = useState("")
   const history = useHistory()
   const handleSearch = (e) => {
