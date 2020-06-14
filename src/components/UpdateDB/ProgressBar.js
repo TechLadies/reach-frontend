@@ -1,6 +1,5 @@
-import React, {useState, useEffect, useRef} from "react";
+import React from "react";
 import "./index.css";
-import { Line } from 'rc-progress';
 import Modal from '../Modal'
 import Spin from "../../lib/spinner";
 
