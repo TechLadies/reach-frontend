@@ -62,8 +62,7 @@
 
 .popup-msg1 {
   font-size: 16px;
-  line-height: 24px;
-  margin-bottom: 16px;
+  line-height: 24px;  
 }
 .popup-msg2 {
   font-size: 20px;
@@ -71,6 +70,7 @@
   color: #252631;
   line-height: 24px;
   margin-bottom: 16px;
+ display: inline-block;
 }
 
 .message-container {
@@ -109,8 +109,9 @@
 }
 
 .popup-loadcontainer {
-  height: 196px;
   width: 430px;
+  text-align: center;
+  margin: 0 auto;
   padding: 32px 40px;
 }
 
@@ -264,4 +265,14 @@ a.nav-item.nav-link {
 
 tr:hover .profilelink{
   visibility: visible;
+}
+
+.progress-spinner{
+ margin-left: 10px;
+}
+
+.progress-loading{
+  display: flex;
+  justify-content: center;
+  
 }
