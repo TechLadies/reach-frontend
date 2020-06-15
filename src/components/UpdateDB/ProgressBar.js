@@ -4,9 +4,8 @@ import Modal from '../Modal'
 import Spin from "../../lib/spinner";
 
 
-const ProgressBar = (props) =>{
+const ProgressBar = () =>{
   
-  // , if upload failed use props.onFailedUpload
     return (
       <Modal show ={true} className= "popup-box">
         <div className= "popup-loadcontainer">

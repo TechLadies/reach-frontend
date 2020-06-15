@@ -67,7 +67,10 @@ const UpdateDb = () => {
       body: JSON.stringify(upload.ipcData),
     })
       .then(validateUpSert)
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err) failed()
+        console.log(err)
+      });
   };
 
   const failed = () => {
@@ -121,14 +124,10 @@ const UpdateDb = () => {
                 ipcEntries={upload.ipcData}
                 clickYes={onYesContinue}
                 success={success}
-                failed={failed}
               />
             )}
             {upload.uploading && (
-              <ProgressBar
-                onFailedUpload={failed}
-                progress={upload.percentage}
-              />
+              <ProgressBar/>
             )}
           </Box>
         </div>
