@@ -11,7 +11,7 @@ import downloadCSV from "./exportToCSV";
 import FilterPopUp from "./filterPopup";
 import ActiveFilter from "./ActiveFilters";
 import "./DonorList.css";
-import ReactPaginate from 'react-paginate';
+
 
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
@@ -75,9 +75,9 @@ function DonorList() {
   const [filter, setFilter] = useState(localStorageFilter() || initialFilter);
 
   const entriesPerPage = 15;
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const begin = currentPage * entriesPerPage;
+  const begin = (currentPage - 1) * entriesPerPage;
   const end = begin + entriesPerPage;
   const paginateDonors = donorList.slice(begin, end);
 
@@ -141,26 +141,7 @@ function DonorList() {
         <>
           <DonorListTable data={paginateDonors} />
           <div className="pagination-center mt-5">
-            <ReactPaginate
-             previousLabel={"prev"}
-             nextLabel={"next"}
-             breakLabel={"..."}
-             breakClassName={"break-me page-item"}
-             pageCount = {Math.ceil(donorCount/entriesPerPage)}
-             marginPagesDisplayed={2}
-             pageRangeDisplayed={5}
-             onPageChange={ data => paginate(data.selected)}
-             containerClassName={"pagination"}
-             subContainerClassName={"pages pagination"}
-             activeClassName={"active"}
-             pageLinkClassName = {"page-link page-numbers"}
-             pageClassName = {"page-item"}
-             previousClassName = {"page-item"}
-             nextClassName = {"page-item"}
-             previousLinkClassName ={"page-link page-numbers"}
-             nextLinkClassName ={"page-link page-numbers"}
-             breakLinkClassName = {"page-link page-numbers"}
-            />
+            <Pagination totalEntries = {donorCount} entriesPerPage = {entriesPerPage} paginate = {paginate}/>
           </div>
         </>
       ) : (

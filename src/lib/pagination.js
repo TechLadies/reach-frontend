@@ -1,65 +1,30 @@
 import React from 'react'
+import ReactPaginate from 'react-paginate';
 
-const Pagination = ({ entriesPerPage, totalEntries, currentPage, paginate }) => {
-  const pageNumbers = []
-  for (let i = 1; i <= Math.ceil(totalEntries / entriesPerPage); i++) {
-    pageNumbers.push(i)
-  }
+const Pagination = ({ entriesPerPage, totalEntries, paginate }) => {
+
 
   return (
-    <nav className="page-btn">
-       {pageNumbers.length > 1 ? (
-        <ul className="pagination">
-          <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-            {pageNumbers.length > 1 ? (
-              <button
-                onClick={() => paginate(Math.max(1, currentPage - 1))}
-                className="page-link page-directions"
-              >
-               {"< Prev "}
-              </button>
-            ) : (
-              ''
-            )}
-          </li> 
-          {pageNumbers.map(number => (
-            <li
-              key={number}
-              className={
-                currentPage === number ? 'page-item active' : 'page-item'
-              }
-            >
-              <button
-                onClick={() => paginate(number)}
-                className="page-link page-numbers"
-              >
-                {number}
-              </button>
-            </li>
-          ))}
-          <li
-            className={`page-item ${
-              currentPage === pageNumbers[pageNumbers.length - 1]
-                ? 'disabled'
-                : ''
-            }`}
-          >
-            {pageNumbers.length > 1 ? (
-              <button
-                onClick={() => paginate(Math.max(1, currentPage + 1))}
-                className="page-link page-directions"
-              >
-                {'Next > '}
-              </button>
-            ) : (
-              'disabled'
-            )}
-          </li>
-        </ul>
-      ) : (
-        ''
-      )}
-    </nav>
+    <ReactPaginate
+    previousLabel={"prev"}
+    nextLabel={"next"}
+    breakLabel={"..."}
+    breakClassName={"break-me page-item"}
+    pageCount = {Math.ceil(totalEntries/entriesPerPage)}
+    marginPagesDisplayed={2}
+    pageRangeDisplayed={5}
+    onPageChange={ data => paginate(data.selected + 1)}
+    containerClassName={"pagination"}
+    subContainerClassName={"pages pagination"}
+    activeClassName={"active"}
+    pageLinkClassName = {"page-link page-numbers"}
+    pageClassName = {"page-item"}
+    previousClassName = {"page-item"}
+    nextClassName = {"page-item"}
+    previousLinkClassName ={"page-link page-numbers"}
+    nextLinkClassName ={"page-link page-numbers"}
+    breakLinkClassName = {"page-link page-numbers"}
+   />
   )
 }
 
