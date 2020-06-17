@@ -17,10 +17,12 @@ const typeaheadRef = React.createRef();
 
 function FilterPopUp(props) {
   const [sources, setSources] = useState([]);
+  const typeAheadSourcesList = sources.length > 0 ? sources.map(e => e.description) : []
   // const activeFilter = true;
   const { filter, setFilter, initialFilter } = props;
   const [localFilter, setLocalFilter] = useState({ ...filter });
   const [selectTypeAhead, setSelectedTypeAhead] = useState(filter.source || []);
+
 
   const clearState = () => {
     fromDateRef.current.clear();
@@ -40,6 +42,7 @@ function FilterPopUp(props) {
   }, [props.show, filter]);
 
   const confirmFilters = () => {
+    console.log(localFilter)
     setFilter(localFilter);
     props.close();
   };
@@ -188,17 +191,14 @@ function FilterPopUp(props) {
                 </span>
                 <Typeahead
                   id="sources-list"
-                  labelKey="description"
                   multiple={true}
-                  options={sources}
+                  options={typeAheadSourcesList}
                   name="source"
                   onChange={(selected) => {
                     setSelectedTypeAhead(selected);
                     setLocalFilter({
                       ...localFilter,
-                      source: selected.map((e) => {
-                        return e.description;
-                      }),
+                      source: selected
                     });
                   }}
                   placeholder="e.g. Charity Dinner, Reach website"
