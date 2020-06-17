@@ -12,6 +12,7 @@ import FilterPopUp from "./filterPopup";
 import ActiveFilter from "./ActiveFilters";
 import "./DonorList.css";
 
+
 const getDonorData = async (query) => {
   const res = await fetch(`${process.env.REACT_APP_API}/donors${query}`, {
     method: "GET",
@@ -140,12 +141,7 @@ function DonorList() {
         <>
           <DonorListTable data={paginateDonors} />
           <div className="pagination-center mt-5">
-            <Pagination
-              totalEntries={donorCount}
-              entriesPerPage={entriesPerPage}
-              paginate={paginate}
-              currentPage={currentPage}
-            />
+            <Pagination totalEntries = {donorCount} entriesPerPage = {entriesPerPage} paginate = {paginate}/>
           </div>
         </>
       ) : (

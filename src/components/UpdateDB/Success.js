@@ -91,7 +91,6 @@ const SuccessUpload = (props) => {
                 totalEntries={uploadDonorData.length}
                 entriesPerPage={entriesPerPage}
                 paginate={paginate}
-                currentPage={currentPage}
               />
             </Tab>
             <Tab
@@ -116,7 +115,6 @@ const SuccessUpload = (props) => {
                 totalEntries={newDonor(uploadDonorData).length}
                 entriesPerPage={entriesPerPage}
                 paginate={paginate}
-                currentPage={currentPage}
               />
             </Tab>
             <Tab
@@ -141,7 +139,6 @@ const SuccessUpload = (props) => {
                 totalEntries={existingDonor(uploadDonorData).length}
                 entriesPerPage={entriesPerPage}
                 paginate={paginate}
-                currentPage={currentPage}
               />
             </Tab>
           </Tabs>

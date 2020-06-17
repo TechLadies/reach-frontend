@@ -43,7 +43,6 @@ function ResultsTable(props) {
         totalEntries={searchResultsCount}
         entriesPerPage={entriesPerPage}
         paginate={paginate}
-        currentPage={currentPage}
       />
     </div>
   )

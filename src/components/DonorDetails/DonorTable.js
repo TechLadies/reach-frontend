@@ -47,7 +47,6 @@ function DonorTable(props) {
       totalEntries={totalDonations}
       entriesPerPage={entriesPerPage}
       paginate={paginate}
-      currentPage={currentPage}
       />
     </div>
   )
