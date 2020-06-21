@@ -155,7 +155,7 @@ const UploadMsg = () => {
 
   useEffect(() => {
     getLatestUpload().then((result) => {
-      setLatestUpload(result);
+      if (result) setLatestUpload(result);
     });
   }, []);
 
