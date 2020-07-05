@@ -17,9 +17,18 @@ const priorUploadState = {
   successUpload: null,
 };
 
+function chunk(array, size) {
+  const chunked_arr = [];
+  let index = 0;
+  while (index < array.length) {
+    chunked_arr.push(array.slice(index, size + index));
+    index += size;
+  }
+  return chunked_arr;
+}
+
 const UpdateDb = () => {
   const [upload, setUpload] = useState(priorUploadState);
-
   const loadIpcEntries = (entries) => {
     setUpload({
       showPopUp: true,
@@ -48,7 +57,6 @@ const UpdateDb = () => {
       failedUpload: false,
       successUpload: null,
     });
-
     const validateUpSert = (res) => {
       if (res.ok) {
         res.json().then((data) => success(data));
@@ -56,22 +64,44 @@ const UpdateDb = () => {
         return failed();
       }
     };
+    const chunkedIPC = chunk(upload.ipcData, 2);
+    const fetchAChunk = (chunk) => {
+      return fetch(`http://localhost:3001/donations/upload`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
 
-    fetch(`${process.env.REACT_APP_API}/donations/upload`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
+        body: JSON.stringify(chunk),
+      })
+        .then((res) => {
+          if (res.ok) return res.json();
+          else throw new Error("Error in uploading chunk");
+        })
+        .then((data) => {
+          console.log(data);
+          return data;
+        });
+    };
 
-      body: JSON.stringify(upload.ipcData),
-    })
-      .then(validateUpSert)
-      .catch((err) => {
-        if (err) failed()
-        console.log(err)
+    chunkedIPC.reduce((prev, curr) => {
+      return prev.then((prevResults) => {
+        return fetchAChunk(curr).then((result) => [result, ...prevResults]);
       });
+    }, Promise.resolve([]))
+    .catch((err) => {
+      failed()
+      console.log(err)
+    })
+    .then(results => {
+      console.log(results)
+      //handle results here
+      
+    });
+ 
   };
+
 
   const failed = () => {
     setUpload({
@@ -126,9 +156,7 @@ const UpdateDb = () => {
                 success={success}
               />
             )}
-            {upload.uploading && (
-              <ProgressBar/>
-            )}
+            {upload.uploading && <ProgressBar />}
           </Box>
         </div>
       )}
@@ -137,7 +165,7 @@ const UpdateDb = () => {
 };
 
 const getLatestUpload = async () => {
-  return await fetch(`${process.env.REACT_APP_API}/uploads/latest`, {
+  return await fetch(`http://localhost:3001/uploads/latest`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
