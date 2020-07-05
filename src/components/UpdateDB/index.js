@@ -8,6 +8,7 @@ import ProgressBar from "./ProgressBar";
 import SuccessUpload from "./Success";
 import FailedImg from "../../images/uploadfail.svg";
 import { dateStringOf } from "../../lib/date.js";
+import BigNumber from 'bignumber.js/bignumber';
 
 const priorUploadState = {
   showPopUp: false,
@@ -80,7 +81,6 @@ const UpdateDb = () => {
           else throw new Error("Error in uploading chunk");
         })
         .then((data) => {
-          console.log(data);
           return data;
         });
     };
@@ -95,13 +95,41 @@ const UpdateDb = () => {
       console.log(err)
     })
     .then(results => {
-      console.log(results)
+      console.log(finalResult(results))
       //handle results here
-      
+
     });
  
   };
 
+  const finalResult = (results) => {
+    console.log(results)
+    const extractDataResponse = results.map(i => i.data)
+    const extractChunkSummary = results.map(i=> i.summary)
+    console.log(extractChunkSummary)
+    const flattenDataResponse = extractDataResponse.reduce((acc, val) => acc.concat(val), []);
+    const maxDate = new Date(Math.max.apply(null, extractChunkSummary.map(function(e) {
+      return new Date(e.maxDate);
+    })));
+    const minDate = new Date(Math.min.apply(null, extractChunkSummary.map(function(e) {
+      return new Date(e.minDate);
+    })));
+    const totalCount = extractChunkSummary.reduce((acc, curr)=> {
+      return  acc + curr.totalCount
+    },0)
+    const totalAmt = extractChunkSummary.reduce((acc, curr)=> {
+      return acc.plus(curr.totalAmt)
+    }, new BigNumber(0))
+    return {
+      data: flattenDataResponse,
+      summary :{
+        minDate: minDate.toISOString(),
+        maxDate: maxDate.toISOString(),
+        totalCount,
+        totalAmt
+      }
+    }
+  }
 
   const failed = () => {
     setUpload({
