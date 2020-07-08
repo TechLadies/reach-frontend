@@ -59,9 +59,9 @@ const UpdateDb = () => {
       successUpload: null,
     });
     
-    const chunkedIPC = chunk(upload.ipcData, 2);
+    const chunkedIPC = chunk(upload.ipcData, 1000);
     const fetchAChunk = (chunk) => {
-      return fetch(`http://localhost:3001/donations/upload`, {
+      return fetch(`${process.env.REACT_APP_API}/donations/upload`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -185,7 +185,7 @@ const UpdateDb = () => {
 };
 
 const getLatestUpload = async () => {
-  return await fetch(`http://localhost:3001/uploads/latest`, {
+  return await fetch(`${process.env.REACT_APP_API}/uploads/latest`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
