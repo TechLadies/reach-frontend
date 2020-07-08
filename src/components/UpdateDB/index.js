@@ -58,13 +58,7 @@ const UpdateDb = () => {
       failedUpload: false,
       successUpload: null,
     });
-    const validateUpSert = (res) => {
-      if (res.ok) {
-        res.json().then((data) => success(data));
-      } else {
-        return failed();
-      }
-    };
+    
     const chunkedIPC = chunk(upload.ipcData, 2);
     const fetchAChunk = (chunk) => {
       return fetch(`http://localhost:3001/donations/upload`, {
@@ -94,11 +88,7 @@ const UpdateDb = () => {
       failed()
       console.log(err)
     })
-    .then(results => {
-      console.log(finalResult(results))
-      //handle results here
-
-    });
+    .then(results => success(finalResult(results)));
  
   };
 
@@ -120,13 +110,15 @@ const UpdateDb = () => {
     const totalAmt = extractChunkSummary.reduce((acc, curr)=> {
       return acc.plus(curr.totalAmt)
     }, new BigNumber(0))
+
+    
     return {
       data: flattenDataResponse,
       summary :{
         minDate: minDate.toISOString(),
         maxDate: maxDate.toISOString(),
         totalCount,
-        totalAmt
+        totalAmt: totalAmt.toString()
       }
     }
   }

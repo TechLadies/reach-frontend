@@ -15,7 +15,6 @@ const SuccessUpload = (props) => {
   const uploadSummary = props.donorData.summary;
   const minDate = dateVariation(new Date(uploadSummary.minDate));
   const maxDate = dateVariation(new Date(uploadSummary.maxDate));
-
   //pagination
   const entriesPerPage = 15;
   const [currentPage, setCurrentPage] = useState(1);
