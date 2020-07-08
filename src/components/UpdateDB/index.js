@@ -93,10 +93,8 @@ const UpdateDb = () => {
   };
 
   const finalResult = (results) => {
-    console.log(results)
     const extractDataResponse = results.map(i => i.data)
     const extractChunkSummary = results.map(i=> i.summary)
-    console.log(extractChunkSummary)
     const flattenDataResponse = extractDataResponse.reduce((acc, val) => acc.concat(val), []);
     const maxDate = new Date(Math.max.apply(null, extractChunkSummary.map(function(e) {
       return new Date(e.maxDate);
