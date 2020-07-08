@@ -84,12 +84,10 @@ const UpdateDb = () => {
         return fetchAChunk(curr).then((result) => [result, ...prevResults]);
       });
     }, Promise.resolve([]))
+    .then(results => success(finalResult(results)))
     .catch((err) => {
-      failed()
-      console.log(err)
+      if (err) failed();
     })
-    .then(results => success(finalResult(results)));
- 
   };
 
   const finalResult = (results) => {
