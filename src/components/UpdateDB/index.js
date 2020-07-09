@@ -74,9 +74,6 @@ const UpdateDb = () => {
           if (res.ok) return res.json();
           else throw new Error("Error in uploading chunk");
         })
-        .then((data) => {
-          return data;
-        });
     };
 
     chunkedIPC.reduce((prev, curr) => {
