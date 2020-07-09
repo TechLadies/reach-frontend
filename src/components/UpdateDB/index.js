@@ -8,6 +8,7 @@ import ProgressBar from "./ProgressBar";
 import SuccessUpload from "./Success";
 import FailedImg from "../../images/uploadfail.svg";
 import { dateStringOf } from "../../lib/date.js";
+import BigNumber from 'bignumber.js/bignumber';
 
 const priorUploadState = {
   showPopUp: false,
@@ -17,9 +18,18 @@ const priorUploadState = {
   successUpload: null,
 };
 
+function chunk(array, size) {
+  const chunked_arr = [];
+  let index = 0;
+  while (index < array.length) {
+    chunked_arr.push(array.slice(index, size + index));
+    index += size;
+  }
+  return chunked_arr;
+}
+
 const UpdateDb = () => {
   const [upload, setUpload] = useState(priorUploadState);
-
   const loadIpcEntries = (entries) => {
     setUpload({
       showPopUp: true,
@@ -48,30 +58,63 @@ const UpdateDb = () => {
       failedUpload: false,
       successUpload: null,
     });
+    
+    const chunkedIPC = chunk(upload.ipcData, 1000);
+    const fetchAChunk = (chunk) => {
+      return fetch(`${process.env.REACT_APP_API}/donations/upload`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
 
-    const validateUpSert = (res) => {
-      if (res.ok) {
-        res.json().then((data) => success(data));
-      } else {
-        return failed();
-      }
+        body: JSON.stringify(chunk),
+      })
+        .then((res) => {
+          if (res.ok) return res.json();
+          else throw new Error("Error in uploading chunk");
+        })
     };
 
-    fetch(`${process.env.REACT_APP_API}/donations/upload`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-
-      body: JSON.stringify(upload.ipcData),
-    })
-      .then(validateUpSert)
-      .catch((err) => {
-        if (err) failed()
-        console.log(err)
+    chunkedIPC.reduce((prev, curr) => {
+      return prev.then((prevResults) => {
+        return fetchAChunk(curr).then((result) => [result, ...prevResults]);
       });
+    }, Promise.resolve([]))
+    .then(results => success(finalResult(results)))
+    .catch((err) => {
+      if (err) failed();
+    })
   };
+
+  const finalResult = (results) => {
+    const extractDataResponse = results.map(i => i.data)
+    const extractChunkSummary = results.map(i=> i.summary)
+    const flattenDataResponse = extractDataResponse.reduce((acc, val) => acc.concat(val), []);
+    const maxDate = new Date(Math.max.apply(null, extractChunkSummary.map(function(e) {
+      return new Date(e.maxDate);
+    })));
+    const minDate = new Date(Math.min.apply(null, extractChunkSummary.map(function(e) {
+      return new Date(e.minDate);
+    })));
+    const totalCount = extractChunkSummary.reduce((acc, curr)=> {
+      return  acc + curr.totalCount
+    },0)
+    const totalAmt = extractChunkSummary.reduce((acc, curr)=> {
+      return acc.plus(curr.totalAmt)
+    }, new BigNumber(0))
+
+    
+    return {
+      data: flattenDataResponse,
+      summary :{
+        minDate: minDate.toISOString(),
+        maxDate: maxDate.toISOString(),
+        totalCount,
+        totalAmt: totalAmt.toString()
+      }
+    }
+  }
 
   const failed = () => {
     setUpload({
@@ -126,9 +169,7 @@ const UpdateDb = () => {
                 success={success}
               />
             )}
-            {upload.uploading && (
-              <ProgressBar/>
-            )}
+            {upload.uploading && <ProgressBar />}
           </Box>
         </div>
       )}

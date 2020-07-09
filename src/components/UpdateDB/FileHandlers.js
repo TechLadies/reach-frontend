@@ -27,10 +27,6 @@ function FileHandlers(props) {
               'Receipt Serial No' : e['Receipt Serial No'].toString()
             }
           }
-
-          
-          
-          
         })
         console.log(processedArray)      
         return props.loadIpcEntries(processedArray)
