@@ -83,14 +83,38 @@ const UpdateDb = () => {
     }, Promise.resolve([]))
     .then(results => success(finalResult(results)))
     .catch((err) => {
+      console.log(err)
       if (err) failed();
     })
   };
 
+  const mergeDonor = (prev, curr) => {
+    const totalAmount = ((new BigNumber(prev.totalAmount)).plus(new BigNumber(curr.totalAmount))).toString()
+    return {
+      donationCount : prev.donationCount += curr.donationCount,
+      id: curr.id,
+      idNo: curr.idNo,
+      name: curr.name,
+      totalAmount,
+      __isNew: prev.__isNew
+    }
+  }
+
   const finalResult = (results) => {
-    const extractDataResponse = results.map(i => i.data)
-    const extractChunkSummary = results.map(i=> i.summary)
+    const chronologicalResults = results.reverse()
+    const extractDataResponse = chronologicalResults.map(i => i.data)
+    const extractChunkSummary = chronologicalResults.map(i=> i.summary)
     const flattenDataResponse = extractDataResponse.reduce((acc, val) => acc.concat(val), []);
+    const dedupedData = flattenDataResponse.reduce((acc,curr)=> {
+      const prev = acc[curr.id]
+      if (prev){
+        acc[curr.id] = mergeDonor(prev, curr)
+      } else {
+        acc[curr.id] = curr
+      }
+      return acc
+    }, {})
+
     const maxDate = new Date(Math.max.apply(null, extractChunkSummary.map(function(e) {
       return new Date(e.maxDate);
     })));
@@ -104,9 +128,8 @@ const UpdateDb = () => {
       return acc.plus(curr.totalAmt)
     }, new BigNumber(0))
 
-    
     return {
-      data: flattenDataResponse,
+      data: Object.values(dedupedData),
       summary :{
         minDate: minDate.toISOString(),
         maxDate: maxDate.toISOString(),
