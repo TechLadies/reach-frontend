@@ -71,7 +71,7 @@ function ResetPassword() {
               name="password1"
               id="password1"
               value={password1}
-              onChange={(e) => setPassword1(e.target.value)}
+              onChange={(e) => setPassword1(e.target.value.trim())}
               className="textbox"
             />
           </div>
@@ -82,7 +82,7 @@ function ResetPassword() {
               name="password2"
               id="password2"
               value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
+              onChange={(e) => setPassword2(e.target.value.trim())}
               className="textbox"
             />
           </div>
